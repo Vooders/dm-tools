@@ -22,7 +22,9 @@ export const secondaryListItems = (
     <ListSubheader component="div" inset>
       Saved reports
     </ListSubheader>
-    <ListItemButton>
+    <ListItemButton onClick={() => {
+      window.electron.save()
+    }}>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>

@@ -29,14 +29,11 @@
 import './index.css';
 import './app';
 
-
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 console.log(`starting in mode ${process.env.NODE_ENV}`)
 
-
-
 declare global {
     interface Window {
-        store: any
+        electron: any
     }
 }
