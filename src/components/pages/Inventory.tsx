@@ -6,7 +6,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import FormGroup from '@mui/material/FormGroup';
-import Title from './Title';
+import Title from '../Title';
 
 export declare interface InventoryProps {
   inventory: Item[],

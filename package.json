@@ -93,6 +93,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "node-fetch": "^3.2.10",
     "path-browserify": "^1.0.1",
+    "react-router-dom": "^6.4.2",
     "recharts": "^2.1.14"
   },
   "browser": {
