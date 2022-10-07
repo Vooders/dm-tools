@@ -3,22 +3,54 @@ import Title from '../Title';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { ImportResponse } from '../../handlers/importCharacter';
+import Snackbar from '@mui/material/Snackbar';
 import Grid from '@mui/material/Unstable_Grid2';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { ImportResponse } from '../../handlers/importCharacter';
 
 export default function Characters() {
     const [characterId, setCharacterId] = useState(null)
+    const [characterName, setCharacterName] = useState('')
+    const [saveResponse, setSaveResponse] = useState('')
+    const [open, setOpen] = React.useState(false);
     const [importResponse, setImportResponse] = useState<ImportResponse>({ status: '', value: {} })
 
     const importChar = async (): Promise<void> => {
         console.log(`Characters: getting ${characterId}`)
         const response = await window.electron.importCharacter(characterId) as ImportResponse
         setImportResponse(response)
+        if (response.status === 'success') {
+            setCharacterName(response.value.data.name)
+        }
+    }
+
+    const saveChar = async (): Promise<void> => {
+        const response = await window.electron.saveCharacter(importResponse.value)
+        setSaveResponse(response)
+        setOpen(true)
     }
 
     const reset = () => {
         setImportResponse({ status: '', value: {} })
+        setCharacterId(null)
+        setCharacterName('')
+        setSaveResponse('')
     }
+
+    const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+        props,
+        ref,
+    ) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+
+    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+        reset()
+    };
 
     const importHelperTest = "The numbers at the end of your dndbeyond link"
 
@@ -35,11 +67,11 @@ export default function Characters() {
                             Do you want import the following character?
                         </Typography>
                         <Typography variant="h5">
-                            {importResponse.value.data.name}
+                            {characterName}
                         </Typography>
                     </Grid>
                     <Grid xs={12} md={4}>
-                        <Button variant="contained" color="success" size='medium'>
+                        <Button variant="contained" color="success" size='medium' onClick={saveChar}>
                             Save
                         </Button>
                         <Button variant="outlined" color="error" size='medium' onClick={reset}>
@@ -65,6 +97,11 @@ export default function Characters() {
                     </Button>
                 </>
             }
+            <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={saveResponse ? 'success' : 'error'} sx={{ width: '100%' }}>
+                    {saveResponse ? `${characterName} saved` : 'There was a problem saving'}
+                </Alert>
+            </Snackbar>
         </React.Fragment>
     )
 }

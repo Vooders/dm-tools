@@ -4,6 +4,7 @@ import Store from './lib/Store'
 import CharacterService from './api/CharacterService'
 import * as fs from 'node:fs/promises'
 import handleImport from './handlers/importCharacter'
+import handleSave from './handlers/saveCharacter'
 
 const characterService = new CharacterService()
 
@@ -51,6 +52,7 @@ app.on('ready', createWindow);
 
 app.whenReady().then(() => {
   ipcMain.handle('character:import', handleImport)
+  ipcMain.handle('character:save', handleSave)
 })
 
 // ipcMain.on('import', async (event, id) => {
