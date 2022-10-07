@@ -4,15 +4,15 @@ import * as fs from 'fs'
 
 
 export default class Store {
-  get(filename: string) {
+  get(filename: string, directory: string) {
     const userDataPath = app.getPath('userData');
-    const filePath = path.join(userDataPath, filename + '.json');
+    const filePath = path.join(userDataPath, directory, filename + '.json');
     return parseDataFile(filePath, {});
   }
   
-  set(filename: string, data: object) {
+  set(filename: string, directory: string, data: object) {
     const userDataPath = app.getPath('userData');
-    const filePath = path.join(userDataPath, filename + '.json');
+    const filePath = path.join(userDataPath, directory, filename + '.json');
     console.log(filePath)
     fs.writeFileSync(filePath, JSON.stringify(data));
   }
