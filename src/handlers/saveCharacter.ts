@@ -1,24 +1,27 @@
-import { app } from 'electron';
-import path from 'path'
+import { app, BrowserWindow } from 'electron';
 import { writeFile, readFile, open } from 'fs/promises';
-import * as fs from 'fs'
+import path from 'path'
+import getSummaryData from './getSummary';
 
 const directory = 'characters'
 const userDataPath = app.getPath('userData');
 const summaryPath = path.join(userDataPath, directory, 'summary.json');
 
-export default async (_: Electron.IpcMainInvokeEvent, character: any) => {
-    const filename = character.data.id
-    const filePath = path.join(userDataPath, directory, filename + '.json');
-    console.log(filePath)
-    try {
-        await writeFile(filePath, JSON.stringify(character));
-        console.log(`saved ${filename}`)
-        await updateSummary(character.data)
-        return true
-    } catch(error) {
-        console.log(error)
-        return false
+export default (mainWindow: BrowserWindow) => {
+    return async (_: Electron.IpcMainInvokeEvent, character: any) => {
+        const filename = character.data.id
+        const filePath = path.join(userDataPath, directory, filename + '.json');
+        console.log(filePath)
+        try {
+            await writeFile(filePath, JSON.stringify(character));
+            console.log(`saved ${filename}`)
+            const summary = await updateSummary(character.data)
+            mainWindow.webContents.send('character:summaryUpdate', summary)
+            return true
+        } catch(error) {
+            console.log(error)
+            return false
+        }
     }
 }
 
@@ -30,6 +33,7 @@ const updateSummary = async (characterData: any) => {
     summaryData[characterSummary.id] = characterSummary
 
     await writeFile(summaryPath, JSON.stringify(summaryData))
+    return summaryData
 }
 
 const buildCharacterSummary = (characterData: any) => {
@@ -41,15 +45,13 @@ const buildCharacterSummary = (characterData: any) => {
     }
 }
 
-const getSummaryData = async () => {
-    // Create summary.json if it does not exist
-    const fileHandle = await open(summaryPath, 'a+')
-    await fileHandle.close()
+export type Summary = {
+    [id: string]: CharacterSummary
+}
 
-    const fileBuffer = await readFile(summaryPath)
-    let file = fileBuffer.toString()
-    if (file === '') {
-        file = '{}'
-    }
-    return JSON.parse(file)
+export type CharacterSummary = {
+    id: number,
+    name: string,
+    race: string,
+    classes: string[]
 }

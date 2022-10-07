@@ -12,6 +12,12 @@ contextBridge.exposeInMainWorld('electron', {
   },
   saveCharacter: async (characterData) => {
     return await ipcRenderer.invoke('character:save', characterData)
+  },
+  getSummary: async () => {
+    return await ipcRenderer.invoke('character:getSummary')
+  },
+  summaryUpdate: async (callback) => {
+    return ipcRenderer.on('character:summaryUpdate', callback)
   }
 })
 
