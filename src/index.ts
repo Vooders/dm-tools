@@ -6,6 +6,7 @@ import * as fs from 'node:fs/promises'
 import handleImport from './handlers/importCharacter'
 import handleSave from './handlers/saveCharacter'
 import getSummary from './handlers/getSummary'
+import getInventories from './handlers/getInventories'
 
 const characterService = new CharacterService()
 
@@ -49,6 +50,7 @@ const createWindow = (): void => {
     ipcMain.handle('character:import', handleImport)
     ipcMain.handle('character:getSummary', getSummary)
     ipcMain.handle('character:save', handleSave(mainWindow))
+    ipcMain.handle('inventory:get', getInventories)
   })
 };
 

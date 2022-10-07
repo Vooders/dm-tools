@@ -1,15 +1,15 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 import CharacterImporter from '../fragments/CharacterImporter';
 import Title from '../Title';
 
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+import ListItemButton  from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import ImageIcon from '@mui/icons-material/Image';
 
-import { Summary, CharacterSummary } from '../../handlers/saveCharacter';
+import { Summary } from '../../handlers/saveCharacter';
 
 export default function Characters() {
     const [characters, setCharacters] = useState<Summary>({})
@@ -21,8 +21,8 @@ export default function Characters() {
 
     useEffect(() => {
         const getSummary = async () => {
-            const bob = await window.electron.getSummary()
-            setCharacters(bob)
+            const summary = await window.electron.getSummary()
+            setCharacters(summary)
         }
 
         if (!gotSummary) {
@@ -35,21 +35,23 @@ export default function Characters() {
     return (
         <React.Fragment>
             <Title>Characters</Title>
-            {Object.keys(characters).map((characterKey) => {
-                const character = characters[characterKey]
-                const name = character.name
-                const details = `${character.race} ${character.classes.join(' ')}`
-                return (
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar>
-                                <ImageIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={name} secondary={details} />
-                    </ListItem>
-                )
-            })}
+            <List>
+                {Object.keys(characters).map((characterKey) => {
+                    const character = characters[characterKey]
+                    const name = character.name
+                    const details = `${character.race} ${character.classes.join(' ')}`
+                    return (
+                        <ListItemButton>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <ImageIcon />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText primary={name} secondary={details} />
+                        </ListItemButton >
+                    )
+                })}
+            </List>
             <CharacterImporter />
         </React.Fragment>
     )

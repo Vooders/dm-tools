@@ -138,7 +138,7 @@ function DashboardContent(props: any) {
                 noWrap
                 sx={{ flexGrow: 1 }}
               >
-                Dashboard
+                DM Tools
               </Typography>
               <IconButton color="inherit">
                 <Badge badgeContent={4} color="secondary">
@@ -186,8 +186,8 @@ function DashboardContent(props: any) {
                 <Grid item xs={12}>
                   <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                     <Routes>
-                      <Route path="/" element={<Inventory inventory={props.character.inventory} characterValues={props.character.characterValues} />} />
-                      <Route path="/inventory" element={<Inventory inventory={props.character.inventory} characterValues={props.character.characterValues} />} />
+                      <Route path="/" element={<Inventory />} />
+                      <Route path="/inventory" element={<Inventory />} />
                       <Route path="/characters" element={<Characters />} />
                     </Routes>
                     {/* <Inventory inventory={props.character.inventory} characterValues={props.character.characterValues}/> */}
