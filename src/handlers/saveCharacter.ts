@@ -1,5 +1,5 @@
 import { app, BrowserWindow } from 'electron';
-import { writeFile, readFile, open } from 'fs/promises';
+import { writeFile } from 'fs/promises';
 import path from 'path'
 import getSummaryData from './getSummary';
 

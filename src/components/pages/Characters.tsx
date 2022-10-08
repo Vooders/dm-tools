@@ -3,7 +3,7 @@ import CharacterImporter from '../fragments/CharacterImporter';
 import Title from '../Title';
 
 import List from '@mui/material/List';
-import ListItemButton  from '@mui/material/ListItemButton';
+import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
@@ -41,14 +41,16 @@ export default function Characters() {
                     const name = character.name
                     const details = `${character.race} ${character.classes.join(' ')}`
                     return (
-                        <ListItemButton>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <ImageIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary={name} secondary={details} />
-                        </ListItemButton >
+                        <>
+                            <ListItemButton>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <ImageIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary={name} secondary={details} />
+                            </ListItemButton >
+                        </>
                     )
                 })}
             </List>
