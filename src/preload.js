@@ -16,8 +16,10 @@ contextBridge.exposeInMainWorld('electron', {
   getSummary: async () => {
     return await ipcRenderer.invoke('character:getSummary')
   },
+  deleteCharacter: async (characterId) => {
+    return await ipcRenderer.invoke('character:delete', characterId)
+  },
   getInventories: async () => {
-    console.log('getting inventories')
     return await ipcRenderer.invoke('inventory:get')
   },
   summaryUpdate: async (callback) => {
