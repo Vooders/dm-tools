@@ -5,6 +5,12 @@ import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
 import Grid from '@mui/material/Unstable_Grid2';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 import { ImportResponse } from '../../handlers/importCharacter';
 import Title from '../Title';
 
@@ -12,8 +18,13 @@ export default function CharacterImporter() {
     const [characterId, setCharacterId] = useState(null)
     const [characterName, setCharacterName] = useState('')
     const [saveResponse, setSaveResponse] = useState('')
-    const [open, setOpen] = React.useState(false);
+    const [openSnackBar, setOpenSnackBar] = React.useState(false);
     const [importResponse, setImportResponse] = useState<ImportResponse>({ status: '', value: {} })
+    const [openDialog, setOpenDialog] = React.useState(false);
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    };
 
     const importChar = async (): Promise<void> => {
         console.log(`Characters: getting ${characterId}`)
@@ -21,13 +32,14 @@ export default function CharacterImporter() {
         setImportResponse(response)
         if (response.status === 'success') {
             setCharacterName(response.value.data.name)
+            setOpenDialog(true)
         }
     }
 
     const saveChar = async (): Promise<void> => {
         const response = await window.electron.saveCharacter(importResponse.value)
         setSaveResponse(response)
-        setOpen(true)
+        setOpenSnackBar(true)
     }
 
     const reset = () => {
@@ -44,11 +56,11 @@ export default function CharacterImporter() {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
 
-    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    const handleCloseSnackBar = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
             return;
         }
-        setOpen(false);
+        setOpenSnackBar(false);
         reset()
     };
 
@@ -57,46 +69,48 @@ export default function CharacterImporter() {
     return (
         <React.Fragment>
             <Title>Import</Title>
-            {importResponse.status === 'success' ?
-                <Grid container spacing={2}>
-                    <Grid xs={12}>
-                        <Typography variant="body1">
-                            Do you want import the following character?
-                        </Typography>
-                        <Typography variant="h5">
-                            {characterName}
-                        </Typography>
-                    </Grid>
-                    <Grid xs={12} md={4}>
-                        <Button variant="contained" color="success" size='medium' onClick={saveChar}>
-                            Save
-                        </Button>
-                        <Button variant="outlined" color="error" size='medium' onClick={reset}>
-                            Cancel
-                        </Button>
-                    </Grid>
-                </Grid>
-                :
-                <>
-                    <TextField
-                        error={importResponse.status === 'error' ? true : false}
-                        id="standard-helperText"
-                        label="DNDBeyond ID"
-                        helperText={importResponse.status === 'error' ? importResponse.value : importHelperTest}
-                        variant="standard"
-                        type='number'
-                        onChange={(e) => setCharacterId(e.target.value)}
-                    />
-                    <Button
-                        disabled={characterId < 1}
-                        variant="contained"
-                        onClick={importChar}>
-                        Look up
+
+            <Dialog
+                open={openDialog}
+                onClose={handleCloseDialog}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Do you want import the following character?"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        {characterName}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={reset}>no</Button>
+                    <Button onClick={saveChar} autoFocus>
+                        yes
                     </Button>
-                </>
-            }
-            <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity={saveResponse ? 'success' : 'error'} sx={{ width: '100%' }}>
+                </DialogActions>
+            </Dialog>
+
+            <TextField
+                error={importResponse.status === 'error' ? true : false}
+                id="standard-helperText"
+                label="DNDBeyond ID"
+                helperText={importResponse.status === 'error' ? importResponse.value : importHelperTest}
+                variant="standard"
+                type='number'
+                onChange={(e) => setCharacterId(e.target.value)}
+            />
+            <Button
+                disabled={characterId < 1}
+                variant="contained"
+                onClick={importChar}>
+                Look up
+            </Button>
+
+
+            <Snackbar open={openSnackBar} autoHideDuration={4000} onClose={handleCloseSnackBar}>
+                <Alert onClose={handleCloseSnackBar} severity={saveResponse ? 'success' : 'error'} sx={{ width: '100%' }}>
                     {saveResponse ? `${characterName} saved` : 'There was a problem saving'}
                 </Alert>
             </Snackbar>
