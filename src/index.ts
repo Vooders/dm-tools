@@ -7,8 +7,7 @@ import getSummary from './handlers/getSummary'
 import getInventories from './handlers/getInventories'
 import deleteCharacter from './handlers/deleteCharacter'
 import getCharacter from './handlers/getCharacter'
-
-const autoUpdater = require("electron-updater");
+import { autoUpdater } from 'electron-updater'
 
 app.on("ready", () => {
 	autoUpdater.checkForUpdatesAndNotify();
