@@ -91,19 +91,6 @@
             }
           }
         ]
-      ],
-      "publishers": [
-        {
-          "name": "@electron-forge/publisher-github",
-          "config": {
-            "repository": {
-              "owner": "vooders",
-              "name": "dm-tools"
-            },
-            "prerelease": true,
-            "draft": true
-          }
-        }
       ]
     }
   },
