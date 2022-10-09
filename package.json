@@ -11,7 +11,7 @@
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
     "postinstall": "electron-builder install-app-deps",
-    "build": "electron-builder --mac --windows --linux",
+    "build": "electron-forge make",
     "release": "electron-builder --mac --windows --linux --publish always"
   },
   "keywords": [],
@@ -27,6 +27,11 @@
     },
     "dmg": {
       "icon": false
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
     },
     "linux": {
       "target": [
