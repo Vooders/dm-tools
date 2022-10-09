@@ -64,7 +64,6 @@ export default function Inventory() {
               <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell></TableCell>
                     <TableCell>Equipped</TableCell>
                     <TableCell>Name</TableCell>
                     <TableCell>Quantity</TableCell>
@@ -76,7 +75,6 @@ export default function Inventory() {
                 <TableBody>
                   {character.inventory.map((item: any) => (
                     <TableRow key={item.id}>
-                      <TableCell><img src={item.definition.avatarUrl} /></TableCell>
                       <TableCell>{item.equipped ? '✔️' : '❌'}</TableCell>
                       <TableCell>{item.definition.name}</TableCell>
                       <TableCell>{item.quantity}</TableCell>

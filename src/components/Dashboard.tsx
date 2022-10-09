@@ -21,6 +21,8 @@ import { mainListItems, secondaryListItems } from './listItems';
 import Inventory from './pages/Inventory';
 import { HashRouter, Route, Routes } from "react-router-dom";
 import Characters from './pages/Characters';
+import CharactersMenu from './menuItems/CharactersMenu'
+import CharacterSheet from './pages/CharacterSheet'
 
 function Copyright(props: any) {
   return (
@@ -162,6 +164,8 @@ function DashboardContent(props: any) {
             </Toolbar>
             <Divider />
             <List component="nav">
+              <CharactersMenu />
+              <Divider sx={{ my: 1 }} />
               {mainListItems}
               <Divider sx={{ my: 1 }} />
               {secondaryListItems}
@@ -189,6 +193,7 @@ function DashboardContent(props: any) {
                       <Route path="/" element={<Inventory />} />
                       <Route path="/inventory" element={<Inventory />} />
                       <Route path="/characters" element={<Characters />} />
+                      <Route path="/characterSheet/:characterId" element={<CharacterSheet />} />
                     </Routes>
                     {/* <Inventory inventory={props.character.inventory} characterValues={props.character.characterValues}/> */}
                   </Paper>
