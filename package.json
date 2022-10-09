@@ -33,7 +33,11 @@
         "AppImage"
       ],
       "category": "Game"
-    }
+    },
+    "files": [
+      "**/*"
+    ],
+    "asar": null
   },
   "proxy": "https://character-service.dndbeyond.com",
   "license": "MIT",
