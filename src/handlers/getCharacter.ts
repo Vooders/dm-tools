@@ -12,7 +12,7 @@ export default async (_: Electron.IpcMainInvokeEvent, characterId: string) => {
         const file = fileBuffer.toString()
         console.log(`Got file of length ${file.length}`)
         const characterJson = JSON.parse(file)
-        characterJson.avatarPath = path.join(userDataPath, 'avatars', characterId + '.jpeg')
+        characterJson.dmTools.avatarPath = path.join(userDataPath, 'avatars', characterId + '.jpeg')
         return characterJson
     } catch (error) {
         console.error(error)

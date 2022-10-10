@@ -4,22 +4,28 @@ import { useParams } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import Abilities from '../fragments/character-sheet/Abilities';
+import { CharacterProfileHp } from '../../lib/processCharacterSheet';
+
+import { DmToolsData } from '../../lib/processCharacterSheet'
+import { Paper } from '@mui/material';
 
 export default function CharacterSheet() {
     let { characterId } = useParams()
-    const [character, setCharacter] = useState(null)
+    const [character, setCharacter] = useState<DmToolsData>(null)
 
     useEffect(() => {
         const getCharacter = async () => {
             console.log('getting Character')
             const char = await window.electron.getCharacter(characterId)
-            setCharacter(char)
+            console.log(char.dmTools)
+            setCharacter(char.dmTools)
         }
 
-        if (!character || characterId != character.data.id) {
+        if (!character || characterId !== character.id.toString()) {
             getCharacter()
                 .catch(console.error)
         }
@@ -29,25 +35,31 @@ export default function CharacterSheet() {
         <React.Fragment>
             {character ?
                 <React.Fragment>
-                    <Card sx={{ display: 'flex' }}>
-                        <CardMedia
-                            component="img"
-                            sx={{ width: 151 }}
-                            image={character.avatarPath}
-                            alt={character.data.name}
-                        />
-                        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                            <Typography component="div" variant="h5">
-                                {character.data.name}
-                            </Typography>
-                            <Typography variant="subtitle1" color="text.primary" component="div">
-                                {character.data.race.fullName}
-                            </Typography>
-                            <Typography variant="subtitle2" color="text.secondary" component="div">
-                                {buildClassesString(character)}
-                            </Typography>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Card sx={{ display: 'flex', paddingBottom: '10px' }}>
+                            <CardMedia
+                                component="img"
+                                sx={{ width: 151 }}
+                                image={character.avatarPath}
+                                alt={character.profile.name}
+                            />
+                            <Box sx={{ display: 'flex', flexDirection: 'column', padding: '5px' }}>
+                                <Typography component="div" variant="h5">
+                                    {character.profile.name}
+                                </Typography>
+                                <Typography variant="subtitle1" color="text.primary" component="div">
+                                    {`${character.profile.appearance.gender} ${character.profile.race} ${character.profile.classes}`}
+                                </Typography>
+                                <Typography variant="subtitle2" color="text.secondary" component="div">
+                                    {`Level ${character.profile.level}`}
+                                </Typography>
+                            </Box>
+                        </Card>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', padding: '5px' }}>
+                            <Hp hp={character.profile.hp}></Hp>
                         </Box>
-                    </Card>
+                    </Box>
+                    <Abilities abilities={character.abilities} />
                 </React.Fragment>
                 :
                 "loading"
@@ -56,6 +68,23 @@ export default function CharacterSheet() {
     )
 }
 
-function buildClassesString(characterData: any) {
-    return characterData.data.classes.map((clas: any) => `${clas.definition.name} ${clas.level}`).join(' ')
+interface HpProps {
+    hp: CharacterProfileHp
+}
+
+function Hp({ hp }: HpProps) {
+    const currentHp = hp.override ? hp.override : hp.base + hp.bonus - hp.removed
+    return (
+        <Paper variant="outlined" elevation={0} sx={{padding: '10px', textAlign: 'center'}}>
+            <Typography component="div" variant="subtitle1">
+                HP
+            </Typography>
+            <Typography component="div" variant="h5">
+                {`${currentHp} / ${hp.base}`}
+            </Typography>
+            <Typography component="div" variant="overline">
+                {`temp ${hp.temporary}`}
+            </Typography>
+        </Paper>
+    )
 }
