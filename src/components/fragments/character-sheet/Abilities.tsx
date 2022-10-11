@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Divider, Typography } from '@mui/material';
-import { Ability } from '../../../lib/processCharacterSheet';
+import { Ability } from '../../../lib/CharacterSheetProcessor';
 
 export default function Abilities({ abilities }: AbilitiesProps) {
     return (

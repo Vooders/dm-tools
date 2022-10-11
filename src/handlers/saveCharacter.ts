@@ -3,7 +3,7 @@ import { writeFile } from 'fs/promises';
 import path from 'path'
 import getSummaryData from './getSummary';
 import fetch from 'electron-fetch'
-import processCharacterSheet from '../lib/processCharacterSheet';
+import CharacterSheetProcessor from '../lib/CharacterSheetProcessor';
 
 const directory = 'characters'
 const userDataPath = app.getPath('userData');
@@ -16,7 +16,8 @@ export default (mainWindow: BrowserWindow) => {
         const filePath = path.join(userDataPath, directory, filename + '.json');
         console.log(filePath)
         try {
-            const processedCharacter = processCharacterSheet(character)
+            const characterSheetProcessor = new CharacterSheetProcessor(character)
+            const processedCharacter = characterSheetProcessor.process()
             console.log(processedCharacter.dmTools)
             await writeFile(filePath, JSON.stringify(processedCharacter));
             console.log(`saved ${filename}`)

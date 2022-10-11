@@ -8,9 +8,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Abilities from '../fragments/character-sheet/Abilities';
-import { CharacterProfileHp } from '../../lib/processCharacterSheet';
+import { CharacterProfileHp, DmToolsData } from '../../lib/CharacterSheetProcessor';
 
-import { DmToolsData } from '../../lib/processCharacterSheet'
 import { Paper } from '@mui/material';
 
 export default function CharacterSheet() {
@@ -56,7 +55,7 @@ export default function CharacterSheet() {
                             </Box>
                         </Card>
                         <Box sx={{ display: 'flex', flexDirection: 'column', padding: '5px' }}>
-                            <Hp hp={character.profile.hp}></Hp>
+                            <Hp hp={character.hp}></Hp>
                         </Box>
                     </Box>
                     <Abilities abilities={character.abilities} />
@@ -73,14 +72,15 @@ interface HpProps {
 }
 
 function Hp({ hp }: HpProps) {
-    const currentHp = hp.override ? hp.override : hp.base + hp.bonus - hp.removed
+    const max = hp.base + hp.bonus + hp.constitutionBonus
+    const currentHp = hp.override ? hp.override : hp.base + hp.bonus + hp.constitutionBonus - hp.removed
     return (
         <Paper variant="outlined" elevation={0} sx={{padding: '10px', textAlign: 'center'}}>
             <Typography component="div" variant="subtitle1">
                 HP
             </Typography>
             <Typography component="div" variant="h5">
-                {`${currentHp} / ${hp.base}`}
+                {`${currentHp} / ${max}`}
             </Typography>
             <Typography component="div" variant="overline">
                 {`temp ${hp.temporary}`}
