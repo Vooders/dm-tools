@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
-import Grid from '@mui/material/Unstable_Grid2';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -13,11 +11,14 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import { ImportResponse } from '../../handlers/importCharacter';
 import Title from '../Title';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function CharacterImporter() {
-    const [characterId, setCharacterId] = useState(null)
+    const [characterId, setCharacterId] = useState('')
     const [characterName, setCharacterName] = useState('')
     const [saveResponse, setSaveResponse] = useState('')
+    const [processing, setProcessing] = useState(false)
     const [openSnackBar, setOpenSnackBar] = React.useState(false);
     const [importResponse, setImportResponse] = useState<ImportResponse>({ status: '', value: {} })
     const [openDialog, setOpenDialog] = React.useState(false);
@@ -37,22 +38,27 @@ export default function CharacterImporter() {
     }
 
     const saveChar = async (): Promise<void> => {
+        setProcessing(true)
+        setOpenDialog(false)
+        setCharacterId('')
         const response = await window.electron.saveCharacter(importResponse.value)
         setSaveResponse(response)
         setOpenSnackBar(true)
+        setProcessing(false)
     }
 
     const reset = () => {
-        setImportResponse({ status: '', value: {} })
-        setCharacterId(null)
         setCharacterName('')
         setSaveResponse('')
+        setOpenDialog(false)
     }
 
-    const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-        props,
-        ref,
-    ) {
+    const handleFormChange = (e: any) => {
+        setImportResponse({ status: '', value: {} })
+        setCharacterId(e.target.value)
+    }
+
+    const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref,) {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
 
@@ -99,15 +105,21 @@ export default function CharacterImporter() {
                 helperText={importResponse.status === 'error' ? importResponse.value : importHelperTest}
                 variant="standard"
                 type='number'
-                onChange={(e) => setCharacterId(e.target.value)}
+                value={characterId}
+                onChange={handleFormChange}
             />
             <Button
-                disabled={characterId < 1}
                 variant="contained"
                 onClick={importChar}>
                 Look up
             </Button>
 
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={processing}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
 
             <Snackbar open={openSnackBar} autoHideDuration={4000} onClose={handleCloseSnackBar}>
                 <Alert onClose={handleCloseSnackBar} severity={saveResponse ? 'success' : 'error'} sx={{ width: '100%' }}>
