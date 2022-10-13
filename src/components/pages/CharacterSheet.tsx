@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
 import Abilities from '../fragments/character-sheet/Abilities';
 import { CharacterProfileHp, DmToolsData } from '../../lib/CharacterSheetProcessor';
 

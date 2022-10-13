@@ -9,17 +9,21 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import Tooltip from '@mui/material/Tooltip';
+import Box from '@mui/material/Box';
+import LoadingButton from '@mui/lab/LoadingButton';
 
-import ImageIcon from '@mui/icons-material/Image';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 
 import { Summary } from '../../handlers/saveCharacter';
+import { ImportResponse } from '../../handlers/importCharacter';
+import Button from '@mui/material/Button';
 
 export default function Characters() {
     const [characters, setCharacters] = useState<Summary>({})
     const [gotSummary, setGotSummary] = useState(false)
+    const [loading, setLoading] = React.useState(false);
 
     window.electron.summaryUpdate((event: any, value: any) => {
         setCharacters(value)
@@ -44,8 +48,34 @@ export default function Characters() {
         console.log(`Delete ${characterId} - ${result}`)
     }
 
+    const updateAll = async () => {
+        setLoading(true);
+        const characterIds = Object.keys(characters)
+        console.log(`Updating ${characterIds}`)
+        for (const id of characterIds) {
+            const response = await window.electron.importCharacter(id) as ImportResponse
+            if (response.status === 'success') {
+                const name = characters[id].name
+                const saveResponse = await window.electron.saveCharacter(response.value)
+                const message = saveResponse ? `${name} saved` : 'There was a problem saving'
+            }
+        }
+        setLoading(false);
+    }
+
     return (
         <React.Fragment>
+            <Box sx={{ '& > button': { m: 1 } }}>
+                <LoadingButton
+                    onClick={updateAll}
+                    endIcon={<CloudDownloadIcon />}
+                    loading={loading}
+                    loadingPosition="end"
+                    variant="contained"
+                >
+                    Update all
+                </LoadingButton>
+            </Box>
             <Title>Characters</Title>
             <List>
                 {Object.keys(characters).map((characterKey) => {
@@ -57,11 +87,6 @@ export default function Characters() {
                         <>
                             <ListItem secondaryAction={
                                 <>
-                                    <Tooltip title="Download">
-                                        <IconButton edge="end" aria-label="download">
-                                            <CloudDownloadIcon />
-                                        </IconButton>
-                                    </Tooltip>
                                     <Tooltip title="Delete">
                                         <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(character.id)}>
                                             <DeleteIcon />
