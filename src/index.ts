@@ -29,6 +29,7 @@ if (require('electron-squirrel-startup')) {
 const devMode = process.env.NODE_ENV === 'development'
 
 fs.mkdir(path.join(app.getPath('userData'), 'characters'))
+fs.mkdir(path.join(app.getPath('userData'), 'avatars'))
 
 const createWindow = (): void => {
   // Create the browser window.
