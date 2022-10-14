@@ -18,17 +18,13 @@ export default function Abilities({ abilities }: AbilitiesProps) {
                                 <Divider />
                                 <Typography variant='h4'>{ability.modifier >= 0 ? `+${ability.modifier}` : ability.modifier}</Typography>
                             </Paper>
-                            <Grid container>
+                            <Grid container justifyContent="center">
                                 <Grid item xs={12} md={6}>
                                     <Paper variant="outlined" elevation={0}>
                                         <Typography variant='subtitle1'>{ability.value}</Typography>
                                     </Paper>
                                 </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <Paper variant="outlined" elevation={0}>
-                                        <Typography variant='subtitle1'>-</Typography>
-                                    </Paper>
-                                </Grid>
+                            
                             </Grid>
                         </Grid>
                     )

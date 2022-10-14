@@ -10,6 +10,7 @@ import Abilities from '../fragments/character-sheet/Abilities';
 import { CharacterProfileHp, DmToolsData } from '../../lib/CharacterSheetProcessor';
 
 import { Paper } from '@mui/material';
+import Saves from '../fragments/character-sheet/Saves';
 
 export default function CharacterSheet() {
     let { characterId } = useParams()
@@ -58,6 +59,7 @@ export default function CharacterSheet() {
                         </Box>
                     </Box>
                     <Abilities abilities={character.abilities} />
+                    <Saves saves={character.saves} />
                 </React.Fragment>
                 :
                 "loading"

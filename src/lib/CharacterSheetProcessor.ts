@@ -4,6 +4,8 @@ export default class CharacterSheetProcessor {
 
     private abilities: Ability[]
     private level: number
+    private proficiency: number
+    private isMultiClass: boolean
 
     constructor(private dndBeyondJson: any) {
         this.modifiers = dndBeyondJson.data.modifiers
@@ -11,9 +13,11 @@ export default class CharacterSheetProcessor {
         this.level = dndBeyondJson.data.classes.reduce((total: number, clas: any) => {
             return total + clas.level
         }, 0)
+        this.isMultiClass = dndBeyondJson.data.classes.length > 1
     }
 
     public process(): any {
+        this.proficiency = this.calculateProficiency()
         this.buildAbilities()
 
         return {
@@ -27,8 +31,54 @@ export default class CharacterSheetProcessor {
             id: this.dndBeyondJson.data.id,
             abilities: this.abilities,
             profile: this.buildProfile(),
-            hp: this.buildHp()
+            hp: this.buildHp(),
+            proficiency: this.proficiency,
+            saves: this.buildSaves()
         }
+    }
+
+    private buildSaves(): Save[] {
+        let bannedIds: number[] = []
+        if (this.isMultiClass) {
+            const multiClasses = this.dndBeyondJson.data.classes.slice(1)
+            bannedIds = multiClasses.map((clas: any) => {
+                const multiClassProficiency = clas.definition.classFeatures.find((feature: any) => feature.name === 'Proficiencies')
+                if (multiClassProficiency) {
+                    return multiClassProficiency.id
+                }
+            })
+
+            console.log(bannedIds)
+        }
+
+        const saveProficiencies = this.filterModifiersByType('proficiency')
+            .filter(proficiency => proficiency.subType.includes('saving-throws'))
+            .filter(proficiency => !bannedIds.includes(proficiency.componentId))
+            .map(proficientSave => proficientSave.friendlySubtypeName.split(' ')[0])
+
+        return this.abilities.map(ability => {
+            return {
+                name: ability.name,
+                modifier: saveProficiencies.includes(ability.name) ? ability.modifier + this.proficiency : ability.modifier,
+                shortName: ability.name.slice(0, 3).toLowerCase()
+            }
+        })
+    }
+
+    private calculateProficiency() :number {
+        if (this.level < 5) {
+            return 2
+        }
+        if (this.level < 9) {
+            return 3
+        }
+        if (this.level < 13) {
+            return 4
+        }
+        if (this.level < 17) {
+            return 5
+        }
+        return 6
     }
 
     private buildHp(): CharacterProfileHp {
@@ -100,6 +150,10 @@ export default class CharacterSheetProcessor {
         })
     }
 
+    private filterModifiersByType(subType: string): Modifier[] {
+        return this.filterModifiers((modifier) => modifier.type === subType)
+    }
+
     private filterModifiersBySubType(subType: string): Modifier[] {
         return this.filterModifiers((modifier) => modifier.subType === subType)
     }
@@ -118,6 +172,8 @@ export type DmToolsData = {
     profile: CharacterProfile
     abilities: Ability[]
     hp: CharacterProfileHp
+    proficiency: number
+    saves: Save[]
 }
 
 type ModifierFilterFunction = (arg0: Modifier) => boolean
@@ -141,6 +197,21 @@ type CharacterProfile = {
         weight: number
     }
     xp: number
+}
+
+export type Save = {
+    name: string
+    modifier: number
+    shortName:string
+}
+
+export type Saves = {
+    str: number
+    int: number
+    dex: number
+    wis: number
+    con: number
+    cha: number
 }
 
 export type CharacterProfileHp = {

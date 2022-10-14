@@ -65,6 +65,7 @@ export default function Characters() {
 
     return (
         <React.Fragment>
+            <Title>Update</Title>
             <Box sx={{ '& > button': { m: 1 } }}>
                 <LoadingButton
                     onClick={updateAll}
