@@ -15,7 +15,7 @@ export default function Skills({ skills }: SkillsProds) {
                 <Typography variant='overline' >Skills</Typography>
                 <Divider />
 
-                <List sx={{ width: '100%', bgcolor: 'background.paper'}}>
+                <List sx={{ bgcolor: 'background.paper'}}>
                     {skills.map(skill => {
                         return (
                             <ListItem sx={{paddingBottom: '0'}}

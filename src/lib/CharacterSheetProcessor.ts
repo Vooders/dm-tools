@@ -46,8 +46,54 @@ export default class CharacterSheetProcessor {
             proficiency: this.proficiency,
             saves: this.buildSaves(),
             skills: this.skills,
-            passiveSkills: this.buildPassiveSkills()
+            passiveSkills: this.buildPassiveSkills(),
+            proficiencyView: this.buildProficienciesView()
         }
+    }
+
+    private buildProficienciesView(): ProficiencyView[] {
+        const entityId = {
+            tools: 2103445194,
+            martialWeapons: 1782728300,
+            simpleWeapons: 660121713,
+            armour: 174869515
+        }
+        const customProficiencies = this.dndBeyondJson.data.customProficiencies.map((customProficiency: any) => customProficiency.name)
+        const skillNames = this.skills.map(skill => skill.name)
+        const proficiencies = this.filterModifiersByType('proficiency')
+            .filter(proficiency => !proficiency.subType.includes('saving-throws'))
+            .filter(proficiency => !skillNames.includes(proficiency.friendlySubtypeName) || customProficiencies.includes(proficiency.friendlySubtypeName))
+
+        const languages = this.filterModifiersByType('language')
+            .map(language => language.subType)
+            .join(', ')
+
+        return [
+            {
+                type: 'armour',
+                value: this.getSubTypeNamesByEntityId(proficiencies, entityId.armour)
+            },
+            {
+                type: 'Weapons',
+                value: this.getSubTypeNamesByEntityId(proficiencies, entityId.martialWeapons)
+                    .concat(', ', this.getSubTypeNamesByEntityId(proficiencies, entityId.simpleWeapons))
+            },
+            {
+                type: 'tools',
+                value: this.getSubTypeNamesByEntityId(proficiencies, entityId.tools)
+            }
+            ,
+            {
+                type: 'Languages',
+                value: languages
+            }
+        ]
+    }
+
+    private getSubTypeNamesByEntityId(proficiencies: Modifier[], entityId: number): string {
+        return proficiencies.filter(proficiency => proficiency.entityTypeId === entityId)
+            .map(proficiency => proficiency.friendlySubtypeName)
+            .join(', ')
     }
 
     private buildPassiveSkills(): PassiveSkill[] {
@@ -260,6 +306,12 @@ export type DmToolsData = {
     saves: Save[]
     skills: Skill[]
     passiveSkills: PassiveSkill[]
+    proficiencyView: ProficiencyView[]
+}
+
+export type ProficiencyView ={
+    type: string,
+    value: string
 }
 
 export type PassiveSkill = {

@@ -12,7 +12,7 @@ import { Grid, Paper } from '@mui/material';
 import Saves from '../fragments/character-sheet/Saves';
 import Skills from '../fragments/character-sheet/Skills';
 import PassiveSkills from '../fragments/character-sheet/PassiveSkills';
-import { minWidth } from '@mui/system';
+import { ProficienciesLanguages } from '../fragments/character-sheet/ProficienciesLanguages';
 
 export default function CharacterSheet() {
     let { characterId } = useParams()
@@ -69,6 +69,7 @@ export default function CharacterSheet() {
                         <Skills skills={character.skills} />
                         <Saves saves={character.saves} />
                         <PassiveSkills passiveSkills={character.passiveSkills} />
+                        <ProficienciesLanguages proficiencyView={character.proficiencyView}/>
                     </Grid>
                 </React.Fragment>
                 :
