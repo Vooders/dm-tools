@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
@@ -12,6 +11,8 @@ import { CharacterProfileHp, DmToolsData } from '../../lib/CharacterSheetProcess
 import { Grid, Paper } from '@mui/material';
 import Saves from '../fragments/character-sheet/Saves';
 import Skills from '../fragments/character-sheet/Skills';
+import PassiveSkills from '../fragments/character-sheet/PassiveSkills';
+import { minWidth } from '@mui/system';
 
 export default function CharacterSheet() {
     let { characterId } = useParams()
@@ -35,9 +36,8 @@ export default function CharacterSheet() {
         <React.Fragment>
             {character ?
                 <React.Fragment>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={2} sx={{paddingBottom: '27px'}}>
                         <Grid item sm={12}>
-
                             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <Card sx={{ display: 'flex', paddingBottom: '10px' }}>
                                     <CardMedia
@@ -64,9 +64,11 @@ export default function CharacterSheet() {
                             </Box>
                         </Grid>
                         <Abilities abilities={character.abilities} />
+                    </Grid>
+                    <Grid container spacing={2} flexDirection={'column'} flexWrap={'wrap'} justifyContent={'space-evenly'} sx={{maxHeight: '900px'}}>
                         <Skills skills={character.skills} />
                         <Saves saves={character.saves} />
-
+                        <PassiveSkills passiveSkills={character.passiveSkills} />
                     </Grid>
                 </React.Fragment>
                 :

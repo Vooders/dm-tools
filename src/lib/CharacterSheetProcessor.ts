@@ -1,3 +1,4 @@
+
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
     private stats: Stat[]
@@ -14,6 +15,7 @@ export default class CharacterSheetProcessor {
     private level: number
     private proficiency: number
     private isMultiClass: boolean
+    private skills: Skill[]
 
     constructor(private dndBeyondJson: any) {
         this.modifiers = dndBeyondJson.data.modifiers
@@ -27,6 +29,7 @@ export default class CharacterSheetProcessor {
     public process(): any {
         this.proficiency = this.calculateProficiency()
         this.buildAbilities()
+        this.skills = this.buildSkills()
 
         return {
             ...this.dndBeyondJson,
@@ -42,8 +45,23 @@ export default class CharacterSheetProcessor {
             hp: this.buildHp(),
             proficiency: this.proficiency,
             saves: this.buildSaves(),
-            skills: this.buildSkills()
+            skills: this.skills,
+            passiveSkills: this.buildPassiveSkills()
         }
+    }
+
+    private buildPassiveSkills(): PassiveSkill[] {
+        return [
+            { mod: 'WIS', name: 'Perception', score: 10},
+            { mod: 'INT', name: 'Investigation', score: 10},
+            { mod: 'WIS', name: 'Insight', score: 10}
+        ].map(passiveSkill => {
+            const modifier = this.skillModifier(passiveSkill.name)
+            return {
+                ...passiveSkill,
+                score: passiveSkill.score + modifier
+            }
+        })
     }
 
     private buildSkills(): Skill[] {
@@ -86,7 +104,7 @@ export default class CharacterSheetProcessor {
             const proficient = skillProficiencies.includes(skill.name)
             const expertise = skillExpertise.includes(skill.name)
 
-            const baseModifier = this.abilities.find(ability => ability.shortName === skill.mod).modifier
+            const baseModifier = this.abilityModifierByShortName(skill.mod)
             let abilityModifier = baseModifier
             if (expertise) {
                 abilityModifier += (this.proficiency * 2)
@@ -208,6 +226,14 @@ export default class CharacterSheetProcessor {
         })
     }
 
+    private abilityModifierByShortName(shortName: string): number {
+        return this.abilities.find(ability => ability.shortName === shortName).modifier
+    }
+
+    private skillModifier(name: string): number {
+        return this.skills.find(skill => skill.name === name).bonus
+    }
+
     private filterModifiersByType(subType: string): Modifier[] {
         return this.filterModifiers((modifier) => modifier.type === subType)
     }
@@ -233,6 +259,13 @@ export type DmToolsData = {
     proficiency: number
     saves: Save[]
     skills: Skill[]
+    passiveSkills: PassiveSkill[]
+}
+
+export type PassiveSkill = {
+    mod: string
+    name: string,
+    score: number
 }
 
 export type Skill = {
