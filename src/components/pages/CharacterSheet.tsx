@@ -9,8 +9,9 @@ import Typography from '@mui/material/Typography';
 import Abilities from '../fragments/character-sheet/Abilities';
 import { CharacterProfileHp, DmToolsData } from '../../lib/CharacterSheetProcessor';
 
-import { Paper } from '@mui/material';
+import { Grid, Paper } from '@mui/material';
 import Saves from '../fragments/character-sheet/Saves';
+import Skills from '../fragments/character-sheet/Skills';
 
 export default function CharacterSheet() {
     let { characterId } = useParams()
@@ -34,32 +35,39 @@ export default function CharacterSheet() {
         <React.Fragment>
             {character ?
                 <React.Fragment>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Card sx={{ display: 'flex', paddingBottom: '10px' }}>
-                            <CardMedia
-                                component="img"
-                                sx={{ width: 151 }}
-                                image={character.avatarPath}
-                                alt={character.profile.name}
-                            />
-                            <Box sx={{ display: 'flex', flexDirection: 'column', padding: '5px' }}>
-                                <Typography component="div" variant="h5">
-                                    {character.profile.name}
-                                </Typography>
-                                <Typography variant="subtitle1" color="text.primary" component="div">
-                                    {`${character.profile.appearance.gender} ${character.profile.race} ${character.profile.classes}`}
-                                </Typography>
-                                <Typography variant="subtitle2" color="text.secondary" component="div">
-                                    {`Level ${character.profile.level}`}
-                                </Typography>
+                    <Grid container spacing={2}>
+                        <Grid item sm={12}>
+
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Card sx={{ display: 'flex', paddingBottom: '10px' }}>
+                                    <CardMedia
+                                        component="img"
+                                        sx={{ width: 151 }}
+                                        image={character.avatarPath}
+                                        alt={character.profile.name}
+                                    />
+                                    <Box sx={{ display: 'flex', flexDirection: 'column', padding: '5px' }}>
+                                        <Typography component="div" variant="h5">
+                                            {character.profile.name}
+                                        </Typography>
+                                        <Typography variant="subtitle1" color="text.primary" component="div">
+                                            {`${character.profile.appearance.gender} ${character.profile.race} ${character.profile.classes}`}
+                                        </Typography>
+                                        <Typography variant="subtitle2" color="text.secondary" component="div">
+                                            {`Level ${character.profile.level}`}
+                                        </Typography>
+                                    </Box>
+                                </Card>
+                                <Box sx={{ display: 'flex', flexDirection: 'column', padding: '5px' }}>
+                                    <Hp hp={character.hp}></Hp>
+                                </Box>
                             </Box>
-                        </Card>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', padding: '5px' }}>
-                            <Hp hp={character.hp}></Hp>
-                        </Box>
-                    </Box>
-                    <Abilities abilities={character.abilities} />
-                    <Saves saves={character.saves} />
+                        </Grid>
+                        <Abilities abilities={character.abilities} />
+                        <Skills skills={character.skills} />
+                        <Saves saves={character.saves} />
+
+                    </Grid>
                 </React.Fragment>
                 :
                 "loading"
@@ -76,7 +84,7 @@ function Hp({ hp }: HpProps) {
     const max = hp.base + hp.bonus + hp.constitutionBonus
     const currentHp = hp.override ? hp.override : hp.base + hp.bonus + hp.constitutionBonus - hp.removed
     return (
-        <Paper variant="outlined" elevation={0} sx={{padding: '10px', textAlign: 'center'}}>
+        <Paper variant="outlined" elevation={0} sx={{ padding: '10px', textAlign: 'center' }}>
             <Typography component="div" variant="subtitle1">
                 HP
             </Typography>

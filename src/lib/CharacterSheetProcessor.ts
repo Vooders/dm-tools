@@ -1,6 +1,14 @@
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
     private stats: Stat[]
+    private abilityNames = [
+        'Strength',
+        'Dexterity',
+        'Constitution',
+        'Intelligence',
+        'Wisdom',
+        'Charisma'
+    ]
 
     private abilities: Ability[]
     private level: number
@@ -33,8 +41,66 @@ export default class CharacterSheetProcessor {
             profile: this.buildProfile(),
             hp: this.buildHp(),
             proficiency: this.proficiency,
-            saves: this.buildSaves()
+            saves: this.buildSaves(),
+            skills: this.buildSkills()
         }
+    }
+
+    private buildSkills(): Skill[] {
+        const base = [
+            { mod: 'DEX', name: 'Acrobatics'},
+            { mod: 'WIS', name: 'Animal Handling'},
+            { mod: 'INT', name: 'Arcana'},
+            { mod: 'STR', name: 'Athletics'},
+            { mod: 'CHA', name: 'Deception'},
+            { mod: 'INT', name: 'History'},
+            { mod: 'WIS', name: 'Insight'},
+            { mod: 'CHA', name: 'Intimidation'},
+            { mod: 'INT', name: 'Investigation'},
+            { mod: 'WIS', name: 'Medicine'},
+            { mod: 'INT', name: 'Nature'},
+            { mod: 'WIS', name: 'Perception'},
+            { mod: 'CHA', name: 'Performance'},
+            { mod: 'CHA', name: 'Persuasion'},
+            { mod: 'INT', name: 'Religion'},
+            { mod: 'DEX', name: 'Sleight of Hand'},
+            { mod: 'DEX', name: 'Stealth'},
+            { mod: 'WIS', name: 'Survival'}
+        ].concat(this.dndBeyondJson.data.customProficiencies.map((customProficiency: any) => {
+            return {
+                mod: this.abilityNames[customProficiency.statId -1].slice(0, 3).toUpperCase(),
+                name: customProficiency.name
+            }
+        }))
+
+        const skillNames = base.map(skill => skill.name)
+        const skillProficiencies = this.filterModifiersByType('proficiency')
+            .filter(proficiency => skillNames.includes(proficiency.friendlySubtypeName))
+            .map(proficiency => proficiency.friendlySubtypeName)
+
+        const skillExpertise = this.filterModifiersByType('expertise')
+            .filter(proficiency => skillNames.includes(proficiency.friendlySubtypeName))
+            .map(proficiency => proficiency.friendlySubtypeName)
+
+        return base.map(skill => {
+            const proficient = skillProficiencies.includes(skill.name)
+            const expertise = skillExpertise.includes(skill.name)
+
+            const baseModifier = this.abilities.find(ability => ability.shortName === skill.mod).modifier
+            let abilityModifier = baseModifier
+            if (expertise) {
+                abilityModifier += (this.proficiency * 2)
+            } else if (proficient) {
+                abilityModifier += this.proficiency
+            }
+
+            return {
+                ...skill,
+                bonus: abilityModifier,
+                proficient,
+                expertise
+            }
+        })
     }
 
     private buildSaves(): Save[] {
@@ -60,7 +126,7 @@ export default class CharacterSheetProcessor {
             return {
                 name: ability.name,
                 modifier: saveProficiencies.includes(ability.name) ? ability.modifier + this.proficiency : ability.modifier,
-                shortName: ability.name.slice(0, 3).toLowerCase()
+                shortName: ability.name.slice(0, 3).toUpperCase()
             }
         })
     }
@@ -120,15 +186,6 @@ export default class CharacterSheetProcessor {
     }
 
     private buildAbilities() {
-        const abilityNames = [
-            'Strength',
-            'Dexterity',
-            'Constitution',
-            'Intelligence',
-            'Wisdom',
-            'Charisma'
-        ]
-
         const stats = [...this.stats]
         const bonusModifiers = this.filterModifiers((modifier) => {
             return modifier.type === "bonus" && modifier.entityId !== null
@@ -143,9 +200,10 @@ export default class CharacterSheetProcessor {
 
         this.abilities = stats.map(stat => {
             return {
-                name: abilityNames[stat.id - 1],
+                name: this.abilityNames[stat.id - 1],
                 value: stat.value,
-                modifier: Math.floor((stat.value - 10) / 2)
+                modifier: Math.floor((stat.value - 10) / 2),
+                shortName: this.abilityNames[stat.id - 1].slice(0, 3).toUpperCase()
             }
         })
     }
@@ -174,6 +232,15 @@ export type DmToolsData = {
     hp: CharacterProfileHp
     proficiency: number
     saves: Save[]
+    skills: Skill[]
+}
+
+export type Skill = {
+    name: string
+    mod: string
+    bonus: number
+    proficient: boolean
+    expertise: boolean
 }
 
 type ModifierFilterFunction = (arg0: Modifier) => boolean
@@ -227,6 +294,7 @@ export type Ability = {
     name: string
     modifier: number
     value: number
+    shortName: string
 }
 
 type Stat = {
