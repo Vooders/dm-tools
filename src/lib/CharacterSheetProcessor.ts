@@ -91,9 +91,10 @@ export default class CharacterSheetProcessor {
     }
 
     private getSubTypeNamesByEntityId(proficiencies: Modifier[], entityId: number): string {
-        return proficiencies.filter(proficiency => proficiency.entityTypeId === entityId)
+        const names =  proficiencies.filter(proficiency => proficiency.entityTypeId === entityId)
             .map(proficiency => proficiency.friendlySubtypeName)
-            .join(', ')
+        
+        return [...new Set(names)].join(', ')
     }
 
     private buildPassiveSkills(): PassiveSkill[] {
