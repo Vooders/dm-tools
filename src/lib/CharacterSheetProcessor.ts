@@ -81,8 +81,7 @@ export default class CharacterSheetProcessor {
             {
                 type: 'tools',
                 value: this.getSubTypeNamesByEntityId(proficiencies, entityId.tools)
-            }
-            ,
+            },
             {
                 type: 'Languages',
                 value: languages
