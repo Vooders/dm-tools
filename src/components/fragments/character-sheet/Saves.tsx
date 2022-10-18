@@ -10,7 +10,6 @@ import { Save } from '../../../lib/CharacterSheetProcessor';
 export default function Saves({ saves }: SavesProps) {
     return (
         <Grid item sm={6}>
-
             <Box sx={{ flexGrow: 1 }}>
                 <Paper variant="outlined" sx={{ textAlign: 'center' }}>
                     <Typography variant='overline' >saves</Typography>

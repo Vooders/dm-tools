@@ -97,15 +97,22 @@ export default class CharacterSheetProcessor {
     }
 
     private buildPassiveSkills(): PassiveSkill[] {
+        const passiveBonuses = this.filterModifiersByType('bonus')
+            .filter((bonus) => bonus.subType.includes('passive'))
+
         return [
             { mod: 'WIS', name: 'Perception', score: 10},
             { mod: 'INT', name: 'Investigation', score: 10},
             { mod: 'WIS', name: 'Insight', score: 10}
         ].map(passiveSkill => {
             const modifier = this.skillModifier(passiveSkill.name)
+            const bonus = passiveBonuses
+                .filter(passiveBonus => passiveBonus.friendlySubtypeName.includes(passiveSkill.name))
+                .reduce((total: number, passiveBonus) => total += passiveBonus.fixedValue ,0)
+
             return {
                 ...passiveSkill,
-                score: passiveSkill.score + modifier
+                score: passiveSkill.score + modifier + bonus
             }
         })
     }
@@ -280,8 +287,8 @@ export default class CharacterSheetProcessor {
         return this.skills.find(skill => skill.name === name).bonus
     }
 
-    private filterModifiersByType(subType: string): Modifier[] {
-        return this.filterModifiers((modifier) => modifier.type === subType)
+    private filterModifiersByType(type: string): Modifier[] {
+        return this.filterModifiers((modifier) => modifier.type === type)
     }
 
     private filterModifiersBySubType(subType: string): Modifier[] {

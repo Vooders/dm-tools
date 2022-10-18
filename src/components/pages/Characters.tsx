@@ -49,7 +49,7 @@ export default function Characters() {
     }
 
     const updateAll = async () => {
-        setLoading(true);
+        setLoading(true)
         const characterIds = Object.keys(characters)
         console.log(`Updating ${characterIds}`)
         for (const id of characterIds) {
