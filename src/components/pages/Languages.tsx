@@ -39,23 +39,19 @@ export default function Languages() {
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
-                        <TableRow>
-                        <TableCell></TableCell>
-                            { languages.allLanguages.map((language) => {
-                                return (
-                                    <TableCell>{language}</TableCell>
-                                )
-                            }) }
-                        </TableRow>
+                        <TableCell>Language</TableCell>
+                        <TableCell>Characters</TableCell>
                     </TableHead>
                     <TableBody>
-                        { languages.characters.map((character) => {
+                        {languages.allLanguages.map((language) => {
                             return (
                                 <TableRow>
-                                    <TableCell>{character.name}</TableCell>
-                                    { languages.allLanguages.map(language => {
-                                        return <TableCell>{ character.languages.includes(language) ? '✔️' : '❌' }</TableCell>
-                                    })}
+                                    <TableCell>{language}</TableCell>
+                                    <TableCell>
+                                        {languages.characters.map(character => {
+                                            return character.languages.includes(language) ? character.name + ', ' : ''
+                                        })}
+                                    </TableCell>
                                 </TableRow>
                             )
                         })}
