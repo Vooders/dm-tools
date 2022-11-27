@@ -13,7 +13,6 @@ import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -23,6 +22,7 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import Characters from './pages/Characters';
 import CharactersMenu from './menuItems/CharactersMenu'
 import CharacterSheet from './pages/CharacterSheet'
+import Languages from './pages/Languages';
 
 function Copyright(props: any) {
   return (
@@ -190,6 +190,7 @@ function DashboardContent(props: any) {
                       <Route path="/" element={<Inventory />} />
                       <Route path="/inventory" element={<Inventory />} />
                       <Route path="/characters" element={<Characters />} />
+                      <Route path="/languages" element={<Languages />} />
                       <Route path="/characterSheet/:characterId" element={<CharacterSheet />} />
                     </Routes>
                     {/* <Inventory inventory={props.character.inventory} characterValues={props.character.characterValues}/> */}

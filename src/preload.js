@@ -25,6 +25,9 @@ contextBridge.exposeInMainWorld('electron', {
   getInventories: async () => {
     return await ipcRenderer.invoke('inventory:get')
   },
+  getLanguages: async () => {
+    return await ipcRenderer.invoke('languages:get')
+  },
   summaryUpdate: async (callback) => {
     return ipcRenderer.on('character:summaryUpdate', callback)
   }

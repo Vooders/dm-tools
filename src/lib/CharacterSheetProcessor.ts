@@ -30,7 +30,7 @@ export default class CharacterSheetProcessor {
         this.proficiency = this.calculateProficiency()
         this.buildAbilities()
         this.skills = this.buildSkills()
-
+console.log('bob')
         return {
             ...this.dndBeyondJson,
             dmTools: this.dmTools()
@@ -234,6 +234,7 @@ export default class CharacterSheetProcessor {
     }
 
     private buildProfile(): CharacterProfile {
+        console.log('background', this.dndBeyondJson.data.background)
         return {
             name: this.dndBeyondJson.data.name,
             race: this.dndBeyondJson.data.race.fullName,
