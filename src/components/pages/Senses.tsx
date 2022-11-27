@@ -39,7 +39,7 @@ export default function Senses() {
                         <TableCell>Name</TableCell>
                         <TableCell>PERCEPTION</TableCell>
                         <TableCell>INVESTIGATION</TableCell>
-                        <TableCell>INVESTIGATION</TableCell>
+                        <TableCell>INSIGHT</TableCell>
                     </TableHead>
                     <TableBody>
                         { senses.map(character => {
