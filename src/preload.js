@@ -28,6 +28,9 @@ contextBridge.exposeInMainWorld('electron', {
   getLanguages: async () => {
     return await ipcRenderer.invoke('languages:get')
   },
+  getSenses: async () => {
+    return await ipcRenderer.invoke('senses:get')
+  },
   summaryUpdate: async (callback) => {
     return ipcRenderer.on('character:summaryUpdate', callback)
   }

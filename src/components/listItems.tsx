@@ -5,6 +5,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import LuggageIcon from '@mui/icons-material/Luggage';
 import ForumIcon from '@mui/icons-material/Forum';
+import WifiIcon from '@mui/icons-material/Wifi';
 import DndBeyondMenu from './menuItems/DndBeyondMenu';
 import { Link } from 'react-router-dom';
 
@@ -25,6 +26,15 @@ export const mainListItems = (
           <ForumIcon />
         </ListItemIcon>
         <ListItemText primary="Languages" sx={{color: 'white'}} />
+      </ListItemButton>
+    </Link>
+
+    <Link to='/senses'>
+      <ListItemButton>
+        <ListItemIcon>
+          <WifiIcon />
+        </ListItemIcon>
+        <ListItemText primary="Senses" sx={{color: 'white'}} />
       </ListItemButton>
     </Link>
     
