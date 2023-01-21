@@ -9,6 +9,7 @@ import deleteCharacter from './handlers/deleteCharacter'
 import getCharacter from './handlers/getCharacter'
 import getLanguages from './handlers/getLanguages'
 import getSenses from './handlers/getSenses'
+import getSkills from './handlers/getSkills'
 import { autoUpdater } from 'electron-updater'
 
 app.on("ready", () => {
@@ -63,6 +64,7 @@ const createWindow = (): void => {
     ipcMain.handle('inventory:get', getInventories)
     ipcMain.handle('languages:get', getLanguages)
     ipcMain.handle('senses:get', getSenses)
+    ipcMain.handle('skills:get', getSkills)
   })
 };
 

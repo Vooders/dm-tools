@@ -6,11 +6,21 @@ import ListSubheader from '@mui/material/ListSubheader';
 import LuggageIcon from '@mui/icons-material/Luggage';
 import ForumIcon from '@mui/icons-material/Forum';
 import WifiIcon from '@mui/icons-material/Wifi';
+import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import DndBeyondMenu from './menuItems/DndBeyondMenu';
 import { Link } from 'react-router-dom';
 
 export const mainListItems = (
   <React.Fragment>
+    <Link to='/skills'>
+      <ListItemButton>
+        <ListItemIcon>
+          <DensitySmallIcon />
+        </ListItemIcon>
+        <ListItemText primary="Skills" sx={{color: 'white'}} />
+      </ListItemButton>
+    </Link>
+    
     <Link to='/inventory'>
       <ListItemButton>
         <ListItemIcon>

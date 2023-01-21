@@ -24,6 +24,7 @@ import CharactersMenu from './menuItems/CharactersMenu'
 import CharacterSheet from './pages/CharacterSheet'
 import Languages from './pages/Languages';
 import Senses from './pages/Senses';
+import Skills from './pages/Skills';
 
 function Copyright(props: any) {
   return (
@@ -193,6 +194,7 @@ function DashboardContent(props: any) {
                       <Route path="/characters" element={<Characters />} />
                       <Route path="/languages" element={<Languages />} />
                       <Route path="/senses" element={<Senses />} />
+                      <Route path="/skills" element={<Skills />} />
                       <Route path="/characterSheet/:characterId" element={<CharacterSheet />} />
                     </Routes>
                     {/* <Inventory inventory={props.character.inventory} characterValues={props.character.characterValues}/> */}

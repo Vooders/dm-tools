@@ -31,6 +31,9 @@ contextBridge.exposeInMainWorld('electron', {
   getSenses: async () => {
     return await ipcRenderer.invoke('senses:get')
   },
+  getSkills: async () => {
+    return await ipcRenderer.invoke('skills:get')
+  },
   summaryUpdate: async (callback) => {
     return ipcRenderer.on('character:summaryUpdate', callback)
   }
