@@ -7,10 +7,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import TableHead from '@mui/material/TableHead';
 
 export default function Skills() {
     const [gotSkills, setGotSkills] = useState(false)
-    const [skills, setSkills] = useState<any[]>([])
+    const [skills, setSkills] = useState<any[]>([[], []])
 
     useEffect(() => {
         const getSkills = async () => {
@@ -30,14 +31,23 @@ export default function Skills() {
         <React.Fragment>
             <Title>Skills</Title>
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <Table stickyHeader aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            {skills[0].map((name: string) => (
+                                <TableCell>
+                                    {name}
+                                </TableCell>
+                            ))}
+                        </TableRow>
+                    </TableHead>
                     <TableBody>
-                        {skills.map((skill) => {
+                        {skills[1].map((skill: any[]) => {
                             return (
                                 <TableRow>
-                                    {skill.map((bonus: any) => {
-                                        return <TableCell> {bonus} </TableCell>
-                                    })}
+                                    {skill.map((bonus: any) => (
+                                        <TableCell> {bonus} </TableCell>
+                                    ))}
                                 </TableRow>
                             )
                         })}

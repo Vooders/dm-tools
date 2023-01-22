@@ -23,7 +23,7 @@ export default async () => {
         return [skillName, ...allSkills.filter(skill => skill.name === skillName).map(skill => skill.bonus)]
     })
 
-    return [characterNames, ...sortedSkills]
+    return [characterNames, sortedSkills]
 }
 
 export type SkillsData = {
