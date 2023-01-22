@@ -19,12 +19,10 @@ export default async (): Promise<LanguagesData> => {
 
     const allLanguages = [ ...new Set(characters.map(toon => toon.languages).flat()) ]
 
-    const bob = {
+    return {
         allLanguages,
         characters
     }
-    console.log(bob)
-    return bob
 }
 
 export type LanguagesData = {

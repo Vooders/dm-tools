@@ -94,7 +94,7 @@ export default function CharacterSheet() {
                                             {character.profile.name}
                                         </Typography>
                                         <Typography variant="subtitle1" color="text.primary" component="div">
-                                            {`${character.profile.appearance.gender} ${character.profile.race} ${character.profile.classes}`}
+                                            {`${character.profile.appearance.gender || ''} ${character.profile.race} ${character.profile.classes}`}
                                         </Typography>
                                         <Typography variant="subtitle2" color="text.secondary" component="div">
                                             {`Level ${character.profile.level}`}
