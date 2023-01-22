@@ -1,4 +1,4 @@
-import getSummaryData from './getSummary'
+import getSummaryData from '../lib/getSummary'
 import getCharacter from './getCharacter'
 import { CharacterProfileHp } from '../../src/lib/CharacterSheetProcessor'
 

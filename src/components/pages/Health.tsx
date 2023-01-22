@@ -4,30 +4,29 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import { styled } from '@mui/material/styles'
-import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
+import LinearProgress from '@mui/material/LinearProgress'
 
 import { HealthData } from '../../handlers/getHealth'
 import Title from '../Title'
 import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'
 
 export default function Health() {
-    const [gotHealth, setGotHealth] = useState(false)
     const [health, setHealth] = useState<HealthData[]>([])
 
-    useEffect(() => {
-        const getSenses = async () => {
-            console.log('getting Health')
-            const inv = await window.electron.getHealth()
-            setHealth(inv)
-        }
 
-        if (!gotHealth) {
-            getSenses()
-                .catch(console.error)
-            setGotHealth(true)
-        }
-    })
+    const getSenses = async () => {
+        console.log('getting Health')
+        setHealth(await window.electron.getHealth())
+    }
+
+    useEffect(() => {
+        getSenses()
+            .catch(console.error)
+
+        window.electron.characterUpdated(async () => {
+            await getSenses()
+        })
+    }, [])
 
     const healthBarColour = (percent: number) => {
         if (percent < 20) return 'error'

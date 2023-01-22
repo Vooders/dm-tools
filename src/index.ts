@@ -1,9 +1,11 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path'
 import * as fs from 'node:fs/promises'
+
+import handleImportAll from './handlers/importAllCharacters'
 import handleImport from './handlers/importCharacter'
 import handleSave from './handlers/saveCharacter'
-import getSummary from './handlers/getSummary'
+import getSummary from './lib/getSummary'
 import getInventories from './handlers/getInventories'
 import deleteCharacter from './handlers/deleteCharacter'
 import getCharacter from './handlers/getCharacter'
@@ -58,9 +60,12 @@ const createWindow = (): void => {
   
   app.whenReady().then(() => {
     ipcMain.handle('character:import', handleImport)
+    ipcMain.handle('character:save', handleSave(mainWindow))
+
+    ipcMain.handle('character:updateAll', handleImportAll(mainWindow))
+
     ipcMain.handle('character:getSummary', getSummary)
     ipcMain.handle('character:get', getCharacter)
-    ipcMain.handle('character:save', handleSave(mainWindow))
     ipcMain.handle('character:delete', deleteCharacter(mainWindow))
     ipcMain.handle('inventory:get', getInventories)
     ipcMain.handle('languages:get', getLanguages)

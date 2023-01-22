@@ -12,22 +12,22 @@ import Paper from '@mui/material/Paper';
 import { SensesData } from '../../handlers/getSenses';
 
 export default function Senses() {
-    const [gotSenses, setGotSenses] = useState(false)
     const [senses, setSenses] = useState<SensesData[]>([])
 
-    useEffect(() => {
-        const getSenses = async () => {
-            console.log('getting Senses')
-            const inv = await window.electron.getSenses()
-            setSenses(inv)
-        }
+    const getSenses = async () => {
+        console.log('getting Senses')
+        const inv = await window.electron.getSenses()
+        setSenses(inv)
+    }
 
-        if (!gotSenses) {
-            getSenses()
-                .catch(console.error)
-            setGotSenses(true)
-        }
-    })
+    useEffect(() => {
+        getSenses()
+            .catch(console.error)
+
+        window.electron.characterUpdated(async () => {
+            await getSenses()
+        })
+    }, [])
 
     return (
         <React.Fragment>

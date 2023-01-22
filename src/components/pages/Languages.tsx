@@ -18,19 +18,20 @@ export default function Languages() {
         characters: []
     })
 
-    useEffect(() => {
-        const getLanguages = async () => {
-            console.log('getting Languages')
-            const inv = await window.electron.getLanguages()
-            setLanguages(inv)
-        }
+    const getLanguages = async () => {
+        console.log('getting Languages')
+        const inv = await window.electron.getLanguages()
+        setLanguages(inv)
+    }
 
-        if (!gotLanguages) {
-            getLanguages()
-                .catch(console.error)
-            setGotLanguages(true)
-        }
-    })
+    useEffect(() => {
+        getLanguages()
+            .catch(console.error)
+
+        window.electron.characterUpdated(async () => {
+            await getLanguages()
+        })
+    }, [])
 
     return (
         <React.Fragment>

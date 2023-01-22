@@ -9,38 +9,27 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import Tooltip from '@mui/material/Tooltip';
-import Box from '@mui/material/Box';
-import LoadingButton from '@mui/lab/LoadingButton';
 
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 
-import { Summary } from '../../handlers/saveCharacter';
-import { ImportResponse } from '../../handlers/importCharacter';
-import Button from '@mui/material/Button';
+import { Summary } from '../../lib/saveCharacter';
 
 export default function Characters() {
     const [characters, setCharacters] = useState<Summary>({})
-    const [gotSummary, setGotSummary] = useState(false)
-    const [loading, setLoading] = React.useState(false);
 
-    window.electron.summaryUpdate((event: any, value: any) => {
-        setCharacters(value)
-    })
+    const getSummary = async () => {
+        setCharacters(await window.electron.getSummary())
+    }
 
     useEffect(() => {
-        const getSummary = async () => {
-            const summary = await window.electron.getSummary()
-            setCharacters(summary)
-        }
-
-        if (!gotSummary) {
-            getSummary()
-                .catch(console.error)
-            setGotSummary(true)
-        }
-    })
+        getSummary()
+            .catch(console.error)
+    
+        window.electron.characterUpdated(async () => {
+            await getSummary()
+        })
+    }, [])
 
     const handleDelete = async (characterId: number) => {
         console.log(`Deleting ${characterId}`)
@@ -48,35 +37,8 @@ export default function Characters() {
         console.log(`Delete ${characterId} - ${result}`)
     }
 
-    const updateAll = async () => {
-        setLoading(true)
-        const characterIds = Object.keys(characters)
-        console.log(`Updating ${characterIds}`)
-        for (const id of characterIds) {
-            const response = await window.electron.importCharacter(id) as ImportResponse
-            if (response.status === 'success') {
-                const name = characters[id].name
-                const saveResponse = await window.electron.saveCharacter(response.value)
-                const message = saveResponse ? `${name} saved` : 'There was a problem saving'
-            }
-        }
-        setLoading(false);
-    }
-
     return (
         <React.Fragment>
-            <Title>Update</Title>
-            <Box sx={{ '& > button': { m: 1 } }}>
-                <LoadingButton
-                    onClick={updateAll}
-                    endIcon={<CloudDownloadIcon />}
-                    loading={loading}
-                    loadingPosition="end"
-                    variant="contained"
-                >
-                    Update all
-                </LoadingButton>
-            </Box>
             <Title>Characters</Title>
             <List>
                 {Object.keys(characters).map((characterKey) => {

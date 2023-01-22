@@ -20,7 +20,6 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Inventory() {
   const [fullInventory, setFullInventory] = useState([])
-  const [gotInventory, setGotInventory] = useState(false)
   const [inventory, setInventory] = useState([])
 
   function search(name: string) {
@@ -35,20 +34,22 @@ export default function Inventory() {
       setInventory(results)
   }
 
-  useEffect(() => {
-    const getInvertory = async () => {
-      console.log('getting inventory')
-      const inv = await window.electron.getInventories()
-      setInventory(inv)
-      setFullInventory(inv)
-    }
+  const getInvertory = async () => {
+    console.log('getting inventory')
+    const inv = await window.electron.getInventories()
+    setInventory(inv)
+    setFullInventory(inv)
+  }
 
-    if (!gotInventory) {
-      getInvertory()
-        .catch(console.error)
-      setGotInventory(true)
-    }
-  })
+  useEffect(() => {
+    getInvertory()
+      .catch(console.error)
+      
+    window.electron.characterUpdated(async () => {
+      console.log('character updated')
+      await getInvertory()
+    })
+  }, [])
 
   return (
     <React.Fragment>

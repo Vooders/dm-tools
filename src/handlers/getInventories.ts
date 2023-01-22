@@ -1,7 +1,7 @@
 import { app } from 'electron';
 import { readFile } from 'fs/promises';
 import path from 'path'
-import getSummaryData from './getSummary';
+import getSummaryData from '../lib/getSummary';
 
 const directory = 'characters'
 const userDataPath = app.getPath('userData');
@@ -16,7 +16,6 @@ export default async () => {
             inventory: addCustomNames(character.data.inventory, character.data.characterValues)
         }
     }))
-    console.log('built', invertories)
     return invertories
 }
 

@@ -1,43 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
-import People from '@mui/icons-material/People';
 import { Link } from 'react-router-dom';
-import { Summary } from '../../handlers/saveCharacter';
+import { Summary } from '../../lib/saveCharacter';
 import GroupsIcon from '@mui/icons-material/Groups';
-
-const data = [
-    { icon: <People />, label: 'Characters' }
-];
+import UpdateAllButton from '../fragments/UpdateAllButton';
 
 export default function CharactersMenu() {
     const [open, setOpen] = React.useState(true);
     const [characters, setCharacters] = useState<Summary>({})
-    const [gotSummary, setGotSummary] = useState(false)
 
-    window.electron.summaryUpdate((event: any, value: any) => {
-        setCharacters(value)
+    const getSummary = async () => {
+        console.log()
+        setCharacters(await window.electron.getSummary())
+    }
+
+    window.electron.characterUpdated(async () => {
+        console.log('character updated')
+        await setCharacters(await window.electron.getSummary())
     })
 
     useEffect(() => {
-        const getSummary = async () => {
-            const summary = await window.electron.getSummary()
-            setCharacters(summary)
-        }
-
-        if (!gotSummary) {
-            getSummary()
-                .catch(console.error)
-            setGotSummary(true)
-        }
-    })
+        getSummary()
+            .catch(console.error)
+    }, [])
 
     return (
         <>
+            <UpdateAllButton characters={characters} />
             <ListItemButton
                 alignItems="flex-start"
                 onClick={() => setOpen(!open)}>

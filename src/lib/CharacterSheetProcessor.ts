@@ -186,8 +186,6 @@ export default class CharacterSheetProcessor {
                     return multiClassProficiency.id
                 }
             })
-
-            console.log(bannedIds)
         }
 
         const saveProficiencies = this.filterModifiersByType('proficiency')
@@ -236,7 +234,6 @@ export default class CharacterSheetProcessor {
     }
 
     private buildProfile(): CharacterProfile {
-        console.log('background', this.dndBeyondJson.data.background)
         return {
             name: this.dndBeyondJson.data.name,
             race: this.dndBeyondJson.data.race.fullName,

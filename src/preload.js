@@ -10,6 +10,9 @@ contextBridge.exposeInMainWorld('electron', {
   importCharacter: async (characterId) => {
     return await ipcRenderer.invoke('character:import', characterId)
   },
+  importAllCharacters: async () => {
+    return await ipcRenderer.invoke('character:updateAll')
+  },
   saveCharacter: async (characterData) => {
     return await ipcRenderer.invoke('character:save', characterData)
   },
@@ -36,6 +39,9 @@ contextBridge.exposeInMainWorld('electron', {
   },
   getHealth: async () => {
     return await ipcRenderer.invoke('health:get')
+  },
+  characterUpdated: async (callback) => {
+    return await ipcRenderer.on('character:updated', callback)
   },
   summaryUpdate: async (callback) => {
     return ipcRenderer.on('character:summaryUpdate', callback)

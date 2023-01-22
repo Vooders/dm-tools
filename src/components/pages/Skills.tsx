@@ -10,22 +10,22 @@ import Paper from '@mui/material/Paper';
 import TableHead from '@mui/material/TableHead';
 
 export default function Skills() {
-    const [gotSkills, setGotSkills] = useState(false)
     const [skills, setSkills] = useState<any[]>([[], []])
 
-    useEffect(() => {
-        const getSkills = async () => {
-            console.log('getting Skills')
-            const inv = await window.electron.getSkills()
-            setSkills(inv)
-        }
+    const getSkills = async () => {
+        console.log('getting Skills')
+        const inv = await window.electron.getSkills()
+        setSkills(inv)
+    }
 
-        if (!gotSkills) {
-            getSkills()
-                .catch(console.error)
-            setGotSkills(true)
-        }
-    })
+    useEffect(() => {
+        getSkills()
+            .catch(console.error)
+
+        window.electron.characterUpdated(async () => {
+            await getSkills()
+        })
+    }, [])
 
     return (
         <React.Fragment>
