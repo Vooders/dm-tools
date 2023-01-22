@@ -1,3 +1,5 @@
+import { app } from 'electron'
+import path from 'path'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -30,7 +32,6 @@ export default class CharacterSheetProcessor {
         this.proficiency = this.calculateProficiency()
         this.buildAbilities()
         this.skills = this.buildSkills()
-console.log('bob')
         return {
             ...this.dndBeyondJson,
             dmTools: this.dmTools()
@@ -40,6 +41,7 @@ console.log('bob')
     private dmTools(): DmToolsData {
         return {
             id: this.dndBeyondJson.data.id,
+            avatarPath: path.join(app.getPath('userData'), 'avatars', this.dndBeyondJson.data.id + '.jpeg'),
             abilities: this.abilities,
             profile: this.buildProfile(),
             hp: this.buildHp(),
@@ -227,7 +229,7 @@ console.log('bob')
             constitutionBonus: this.level * constitutionModifier,
             base: this.dndBeyondJson.data.baseHitPoints + hpPerLevelBonus,
             bonus: this.dndBeyondJson.data.bonusHitPoints,
-            override: this.dndBeyondJson.data.bonusHitPoints,
+            override: this.dndBeyondJson.data.overrideHitPoints,
             removed: this.dndBeyondJson.data.removedHitPoints,
             temporary: this.dndBeyondJson.data.temporaryHitPoints
         }

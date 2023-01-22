@@ -10,6 +10,7 @@ import getCharacter from './handlers/getCharacter'
 import getLanguages from './handlers/getLanguages'
 import getSenses from './handlers/getSenses'
 import getSkills from './handlers/getSkills'
+import getHealth from './handlers/getHealth'
 import { autoUpdater } from 'electron-updater'
 
 app.on("ready", () => {
@@ -65,6 +66,7 @@ const createWindow = (): void => {
     ipcMain.handle('languages:get', getLanguages)
     ipcMain.handle('senses:get', getSenses)
     ipcMain.handle('skills:get', getSkills)
+    ipcMain.handle('health:get', getHealth)
   })
 };
 

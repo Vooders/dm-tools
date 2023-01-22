@@ -7,11 +7,21 @@ import LuggageIcon from '@mui/icons-material/Luggage';
 import ForumIcon from '@mui/icons-material/Forum';
 import WifiIcon from '@mui/icons-material/Wifi';
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
+import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import DndBeyondMenu from './menuItems/DndBeyondMenu';
 import { Link } from 'react-router-dom';
 
 export const mainListItems = (
   <React.Fragment>
+    <Link to='/health'>
+      <ListItemButton>
+        <ListItemIcon>
+          <HealthAndSafetyIcon />
+        </ListItemIcon>
+        <ListItemText primary="Health" sx={{color: 'white'}} />
+      </ListItemButton>
+    </Link>
+
     <Link to='/skills'>
       <ListItemButton>
         <ListItemIcon>

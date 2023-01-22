@@ -19,12 +19,14 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import Inventory from './pages/Inventory';
 import { HashRouter, Route, Routes } from "react-router-dom";
+
 import Characters from './pages/Characters';
 import CharactersMenu from './menuItems/CharactersMenu'
 import CharacterSheet from './pages/CharacterSheet'
 import Languages from './pages/Languages';
 import Senses from './pages/Senses';
 import Skills from './pages/Skills';
+import Health from './pages/Health';
 
 function Copyright(props: any) {
   return (
@@ -195,6 +197,7 @@ function DashboardContent(props: any) {
                       <Route path="/languages" element={<Languages />} />
                       <Route path="/senses" element={<Senses />} />
                       <Route path="/skills" element={<Skills />} />
+                      <Route path="/health" element={<Health />} />
                       <Route path="/characterSheet/:characterId" element={<CharacterSheet />} />
                     </Routes>
                     {/* <Inventory inventory={props.character.inventory} characterValues={props.character.characterValues}/> */}
