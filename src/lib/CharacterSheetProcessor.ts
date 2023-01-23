@@ -280,7 +280,7 @@ export default class CharacterSheetProcessor {
         })
     }
 
-    private buildSpellSlots(): SpellSlots {
+    private buildSpellSlots(): SpellSlot[] {
         const isCaster = this.dndBeyondJson.data.classes[0].definition.spellCastingAbilityId != null
         const levelSpellSlots = this.dndBeyondJson.data.classes[0].definition.spellRules.levelSpellSlots
         const bob = levelSpellSlots[this.level].map((maxSlots: number, index: number) => {
@@ -289,6 +289,9 @@ export default class CharacterSheetProcessor {
                 max: (isCaster) ? maxSlots : 0,
                 used: this.dndBeyondJson.data.spellSlots[index].used
             }
+        }).filter((
+            spellSlot: SpellSlot) => {
+            return spellSlot.max > 0
         })
         console.log(bob)
         return bob
@@ -329,7 +332,7 @@ export type DmToolsData = {
     skills: Skill[]
     passiveSkills: PassiveSkill[]
     proficiencyView: ProficiencyView[]
-    spellSlots: SpellSlots
+    spellSlots: SpellSlot[]
 }
 
 export type ProficiencyView ={
@@ -405,13 +408,7 @@ export type Ability = {
     shortName: string
 }
 
-export type SpellSlots = [
-    SpellSlot, SpellSlot, SpellSlot,
-    SpellSlot, SpellSlot, SpellSlot,
-    SpellSlot, SpellSlot, SpellSlot
-]
-
-type SpellSlot = {
+export type SpellSlot = {
     level: number
     max: number
     used: number

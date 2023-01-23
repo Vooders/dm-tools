@@ -1,6 +1,6 @@
 import getSummaryData from '../lib/getSummary'
 import getCharacter from './getCharacter'
-import { CharacterProfileHp } from '../../src/lib/CharacterSheetProcessor'
+import { CharacterProfileHp, SpellSlot } from '../../src/lib/CharacterSheetProcessor'
 
 export default async (): Promise<HealthData[]> => {
     const summary = await getSummaryData()
@@ -12,7 +12,8 @@ export default async (): Promise<HealthData[]> => {
         return {
             name: characterData.dmTools.profile.name,
             hp: characterData.dmTools.hp,
-            avatarPath: characterData.dmTools.avatarPath
+            avatarPath: characterData.dmTools.avatarPath,
+            spellSlots: characterData.dmTools.spellSlots
         }
         
     }))
@@ -23,5 +24,6 @@ export default async (): Promise<HealthData[]> => {
 export type HealthData = {
     name: string,
     hp: CharacterProfileHp,
-    avatarPath: string
+    avatarPath: string,
+    spellSlots: SpellSlot[]
 }
