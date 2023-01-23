@@ -49,7 +49,8 @@ export default class CharacterSheetProcessor {
             saves: this.buildSaves(),
             skills: this.skills,
             passiveSkills: this.buildPassiveSkills(),
-            proficiencyView: this.buildProficienciesView()
+            proficiencyView: this.buildProficienciesView(),
+            spellSlots: this.buildSpellSlots()
         }
     }
 
@@ -279,6 +280,20 @@ export default class CharacterSheetProcessor {
         })
     }
 
+    private buildSpellSlots(): SpellSlots {
+        const isCaster = this.dndBeyondJson.data.classes[0].definition.spellCastingAbilityId != null
+        const levelSpellSlots = this.dndBeyondJson.data.classes[0].definition.spellRules.levelSpellSlots
+        const bob = levelSpellSlots[this.level].map((maxSlots: number, index: number) => {
+            return {
+                level: index+1,
+                max: (isCaster) ? maxSlots : 0,
+                used: this.dndBeyondJson.data.spellSlots[index].used
+            }
+        })
+        console.log(bob)
+        return bob
+    }
+
     private abilityModifierByShortName(shortName: string): number {
         return this.abilities.find(ability => ability.shortName === shortName).modifier
     }
@@ -314,6 +329,7 @@ export type DmToolsData = {
     skills: Skill[]
     passiveSkills: PassiveSkill[]
     proficiencyView: ProficiencyView[]
+    spellSlots: SpellSlots
 }
 
 export type ProficiencyView ={
@@ -387,6 +403,18 @@ export type Ability = {
     modifier: number
     value: number
     shortName: string
+}
+
+export type SpellSlots = [
+    SpellSlot, SpellSlot, SpellSlot,
+    SpellSlot, SpellSlot, SpellSlot,
+    SpellSlot, SpellSlot, SpellSlot
+]
+
+type SpellSlot = {
+    level: number
+    max: number
+    used: number
 }
 
 type Stat = {
