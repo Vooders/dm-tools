@@ -7,7 +7,6 @@ import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import { Link } from 'react-router-dom';
 import { Summary } from '../../lib/saveCharacter';
 import GroupsIcon from '@mui/icons-material/Groups';
-import UpdateAllButton from '../fragments/UpdateAllButton';
 
 export default function CharactersMenu() {
     const [open, setOpen] = React.useState(true);
@@ -30,7 +29,6 @@ export default function CharactersMenu() {
 
     return (
         <>
-            <UpdateAllButton characters={characters} />
             <ListItemButton
                 alignItems="flex-start"
                 onClick={() => setOpen(!open)}>

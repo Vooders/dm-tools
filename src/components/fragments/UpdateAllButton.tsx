@@ -4,9 +4,7 @@ import Box from '@mui/material/Box';
 import LoadingButton from '@mui/lab/LoadingButton';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 
-import { Summary } from '../../lib/saveCharacter';
-
-export default function UpdateAllButton({ characters }: Props) {
+export default function UpdateAllButton() {
     const [loading, setLoading] = useState(false);
 
     const updateAll = async () => {
@@ -19,17 +17,13 @@ export default function UpdateAllButton({ characters }: Props) {
         <Box sx={{ '& > button': { m: 1 } }}>
             <LoadingButton
                 onClick={updateAll}
-                endIcon={<CloudDownloadIcon />}
+                startIcon={<CloudDownloadIcon />}
                 loading={loading}
-                loadingPosition="end"
-                variant="contained"
+
+                variant="outlined"
             >
-                Update all
+                UPDATE
             </LoadingButton>
         </Box>
     )
-}
-
-interface Props {
-    characters: Summary
 }

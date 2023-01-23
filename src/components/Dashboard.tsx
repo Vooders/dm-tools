@@ -16,6 +16,7 @@ import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import UpdateAllButton from './fragments/UpdateAllButton'
 import { mainListItems, secondaryListItems } from './listItems';
 import Inventory from './pages/Inventory';
 import { HashRouter, Route, Routes } from "react-router-dom";
@@ -143,11 +144,7 @@ function DashboardContent(props: any) {
               >
                 DM Tools
               </Typography>
-              <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
+              <UpdateAllButton />
             </Toolbar>
           </AppBar>
           <Drawer variant="permanent" open={open}>
@@ -191,7 +188,7 @@ function DashboardContent(props: any) {
                 <Grid item xs={12}>
                   <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                     <Routes>
-                      <Route path="/" element={<Inventory />} />
+                      <Route path="/" element={<Health />} />
                       <Route path="/inventory" element={<Inventory />} />
                       <Route path="/characters" element={<Characters />} />
                       <Route path="/languages" element={<Languages />} />
@@ -200,7 +197,6 @@ function DashboardContent(props: any) {
                       <Route path="/health" element={<Health />} />
                       <Route path="/characterSheet/:characterId" element={<CharacterSheet />} />
                     </Routes>
-                    {/* <Inventory inventory={props.character.inventory} characterValues={props.character.characterValues}/> */}
                   </Paper>
                 </Grid>
               </Grid>

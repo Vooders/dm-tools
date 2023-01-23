@@ -283,7 +283,7 @@ export default class CharacterSheetProcessor {
     private buildSpellSlots(): SpellSlot[] {
         const isCaster = this.dndBeyondJson.data.classes[0].definition.spellCastingAbilityId != null
         const levelSpellSlots = this.dndBeyondJson.data.classes[0].definition.spellRules.levelSpellSlots
-        const bob = levelSpellSlots[this.level].map((maxSlots: number, index: number) => {
+        return levelSpellSlots[this.level].map((maxSlots: number, index: number) => {
             return {
                 level: index+1,
                 max: (isCaster) ? maxSlots : 0,
@@ -293,8 +293,6 @@ export default class CharacterSheetProcessor {
             spellSlot: SpellSlot) => {
             return spellSlot.max > 0
         })
-        console.log(bob)
-        return bob
     }
 
     private abilityModifierByShortName(shortName: string): number {
