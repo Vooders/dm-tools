@@ -3,7 +3,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
+import ListSubheader from '@mui/material/ListSubheader';
+
 import { Link } from 'react-router-dom';
 import { Summary } from '../../lib/saveCharacter';
 import GroupsIcon from '@mui/icons-material/Groups';
@@ -28,24 +29,9 @@ export default function CharactersMenu() {
 
     return (
         <>
-            <ListItemButton
-                alignItems="flex-start"
-                onClick={() => setOpen(!open)}>
-                <ListItemAvatar>
-                    <GroupsIcon />
-                </ListItemAvatar>
-                <ListItemText
-                    primary="Characters"
-                />
-                <KeyboardArrowDown
-                    sx={{
-                        mr: -1,
-                        opacity: 0,
-                        transform: open ? 'rotate(-180deg)' : 'rotate(0)',
-                        transition: '0.2s',
-                    }}
-                />
-            </ListItemButton>
+            <ListSubheader component="div" inset>
+                Party
+            </ListSubheader>
             {open &&
                 Object.keys(characters).map((characterKey) => {
                     const character = characters[characterKey]
@@ -54,9 +40,9 @@ export default function CharactersMenu() {
                         <Link to={`/characterSheet/${character.id}`}>
                             <ListItemButton
                                 key={character.name}
-                                sx={{ color: 'rgba(255,255,255,.8)' }}
+                                // sx={{ color: 'rgba(255,255,255,.8)' }}
                             >
-                                <ListItemAvatar sx={{width: '35px', height: '35px'}}>
+                                <ListItemAvatar sx={{ width: '35px', height: '35px' }}>
                                     <Avatar src={character.avatarPath} />
                                 </ListItemAvatar>
                                 <ListItemText primary={shortName} />

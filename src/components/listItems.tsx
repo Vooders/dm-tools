@@ -8,17 +8,21 @@ import ForumIcon from '@mui/icons-material/Forum';
 import WifiIcon from '@mui/icons-material/Wifi';
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
-import DndBeyondMenu from './menuItems/DndBeyondMenu';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import { Link } from 'react-router-dom';
 
 export const mainListItems = (
   <React.Fragment>
+    <ListSubheader component="div" inset>
+      Party Views
+    </ListSubheader>
+
     <Link to='/health'>
       <ListItemButton>
         <ListItemIcon>
           <HealthAndSafetyIcon />
         </ListItemIcon>
-        <ListItemText primary="Health" sx={{color: 'white'}} />
+        <ListItemText primary="Health" />
       </ListItemButton>
     </Link>
 
@@ -27,7 +31,7 @@ export const mainListItems = (
         <ListItemIcon>
           <DensitySmallIcon />
         </ListItemIcon>
-        <ListItemText primary="Skills" sx={{color: 'white'}} />
+        <ListItemText primary="Skills" />
       </ListItemButton>
     </Link>
     
@@ -36,7 +40,7 @@ export const mainListItems = (
         <ListItemIcon>
           <LuggageIcon />
         </ListItemIcon>
-        <ListItemText primary="Inventory" sx={{color: 'white'}} />
+        <ListItemText primary="Inventory" />
       </ListItemButton>
     </Link>
 
@@ -45,7 +49,7 @@ export const mainListItems = (
         <ListItemIcon>
           <ForumIcon />
         </ListItemIcon>
-        <ListItemText primary="Languages" sx={{color: 'white'}} />
+        <ListItemText primary="Languages" />
       </ListItemButton>
     </Link>
 
@@ -54,7 +58,7 @@ export const mainListItems = (
         <ListItemIcon>
           <WifiIcon />
         </ListItemIcon>
-        <ListItemText primary="Senses" sx={{color: 'white'}} />
+        <ListItemText primary="Senses" />
       </ListItemButton>
     </Link>
     
@@ -66,6 +70,13 @@ export const secondaryListItems = (
     <ListSubheader component="div" inset>
       Settings
     </ListSubheader>
-    <DndBeyondMenu />
+    <Link to='/characters'>
+      <ListItemButton>
+        <ListItemIcon>
+          <GroupAddIcon />
+        </ListItemIcon>
+        <ListItemText primary="Manage Characters" />
+      </ListItemButton>
+    </Link>
   </React.Fragment>
 );
