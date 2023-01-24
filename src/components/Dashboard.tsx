@@ -9,13 +9,11 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import UpdateAllButton from './fragments/UpdateAllButton'
 import { mainListItems, secondaryListItems } from './listItems';
 import Inventory from './pages/Inventory';
@@ -89,9 +87,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-const mdTheme = createTheme();
-
-function DashboardContent(props: any) {
+function DashboardContent() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -111,6 +107,9 @@ function DashboardContent(props: any) {
           mode: 'dark',
           primary: { main: 'rgb(102, 157, 246)' },
           background: { paper: 'rgb(5, 30, 52)' },
+        },
+        typography: {
+          fontSize: 11,
         },
       })}
     >
@@ -162,11 +161,11 @@ function DashboardContent(props: any) {
             </Toolbar>
             <Divider />
             <List component="nav">
-              <CharactersMenu />
-              <Divider sx={{ my: 1 }} />
-              {mainListItems}
-              <Divider sx={{ my: 1 }} />
-              {secondaryListItems}
+                <CharactersMenu />
+                <Divider sx={{ my: 1 }} />
+                {mainListItems}
+                <Divider sx={{ my: 1 }} />
+                {secondaryListItems}
             </List>
           </Drawer>
           <Box
@@ -209,6 +208,6 @@ function DashboardContent(props: any) {
   );
 }
 
-export default function Dashboard(props: any) {
-  return <DashboardContent character={props.character} />;
+export default function Dashboard() {
+  return <DashboardContent />;
 }

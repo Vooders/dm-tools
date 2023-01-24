@@ -295,6 +295,11 @@ export default class CharacterSheetProcessor {
         })
     }
 
+    private buildActions(): Action[] {
+        const actions = this.dndBeyondJson.data.actions
+        return []
+    }
+
     private abilityModifierByShortName(shortName: string): number {
         return this.abilities.find(ability => ability.shortName === shortName).modifier
     }
@@ -333,7 +338,17 @@ export type DmToolsData = {
     spellSlots: SpellSlot[]
 }
 
-export type ProficiencyView ={
+export type Action = {
+    name: string,
+    description: string,
+    snippet: string,
+    limitedUse: {
+        maxUses: number,
+        numberUsed: number
+    }
+}
+
+export type ProficiencyView = {
     type: string,
     value: string
 }

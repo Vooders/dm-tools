@@ -13,18 +13,17 @@ export default function CharactersMenu() {
     const [characters, setCharacters] = useState<Summary>({})
 
     const getSummary = async () => {
-        console.log()
         setCharacters(await window.electron.getSummary())
     }
-
-    window.electron.characterUpdated(async () => {
-        console.log('character updated')
-        await setCharacters(await window.electron.getSummary())
-    })
 
     useEffect(() => {
         getSummary()
             .catch(console.error)
+
+        window.electron.characterUpdated(async () => {
+            console.log('character updated')
+            await setCharacters(await window.electron.getSummary())
+        })
     }, [])
 
     return (
@@ -57,7 +56,7 @@ export default function CharactersMenu() {
                                 key={character.name}
                                 sx={{ color: 'rgba(255,255,255,.8)' }}
                             >
-                                <ListItemAvatar>
+                                <ListItemAvatar sx={{width: '35px', height: '35px'}}>
                                     <Avatar src={character.avatarPath} />
                                 </ListItemAvatar>
                                 <ListItemText primary={shortName} />
