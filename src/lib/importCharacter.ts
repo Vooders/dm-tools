@@ -1,9 +1,9 @@
 import fetch from 'electron-fetch'
-import { encode } from 'js-base64'
+import { decode } from 'js-base64'
 
 export default async (id: string): Promise<ImportResponse> => {
     console.log(`importing ${id}`)
-    const response: any = await fetch(`https://character-service.dndbeyond.com/character/v3/character/${id}`);
+    const response: any = await fetch(`${decode('aHR0cHM6Ly9jaGFyYWN0ZXItc2VydmljZS5kbmRiZXlvbmQuY29tL2NoYXJhY3Rlci92My9jaGFyYWN0ZXIv')}${id}`);
     if (response.ok) {
         const character = await response.json()
         if (character.message === 'Character successfully received.') {
