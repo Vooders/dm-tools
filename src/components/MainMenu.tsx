@@ -5,7 +5,7 @@ import CharactersMenu from './menuItems/CharactersMenu'
 import Divider from '@mui/material/Divider';
 import { mainListItems, secondaryListItems } from './listItems';
 
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default function MainMenu() {
     return (

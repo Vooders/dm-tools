@@ -1,4 +1,5 @@
 import fetch from 'electron-fetch'
+import { encode } from 'js-base64'
 
 export default async (id: string): Promise<ImportResponse> => {
     console.log(`importing ${id}`)

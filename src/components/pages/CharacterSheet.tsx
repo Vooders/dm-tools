@@ -58,8 +58,7 @@ export default function CharacterSheet() {
         const getCharacter = async () => {
             console.log('getting Character')
             const char = await window.electron.getCharacter(characterId)
-            console.log(char.dmTools)
-            setCharacter(char.dmTools)
+            setCharacter(char)
         }
 
         if (!character || characterId !== character.id.toString()) {

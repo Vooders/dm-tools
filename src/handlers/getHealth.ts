@@ -1,6 +1,6 @@
 import getSummaryData from '../lib/getSummary'
 import getCharacter from './getCharacter'
-import { CharacterProfileHp, SpellSlot } from '../../src/lib/CharacterSheetProcessor'
+import { CharacterProfileHp, SpellSlot, Action } from '../../src/lib/CharacterSheetProcessor'
 
 export default async (): Promise<HealthData[]> => {
     const summary = await getSummaryData()
@@ -8,12 +8,14 @@ export default async (): Promise<HealthData[]> => {
 
     const characters = await Promise.all(characterIds.map(async (characterId) => {
         const characterData = await getCharacter(null, characterId)
+        const limitedUseActions = characterData.actions.filter(action => action.limitedUse.maxUses > 0)
         
         return {
-            name: characterData.dmTools.profile.name,
-            hp: characterData.dmTools.hp,
-            avatarPath: characterData.dmTools.avatarPath,
-            spellSlots: characterData.dmTools.spellSlots
+            name: characterData.profile.name,
+            hp: characterData.hp,
+            avatarPath: characterData.avatarPath,
+            spellSlots: characterData.spellSlots,
+            limitedUseActions
         }
         
     }))
@@ -25,5 +27,6 @@ export type HealthData = {
     name: string,
     hp: CharacterProfileHp,
     avatarPath: string,
-    spellSlots: SpellSlot[]
+    spellSlots: SpellSlot[],
+    limitedUseActions: Action[]
 }

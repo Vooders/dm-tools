@@ -8,32 +8,28 @@ import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 import Rating from '@mui/material/Rating'
 
-
-import CancelIcon from '@mui/icons-material/Cancel';
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import Brightness1Icon from '@mui/icons-material/Brightness1'
 import BlockIcon from '@mui/icons-material/Block'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 import { HealthData } from '../../handlers/getHealth'
 import Title from '../Title'
 import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'
+import Slots from '../fragments/Slots'
 
 export default function Health() {
     const [health, setHealth] = useState<HealthData[]>([])
 
     const StyledRating = styled(Rating)({
         '& .MuiRating-iconFilled': {
-          color: '#ddd',
+            color: '#ddd',
         },
         '& .MuiRating-iconHover': {
-          color: '#ff3d47',
+            color: '#ff3d47',
         },
         '& .MuiRating-iconEmpty': {
             color: '#ff6d75'
         }
-      });
+    });
 
     const getSenses = async () => {
         console.log('getting Health')
@@ -112,22 +108,23 @@ export default function Health() {
                             </Typography>
                             <LinearProgressWithLabel value={calculateHpPercent(character.hp)} />
                             <Box sx={{ display: 'flex', paddingBottom: '10px' }}>
-                            { character.spellSlots.map(spellSlot => {
-                                return (
-                                        <Box m={2}>
-                                        <Typography component="legend">{`Level ${spellSlot.level}`}</Typography>
-                                        <StyledRating
-                                            name="customized-color"
-                                            defaultValue={spellSlot.max - spellSlot.used}
-                                            max={spellSlot.max}
-                                            readOnly
-                                            precision={0.5}
-                                            icon={<Brightness1Icon fontSize="inherit" />}
-                                            emptyIcon={<BlockIcon fontSize="inherit" />} 
-                                        />
-                                        </Box>
-                                        )
-                                    })}
+                                {character.spellSlots.map(spellSlot => {
+                                    return (
+                                        <Slots title={`Level ${spellSlot.level}`} max={spellSlot.max} used={spellSlot.used} description=''/>
+                                    )
+                                })}
+                            </Box>
+
+                            <Box sx={{ display: 'flex', paddingBottom: '10px' }}>
+                                {character.limitedUseActions.map(limitedUseAction => {
+                                    return (
+                                        <Slots 
+                                            title={`${limitedUseAction.name}`} 
+                                            max={limitedUseAction.limitedUse.maxUses} 
+                                            used={limitedUseAction.limitedUse.numberUsed} 
+                                            description={limitedUseAction.snippet} />
+                                    )
+                                })}
                             </Box>
                         </Box>
                     </Card>

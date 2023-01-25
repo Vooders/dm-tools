@@ -9,8 +9,8 @@ export default async () => {
     const characters = await Promise.all(characterIds.map(async (characterId) => {
         const characterData = await getCharacter(null, characterId)
         return {
-            name: characterData.dmTools.profile.name,
-            senses: characterData.dmTools.passiveSkills
+            name: characterData.profile.name,
+            senses: characterData.passiveSkills
         }
     }))
 

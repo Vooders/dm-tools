@@ -50,7 +50,8 @@ export default class CharacterSheetProcessor {
             skills: this.skills,
             passiveSkills: this.buildPassiveSkills(),
             proficiencyView: this.buildProficienciesView(),
-            spellSlots: this.buildSpellSlots()
+            spellSlots: this.buildSpellSlots(),
+            actions: this.buildActions()
         }
     }
 
@@ -297,7 +298,17 @@ export default class CharacterSheetProcessor {
 
     private buildActions(): Action[] {
         const actions = this.dndBeyondJson.data.actions
-        return []
+        return [...actions.race, ...actions.class, ...actions.feat].map(action => {
+            return {
+                name: action.name,
+                description: action.description,
+                snippet: action.snippet,
+                limitedUse: {
+                    maxUses: (action.limitedUse) ? action.limitedUse.maxUses : 0,
+                    numberUsed: (action.limitedUse) ? action.limitedUse.numberUsed : 0
+                }
+            }
+        })
     }
 
     private abilityModifierByShortName(shortName: string): number {
@@ -336,6 +347,7 @@ export type DmToolsData = {
     passiveSkills: PassiveSkill[]
     proficiencyView: ProficiencyView[]
     spellSlots: SpellSlot[]
+    actions: Action[]
 }
 
 export type Action = {
