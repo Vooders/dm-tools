@@ -8,7 +8,14 @@ export default async (): Promise<HealthData[]> => {
 
     const characters = await Promise.all(characterIds.map(async (characterId) => {
         const characterData = await getCharacter(null, characterId)
-        const limitedUseActions = characterData.actions.filter(action => action.limitedUse.maxUses > 0)
+        const limitedUseActions = characterData.actions
+            .map(action => {
+                if (action.name === 'Bardic Inspiration') {
+                    action.limitedUse.maxUses = 5
+                }
+                return action
+            })
+            .filter(action => action.limitedUse.maxUses > 0)
         
         return {
             name: characterData.profile.name,
