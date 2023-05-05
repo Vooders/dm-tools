@@ -298,17 +298,27 @@ export default class CharacterSheetProcessor {
 
     private buildActions(): Action[] {
         const actions = this.dndBeyondJson.data.actions
-        return [...actions.race, ...actions.class, ...actions.feat].map(action => {
+        return [...actions.race, ...actions.class, ...actions.feat].map(action => { 
             return {
                 name: action.name,
                 description: action.description,
                 snippet: action.snippet,
                 limitedUse: {
-                    maxUses: (action.limitedUse) ? action.limitedUse.maxUses : 0,
+                    maxUses: this.getMaxUses(action),
                     numberUsed: (action.limitedUse) ? action.limitedUse.numberUsed : 0
                 }
             }
         })
+    }
+
+    private getMaxUses(action: any) {
+        if (action.limitedUse) {
+            if (action.limitedUse.useProficiencyBonus) {
+                return this.proficiency
+            }
+            return action.limitedUse.maxUses
+        }
+        return 0
     }
 
     private abilityModifierByShortName(shortName: string): number {
