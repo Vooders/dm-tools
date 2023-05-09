@@ -51,7 +51,8 @@ export default class CharacterSheetProcessor {
             passiveSkills: this.buildPassiveSkills(),
             proficiencyView: this.buildProficienciesView(),
             spellSlots: this.buildSpellSlots(),
-            actions: this.buildActions()
+            actions: this.buildActions(),
+            spells: this.buildSpells()
         }
     }
 
@@ -321,6 +322,44 @@ export default class CharacterSheetProcessor {
         return 0
     }
 
+    private buildSpells(): SpellType[][] {
+        function getActionType(spell: any): CastingTime {
+            switch (spell.activation.activationType) {
+                case 1:
+                    return 'action'
+                case 3:
+                    return 'bonus'
+                case 4:
+                    return 'reaction'
+                case 6:
+                    return 'minutes'
+            }
+                
+        }
+
+        const spells = this.dndBeyondJson.data.classSpells.map((classSpell: any) => {
+            return classSpell.spells.map((spell: any) => {
+                return {
+                    name: spell.definition.name,
+                    level: spell.definition.level,
+                    school: spell.definition.school,
+                    duration: spell.definition.duration,
+                    range: spell.definition.range,
+                    description: spell.definition.description,
+                    components: spell.definition.componentsDescription,
+                    tags: spell.definition.tags,
+                    prepared: spell.prepared,
+                    alwayPrepared: spell.alwayPrepared,
+                    castingTime: getActionType(spell)
+                }
+            })
+        }).flat()
+        
+        return new Array(9).fill('').map((spell: SpellType, index: number) => {
+            return spells.filter((s: SpellType) => s.level === index+1)
+        }).filter(spellLevel => spellLevel.length > 0)
+    }
+
     private abilityModifierByShortName(shortName: string): number {
         return this.abilities.find(ability => ability.shortName === shortName).modifier
     }
@@ -358,26 +397,52 @@ export type DmToolsData = {
     proficiencyView: ProficiencyView[]
     spellSlots: SpellSlot[]
     actions: Action[]
+    spells: SpellType[][]
 }
 
+export type SpellType = {
+    name: string
+    level: number
+    school: string
+    duration: {
+        durationInterval: number
+        durationUnit: string
+        durationType: string
+    }
+    range: {
+        origin: string
+        rangeValue: number
+        aoeType: string
+        aoeValue: number
+    }
+    description: string
+    components: string
+    tags: string[]
+    prepared: boolean
+    alwaysPrepared: boolean
+    castingTime: CastingTime
+}
+
+type CastingTime = 'action' | 'bonus' | 'reaction' | 'minutes'
+
 export type Action = {
-    name: string,
-    description: string,
-    snippet: string,
+    name: string
+    description: string
+    snippet: string
     limitedUse: {
-        maxUses: number,
+        maxUses: number
         numberUsed: number
     }
 }
 
 export type ProficiencyView = {
-    type: string,
+    type: string
     value: string
 }
 
 export type PassiveSkill = {
     mod: string
-    name: string,
+    name: string
     score: number
 }
 
@@ -450,8 +515,8 @@ export type SpellSlot = {
 }
 
 type Stat = {
-    id: number,
-    name: string,
+    id: number
+    name: string
     value: number
 }
 
@@ -467,25 +532,25 @@ type Modifiers = {
 type ModifierKeys = keyof Modifiers
 
 type Modifier = {
-    fixedValue: number,
-    id: number,
-    entityId: number,
-    entityTypeId: number,
-    type: string,
-    subType: string,
-    dice: null,
-    restriction: string,
-    statId: null,
-    requiresAttunement: boolean,
-    duration: null,
-    friendlyTypeName: string,
-    friendlySubtypeName: string,
-    isGranted: boolean,
-    bonusTypes: [],
-    value: number,
-    availableToMulticlass: boolean,
-    modifierTypeId: number,
-    modifierSubTypeId: number,
-    componentId: number,
+    fixedValue: number
+    id: number
+    entityId: number
+    entityTypeId: number
+    type: string
+    subType: string
+    dice: null
+    restriction: string
+    statId: null
+    requiresAttunement: boolean
+    duration: null
+    friendlyTypeName: string
+    friendlySubtypeName: string
+    isGranted: boolean
+    bonusTypes: []
+    value: number
+    availableToMulticlass: boolean
+    modifierTypeId: number
+    modifierSubTypeId: number
+    componentId: number
     componentTypeId: number
 }

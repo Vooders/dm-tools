@@ -13,6 +13,7 @@ import Tab from '@mui/material/Tab';
 import { CharacterProfileHp, DmToolsData } from '../../lib/CharacterSheetProcessor';
 import Abilities from '../fragments/character-sheet/Abilities';
 import Skills from '../fragments/character-sheet/Skills';
+import Spells from '../fragments/character-sheet/Spells';
 import PassiveSkills from '../fragments/character-sheet/PassiveSkills';
 import { ProficienciesLanguages } from '../fragments/character-sheet/ProficienciesLanguages';
 import Saves from '../fragments/character-sheet/Saves';
@@ -112,7 +113,7 @@ export default function CharacterSheet() {
                             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                                     <Tab label="skills & saves" {...a11yProps(0)} />
-                                    <Tab label="Inventory" {...a11yProps(1)} />
+                                    <Tab label="Spells" {...a11yProps(1)} />
                                     <Tab label="Actions" {...a11yProps(2)} />
                                 </Tabs>
                             </Box>
@@ -123,7 +124,7 @@ export default function CharacterSheet() {
                                 <ProficienciesLanguages proficiencyView={character.proficiencyView} />
                             </TabPanel>
                             <TabPanel value={value} index={1}>
-                                Item Two
+                               <Spells theSpells={character.spells} />
                             </TabPanel>
                             <TabPanel value={value} index={2}>
                                 Item Three
