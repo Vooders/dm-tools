@@ -1451,7 +1451,7 @@
                         "Consumable"
                     ],
                     "grantedModifiers": [],
-                    "subType": "Poison",
+                    "subType": null,
                     "isConsumable": false,
                     "weaponBehaviors": [],
                     "baseItemId": null,
@@ -1773,94 +1773,6 @@
                 "currency": null
             },
             {
-                "id": 759624500,
-                "entityTypeId": 1439493548,
-                "definition": {
-                    "id": 86,
-                    "baseTypeId": 2103445194,
-                    "entityTypeId": 2103445194,
-                    "definitionKey": "2103445194:86",
-                    "canEquip": false,
-                    "magic": false,
-                    "name": "Spellbook",
-                    "snippet": null,
-                    "weight": 3,
-                    "weightMultiplier": 1,
-                    "capacity": null,
-                    "capacityWeight": 0,
-                    "type": "Gear",
-                    "description": "<p>Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages suitable for recording spells.</p>",
-                    "canAttune": false,
-                    "attunementDescription": null,
-                    "rarity": "Common",
-                    "isHomebrew": false,
-                    "version": null,
-                    "sourceId": null,
-                    "sourcePageNumber": null,
-                    "stackable": true,
-                    "bundleSize": 1,
-                    "avatarUrl": null,
-                    "largeAvatarUrl": null,
-                    "filterType": "Other Gear",
-                    "cost": 50,
-                    "isPack": false,
-                    "tags": [
-                        "Utility"
-                    ],
-                    "grantedModifiers": [],
-                    "subType": "Adventuring Gear",
-                    "isConsumable": false,
-                    "weaponBehaviors": [],
-                    "baseItemId": null,
-                    "baseArmorName": null,
-                    "strengthRequirement": null,
-                    "armorClass": null,
-                    "stealthCheck": null,
-                    "damage": null,
-                    "damageType": null,
-                    "fixedDamage": null,
-                    "properties": null,
-                    "attackType": null,
-                    "categoryId": null,
-                    "range": null,
-                    "longRange": null,
-                    "isMonkWeapon": false,
-                    "levelInfusionGranted": null,
-                    "sources": [
-                        {
-                            "sourceId": 1,
-                            "pageNumber": null,
-                            "sourceType": 2
-                        },
-                        {
-                            "sourceId": 2,
-                            "pageNumber": null,
-                            "sourceType": 1
-                        }
-                    ],
-                    "armorTypeId": null,
-                    "gearTypeId": 1,
-                    "groupedId": null,
-                    "canBeAddedToInventory": true,
-                    "isContainer": false,
-                    "isCustomItem": false
-                },
-                "definitionId": 0,
-                "definitionTypeId": 0,
-                "displayAsAttack": null,
-                "quantity": 1,
-                "isAttuned": false,
-                "equipped": false,
-                "equippedEntityTypeId": null,
-                "equippedEntityId": null,
-                "chargesUsed": 0,
-                "limitedUse": null,
-                "containerEntityId": 69432830,
-                "containerEntityTypeId": 1581111423,
-                "containerDefinitionKey": "1581111423:69432830",
-                "currency": null
-            },
-            {
                 "id": 759624493,
                 "entityTypeId": 1439493548,
                 "definition": {
@@ -1968,6 +1880,94 @@
                 "equipped": true,
                 "equippedEntityTypeId": 1581111423,
                 "equippedEntityId": 69432830,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 69432830,
+                "containerEntityTypeId": 1581111423,
+                "containerDefinitionKey": "1581111423:69432830",
+                "currency": null
+            },
+            {
+                "id": 759624500,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 86,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:86",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Spellbook",
+                    "snippet": null,
+                    "weight": 3,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages suitable for recording spells.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 50,
+                    "isPack": false,
+                    "tags": [
+                        "Utility"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
                 "chargesUsed": 0,
                 "limitedUse": null,
                 "containerEntityId": 69432830,
@@ -3072,7 +3072,7 @@
                     "isPack": false,
                     "tags": [],
                     "grantedModifiers": [],
-                    "subType": "Gemstone",
+                    "subType": null,
                     "isConsumable": false,
                     "weaponBehaviors": [],
                     "baseItemId": null,
@@ -12324,7 +12324,7 @@
         "optionalOrigins": [],
         "optionalClassFeatures": [],
         "dateModified": "2023-05-02T14:20:11.139196Z",
-        "providedFrom": "database"
+        "providedFrom": "cache"
     },
     "pagination": null,
     "dmTools": {
@@ -12653,6 +12653,101 @@
             }
         ],
         "spells": [
+            [
+                {
+                    "name": "Fire Bolt",
+                    "level": 0,
+                    "school": "Evocation",
+                    "duration": {
+                        "durationInterval": 0,
+                        "durationUnit": null,
+                        "durationType": "Instantaneous"
+                    },
+                    "range": {
+                        "origin": "Ranged",
+                        "rangeValue": 120,
+                        "aoeType": null,
+                        "aoeValue": null
+                    },
+                    "description": "<p>You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn't being worn or carried.</p>\r\n<p>This spell's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).</p>",
+                    "components": "",
+                    "tags": [
+                        "Damage"
+                    ],
+                    "prepared": false,
+                    "castingTime": "action"
+                },
+                {
+                    "name": "Light",
+                    "level": 0,
+                    "school": "Evocation",
+                    "duration": {
+                        "durationInterval": 1,
+                        "durationUnit": "Hour",
+                        "durationType": "Time"
+                    },
+                    "range": {
+                        "origin": "Touch",
+                        "rangeValue": 0,
+                        "aoeType": "Sphere",
+                        "aoeValue": 20
+                    },
+                    "description": "<p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p>\r\n<p>If you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.</p>",
+                    "components": "a firefly or phosphorescent moss",
+                    "tags": [
+                        "Creation",
+                        "Utility"
+                    ],
+                    "prepared": false,
+                    "castingTime": "action"
+                },
+                {
+                    "name": "Mage Hand",
+                    "level": 0,
+                    "school": "Conjuration",
+                    "duration": {
+                        "durationInterval": 1,
+                        "durationUnit": "Minute",
+                        "durationType": "Time"
+                    },
+                    "range": {
+                        "origin": "Ranged",
+                        "rangeValue": 30,
+                        "aoeType": null,
+                        "aoeValue": null
+                    },
+                    "description": "<p>A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.</p>\r\n<p>You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.</p>\r\n<p>The hand can't attack, activate magic items, or carry more than 10 pounds.</p>",
+                    "components": "",
+                    "tags": [
+                        "Utility"
+                    ],
+                    "prepared": false,
+                    "castingTime": "action"
+                },
+                {
+                    "name": "Gust",
+                    "level": 0,
+                    "school": "Transmutation",
+                    "duration": {
+                        "durationInterval": 0,
+                        "durationUnit": null,
+                        "durationType": "Instantaneous"
+                    },
+                    "range": {
+                        "origin": "Ranged",
+                        "rangeValue": 30,
+                        "aoeType": null,
+                        "aoeValue": null
+                    },
+                    "description": "<p>You seize the air and compel it to create one of the following effects at a point you can see within range:</p>\r\n<ul>\r\n<li>\r\n<p>One Medium or smaller creature that you choose must succeed on a Strength saving throw or be pushed up to 5 feet away from you.</p>\r\n</li>\r\n<li>\r\n<p>You create a small blast of air capable of moving one object that is neither held nor carried and that weighs no more than 5 pounds. The object is pushed up to 10 feet away from you. It isn’t pushed with enough force to cause damage.</p>\r\n</li>\r\n<li>\r\n<p>You create a harmless sensory effect using air, such as causing leaves to rustle, wind to slam shutters shut, or your clothing to ripple in a breeze.</p>\r\n</li>\r\n</ul>",
+                    "components": "",
+                    "tags": [
+                        "Control"
+                    ],
+                    "prepared": false,
+                    "castingTime": "action"
+                }
+            ],
             [
                 {
                     "name": "Feather Fall",

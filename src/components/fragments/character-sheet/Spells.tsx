@@ -4,11 +4,11 @@ import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import { Divider, FormControl, List, ListSubheader, Stack, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
 
-import { SpellType } from '../../../lib/CharacterSheetProcessor';
+import { Spells } from '../../../lib/CharacterSheetProcessor';
 import Spell from './Spell';
 
 export default function Spells({ theSpells }: SpellsProps) {
-    const castingTimes = ['action', 'bonus', 'reaction']
+    const castingTimes = ['action', 'bonus', 'reaction', 'minutes']
 
     const [spells, setSpells] = useState(theSpells)
     const [hideUnprepared, setHideUnprepared] = useState(true)
@@ -16,11 +16,14 @@ export default function Spells({ theSpells }: SpellsProps) {
     const [searchString, setSearchString] = useState('')
 
     useEffect(() => {
-        setSpells(theSpells.map((level: SpellType[]) => {
-            return level
-                .filter((spell: SpellType) => castingTimeFilters.includes(spell.castingTime))
-                .filter((spell: SpellType) => spell.prepared === true || spell.prepared === hideUnprepared)
-                .filter((spell: SpellType) => spell.name.toLowerCase().includes(searchString.toLowerCase()))
+        setSpells(theSpells.map((level: Spells) => {
+            return {
+                ...level,
+                spells: level.spells
+                .filter((spell) => castingTimeFilters.includes(spell.castingTime))
+                .filter((spell) => spell.prepared === true || spell.prepared === hideUnprepared)
+                .filter((spell) => spell.name.toLowerCase().includes(searchString.toLowerCase()))
+            }
         }))
         
     }, [ theSpells, castingTimeFilters, hideUnprepared, searchString ])
@@ -63,6 +66,9 @@ export default function Spells({ theSpells }: SpellsProps) {
                         <ToggleButton value="reaction" aria-label="color">
                             reaction
                         </ToggleButton>
+                        <ToggleButton value="minutes" aria-label="color">
+                            minutes
+                        </ToggleButton>
                     </ToggleButtonGroup>
                     <TextField id="outlined-basic" label="Search" variant="outlined" onChange={(e) => handleSearch(e.target.value)} />
                 </Stack>
@@ -81,11 +87,11 @@ export default function Spells({ theSpells }: SpellsProps) {
                 }}
             >
                 {
-                    spells.map((spellLevel, index) => (
+                    spells.map((spellLevel) => (
                         <>
-                            <ListSubheader color="primary" key={`section-${index}`}>Level {index + 1}</ListSubheader>
+                            <ListSubheader color="primary" key={`section-${spellLevel.level}`}>Level {spellLevel.level}</ListSubheader>
                             <Divider component="li" />
-                            { spellLevel.map(spell => (<Spell spell={spell} />)) }
+                            { spellLevel.spells.map(spell => (<Spell spell={spell} />)) }
                         </>
                     ))
                 }
@@ -95,5 +101,5 @@ export default function Spells({ theSpells }: SpellsProps) {
 }
 
 interface SpellsProps {
-    theSpells: SpellType[][]
+    theSpells: Spells[]
 }

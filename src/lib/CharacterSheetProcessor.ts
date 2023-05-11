@@ -322,7 +322,7 @@ export default class CharacterSheetProcessor {
         return 0
     }
 
-    private buildSpells(): SpellType[][] {
+    private buildSpells(): Spells[] {
         function getActionType(spell: any): CastingTime {
             switch (spell.activation.activationType) {
                 case 1:
@@ -337,6 +337,14 @@ export default class CharacterSheetProcessor {
                 
         }
 
+        function isPrepared(spell: any) {
+            if (spell.alwaysPrepared || spell.definition.level === 0) {
+                return true
+            } else {
+                return spell.prepared
+            }
+        }
+
         const spells = this.dndBeyondJson.data.classSpells.map((classSpell: any) => {
             return classSpell.spells.map((spell: any) => {
                 return {
@@ -348,16 +356,18 @@ export default class CharacterSheetProcessor {
                     description: spell.definition.description,
                     components: spell.definition.componentsDescription,
                     tags: spell.definition.tags,
-                    prepared: spell.prepared,
-                    alwayPrepared: spell.alwayPrepared,
+                    prepared: isPrepared(spell),
                     castingTime: getActionType(spell)
                 }
             })
         }).flat()
         
-        return new Array(9).fill('').map((spell: SpellType, index: number) => {
-            return spells.filter((s: SpellType) => s.level === index+1)
-        }).filter(spellLevel => spellLevel.length > 0)
+        return new Array(10).fill('').map((spell: SpellType, index: number) => {
+            return {
+                level: index,
+                spells: spells.filter((s: SpellType) => s.level === index)
+            }
+        }).filter((spellLevel) => spellLevel.spells.length > 0)
     }
 
     private abilityModifierByShortName(shortName: string): number {
@@ -397,7 +407,12 @@ export type DmToolsData = {
     proficiencyView: ProficiencyView[]
     spellSlots: SpellSlot[]
     actions: Action[]
-    spells: SpellType[][]
+    spells: Spells[] 
+}
+
+export type Spells = {
+    level: number
+    spells: SpellType[]
 }
 
 export type SpellType = {
