@@ -111,7 +111,7 @@ export default function CharacterSheet() {
                     <Grid container spacing={2} >
                         <Grid item sm={12} spacing={2}>
                             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                                <Tabs value={value} onChange={handleChange} aria-label="basic tabs">
                                     <Tab label="skills & saves" {...a11yProps(0)} />
                                     <Tab label="Spells" {...a11yProps(1)} />
                                     <Tab label="Actions" {...a11yProps(2)} />
