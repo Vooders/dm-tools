@@ -1,7 +1,7 @@
 {
   "name": "dm-tools",
   "productName": "dm-tools",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "My Electron application description",
   "main": ".webpack/main",
   "scripts": {
@@ -122,7 +122,7 @@
     "@electron/remote": "^2.0.8",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
-    "@mui/icons-material": "^5.10.6",
+    "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.103",
     "@mui/material": "^5.10.7",
     "@types/path-browserify": "^1.0.0",
