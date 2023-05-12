@@ -38,16 +38,20 @@ export default function Slots(props: SlotsProps) {
     return (
         <Box m={2} >
             <Typography component="legend">{props.title}</Typography>
-            <StyledRating
-                onClick={handleClick}
-                name="customized-color"
-                defaultValue={props.max - props.used}
-                max={props.max}
-                readOnly
-                precision={0.5}
-                icon={<Brightness1Icon fontSize="inherit" />}
-                emptyIcon={<BlockIcon fontSize="inherit" />}
-            />
+            { props.max < 10 ?
+                <StyledRating
+                    onClick={handleClick}
+                    name="customized-color"
+                    defaultValue={props.max - props.used}
+                    max={props.max}
+                    readOnly
+                    precision={0.5}
+                    icon={<Brightness1Icon fontSize="inherit" />}
+                    emptyIcon={<BlockIcon fontSize="inherit" />}
+                />
+                :
+                <Typography variant='h6'>{`${props.max - props.used} / ${props.max}`}</Typography>
+            }
             <Popover
                 id={id}
                 open={open}

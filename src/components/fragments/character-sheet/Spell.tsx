@@ -63,9 +63,9 @@ export default function Spell({ spell }: SpellProps) {
                                     >
                                     <TableCell align="left">{buildRange(spell)}</TableCell>
                                     <TableCell align="left">{buildDuration(spell)}</TableCell>
-                                    <TableCell align="left">20</TableCell>
-                                    <TableCell align="left">100 d12</TableCell>
-                                    <TableCell align="left">Fire</TableCell>
+                                    <TableCell align="left">?</TableCell>
+                                    <TableCell align="left">?</TableCell>
+                                    <TableCell align="left">?</TableCell>
                                 </TableRow>
                             </TableBody>
                         </Table>
