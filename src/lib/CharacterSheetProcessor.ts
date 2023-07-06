@@ -52,7 +52,8 @@ export default class CharacterSheetProcessor {
             proficiencyView: this.buildProficienciesView(),
             spellSlots: this.buildSpellSlots(),
             actions: this.buildActions(),
-            spells: this.buildSpells()
+            spells: this.buildSpells(),
+            currencies: this.buildCurrencies()
         }
     }
 
@@ -370,6 +371,20 @@ export default class CharacterSheetProcessor {
         }).filter((spellLevel) => spellLevel.spells.length > 0)
     }
 
+    private buildCurrencies(): Currencies {
+        return {
+            cp: this.findCurrency('cp'),
+            sp: this.dndBeyondJson.data.currencies.sp,
+            gp: this.dndBeyondJson.data.currencies.gp,
+            ep: this.dndBeyondJson.data.currencies.ep,
+            pp: this.dndBeyondJson.data.currencies.pp,
+        } 
+    }
+
+    private findCurrency(type: string): number {
+        return this.dndBeyondJson.data.currencies.`${type}`
+    }
+
     private abilityModifierByShortName(shortName: string): number {
         return this.abilities.find(ability => ability.shortName === shortName).modifier
     }
@@ -407,7 +422,16 @@ export type DmToolsData = {
     proficiencyView: ProficiencyView[]
     spellSlots: SpellSlot[]
     actions: Action[]
-    spells: Spells[] 
+    spells: Spells[]
+    currencies: Currencies
+}
+
+export type Currencies = {
+    cp: number
+    sp: number
+    gp: number
+    pp: number
+    ep: number
 }
 
 export type Spells = {
