@@ -30,7 +30,7 @@ export default class CharacterSheetProcessor {
 
     public process(): any {
         this.proficiency = this.calculateProficiency()
-        this.buildAbilities()
+        this.abilities = this.buildAbilities()
         this.skills = this.buildSkills()
         return {
             ...this.dndBeyondJson,
@@ -273,7 +273,7 @@ export default class CharacterSheetProcessor {
             })
         })
 
-        this.abilities = stats.map(stat => {
+        return stats.map(stat => {
             return {
                 name: this.abilityNames[stat.id - 1],
                 value: stat.value,
@@ -372,17 +372,24 @@ export default class CharacterSheetProcessor {
     }
 
     private buildCurrencies(): Currencies {
+        const currencies = this.dndBeyondJson.data.currencies
         return {
-            cp: this.findCurrency('cp'),
-            sp: this.dndBeyondJson.data.currencies.sp,
-            gp: this.dndBeyondJson.data.currencies.gp,
-            ep: this.dndBeyondJson.data.currencies.ep,
-            pp: this.dndBeyondJson.data.currencies.pp,
+            cp: currencies.cp,
+            sp: currencies.sp,
+            gp: currencies.gp,
+            ep: currencies.ep,
+            pp: currencies.pp,
+            total: this.totalGold(currencies)
         } 
     }
 
-    private findCurrency(type: string): number {
-        return this.dndBeyondJson.data.currencies.`${type}`
+    private totalGold(currencies: any): number {
+       const copper = currencies.cp / 100
+       const silver = currencies.sp / 10
+       const gold = currencies.gp
+       const electrum = currencies.ep / 2
+       const platinum = currencies.pp * 10
+       return copper + silver + gold + electrum + platinum
     }
 
     private abilityModifierByShortName(shortName: string): number {
@@ -432,6 +439,7 @@ export type Currencies = {
     gp: number
     pp: number
     ep: number
+    total: number
 }
 
 export type Spells = {
