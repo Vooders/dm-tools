@@ -3,13 +3,13 @@ import React from 'react'
 
 export default function Currency(props: CurrencyProps) {
     const container = {
-        verticalAlign: "middle",
         display: "inline-block"
     }
 
     const icon = {
-        width: "20px",
-        height: "20px"
+        verticalAlign: "text-bottom",
+        width: "15px",
+        height: "15px"
     }
 
     const currencies = {
@@ -23,10 +23,10 @@ export default function Currency(props: CurrencyProps) {
     return (
         <div>
             <span style={container}>
-                { currencies[props.icon] }
+                <Typography variant='subtitle1'>{props.amount}</Typography>
             </span>
             <span style={container}>
-                <Typography variant='subtitle1'>{props.amount}</Typography>
+                { currencies[props.icon] }
             </span>
         </div>
     )

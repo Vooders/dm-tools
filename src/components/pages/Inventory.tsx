@@ -34,7 +34,7 @@ export default function Inventory() {
       setInventory(results)
   }
 
-  const getInvertory = async () => {
+  const getInventory = async () => {
     console.log('getting inventory')
     const inv = await window.electron.getInventories()
     setInventory(inv)
@@ -42,12 +42,12 @@ export default function Inventory() {
   }
 
   useEffect(() => {
-    getInvertory()
+    getInventory()
       .catch(console.error)
       
     window.electron.characterUpdated(async () => {
       console.log('character updated')
-      await getInvertory()
+      await getInventory()
     })
   }, [])
 
