@@ -16,6 +16,7 @@ import Title from '../Title'
 import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'
 import Slots from '../fragments/Slots'
 import Currencies from '../fragments/Currencies'
+import { Grid } from '@mui/material'
 
 export default function Health() {
     const [health, setHealth] = useState<HealthData[]>([])
@@ -94,7 +95,7 @@ export default function Health() {
                         />
                         <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', padding: '5px' }}>
                             <Typography component="div" variant="h5">
-                                {character.name}
+                                {character.name} 
                             </Typography>
                             <Currencies currencies={character.currencies}/>
                             <Typography component="div" variant="subtitle1">
