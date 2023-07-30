@@ -5,39 +5,40 @@ import Currency from './Currency'
 
 
 export default function Currencies(props: CurrenciesProps) {
-  
-  return (
-    <>
-      <Grid xs={12} container padding={0} columnSpacing={1} direction='row-reverse' justifyContent="flex-start" >
-        {props.currencies.cp > 0 &&
-            <Grid item>
-              <Currency  amount={props.currencies.cp} icon='copper'/>         
-            </Grid>
-        }
-        {props.currencies.sp > 0 &&
-            <Grid item>
-              <Currency  amount={props.currencies.sp} icon='silver'/>  
-            </Grid>
-        }
-        {props.currencies.ep > 0 &&
-            <Grid item>
-              <Currency  amount={props.currencies.ep} icon='electrum'/>
-            </Grid>
-        }
-        {props.currencies.gp > 0 &&
-            <Grid item>
-              <Currency  amount={props.currencies.gp} icon='gold'/>
-            </Grid>
-        }
-        {props.currencies.pp > 0 &&
-            <Grid item>
-              <Currency  amount={props.currencies.pp} icon='platinum'/>
-            </Grid>
-        } 
-      </Grid>
-    </>
-  )
-}
+  const currencyAmount = props.currencies
+
+    return (
+      <>
+        <Grid xs={12} container padding={0} columnSpacing={1} direction='row-reverse' justifyContent="flex-start" >
+          {currencyAmount.cp > 0 &&
+              <Grid item>
+                <Currency  amount={currencyAmount.cp} icon='copper'/>         
+              </Grid>
+          }
+          {currencyAmount.sp > 0 &&
+              <Grid item>
+                <Currency  amount={currencyAmount.sp} icon='silver'/>  
+              </Grid>
+          }
+          {currencyAmount.ep > 0 &&
+              <Grid item>
+                <Currency  amount={currencyAmount.ep} icon='electrum'/>
+              </Grid>
+          }
+          {currencyAmount.gp > 0 &&
+              <Grid item>
+                <Currency  amount={currencyAmount.gp} icon='gold'/>
+              </Grid>
+          }
+          {currencyAmount.pp > 0 &&
+              <Grid item>
+                <Currency  amount={currencyAmount.pp} icon='platinum'/>
+              </Grid>
+          } 
+        </Grid>
+      </>
+    )
+  }
 
 interface CurrenciesProps {
   currencies: Currencies

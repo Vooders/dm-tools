@@ -8,9 +8,6 @@ import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 import Rating from '@mui/material/Rating'
 
-import Brightness1Icon from '@mui/icons-material/Brightness1'
-import BlockIcon from '@mui/icons-material/Block'
-
 import { HealthData } from '../../handlers/getHealth'
 import Title from '../Title'
 import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'

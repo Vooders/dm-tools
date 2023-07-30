@@ -9,6 +9,7 @@ import WifiIcon from '@mui/icons-material/Wifi';
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { Link } from 'react-router-dom';
 
 export const mainListItems = (
@@ -59,6 +60,15 @@ export const mainListItems = (
           <WifiIcon />
         </ListItemIcon>
         <ListItemText primary="Senses" />
+      </ListItemButton>
+    </Link>
+
+    <Link to='/wealth'>
+      <ListItemButton>
+        <ListItemIcon>
+          <AttachMoneyIcon />
+        </ListItemIcon>
+        <ListItemText primary="wealth" />
       </ListItemButton>
     </Link>
     

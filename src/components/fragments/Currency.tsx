@@ -1,6 +1,5 @@
 import { Typography } from '@mui/material'
 import React from 'react'
-import { Tooltip } from 'recharts'
 
 export default function Currency(props: CurrencyProps) {
     const container = {
