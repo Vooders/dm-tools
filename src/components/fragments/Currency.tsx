@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material'
 import React from 'react'
+import { Tooltip } from 'recharts'
 
 export default function Currency(props: CurrencyProps) {
     const container = {
@@ -25,7 +26,7 @@ export default function Currency(props: CurrencyProps) {
             <span style={container}>
                 <Typography variant='subtitle1'>{props.amount}</Typography>
             </span>
-            <span style={container}>
+            <span title={props.icon} style={container}>
                 { currencies[props.icon] }
             </span>
         </div>
