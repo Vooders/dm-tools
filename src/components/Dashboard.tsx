@@ -23,6 +23,7 @@ import Languages from './pages/Languages';
 import Senses from './pages/Senses';
 import Skills from './pages/Skills';
 import Health from './pages/Health';
+import Wealth from './pages/Wealth';
 import MainMenu from './MainMenu';
 
 function Copyright(props: any) {
@@ -186,6 +187,7 @@ function DashboardContent() {
                       <Route path="/senses" element={<Senses />} />
                       <Route path="/skills" element={<Skills />} />
                       <Route path="/health" element={<Health />} />
+                      <Route path="/Wealth" element={<Wealth />} />
                       <Route path="/characterSheet/:characterId" element={<CharacterSheet />} />
                     </Routes>
                   </Paper>

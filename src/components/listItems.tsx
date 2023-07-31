@@ -68,7 +68,7 @@ export const mainListItems = (
         <ListItemIcon>
           <AttachMoneyIcon />
         </ListItemIcon>
-        <ListItemText primary="wealth" />
+        <ListItemText primary="Wealth" />
       </ListItemButton>
     </Link>
     
