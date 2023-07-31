@@ -6,17 +6,16 @@ import getSummaryData from '../lib/getSummary';
 const directory = 'characters'
 const userDataPath = app.getPath('userData');
 
-export default async () => {
+export default async (): Promise<InventoryData[]> => {
     const summary = await getSummaryData()
     const characterIds = Object.keys(summary)
-    const invertories = await Promise.all(characterIds.map(async characterId => {
+    return await Promise.all(characterIds.map(async characterId => {
         const character = await getCharacter(characterId)
         return {
             name: character.data.name,
             inventory: addCustomNames(character.data.inventory, character.data.characterValues)
         }
     }))
-    return invertories
 }
 
 const getCharacter = async (characterId: string) => {
@@ -39,6 +38,11 @@ const addCustomNames = (inventory: Item[], characterValues: CharacterValues[]): 
         })
         return item
     })
+}
+
+export type InventoryData = {
+    name: string;
+    inventory: Item[];
 }
 
 export type Item = {

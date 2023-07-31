@@ -2,7 +2,7 @@ import getSummaryData from '../lib/getSummary'
 import getCharacter from './getCharacter'
 import { Skill } from '../lib/CharacterSheetProcessor'
 
-export default async () => {
+export default async (): Promise<SkillsData> => {
     const summary = await getSummaryData()
     const characterIds = Object.keys(summary)
 
@@ -12,7 +12,7 @@ export default async () => {
             name: characterData.profile.name,
             skills: characterData.skills
         }
-    })) as SkillsData[]
+    })) as CharacterSkills[]
 
 
     const characterNames = ['', ...characters.map(character => character.name)]
@@ -26,9 +26,14 @@ export default async () => {
     return [characterNames, sortedSkills]
 }
 
-export type SkillsData = {
+type CharacterSkills = {
     name: string,
     skills: Skill[]
 }
+
+export type SkillsData = [
+    string[],
+    (string | number)[][]
+]
 
 

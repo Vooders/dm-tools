@@ -5,7 +5,7 @@ import getSummary from "../lib/getSummary"
 import saveCharacter from "../lib/saveCharacter"
 
 export default (mainWindow: BrowserWindow) => {
-    return async () => {
+    return async (): Promise<void> => {
         const summary = await getSummary()
         const characterIds = Object.keys(summary)
         console.log(`Got ids - ${characterIds}`)

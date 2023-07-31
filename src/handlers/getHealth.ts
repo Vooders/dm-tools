@@ -6,7 +6,7 @@ export default async (): Promise<HealthData[]> => {
     const summary = await getSummaryData()
     const characterIds = Object.keys(summary)
 
-    const characters = await Promise.all(characterIds.map(async (characterId) => {
+    return await Promise.all(characterIds.map(async (characterId) => {
         const characterData = await getCharacter(null, characterId)
         const limitedUseActions = characterData.actions
             .map(action => {
@@ -25,10 +25,7 @@ export default async (): Promise<HealthData[]> => {
             limitedUseActions,
             currencies: characterData.currencies
         }
-        
     }))
-
-    return characters
 }
 
 export type HealthData = {

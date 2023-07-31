@@ -9,7 +9,7 @@ const characterPath = path.join(userDataPath, 'characters');
 const summaryPath = path.join(characterPath, 'summary.json')
 
 export default (mainWindow: BrowserWindow) => {
-    return async (_: Electron.IpcMainInvokeEvent, characterId: any) => {
+    return async (_: Electron.IpcMainInvokeEvent, characterId: any): Promise<boolean> => {
         try {
             await unlink(path.join(avatarPath, characterId + '.jpeg'))
             await unlink(path.join(characterPath, characterId + '.json'))
