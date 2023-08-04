@@ -24,7 +24,6 @@ export default function Wealth () {
     return (
         <React.Fragment>
             <Title>Wealth</Title>
-            
             <p>{wealth[0].name}</p>
             <Currency amount={wealth[0].currencies.total} icon='gold'/>
         <Typography>
