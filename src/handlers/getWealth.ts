@@ -9,6 +9,7 @@ export default async () => {
     const characters = await Promise.all(characterIds.map(async (characterId) => {
         const characterData = await getCharacter(null, characterId)
         return {
+            name: characterData.profile.name,
             currencies: characterData.currencies
         }
     }))
@@ -17,5 +18,6 @@ export default async () => {
 }
 
 export type WealthData = {
-    currencies: Currencies[],
+    name: string,
+    currencies: Currencies
 }

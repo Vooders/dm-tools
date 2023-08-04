@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Title from '../Title'
 import { Typography } from '@mui/material'
 import { WealthData } from '../../handlers/getWealth'
+import Currency from '../fragments/Currency'
  
 export default function Wealth () {
     const [wealth, setWealth] = useState<WealthData[]>([])
@@ -23,6 +24,9 @@ export default function Wealth () {
     return (
         <React.Fragment>
             <Title>Wealth</Title>
+            
+            <p>{wealth[0].name}</p>
+            <Currency amount={wealth[0].currencies.total} icon='gold'/>
         <Typography>
         Test
         </Typography> 
