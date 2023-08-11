@@ -8,6 +8,8 @@ const summaryPath = path.join(userDataPath, directory, 'summary.json');
 
 export default async () => {
     // Create summary.json if it does not exist
+
+    console.log(userDataPath)
     const fileHandle = await open(summaryPath, 'a+')
     await fileHandle.close()
 

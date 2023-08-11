@@ -189,7 +189,7 @@ function DashboardContent() {
                         <Route path="/senses" element={<Senses />} />
                         <Route path="/skills" element={<Skills />} />
                         <Route path="/health" element={<Health />} />
-                        <Route path="/Wealth" element={<Wealth />} />
+                        <Route path="/wealth" element={<Wealth />} />
                       <Route path="/characterSheet/:characterId" element={<CharacterSheet />} />
                       </Routes>
                     </Paper>

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Title from '../Title'
-import { Typography } from '@mui/material'
+import { Typography, Card, CardContent } from '@mui/material'
 import { WealthData } from '../../handlers/getWealth'
+import Currencies from '../fragments/Currencies'
 import Currency from '../fragments/Currency'
- 
-export default function Wealth () {
+
+export default function Wealth() {
     const [wealth, setWealth] = useState<WealthData[]>([])
 
     const getWealth = async () => {
-        console.log('getting Wealth')
         setWealth(await window.electron.getWealth())
     }
 
@@ -24,12 +24,21 @@ export default function Wealth () {
     return (
         <React.Fragment>
             <Title>Wealth</Title>
-            <p>{wealth[0].name}</p>
-            <Currency amount={wealth[0].currencies.total} icon='gold'/>
-        <Typography>
-        Test
-        </Typography> 
+
+            {wealth.map(character => {
+                return (
+                    <Card variant="outlined">
+                        <CardContent>
+                            <Typography component="div" variant="h5">
+                                {character.name}
+                            </Typography>
+                            <Currency size='large' amount={character.currencies.total} icon='gold' />
+                            <Currencies align='left' currencies={character.currencies} />
+                        </CardContent>
+                    </Card>
+                )
+            })}
         </React.Fragment>
     )
-    
+
 }

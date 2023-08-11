@@ -6,10 +6,12 @@ import Currency from './Currency'
 
 export default function Currencies(props: CurrenciesProps) {
   const currencyAmount = props.currencies
+  
+  const direction = props.align === 'left' ? 'row' : 'row-reverse'
 
     return (
       <>
-        <Grid xs={12} container padding={0} columnSpacing={1} direction='row-reverse' justifyContent="flex-start" >
+        <Grid xs={12} container padding={0} columnSpacing={1} direction={direction} justifyContent="flex-start" >
           {currencyAmount.cp > 0 &&
               <Grid item>
                 <Currency  amount={currencyAmount.cp} icon='copper'/>         
@@ -41,5 +43,8 @@ export default function Currencies(props: CurrenciesProps) {
   }
 
 interface CurrenciesProps {
+  align: 'left' |'right'
   currencies: Currencies
 }
+
+type bob = 'row' | 'row-reverse'

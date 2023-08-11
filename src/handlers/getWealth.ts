@@ -2,19 +2,18 @@ import getSummaryData from '../lib/getSummary'
 import getCharacter from './getCharacter'
 import { Currencies } from '../lib/CharacterSheetProcessor'
 
-export default async () => {
+export default async(): Promise<WealthData[]> => {
     const summary = await getSummaryData()
     const characterIds = Object.keys(summary)
 
-    const characters = await Promise.all(characterIds.map(async (characterId) => {
+    return await Promise.all(characterIds.map(async (characterId) => {
         const characterData = await getCharacter(null, characterId)
+        console.log(characterData)
         return {
             name: characterData.profile.name,
             currencies: characterData.currencies
-        }
+        }       
     }))
-
-    return characters
 }
 
 export type WealthData = {

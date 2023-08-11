@@ -1,7 +1,7 @@
 {
   "name": "dm-tools",
   "productName": "dm-tools",
-  "version": "0.10.5",
+  "version": "0.11.0",
   "description": "My Electron application description",
   "main": ".webpack/main",
   "scripts": {

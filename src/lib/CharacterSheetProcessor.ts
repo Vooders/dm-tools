@@ -53,8 +53,61 @@ export default class CharacterSheetProcessor {
             spellSlots: this.buildSpellSlots(),
             actions: this.buildActions(),
             spells: this.buildSpells(),
-            currencies: this.buildCurrencies()
+            currencies: this.buildCurrencies(),
+            inventory: this.buildInventory()
         }
+    }
+
+    private findContainers(items: Item[]): Item[] {
+        return items.filter(item => item.definition.isContainer)
+    }
+
+    private fillBag(id: number, items: Item[]): Item[] {
+        return items.filter(item => item.containerId === id)
+    }
+
+    private buildInventory(): ItemContainer[] {
+        const inventory = this.dndBeyondJson.data.inventory
+
+        const items = inventory.map((item: any): Item => {
+            const newItem = {
+                id: item.id,
+                definition: {
+                    id: item.definition.id,
+                    avatarUrl: item.definition.avatarUrl,
+                    name: item.definition.name,
+                    weight: item.definition.weight,
+                    rarity: item.definition.rarity,
+                    filterType: item.definition.filterType,
+                    isContainer: item.definition.isContainer,
+                    cost: item.definition.cost
+                },
+                containerId: item.containerEntityId,
+                equipped: item.equipped,
+                quantity: item.quantity
+            }
+            return this.addCustomNames(newItem, this.dndBeyondJson.data.characterValues)
+        })
+
+        const containers = this.findContainers(items)
+
+        return containers.map(container => {
+            return {
+                name: container.definition.name,
+                contents: this.fillBag(container.id, items)
+            }
+        })
+    }
+
+    private addCustomNames(item: Item, characterValues: CharacterValues[]): Item {
+        const renames = characterValues.filter(characterValue => characterValue.typeId === 8)
+
+        renames.forEach(value => {
+            if (value.valueId === item.id.toString()) {
+                item.definition.name = value.value
+            }
+        })
+        return item
     }
 
     private buildProficienciesView(): ProficiencyView[] {
@@ -96,9 +149,9 @@ export default class CharacterSheetProcessor {
     }
 
     private getSubTypeNamesByEntityId(proficiencies: Modifier[], entityId: number): string {
-        const names =  proficiencies.filter(proficiency => proficiency.entityTypeId === entityId)
+        const names = proficiencies.filter(proficiency => proficiency.entityTypeId === entityId)
             .map(proficiency => proficiency.friendlySubtypeName)
-        
+
         return [...new Set(names)].join(', ')
     }
 
@@ -107,14 +160,14 @@ export default class CharacterSheetProcessor {
             .filter((bonus) => bonus.subType.includes('passive'))
 
         return [
-            { mod: 'WIS', name: 'Perception', score: 10},
-            { mod: 'INT', name: 'Investigation', score: 10},
-            { mod: 'WIS', name: 'Insight', score: 10}
+            { mod: 'WIS', name: 'Perception', score: 10 },
+            { mod: 'INT', name: 'Investigation', score: 10 },
+            { mod: 'WIS', name: 'Insight', score: 10 }
         ].map(passiveSkill => {
             const modifier = this.skillModifier(passiveSkill.name)
             const bonus = passiveBonuses
                 .filter(passiveBonus => passiveBonus.friendlySubtypeName.includes(passiveSkill.name))
-                .reduce((total: number, passiveBonus) => total += passiveBonus.fixedValue ,0)
+                .reduce((total: number, passiveBonus) => total += passiveBonus.fixedValue, 0)
 
             return {
                 ...passiveSkill,
@@ -125,27 +178,27 @@ export default class CharacterSheetProcessor {
 
     private buildSkills(): Skill[] {
         const base = [
-            { mod: 'DEX', name: 'Acrobatics'},
-            { mod: 'WIS', name: 'Animal Handling'},
-            { mod: 'INT', name: 'Arcana'},
-            { mod: 'STR', name: 'Athletics'},
-            { mod: 'CHA', name: 'Deception'},
-            { mod: 'INT', name: 'History'},
-            { mod: 'WIS', name: 'Insight'},
-            { mod: 'CHA', name: 'Intimidation'},
-            { mod: 'INT', name: 'Investigation'},
-            { mod: 'WIS', name: 'Medicine'},
-            { mod: 'INT', name: 'Nature'},
-            { mod: 'WIS', name: 'Perception'},
-            { mod: 'CHA', name: 'Performance'},
-            { mod: 'CHA', name: 'Persuasion'},
-            { mod: 'INT', name: 'Religion'},
-            { mod: 'DEX', name: 'Sleight of Hand'},
-            { mod: 'DEX', name: 'Stealth'},
-            { mod: 'WIS', name: 'Survival'}
+            { mod: 'DEX', name: 'Acrobatics' },
+            { mod: 'WIS', name: 'Animal Handling' },
+            { mod: 'INT', name: 'Arcana' },
+            { mod: 'STR', name: 'Athletics' },
+            { mod: 'CHA', name: 'Deception' },
+            { mod: 'INT', name: 'History' },
+            { mod: 'WIS', name: 'Insight' },
+            { mod: 'CHA', name: 'Intimidation' },
+            { mod: 'INT', name: 'Investigation' },
+            { mod: 'WIS', name: 'Medicine' },
+            { mod: 'INT', name: 'Nature' },
+            { mod: 'WIS', name: 'Perception' },
+            { mod: 'CHA', name: 'Performance' },
+            { mod: 'CHA', name: 'Persuasion' },
+            { mod: 'INT', name: 'Religion' },
+            { mod: 'DEX', name: 'Sleight of Hand' },
+            { mod: 'DEX', name: 'Stealth' },
+            { mod: 'WIS', name: 'Survival' }
         ].concat(this.dndBeyondJson.data.customProficiencies.map((customProficiency: any) => {
             return {
-                mod: this.abilityNames[customProficiency.statId -1].slice(0, 3).toUpperCase(),
+                mod: this.abilityNames[customProficiency.statId - 1].slice(0, 3).toUpperCase(),
                 name: customProficiency.name
             }
         }))
@@ -206,7 +259,7 @@ export default class CharacterSheetProcessor {
         })
     }
 
-    private calculateProficiency() :number {
+    private calculateProficiency(): number {
         if (this.level < 5) {
             return 2
         }
@@ -224,7 +277,7 @@ export default class CharacterSheetProcessor {
 
     private buildHp(): CharacterProfileHp {
         const hpPerLevelBonus = this.filterModifiersBySubType("hit-points-per-level")
-            .reduce((total: number, modifier: Modifier) => total + modifier.fixedValue ,0) * this.level
+            .reduce((total: number, modifier: Modifier) => total + modifier.fixedValue, 0) * this.level
 
         const constitutionModifier = this.abilities.filter(ability => ability.name === 'Constitution')[0].modifier
         return {
@@ -288,7 +341,7 @@ export default class CharacterSheetProcessor {
         const levelSpellSlots = this.dndBeyondJson.data.classes[0].definition.spellRules.levelSpellSlots
         return levelSpellSlots[this.level].map((maxSlots: number, index: number) => {
             return {
-                level: index+1,
+                level: index + 1,
                 max: (isCaster) ? maxSlots : 0,
                 used: this.dndBeyondJson.data.spellSlots[index].used
             }
@@ -300,7 +353,7 @@ export default class CharacterSheetProcessor {
 
     private buildActions(): Action[] {
         const actions = this.dndBeyondJson.data.actions
-        return [...actions.race, ...actions.class, ...actions.feat].map(action => { 
+        return [...actions.race, ...actions.class, ...actions.feat].map(action => {
             return {
                 name: action.name,
                 description: action.description,
@@ -335,7 +388,7 @@ export default class CharacterSheetProcessor {
                 case 6:
                     return 'minutes'
             }
-                
+
         }
 
         function isPrepared(spell: any) {
@@ -362,7 +415,7 @@ export default class CharacterSheetProcessor {
                 }
             })
         }).flat()
-        
+
         return new Array(10).fill('').map((spell: SpellType, index: number) => {
             return {
                 level: index,
@@ -380,16 +433,16 @@ export default class CharacterSheetProcessor {
             ep: currencies.ep,
             pp: currencies.pp,
             total: this.totalGold(currencies)
-        } 
+        }
     }
 
     private totalGold(currencies: any): number {
-       const copper = currencies.cp / 100
-       const silver = currencies.sp / 10
-       const gold = currencies.gp
-       const electrum = currencies.ep / 2
-       const platinum = currencies.pp * 10
-       return copper + silver + gold + electrum + platinum
+        const copper = currencies.cp / 100
+        const silver = currencies.sp / 10
+        const gold = currencies.gp
+        const electrum = currencies.ep / 2
+        const platinum = currencies.pp * 10
+        return copper + silver + gold + electrum + platinum
     }
 
     private abilityModifierByShortName(shortName: string): number {
@@ -408,7 +461,7 @@ export default class CharacterSheetProcessor {
         return this.filterModifiers((modifier) => modifier.subType === subType)
     }
 
-    private filterModifiers(filterFunction: ModifierFilterFunction): Modifier[] {        
+    private filterModifiers(filterFunction: ModifierFilterFunction): Modifier[] {
         const keys = Object.keys(this.modifiers) as ModifierKeys[]
         return keys.map(modifierKey => {
             return this.modifiers[modifierKey].filter(filterFunction)
@@ -431,6 +484,29 @@ export type DmToolsData = {
     actions: Action[]
     spells: Spells[]
     currencies: Currencies
+    inventory: ItemContainer[]
+}
+
+export type ItemContainer = {
+    name: string,
+    contents: Item[]
+}
+
+export type Item = {
+    id: number
+    definition: {
+        id: string
+        avatarUrl: string
+        name: string
+        weight: number
+        rarity: string
+        filterType: string
+        isContainer: boolean
+        cost: number
+    },
+    containerId: number
+    equipped: boolean
+    quantity: number
 }
 
 export type Currencies = {
@@ -527,7 +603,7 @@ type CharacterProfile = {
 export type Save = {
     name: string
     modifier: number
-    shortName:string
+    shortName: string
 }
 
 export type Saves = {
@@ -600,4 +676,10 @@ type Modifier = {
     modifierSubTypeId: number
     componentId: number
     componentTypeId: number
+}
+
+type CharacterValues = {
+    typeId: number,
+    value: string,
+    valueId: string
 }

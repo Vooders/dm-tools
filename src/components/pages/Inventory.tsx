@@ -10,6 +10,8 @@ import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Title from '../Title';
+import { ItemContainer } from '../../lib/CharacterSheetProcessor';
+import { Card, CardContent } from '@mui/material';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -24,14 +26,19 @@ export default function Inventory() {
 
   function search(name: string) {
     console.log('searching', fullInventory)
-      const results = fullInventory
-        .map((character: any) => {
-          return {
-            name: character.name,
-            inventory: character.inventory.filter((item: any) => item.definition.name.toLowerCase().includes(name.toLowerCase()))
-          }
-        })
-      setInventory(results)
+    const results = fullInventory
+      .map((character: any) => {
+        return {
+          ...character,
+          inventory: character.inventory.map((container: ItemContainer) => {
+            return {
+              name: container.name,
+              contents: container.contents.filter((item: any) => item.definition.name.toLowerCase().includes(name.toLowerCase()))
+            }
+          })
+        }
+      })
+    setInventory(results)
   }
 
   const getInventory = async () => {
@@ -44,7 +51,7 @@ export default function Inventory() {
   useEffect(() => {
     getInventory()
       .catch(console.error)
-      
+
     window.electron.characterUpdated(async () => {
       console.log('character updated')
       await getInventory()
@@ -55,38 +62,49 @@ export default function Inventory() {
     <React.Fragment>
       <Title>Inventory</Title>
       <FormGroup>
-        <TextField id="standard-basic" label="Search" variant="standard" onChange={(e) => search(e.target.value)}/>
+        <TextField id="standard-basic" label="Search" variant="standard" onChange={(e) => search(e.target.value)} />
       </FormGroup>
       <Stack spacing={2}>
         {inventory.map(character => {
           return (
-            <Item>
+            <>
               <Title>{character.name}</Title>
-              <Table size="small">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Equipped</TableCell>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Quantity</TableCell>
-                    <TableCell>Weight</TableCell>
-                    <TableCell>Rarity</TableCell>
-                    <TableCell>Type</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {character.inventory.map((item: any) => (
-                    <TableRow key={item.id}>
-                      <TableCell>{item.equipped ? '✔️' : '❌'}</TableCell>
-                      <TableCell>{item.definition.name}</TableCell>
-                      <TableCell>{item.quantity}</TableCell>
-                      <TableCell>{item.definition.weight} lbs</TableCell>
-                      <TableCell>{item.definition.rarity}</TableCell>
-                      <TableCell>{item.definition.filterType}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Item>
+              {character.inventory.map((container: ItemContainer) => {
+                return (
+                  <Card variant="outlined">
+                    <CardContent>
+                      {container.name}
+
+                      <Table size="small">
+                        <TableHead>
+                          <TableRow>
+                            <TableCell>Equipped</TableCell>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Quantity</TableCell>
+                            <TableCell>Weight</TableCell>
+                            <TableCell>Rarity</TableCell>
+                            <TableCell>Type</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {container.contents.map((item: any) => (
+                            <TableRow key={item.id}>
+                              <TableCell>{item.equipped ? '✔️' : '❌'}</TableCell>
+                              <TableCell>{item.definition.name}</TableCell>
+                              <TableCell>{item.quantity}</TableCell>
+                              <TableCell>{item.definition.weight} lbs</TableCell>
+                              <TableCell>{item.definition.rarity}</TableCell>
+                              <TableCell>{item.definition.filterType}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </CardContent>
+                  </Card>
+                )
+              })}
+
+            </>
           )
         })}
       </Stack>
