@@ -8,7 +8,6 @@ export default async(): Promise<WealthData[]> => {
 
     return await Promise.all(characterIds.map(async (characterId) => {
         const characterData = await getCharacter(null, characterId)
-        console.log(characterData)
         return {
             name: characterData.profile.name,
             currencies: characterData.currencies

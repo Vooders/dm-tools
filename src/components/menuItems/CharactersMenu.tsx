@@ -7,7 +7,6 @@ import ListSubheader from '@mui/material/ListSubheader';
 
 import { Link } from 'react-router-dom';
 import { Summary } from '../../lib/saveCharacter';
-import GroupsIcon from '@mui/icons-material/Groups';
 
 export default function CharactersMenu() {
     const [open, setOpen] = React.useState(true);
@@ -43,7 +42,7 @@ export default function CharactersMenu() {
                                 // sx={{ color: 'rgba(255,255,255,.8)' }}
                             >
                                 <ListItemAvatar sx={{ width: '35px', height: '35px' }}>
-                                    <Avatar src={character.avatarPath} />
+                                    <Avatar src={character.avatarPath} variant="rounded"/>
                                 </ListItemAvatar>
                                 <ListItemText primary={shortName} />
                             </ListItemButton>

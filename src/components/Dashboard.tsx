@@ -88,7 +88,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 function DashboardContent() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -176,10 +176,10 @@ function DashboardContent() {
               }}
             >
               <Toolbar />
-              <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                <Grid container spacing={3}>
+              <Container maxWidth='lg' sx={{ my: 4 }}>
+                <Grid container spacing={3} >
                   {/* Recent Inventory */}
-                  <Grid item xs={12}>
+                  <Grid item xs={12} >
                     <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                       <Routes>
                         <Route path="/" element={<Health />} />
@@ -190,7 +190,7 @@ function DashboardContent() {
                         <Route path="/skills" element={<Skills />} />
                         <Route path="/health" element={<Health />} />
                         <Route path="/wealth" element={<Wealth />} />
-                      <Route path="/characterSheet/:characterId" element={<CharacterSheet />} />
+                        <Route path="/characterSheet/:characterId" element={<CharacterSheet />} />
                       </Routes>
                     </Paper>
                   </Grid>

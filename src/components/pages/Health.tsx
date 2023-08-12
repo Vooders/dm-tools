@@ -1,34 +1,29 @@
 import React, { useEffect, useState } from 'react'
 
-import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
-import Rating from '@mui/material/Rating'
 
 import { HealthData } from '../../handlers/getHealth'
 import Title from '../Title'
 import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'
 import Slots from '../fragments/Slots'
 import Currencies from '../fragments/Currencies'
-import { Grid } from '@mui/material'
 
 export default function Health() {
     const [health, setHealth] = useState<HealthData[]>([])
 
-    const StyledRating = styled(Rating)({
-        '& .MuiRating-iconFilled': {
-            color: '#ddd',
-        },
-        '& .MuiRating-iconHover': {
-            color: '#ff3d47',
-        },
-        '& .MuiRating-iconEmpty': {
-            color: '#ff6d75'
-        }
-    });
+    const cardStyling = {
+        display: 'flex',
+        padding: '10px',
+        variant: "outlined",
+        boxShadow: 5,
+        borderRadius: 2,
+        margin: 1,
+        backgroundColor: 'rgb(10, 35, 57)'
+    }
 
     const getSenses = async () => {
         console.log('getting Health')
@@ -54,7 +49,7 @@ export default function Health() {
         return (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ width: '100%', mr: 1 }}>
-                    <LinearProgress variant="determinate" color={healthBarColour(props.value)} {...props} />
+                    <LinearProgress sx={{height: '8px', borderRadius: 2 }} variant="determinate" color={healthBarColour(props.value)} {...props} />
                 </Box>
                 <Box sx={{ minWidth: 35 }}>
                     <Typography variant="body2" color="text.secondary">{`${Math.round(
@@ -83,10 +78,10 @@ export default function Health() {
 
             {health.map(character => {
                 return (
-                    <Card sx={{ display: 'flex', paddingBottom: '10px' }}>
+                    <Card sx={cardStyling}>
                         <CardMedia
                             component="img"
-                            sx={{ width: 151 }}
+                            sx={{ height: 240, width: 151, variant: "rounded" }}
                             image={character.avatarPath}
                             alt={character.name}
                         />
