@@ -39,17 +39,17 @@ export default function Wealth() {
         })
     }, [])
 
-    const reduceContainer  = async (): Promise<number> => {
-        const total = inventories[0].inventory[0].contents.reduce((acc: any, item: any) => acc + (item.definition.cost * item.quantity), 0)
+    const calculateInventoryWealth = (): number[] => {
+        
+        const totalsArray = inventories.map(inventories => inventories.inventory.map(inventory =>
+            inventory.contents.reduce((acc: number, item: any) => acc + (item.definition.cost * item.quantity), 0))
+            .reduce((acc, value) => acc + value, 0))
 
-        console.log(inventories)
-        console.log('name: ', inventories[0].name)
-        console.log('container: ', inventories[0].inventory[0].name)
-        console.log('total: ', total)
+        console.log('totalsArray: ', totalsArray)
+        return totalsArray
 
-        return total
     }
-    reduceContainer()
+    calculateInventoryWealth()
 
     return (
         <React.Fragment>
