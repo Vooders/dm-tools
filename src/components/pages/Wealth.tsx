@@ -39,23 +39,17 @@ export default function Wealth() {
         })
     }, [])
 
+    const reduceContainer  = async (): Promise<number> => {
+        const total = inventories[0].inventory[0].contents.reduce((acc: any, item: any) => acc + (item.definition.cost * item.quantity), 0)
 
-    const log = async () => {
-        console.log('testing', inventories[1].inventory[0].contents[0].definition.cost)
-        console.log('testing', inventories[1].inventory[0].contents[1].definition.cost)
+        console.log(inventories)
+        console.log('name: ', inventories[0].name)
+        console.log('container: ', inventories[0].inventory[0].name)
+        console.log('total: ', total)
 
-        const testItem = inventories[0].inventory[0].contents[0]
-        console.log(testItem.definition.cost)
-    }
-    log()
-
-    const reduceInventory  = async (inventories: any): Promise<number> => {
-        const total = inventories[0].inventory[0].contents.reduce((acc: any, item: any) => acc + item.definition.cost, 0)
-        console.log(inventories[0].name)
-        console.log('total:', total)
         return total
     }
-    reduceInventory(inventories)
+    reduceContainer()
 
     return (
         <React.Fragment>
@@ -74,19 +68,6 @@ export default function Wealth() {
                     </Card>
                 )
             })}
-            {/* {inventory.map(character => {
-                return (
-                    <Card variant="outlined">
-                        <CardContent>
-                            <Typography component="div" variant="h5">
-                                {character.name}
-                            </Typography>
-                            <Currency size='large' amount={character.currencies.total} icon='gold' />
-                            <Currencies align='left' currencies={character.currencies} />
-                        </CardContent>
-                    </Card>
-                )
-            })} */}
         </React.Fragment>
     )
 
