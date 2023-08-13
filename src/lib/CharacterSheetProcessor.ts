@@ -91,12 +91,18 @@ export default class CharacterSheetProcessor {
 
         const containers = this.findContainers(items)
 
-        return containers.map(container => {
-            return {
-                name: container.definition.name,
-                contents: this.fillBag(container.id, items)
-            }
-        })
+        return [
+            {
+                name: 'Equipment',
+                contents: this.fillBag(this.dndBeyondJson.data.id, items)
+            },
+            ...containers.map(container => {
+                return {
+                    name: container.definition.name,
+                    contents: this.fillBag(container.id, items)
+                }
+            })
+        ]
     }
 
     private addCustomNames(item: Item, characterValues: CharacterValues[]): Item {
