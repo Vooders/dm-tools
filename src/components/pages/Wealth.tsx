@@ -9,48 +9,48 @@ import { Item } from '../../lib/CharacterSheetProcessor'
 
 export default function Wealth() {
     const [wealth, setWealth] = useState<WealthData[]>([])
-    const [inventories, setInventory] = useState<InventoryData[]>([])
+    // const [inventories, setInventory] = useState<InventoryData[]>([])
 
     const getWealth = async () => {
         setWealth(await window.electron.getWealth())
     }
 
-    const getInventory = async () => {
-        console.log('getting inventory')
-        const inv = await window.electron.getInventories()
-        setInventory(inv)
-    }
-
     useEffect(() => {
         getWealth()
-            .catch(console.error)
-
+        .catch(console.error)
+        
         window.electron.characterUpdated(async () => {
             await getWealth()
         })
     }, [])
+    
+    // const getInventory = async () => {
+    //     console.log('getting inventory')
+    //     const inv = await window.electron.getInventories()
+    //     setInventory(inv)
+    // }
 
-    useEffect(() => {
-        getInventory()
-            .catch(console.error)
+    // useEffect(() => {
+    //     getInventory()
+    //         .catch(console.error)
 
-        window.electron.characterUpdated(async () => {
-            console.log('character updated')
-            await getInventory()
-        })
-    }, [])
+    //     window.electron.characterUpdated(async () => {
+    //         console.log('character updated')
+    //         await getInventory()
+    //     })
+    // }, [])
 
-    const calculateInventoryWealth = (): number[] => {
+    // const calculateInventoryWealth = (): number[] => {
         
-        const totalsArray = inventories.map(inventories => inventories.inventory.map(inventory =>
-            inventory.contents.reduce((acc: number, item: Item) => acc + (item.definition.cost * item.quantity), 0))
-            .reduce((acc, value) => acc + value, 0))
+    //     const totalsArray = inventories.map(inventories => inventories.inventory.map(inventory =>
+    //         inventory.contents.reduce((acc: number, item: Item) => acc + (item.definition.cost * item.quantity), 0))
+    //         .reduce((acc, value) => acc + value, 0))
 
-        console.log('totalsArray: ', totalsArray)
-        return totalsArray
+    //     console.log('totalsArray: ', totalsArray)
+    //     return totalsArray
 
-    }
-    calculateInventoryWealth()
+    // }
+    // calculateInventoryWealth()
 
     return (
         <React.Fragment>
@@ -65,6 +65,7 @@ export default function Wealth() {
                             </Typography>
                             <Currency size='large' amount={character.currencies.total} icon='gold' />
                             <Currencies align='left' currencies={character.currencies} />
+                            <Currency size="large" amount={character.containerWealth} icon='gold' />
                         </CardContent>
                     </Card>
                 )
