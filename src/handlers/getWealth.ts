@@ -9,14 +9,14 @@ export default async(): Promise<WealthData[]> => {
 
     return await Promise.all(characterIds.map(async (characterId) => {
         const characterData = await getCharacter(null, characterId)
-
+        const containerWealth = Math.floor(characterData.inventory.map(inventory =>
+            inventory.contents.reduce((acc: number, item: Item) => acc + (item.definition.cost * item.quantity), 0))
+            .reduce((acc, value) => acc + value, 0))
         
         return {
             name: characterData.profile.name,
             currencies: characterData.currencies,
-            containerWealth: characterData.inventory.map(inventory =>
-                inventory.contents.reduce((acc: number, item: Item) => acc + (item.definition.cost * item.quantity), 0))
-                .reduce((acc, value) => acc + value, 0)
+            containerWealth
         }       
     }))
 }
