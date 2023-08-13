@@ -14,8 +14,8 @@ export default function Wealth() {
 
     useEffect(() => {
         getWealth()
-        .catch(console.error)
-        
+            .catch(console.error)
+
         window.electron.characterUpdated(async () => {
             await getWealth()
         })
@@ -32,10 +32,14 @@ export default function Wealth() {
                             <Typography component="div" variant="h5">
                                 {character.name}
                             </Typography>
-                            <Currency size='large' amount={character.currencies.total} icon='gold' />
                             <Currencies align='left' currencies={character.currencies} />
-                                Containers Total: 
-                            <Currency size="large" amount={character.containerWealth} icon='gold' />
+                            Currencies Total:
+                            <Currency size='large' amount={character.currencies.total} icon='gold' />
+                            {character.containers.map(container => {
+                                return <Currency amount={container} icon='gold' />
+                            })}
+                            Containers Total:
+                            <Currency size="large" amount={character.totalContainerWealth} icon='gold' />
                         </CardContent>
                     </Card>
                 )
