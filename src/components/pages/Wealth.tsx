@@ -5,6 +5,7 @@ import { WealthData } from '../../handlers/getWealth'
 import Currencies from '../fragments/Currencies'
 import Currency from '../fragments/Currency'
 import { InventoryData } from '../../handlers/getInventories'
+import { Item } from '../../lib/CharacterSheetProcessor'
 
 export default function Wealth() {
     const [wealth, setWealth] = useState<WealthData[]>([])
@@ -42,7 +43,7 @@ export default function Wealth() {
     const calculateInventoryWealth = (): number[] => {
         
         const totalsArray = inventories.map(inventories => inventories.inventory.map(inventory =>
-            inventory.contents.reduce((acc: number, item: any) => acc + (item.definition.cost * item.quantity), 0))
+            inventory.contents.reduce((acc: number, item: Item) => acc + (item.definition.cost * item.quantity), 0))
             .reduce((acc, value) => acc + value, 0))
 
         console.log('totalsArray: ', totalsArray)

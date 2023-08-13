@@ -12,7 +12,6 @@ import Paper from '@mui/material/Paper';
 import { LanguagesData } from '../../handlers/getLanguages';
 
 export default function Languages() {
-    const [gotLanguages, setGotLanguages] = useState(false)
     const [languages, setLanguages] = useState<LanguagesData>({
         allLanguages: [],
         characters: []

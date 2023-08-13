@@ -25,14 +25,13 @@ export default function Characters() {
     useEffect(() => {
         getSummary()
             .catch(console.error)
-    
+
         window.electron.characterUpdated(async () => {
             await getSummary()
         })
     }, [])
 
     const handleDelete = async (characterId: number) => {
-        console.log(`Deleting ${characterId}`)
         const result = await window.electron.deleteCharacter(characterId)
         console.log(`Delete ${characterId} - ${result}`)
     }
