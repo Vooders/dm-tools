@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Title from '../Title'
-import { Typography, Card, CardContent, Grid } from '@mui/material'
+import { Typography, Card, CardContent, Grid, Divider } from '@mui/material'
 import { WealthData } from '../../handlers/getWealth'
 import Currencies from '../fragments/Currencies'
 import Currency from '../fragments/Currency'
@@ -21,6 +21,16 @@ export default function Wealth() {
         })
     }, [])
 
+    const cardStyling = {
+        display: 'flex',
+        padding: '10px',
+        variant: "outlined",
+        boxShadow: 5,
+        borderRadius: 2,
+        margin: 1,
+        backgroundColor: 'rgb(10, 35, 57)'
+    }
+
     return (
         <React.Fragment>
             <Title>Wealth</Title>
@@ -35,14 +45,19 @@ export default function Wealth() {
                 {wealth.map(character => {
                     return (
                         <Grid item >
-                            <Card variant="outlined" >
+                            <Card variant="outlined" sx={cardStyling}>
                                 <CardContent>
                                     <Typography component="div" variant="h5" >
                                         {character.name}
                                     </Typography>
-                                    <Typography component="div" variant="h5" >
-                                        Total Wealth {character.totalWealth}
+                                    <Divider/>
+                                    <Grid item display="flex">
+                                    <Typography component="div" variant="h6" >
+                                        Total Wealth:
                                     </Typography>
+                                         <Currency size="large" amount={character.totalWealth} icon='gold' />
+                                    </Grid>
+                                    <Divider/>
                                     <Currencies align='left' currencies={character.currencies} />
                                     <Grid item display="flex">
                                         <Typography component="div" variant="h6" >
@@ -50,6 +65,7 @@ export default function Wealth() {
                                         </Typography>
                                         <Currency size='large' amount={character.currencies.total} icon='gold' />
                                     </Grid>
+                                    <Divider/>
                                     {character.containers.map(container => {
                                         return <Grid item display="flex" >
                                             <Typography >
