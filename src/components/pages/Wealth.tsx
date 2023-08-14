@@ -40,6 +40,9 @@ export default function Wealth() {
                                     <Typography component="div" variant="h5" >
                                         {character.name}
                                     </Typography>
+                                    <Typography component="div" variant="h5" >
+                                        Total Wealth {character.totalWealth}
+                                    </Typography>
                                     <Currencies align='left' currencies={character.currencies} />
                                     <Grid item display="flex">
                                         <Typography component="div" variant="h6" >
@@ -69,5 +72,4 @@ export default function Wealth() {
             </Grid>
         </React.Fragment>
     )
-
 }
