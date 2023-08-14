@@ -35,8 +35,8 @@ export default function Wealth() {
                             <Currencies align='left' currencies={character.currencies} />
                             Currencies Total:
                             <Currency size='large' amount={character.currencies.total} icon='gold' />
-                            {character.containers.map(container => {
-                                return <Currency amount={container} icon='gold' />
+                            {character.containers.map((container: { amount: number }) => {
+                                return <Currency amount={container.amount} icon='gold' />
                             })}
                             Containers Total:
                             <Currency size="large" amount={character.totalContainerWealth} icon='gold' />

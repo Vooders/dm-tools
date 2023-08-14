@@ -1,6 +1,6 @@
 import getSummaryData from '../lib/getSummary'
 import getCharacter from './getCharacter'
-import { Currencies } from '../lib/CharacterSheetProcessor'
+import { Currencies, ItemContainer } from '../lib/CharacterSheetProcessor'
 import { Item } from '../lib/CharacterSheetProcessor'
 
 export default async (): Promise<WealthData[]> => {
@@ -10,10 +10,18 @@ export default async (): Promise<WealthData[]> => {
     return await Promise.all(characterIds.map(async (characterId) => {
         const characterData = await getCharacter(null, characterId)
 
-        const containers = characterData.inventory.map(inventory => inventory.contents
-            .reduce((acc: number, item: Item) => acc + (item.definition.cost * item.quantity), 0))
-        const totalContainerWealth = Math.floor(containers.reduce((acc, value) => acc + value, 0))
+        const containers = characterData.inventory.map((inventory) => {
+            return {
+                name: inventory.name,
+                amount: Math.floor(inventory.contents.reduce((acc: number, item: Item) => acc + (item.definition.cost * item.quantity), 0))
+            }
+        })
+        console.log('containers:', containers)
 
+        const totalContainerWealth = Math.floor(containers.reduce((acc, value) => acc + value.amount, 0))
+
+        console.log('total:', totalContainerWealth)
+        
         return {
             name: characterData.profile.name,
             currencies: characterData.currencies,
@@ -26,6 +34,6 @@ export default async (): Promise<WealthData[]> => {
 export type WealthData = {
     name: string,
     currencies: Currencies
-    containers: number[]
+    containers: any
     totalContainerWealth: number
 }
