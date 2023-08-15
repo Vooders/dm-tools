@@ -89,7 +89,7 @@ export default function Health() {
                             <Typography component="div" variant="h5">
                                 {character.name} 
                             </Typography>
-                            <Currencies align='right' currencies={character.currencies}/>
+                            <Currencies showZeroes={false} align='right' currencies={character.currencies}/>
                             <Typography component="div" variant="subtitle1">
                                 HP - {hpView(character.hp)}
                             </Typography>

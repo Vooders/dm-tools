@@ -23,11 +23,11 @@ export default function Wealth() {
 
     const cardStyling = {
         display: 'flex',
-        padding: '10px',
+        padding: '5px',
         variant: "outlined",
         boxShadow: 5,
         borderRadius: 2,
-        margin: 1,
+        margin: 0.5,
         backgroundColor: 'rgb(10, 35, 57)'
     }
 
@@ -40,7 +40,7 @@ export default function Wealth() {
                 direction="row"
                 justifyContent="flex-start"
                 alignItems="flex-start"
-                spacing={1}
+                spacing={0.5}
             >
                 {wealth.map(character => {
                     return (
@@ -58,7 +58,7 @@ export default function Wealth() {
                                          <Currency size="large" amount={character.totalWealth} icon='gold' />
                                     </Grid>
                                     <Divider/>
-                                    <Currencies align='left' currencies={character.currencies} />
+                                    <Currencies showZeroes={true} align='left' currencies={character.currencies} />
                                     <Grid item display="flex">
                                         <Typography component="div" variant="h6" >
                                             Total Currency:
