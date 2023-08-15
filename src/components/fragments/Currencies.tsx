@@ -23,28 +23,28 @@ export default function Currencies(props: CurrenciesProps) {
             <Currency amount={currencyAmount.cp} icon='copper' />
           </Grid> : <></>
         }
-        {currencyAmount.sp > 0 ? showZeroes &&
+        {currencyAmount.sp > 0 ? 
           <Grid item>
             <Currency amount={currencyAmount.sp} icon='silver' />
           </Grid> : showZeroes ? <Grid item>
             <Currency amount={currencyAmount.sp} icon='silver' />
           </Grid> : <></>
         }
-        {currencyAmount.ep > 0 ? showZeroes &&
+        {currencyAmount.ep > 0 ? 
           <Grid item>
             <Currency amount={currencyAmount.ep} icon='electrum' />
           </Grid> : showZeroes ? <Grid item>
             <Currency amount={currencyAmount.ep} icon='electrum' />
           </Grid> : <></>
         }
-        {currencyAmount.gp > 0 ? showZeroes &&
+        {currencyAmount.gp > 0 ? 
           <Grid item>
             <Currency amount={currencyAmount.gp} icon='gold' />
           </Grid> : showZeroes ? <Grid item>
             <Currency amount={currencyAmount.gp} icon='gold' />
           </Grid> : <></>
         }
-        {currencyAmount.pp > 0 ? showZeroes &&
+        {currencyAmount.pp > 0 ? 
           <Grid item>
             <Currency amount={currencyAmount.pp} icon='platinum' />
           </Grid> : showZeroes ? <Grid item>
