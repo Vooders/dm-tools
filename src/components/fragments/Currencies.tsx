@@ -7,47 +7,39 @@ import Currency from './Currency'
 export default function Currencies(props: CurrenciesProps) {
   const currencyAmount = props.currencies
   const direction = props.align === 'left' ? 'row' : 'row-reverse'
-  const showZeroes = props.showZeroes
+
+  const displayZeroes = (amount: number) => {
+    return amount > 0 || props.showZeroes
+  }
 
   return (
     <>
-      <Grid xs={12} container padding={0} columnSpacing={1} direction={direction} justifyContent="flex-start" >
+      <Grid container padding={0} columnSpacing={1} direction={direction} justifyContent="flex-start" >
 
-
-        {currencyAmount.cp > 0 ?
+      {displayZeroes(currencyAmount.cp) &&
           <Grid item>
-            <Currency amount={currencyAmount.cp} icon='copper' />
-          </Grid> : showZeroes ? <Grid item>
-            <Currency amount={currencyAmount.cp} icon='copper' />
-          </Grid> : <></>
+            <Currency amount={currencyAmount.cp} icon='copper'/>
+          </Grid>
         }
-        {currencyAmount.sp > 0 ?
-          <Grid item>
-            <Currency amount={currencyAmount.sp} icon='silver' />
-          </Grid> : showZeroes ? <Grid item>
-            <Currency amount={currencyAmount.sp} icon='silver' />
-          </Grid> : <></>
+        {displayZeroes(currencyAmount.sp) &&         
+         <Grid item>
+            <Currency amount={currencyAmount.sp} icon='silver'/>
+          </Grid>
         }
-        {currencyAmount.ep > 0 ?
-          <Grid item>
-            <Currency amount={currencyAmount.ep} icon='electrum' />
-          </Grid> : showZeroes ? <Grid item>
-            <Currency amount={currencyAmount.ep} icon='electrum' />
-          </Grid> : <></>
+        {displayZeroes(currencyAmount.ep) &&      
+         <Grid item>
+            <Currency amount={currencyAmount.ep} icon='electrum'/>
+          </Grid>
         }
-        {currencyAmount.gp > 0 ?
-          <Grid item>
-            <Currency amount={currencyAmount.gp} icon='gold' />
-          </Grid> : showZeroes ? <Grid item>
-            <Currency amount={currencyAmount.gp} icon='gold' />
-          </Grid> : <></>
+        {displayZeroes(currencyAmount.gp) &&       
+         <Grid item>
+            <Currency amount={currencyAmount.gp} icon='gold'/>
+          </Grid>
         }
-        {currencyAmount.pp > 0 ?
-          <Grid item>
-            <Currency amount={currencyAmount.pp} icon='platinum' />
-          </Grid> : showZeroes ? <Grid item>
-            <Currency amount={currencyAmount.pp} icon='platinum' />
-          </Grid> : <></>
+        {displayZeroes(currencyAmount.pp) &&         
+        <Grid item>
+            <Currency amount={currencyAmount.pp} icon='platinum'/>
+          </Grid>
         }
       </Grid>
     </>
