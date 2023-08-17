@@ -47,7 +47,7 @@ export default function Wealth() {
                         <Grid item >
                             <Card variant="outlined" sx={cardStyling}>
                                 <CardContent>
-                                    <Typography component="div" variant="h5" sx={{ margin: '.2rem' }}>
+                                    <Typography component="div" variant="h5" sx={{ m: '.2rem' }}>
                                         {character.name}
                                     </Typography>
                                     <Divider />

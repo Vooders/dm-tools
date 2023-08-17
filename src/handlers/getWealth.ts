@@ -20,7 +20,7 @@ export default async (): Promise<WealthData[]> => {
         const totalContainerWealth = Math.floor(containers.reduce((acc, value) => acc + value.value, 0))
 
         const totalWealth = totalContainerWealth + characterData.currencies.total
-        
+
         return {
             name: characterData.profile.name,
             currencies: characterData.currencies,
@@ -32,7 +32,7 @@ export default async (): Promise<WealthData[]> => {
 }
 
 export type WealthData = {
-    name: string,
+    name: string
     currencies: Currencies
     containers: Container[]
     totalContainerWealth: number
@@ -40,6 +40,6 @@ export type WealthData = {
 }
 
 export type Container = {
-    name: string,
+    name: string
     value: number
 }

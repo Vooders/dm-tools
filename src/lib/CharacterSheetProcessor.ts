@@ -54,7 +54,8 @@ export default class CharacterSheetProcessor {
             actions: this.buildActions(),
             spells: this.buildSpells(),
             currencies: this.buildCurrencies(),
-            inventory: this.buildInventory()
+            inventory: this.buildInventory(),
+            weightData: this.buildWeightData()
         }
     }
 
@@ -451,6 +452,41 @@ export default class CharacterSheetProcessor {
         return copper + silver + gold + electrum + platinum
     }
 
+    private buildWeightData(): WeightData {
+        const carryCapacity = this.dndBeyondJson.data.stats[0].value * 15
+        const totalWeight = this.totalWeight(this.dndBeyondJson.data.inventory)
+        const carriedWeight = this.carriedWeight()
+        console.log('carryCapacity', carryCapacity)        
+        console.log('totalWeight', totalWeight)        
+        console.log('carriedWeight', carriedWeight)
+        return {
+            carryCapacity,
+            totalWeight,
+            carriedWeight
+        }
+    }
+
+    private totalWeight(inventory: any): number {
+        return Math.floor(inventory.reduce((acc: number, item: Item) => acc + (item.definition.weight * item.quantity), 0))
+    }
+
+    private carriedWeight(): number {
+        const inventory = this.dndBeyondJson.data.inventory
+        const equippedContainerIds = this.findEquippedContainerIds(inventory)
+        let carriedItems: any = []
+        equippedContainerIds.forEach((id: number) => {
+            carriedItems.push(inventory.filter((item: any) => {    
+                return item.containerEntityId === id
+            }))
+        })
+        return this.totalWeight(carriedItems.flat())
+    }
+
+    private findEquippedContainerIds(items: Item[]): any {
+        const equippedContainers = items.filter(item => item.definition.isContainer && item.equipped)
+        return equippedContainers.map((container: any) => container.id).concat(this.dndBeyondJson.data.id)
+    }
+
     private abilityModifierByShortName(shortName: string): number {
         return this.abilities.find(ability => ability.shortName === shortName).modifier
     }
@@ -491,11 +527,18 @@ export type DmToolsData = {
     spells: Spells[]
     currencies: Currencies
     inventory: ItemContainer[]
+    weightData: WeightData
 }
 
 export type ItemContainer = {
     name: string,
     contents: Item[]
+}
+
+export type WeightData = {
+    carryCapacity: number
+    totalWeight: number
+    carriedWeight: number
 }
 
 export type Item = {

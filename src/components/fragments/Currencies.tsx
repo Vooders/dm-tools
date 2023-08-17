@@ -16,29 +16,29 @@ export default function Currencies(props: CurrenciesProps) {
     <>
       <Grid container padding={0} columnSpacing={1} direction={direction} justifyContent="flex-start" >
 
-      {displayCurrency(currencyAmount.cp) &&
+        {displayCurrency(currencyAmount.cp) &&
           <Grid item>
-            <Currency amount={currencyAmount.cp} icon='copper'/>
+            <Currency amount={currencyAmount.cp} icon='copper' />
           </Grid>
         }
-        {displayCurrency(currencyAmount.sp) &&         
-         <Grid item>
-            <Currency amount={currencyAmount.sp} icon='silver'/>
+        {displayCurrency(currencyAmount.sp) &&
+          <Grid item>
+            <Currency amount={currencyAmount.sp} icon='silver' />
           </Grid>
         }
-        {displayCurrency(currencyAmount.ep) &&      
-         <Grid item>
-            <Currency amount={currencyAmount.ep} icon='electrum'/>
+        {displayCurrency(currencyAmount.ep) &&
+          <Grid item>
+            <Currency amount={currencyAmount.ep} icon='electrum' />
           </Grid>
         }
-        {displayCurrency(currencyAmount.gp) &&       
-         <Grid item>
-            <Currency amount={currencyAmount.gp} icon='gold'/>
+        {displayCurrency(currencyAmount.gp) &&
+          <Grid item>
+            <Currency amount={currencyAmount.gp} icon='gold' />
           </Grid>
         }
-        {displayCurrency(currencyAmount.pp) &&         
-        <Grid item>
-            <Currency amount={currencyAmount.pp} icon='platinum'/>
+        {displayCurrency(currencyAmount.pp) &&
+          <Grid item>
+            <Currency amount={currencyAmount.pp} icon='platinum' />
           </Grid>
         }
       </Grid>

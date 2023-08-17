@@ -17,6 +17,6 @@ export default async (): Promise<InventoryData[]> => {
 }
 
 export type InventoryData = {
-    name: string;
-    inventory: ItemContainer[];
+    name: string
+    inventory: ItemContainer[]
 }

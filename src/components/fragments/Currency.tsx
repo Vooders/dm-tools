@@ -31,7 +31,7 @@ export default function Currency(props: CurrencyProps) {
                 <Typography variant={variant}>{props.amount}</Typography>
             </span>
             <span title={props.icon} style={container}>
-                { currencies[props.icon] }
+                {currencies[props.icon]}
             </span>
         </div>
     )

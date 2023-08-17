@@ -49,7 +49,7 @@ export default function Health() {
         return (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ width: '100%', mr: 1 }}>
-                    <LinearProgress sx={{height: '8px', borderRadius: 2 }} variant="determinate" color={healthBarColour(props.value)} {...props} />
+                    <LinearProgress sx={{ height: '8px', borderRadius: 2 }} variant="determinate" color={healthBarColour(props.value)} {...props} />
                 </Box>
                 <Box sx={{ minWidth: 35 }}>
                     <Typography variant="body2" color="text.secondary">{`${Math.round(
@@ -87,9 +87,9 @@ export default function Health() {
                         />
                         <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', padding: '5px' }}>
                             <Typography component="div" variant="h5">
-                                {character.name} 
+                                {character.name}
                             </Typography>
-                            <Currencies showZeroes={false} align='right' currencies={character.currencies}/>
+                            <Currencies showZeroes={false} align='right' currencies={character.currencies} />
                             <Typography component="div" variant="subtitle1">
                                 HP - {hpView(character.hp)}
                             </Typography>
@@ -105,7 +105,7 @@ export default function Health() {
                             <Box sx={{ display: 'flex', paddingBottom: '10px' }}>
                                 {character.spellSlots.map(spellSlot => {
                                     return (
-                                        <Slots title={`Level ${spellSlot.level}`} max={spellSlot.max} used={spellSlot.used} description=''/>
+                                        <Slots title={`Level ${spellSlot.level}`} max={spellSlot.max} used={spellSlot.used} description='' />
                                     )
                                 })}
                             </Box>
@@ -113,10 +113,10 @@ export default function Health() {
                             <Box sx={{ display: 'flex', paddingBottom: '10px' }}>
                                 {character.limitedUseActions.map(limitedUseAction => {
                                     return (
-                                        <Slots 
-                                            title={`${limitedUseAction.name}`} 
-                                            max={limitedUseAction.limitedUse.maxUses} 
-                                            used={limitedUseAction.limitedUse.numberUsed} 
+                                        <Slots
+                                            title={`${limitedUseAction.name}`}
+                                            max={limitedUseAction.limitedUse.maxUses}
+                                            used={limitedUseAction.limitedUse.numberUsed}
                                             description={limitedUseAction.snippet} />
                                     )
                                 })}

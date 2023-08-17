@@ -39,10 +39,10 @@ export default function CharactersMenu() {
                         <Link to={`/characterSheet/${character.id}`}>
                             <ListItemButton
                                 key={character.name}
-                                // sx={{ color: 'rgba(255,255,255,.8)' }}
+                            // sx={{ color: 'rgba(255,255,255,.8)' }}
                             >
                                 <ListItemAvatar sx={{ width: '35px', height: '35px' }}>
-                                    <Avatar src={character.avatarPath} variant="rounded"/>
+                                    <Avatar src={character.avatarPath} variant="rounded" />
                                 </ListItemAvatar>
                                 <ListItemText primary={shortName} />
                             </ListItemButton>
