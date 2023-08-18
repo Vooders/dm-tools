@@ -456,14 +456,22 @@ export default class CharacterSheetProcessor {
         const carryCapacity = this.dndBeyondJson.data.stats[0].value * 15
         const totalWeight = this.totalWeight(this.dndBeyondJson.data.inventory)
         const carriedWeight = this.carriedWeight()
+        const coinWeight = this.totalCoinWeight(this.dndBeyondJson.data.currencies)
         console.log('carryCapacity', carryCapacity)        
         console.log('totalWeight', totalWeight)        
         console.log('carriedWeight', carriedWeight)
+        console.log('coinWeight', coinWeight)
         return {
             carryCapacity,
             totalWeight,
-            carriedWeight
+            carriedWeight,
+            coinWeight
         }
+    }
+
+    private totalCoinWeight(currencies: any): number {
+        const totalCoins = currencies.cp + currencies.sp + currencies.gp + currencies.ep + currencies.pp
+        return totalCoins * 0.02
     }
 
     private totalWeight(inventory: any): number {
@@ -483,8 +491,8 @@ export default class CharacterSheetProcessor {
     }
 
     private findEquippedContainerIds(items: Item[]): any {
-        const equippedContainers = items.filter(item => item.definition.isContainer && item.equipped)
-        return equippedContainers.map((container: any) => container.id).concat(this.dndBeyondJson.data.id)
+        return items.filter(item => item.definition.isContainer && item.equipped)
+        .map((container: any) => container.id).concat(this.dndBeyondJson.data.id)
     }
 
     private abilityModifierByShortName(shortName: string): number {
@@ -539,6 +547,7 @@ export type WeightData = {
     carryCapacity: number
     totalWeight: number
     carriedWeight: number
+    coinWeight: number
 }
 
 export type Item = {
