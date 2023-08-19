@@ -454,31 +454,32 @@ export default class CharacterSheetProcessor {
 
     private buildWeightData(): WeightData {
         const carryCapacity = this.dndBeyondJson.data.stats[0].value * 15
-        const totalWeight = this.totalWeight(this.dndBeyondJson.data.inventory)
-        const carriedWeight = this.carriedWeight()
-        const coinWeight = this.totalCoinWeight(this.dndBeyondJson.data.currencies)
+        const totalCarriedItemsWeight = this.totalCarriedItemsWeight()
+        const totalCoinWeight = this.totalCoinWeight()
+        const totalCarriedWeight = totalCarriedItemsWeight + totalCoinWeight
         console.log('carryCapacity', carryCapacity)        
-        console.log('totalWeight', totalWeight)        
-        console.log('carriedWeight', carriedWeight)
-        console.log('coinWeight', coinWeight)
+        console.log('totalCarriedItemsWeight', totalCarriedItemsWeight)
+        console.log('totalCoinWeight', totalCoinWeight)
+        console.log('totalCarriedWeight', totalCarriedWeight)
         return {
             carryCapacity,
-            totalWeight,
-            carriedWeight,
-            coinWeight
+            totalCarriedItemsWeight,
+            totalCoinWeight,
+            totalCarriedWeight
         }
     }
 
-    private totalCoinWeight(currencies: any): number {
+    private totalCoinWeight(): number {
+        const currencies = this.dndBeyondJson.data.currencies
         const totalCoins = currencies.cp + currencies.sp + currencies.gp + currencies.ep + currencies.pp
         return totalCoins * 0.02
     }
 
-    private totalWeight(inventory: any): number {
+    private totalItemWeight(inventory: any): number {
         return Math.floor(inventory.reduce((acc: number, item: Item) => acc + (item.definition.weight * item.quantity), 0))
     }
 
-    private carriedWeight(): number {
+    private totalCarriedItemsWeight(): number {
         const inventory = this.dndBeyondJson.data.inventory
         const equippedContainerIds = this.findEquippedContainerIds(inventory)
         let carriedItems: any = []
@@ -487,7 +488,7 @@ export default class CharacterSheetProcessor {
                 return item.containerEntityId === id
             }))
         })
-        return this.totalWeight(carriedItems.flat())
+        return this.totalItemWeight(carriedItems.flat())
     }
 
     private findEquippedContainerIds(items: Item[]): any {
@@ -545,9 +546,9 @@ export type ItemContainer = {
 
 export type WeightData = {
     carryCapacity: number
-    totalWeight: number
-    carriedWeight: number
-    coinWeight: number
+    totalCarriedItemsWeight: number
+    totalCoinWeight: number
+    totalCarriedWeight: number
 }
 
 export type Item = {
