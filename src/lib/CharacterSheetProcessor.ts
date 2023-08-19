@@ -453,11 +453,13 @@ export default class CharacterSheetProcessor {
     }
 
     private buildWeightData(): WeightData {
+        const name = this.dndBeyondJson.data.name
         const carryCapacity = this.dndBeyondJson.data.stats[0].value * 15
         const totalCarriedItemsWeight = this.totalCarriedItemsWeight()
         const totalCoinWeight = this.totalCoinWeight()
-        const totalCarriedWeight = totalCarriedItemsWeight + totalCoinWeight
-        console.log('carryCapacity', carryCapacity)        
+        const totalCarriedWeight = Math.round(totalCarriedItemsWeight + totalCoinWeight)
+        console.log('character', name)
+        console.log('carryCapacity', carryCapacity)
         console.log('totalCarriedItemsWeight', totalCarriedItemsWeight)
         console.log('totalCoinWeight', totalCoinWeight)
         console.log('totalCarriedWeight', totalCarriedWeight)
@@ -476,7 +478,8 @@ export default class CharacterSheetProcessor {
     }
 
     private totalItemWeight(inventory: any): number {
-        return Math.floor(inventory.reduce((acc: number, item: Item) => acc + (item.definition.weight * item.quantity), 0))
+        return inventory.reduce((acc: number, item: any) =>
+            acc + (((item.definition.weight / item.definition.bundleSize) * 100) * (item.quantity * 100) / 10000), 0)
     }
 
     private totalCarriedItemsWeight(): number {
@@ -484,7 +487,7 @@ export default class CharacterSheetProcessor {
         const equippedContainerIds = this.findEquippedContainerIds(inventory)
         let carriedItems: any = []
         equippedContainerIds.forEach((id: number) => {
-            carriedItems.push(inventory.filter((item: any) => {    
+            carriedItems.push(inventory.filter((item: any) => {
                 return item.containerEntityId === id
             }))
         })
@@ -493,7 +496,7 @@ export default class CharacterSheetProcessor {
 
     private findEquippedContainerIds(items: Item[]): any {
         return items.filter(item => item.definition.isContainer && item.equipped)
-        .map((container: any) => container.id).concat(this.dndBeyondJson.data.id)
+            .map((container: any) => container.id).concat(this.dndBeyondJson.data.id)
     }
 
     private abilityModifierByShortName(shortName: string): number {
