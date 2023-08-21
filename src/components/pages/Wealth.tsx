@@ -85,7 +85,7 @@ export default function Wealth() {
                                     </Grid>
                                     <Grid item display="flex">
                                         <Typography component="div" variant="h6" sx={{ mx: '.2rem' }}>
-                                            Containers:
+                                            Items:
                                         </Typography>
                                         <Currency size="large" amount={character.totalContainerWealth} icon='gold' />
                                     </Grid>
