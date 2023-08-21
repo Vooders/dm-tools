@@ -73,9 +73,8 @@ export default function Wealth() {
                                         return <>
                                             <Grid item display="flex">
                                                 <Typography sx={{ fontSize: '14px', mx: '.2rem' }}>
-                                                    {container.name}:
+                                                    {container.name}: {container.value}
                                                 </Typography>
-                                                <Currency amount={container.value} icon='gold' />
                                             </Grid>
                                         </>
                                     })}

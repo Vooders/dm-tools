@@ -457,16 +457,19 @@ export default class CharacterSheetProcessor {
         const name = this.dndBeyondJson.data.name
         const carryCapacity = this.dndBeyondJson.data.stats[0].value * 15
         const totalCarriedItemsWeight = this.totalCarriedItemsWeight()
+        const totalCustomItemsWeight = this.totalCustomItemsWeight()
         const totalCoinWeight = this.totalCoinWeight()
-        const totalCarriedWeight = Math.round((totalCarriedItemsWeight + totalCoinWeight) * 100) / 100
+        const totalCarriedWeight = Math.round((totalCarriedItemsWeight + totalCoinWeight + totalCustomItemsWeight) * 100) / 100
         console.log('character', name)
         console.log('carryCapacity', carryCapacity)
         console.log('totalCarriedItemsWeight', totalCarriedItemsWeight)
+        console.log('totalCustomItemsWeight', totalCustomItemsWeight)
         console.log('totalCoinWeight', totalCoinWeight)
         console.log('totalCarriedWeight', totalCarriedWeight)
         return {
             carryCapacity,
             totalCarriedItemsWeight,
+            totalCustomItemsWeight,
             totalCoinWeight,
             totalCarriedWeight
         }
@@ -491,6 +494,12 @@ export default class CharacterSheetProcessor {
             carriedItems.push(inventory.filter((item: any) => item.containerEntityId === id))
         })
         return this.totalItemsWeight(carriedItems.flat())
+    }
+
+    private totalCustomItemsWeight() {
+        const customItems = this.dndBeyondJson.data.customItems
+        return customItems.reduce((acc: number, item: any) =>
+            acc + (item.weight * item.quantity), 0)
     }
 
     private findEquippedContainerIds(items: Item[]): any {
@@ -519,11 +528,6 @@ export default class CharacterSheetProcessor {
         return keys.map(modifierKey => {
             return this.modifiers[modifierKey].filter(filterFunction)
         }).flat()
-    }
-
-    private findCustomItems(): any {
-        const customItems = this.dndBeyondJson.data.customItems
-        console.log(customItems)
     }
 }
 
@@ -554,6 +558,7 @@ export type ItemContainer = {
 export type WeightData = {
     carryCapacity: number
     totalCarriedItemsWeight: number
+    totalCustomItemsWeight: number
     totalCoinWeight: number
     totalCarriedWeight: number
 }
