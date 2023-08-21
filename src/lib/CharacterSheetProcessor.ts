@@ -81,7 +81,8 @@ export default class CharacterSheetProcessor {
                     rarity: item.definition.rarity,
                     filterType: item.definition.filterType,
                     isContainer: item.definition.isContainer,
-                    cost: item.definition.cost
+                    cost: item.definition.cost,
+                    bundleSize: item.definition.bundleSize
                 },
                 containerId: item.containerEntityId,
                 equipped: item.equipped,
@@ -568,6 +569,7 @@ export type Item = {
         filterType: string
         isContainer: boolean
         cost: number
+        bundleSize: number
     },
     containerId: number
     equipped: boolean

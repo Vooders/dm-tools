@@ -13,7 +13,7 @@ export default async (): Promise<WealthData[]> => {
         const containers = characterData.inventory.map((inventory) => {
             return {
                 name: inventory.name,
-                value: Math.floor(inventory.contents.reduce((acc: number, item: Item) => acc + (item.definition.cost * item.quantity), 0))
+                value: Math.floor(inventory.contents.reduce((acc: number, item: Item) => acc + ((item.definition.cost / item.definition.bundleSize) * item.quantity), 0))
             }
         })
 
