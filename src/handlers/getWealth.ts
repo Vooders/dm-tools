@@ -19,11 +19,7 @@ export default async (): Promise<WealthData[]> => {
         })
 
         const totalContainerWealth = Math.round((containers.reduce((acc, value) => acc + value.value, 0)) * 100) / 100
-
-        const customItems = characterData.customItems
-        const totalCustomItemWealth = Math.round((customItems.reduce((acc, item) => acc + (item.cost * item.quantity), 0)) * 100) / 100
-        console.log(characterData.profile.name)
-        console.log(totalCustomItemWealth)
+        const totalCustomItemWealth = Math.round((characterData.customItems.reduce((acc, item) => acc + (item.cost * item.quantity), 0)) * 100) / 100
         const totalWealth = totalContainerWealth + totalCustomItemWealth + characterData.currencies.total
 
         return {

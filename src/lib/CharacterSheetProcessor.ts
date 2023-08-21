@@ -455,18 +455,11 @@ export default class CharacterSheetProcessor {
     }
 
     private buildWeightData(): WeightData {
-        const name = this.dndBeyondJson.data.name
         const carryCapacity = this.dndBeyondJson.data.stats[0].value * 15
         const totalCarriedItemsWeight = this.totalCarriedItemsWeight()
         const totalCustomItemsWeight = this.totalCustomItemsWeight()
         const totalCoinWeight = this.totalCoinWeight()
         const totalCarriedWeight = Math.round((totalCarriedItemsWeight + totalCoinWeight + totalCustomItemsWeight) * 100) / 100
-        console.log('character', name)
-        console.log('carryCapacity', carryCapacity)
-        console.log('totalCarriedItemsWeight', totalCarriedItemsWeight)
-        console.log('totalCustomItemsWeight', totalCustomItemsWeight)
-        console.log('totalCoinWeight', totalCoinWeight)
-        console.log('totalCarriedWeight', totalCarriedWeight)
         return {
             carryCapacity,
             totalCarriedItemsWeight,
