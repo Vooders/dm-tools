@@ -492,14 +492,18 @@ export default class CharacterSheetProcessor {
         const equippedContainerIds = this.findEquippedContainerIds(inventory)
         let carriedItems: any = []
         equippedContainerIds.forEach((id: number) => {
-            carriedItems.push(inventory.filter((item: any) => item.containerEntityId === id))
+            carriedItems.push(inventory.filter((item: any) =>
+                item.containerEntityId === id
+            ))
         })
-        return Math.round((this.totalItemsWeight(carriedItems.flat())) * 100) / 100
+        const filteredCarriedItems = carriedItems.flat().filter((item: any) =>
+            (item.definition.isContainer && !item.equipped) === false
+        )
+        return Math.round((this.totalItemsWeight(filteredCarriedItems)) * 100) / 100
     }
 
     private totalCustomItemsWeight() {
         const customItems = this.dndBeyondJson.data.customItems
-        console.log(customItems)
         return customItems.reduce((acc: number, item: any) =>
             acc + (item.weight * item.quantity), 0)
     }
