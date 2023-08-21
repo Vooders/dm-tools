@@ -478,9 +478,9 @@ export default class CharacterSheetProcessor {
         return totalCoins * 0.02
     }
 
-    private totalItemWeight(inventory: any): number {
+    private totalItemsWeight(inventory: any): number {
         return inventory.reduce((acc: number, item: any) =>
-            acc + (((item.definition.weight / item.definition.bundleSize) * 100) * (item.quantity * 100) / 10000), 0)
+            acc + (item.definition.weight / item.definition.bundleSize) * item.quantity, 0)
     }
 
     private totalCarriedItemsWeight(): number {
@@ -490,7 +490,7 @@ export default class CharacterSheetProcessor {
         equippedContainerIds.forEach((id: number) => {
             carriedItems.push(inventory.filter((item: any) => item.containerEntityId === id))
         })
-        return this.totalItemWeight(carriedItems.flat())
+        return this.totalItemsWeight(carriedItems.flat())
     }
 
     private findEquippedContainerIds(items: Item[]): any {

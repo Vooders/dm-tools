@@ -13,11 +13,12 @@ export default async (): Promise<WealthData[]> => {
         const containers = characterData.inventory.map((inventory) => {
             return {
                 name: inventory.name,
-                value: Math.floor(inventory.contents.reduce((acc: number, item: Item) => acc + ((item.definition.cost / item.definition.bundleSize) * item.quantity), 0))
+                value: Math.round((inventory.contents.reduce((acc: number, item: Item) =>
+                    acc + (item.definition.cost / item.definition.bundleSize) * item.quantity, 0)) * 100) / 100
             }
         })
 
-        const totalContainerWealth = Math.floor(containers.reduce((acc, value) => acc + value.value, 0))
+        const totalContainerWealth = Math.round((containers.reduce((acc, value) => acc + value.value, 0)) * 100) / 100
 
         const totalWealth = totalContainerWealth + characterData.currencies.total
 
