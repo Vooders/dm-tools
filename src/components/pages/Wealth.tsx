@@ -79,6 +79,11 @@ export default function Wealth() {
                                         </>
                                     })}
                                     <Grid item display="flex">
+                                        <Typography sx={{ fontSize: '14px', mx: '.2rem' }}>
+                                            Custom Items: {character.totalCustomItemWealth}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item display="flex">
                                         <Typography component="div" variant="h6" sx={{ mx: '.2rem' }}>
                                             Containers:
                                         </Typography>
