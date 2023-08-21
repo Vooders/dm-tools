@@ -55,7 +55,8 @@ export default class CharacterSheetProcessor {
             spells: this.buildSpells(),
             currencies: this.buildCurrencies(),
             inventory: this.buildInventory(),
-            weightData: this.buildWeightData()
+            weightData: this.buildWeightData(),
+            customItems: this.dndBeyondJson.data.customItems
         }
     }
 
@@ -493,11 +494,12 @@ export default class CharacterSheetProcessor {
         equippedContainerIds.forEach((id: number) => {
             carriedItems.push(inventory.filter((item: any) => item.containerEntityId === id))
         })
-        return this.totalItemsWeight(carriedItems.flat())
+        return Math.round((this.totalItemsWeight(carriedItems.flat())) * 100) / 100
     }
 
     private totalCustomItemsWeight() {
         const customItems = this.dndBeyondJson.data.customItems
+        console.log(customItems)
         return customItems.reduce((acc: number, item: any) =>
             acc + (item.weight * item.quantity), 0)
     }
@@ -548,6 +550,7 @@ export type DmToolsData = {
     currencies: Currencies
     inventory: ItemContainer[]
     weightData: WeightData
+    customItems: CustomItem[]
 }
 
 export type ItemContainer = {
@@ -579,6 +582,16 @@ export type Item = {
     containerId: number
     equipped: boolean
     quantity: number
+}
+
+export type CustomItem = {
+    id: number
+    name: string
+    description: string
+    weight: number
+    cost: number
+    quantity: number
+    notes: string
 }
 
 export type Currencies = {
