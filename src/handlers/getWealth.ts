@@ -7,19 +7,23 @@ export default async (): Promise<WealthData[]> => {
     const summary = await getSummaryData()
     const characterIds = Object.keys(summary)
 
+    const roundToTwoDecimalPlaces = (value: number) => {
+        return Math.round((value) * 100) / 100
+    }
+
     return await Promise.all(characterIds.map(async (characterId) => {
         const characterData = await getCharacter(null, characterId)
 
         const containers = characterData.inventory.map((inventory) => {
             return {
                 name: inventory.name,
-                value: Math.round((inventory.contents.reduce((acc: number, item: Item) =>
-                    acc + (item.definition.cost / item.definition.bundleSize) * item.quantity, 0)) * 100) / 100
+                value: roundToTwoDecimalPlaces(inventory.contents.reduce((acc: number, item: Item) =>
+                acc + (item.definition.cost / item.definition.bundleSize) * item.quantity, 0))
             }
         })
 
-        const totalContainerWealth = Math.round((containers.reduce((acc, value) => acc + value.value, 0)) * 100) / 100
-        const totalCustomItemWealth = Math.round((characterData.customItems.reduce((acc, item) => acc + (item.cost * item.quantity), 0)) * 100) / 100
+        const totalContainerWealth = roundToTwoDecimalPlaces(containers.reduce((acc, value) => acc + value.value, 0))
+        const totalCustomItemWealth = roundToTwoDecimalPlaces(characterData.customItems.reduce((acc, item) => acc + (item.cost * item.quantity), 0))
         const totalWealth = totalContainerWealth + totalCustomItemWealth + characterData.currencies.total
 
         return {
