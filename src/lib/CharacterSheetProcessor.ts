@@ -91,6 +91,30 @@ export default class CharacterSheetProcessor {
             }
             return this.addCustomNames(newItem, this.dndBeyondJson.data.characterValues)
         })
+        const customItemInventory = this.dndBeyondJson.data.customItems
+
+        const customItems = customItemInventory.map((item: any): Item => {
+            return {
+                id: item.id,
+                definition: {
+                    id: null,
+                    avatarUrl: null,
+                    name: item.name,
+                    weight: item.weight,
+                    rarity: null,
+                    filterType: null,
+                    isContainer: null,
+                    cost: item.cost,
+                    bundleSize: 1,
+                    description: item.description,
+                    notes: item.notes
+                },
+                containerId: null,
+                equipped: item.equipped,
+                quantity: item.quantity
+            }
+            
+        })
 
         const containers = this.findContainers(items)
 
@@ -98,6 +122,10 @@ export default class CharacterSheetProcessor {
             {
                 name: 'Equipment',
                 contents: this.fillBag(this.dndBeyondJson.data.id, items)
+            },
+            {
+                name: 'Custom Items',
+                contents: customItems
             },
             ...containers.map(container => {
                 return {
@@ -580,6 +608,8 @@ export type Item = {
         isContainer: boolean
         cost: number
         bundleSize: number
+        description?: string
+        notes?: string
     },
     containerId: number
     equipped: boolean
