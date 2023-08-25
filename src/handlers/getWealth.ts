@@ -23,15 +23,13 @@ export default async (): Promise<WealthData[]> => {
         })
 
         const totalContainerWealth = roundToTwoDecimalPlaces(containers.reduce((acc, value) => acc + value.value, 0))
-        const totalCustomItemWealth = roundToTwoDecimalPlaces(characterData.customItems.reduce((acc, item) => acc + (item.cost * item.quantity), 0))
-        const totalWealth = totalContainerWealth + totalCustomItemWealth + characterData.currencies.total
+        const totalWealth = totalContainerWealth + characterData.currencies.total
 
         return {
             name: characterData.profile.name,
             currencies: characterData.currencies,
             containers,
             totalContainerWealth,
-            totalCustomItemWealth,
             totalWealth
         }
     }))
@@ -42,7 +40,6 @@ export type WealthData = {
     currencies: Currencies
     containers: Container[]
     totalContainerWealth: number
-    totalCustomItemWealth: number
     totalWealth: number
 }
 

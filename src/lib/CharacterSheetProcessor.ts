@@ -123,16 +123,16 @@ export default class CharacterSheetProcessor {
                 name: 'Equipment',
                 contents: this.fillBag(this.dndBeyondJson.data.id, items)
             },
-            {
-                name: 'Custom Items',
-                contents: customItems
-            },
             ...containers.map(container => {
                 return {
                     name: container.definition.name,
                     contents: this.fillBag(container.id, items)
                 }
-            })
+            }),
+            {
+                name: 'Custom Items',
+                contents: customItems
+            },
         ]
     }
 
