@@ -1,6 +1,6 @@
 import getSummaryData from '../lib/getSummary'
 import getCharacter from './getCharacter'
-import { Currencies } from '../lib/CharacterSheetProcessor'
+import { Currencies, ItemContainer } from '../lib/CharacterSheetProcessor'
 import { Item } from '../lib/CharacterSheetProcessor'
 
 export default async (): Promise<WealthData[]> => {
@@ -12,18 +12,20 @@ export default async (): Promise<WealthData[]> => {
         return Math.round(result * 100) / 100
     }
 
-    return await Promise.all(characterIds.map(async (characterId) => {
-        const characterData = await getCharacter(null, characterId)
-
-        const containers = characterData.inventory.map((inventory) => {
+    function buildContainers(inventory: ItemContainer[]): Container[] {
+        return inventory.map((inventory) => {
             return {
                 name: inventory.name,
                 value: reduceAndRound<Item>(inventory.contents, (total, item) => {
                     return total + (item.definition.cost / item.definition.bundleSize) * item.quantity
                 })
             }
-        }) as Container[]
+        })
+    }
 
+    return await Promise.all(characterIds.map(async (characterId) => {
+        const characterData = await getCharacter(null, characterId)
+        const containers = buildContainers(characterData.inventory)
         const totalContainerWealth = reduceAndRound<Container>(containers, (total, container) => total + container.value)
         const totalWealth = totalContainerWealth + characterData.currencies.total
 
