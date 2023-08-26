@@ -113,7 +113,6 @@ export default class CharacterSheetProcessor {
                 equipped: item.equipped,
                 quantity: item.quantity
             }
-            
         })
 
         const containers = this.findContainers(items)

@@ -7,8 +7,9 @@ export default async (): Promise<WealthData[]> => {
     const summary = await getSummaryData()
     const characterIds = Object.keys(summary)
 
-    const roundToTwoDecimalPlaces = (value: number) => {
-        return Math.round((value) * 100) / 100
+    function reduceAndRound<T>(someArray: T[], reduceFunc: (acc: number, item: T) => number): number {
+        const result = someArray.reduce(reduceFunc, 0)
+        return Math.round(result * 100) / 100
     }
 
     return await Promise.all(characterIds.map(async (characterId) => {
@@ -17,12 +18,13 @@ export default async (): Promise<WealthData[]> => {
         const containers = characterData.inventory.map((inventory) => {
             return {
                 name: inventory.name,
-                value: roundToTwoDecimalPlaces(inventory.contents.reduce((acc: number, item: Item) =>
-                acc + (item.definition.cost / item.definition.bundleSize) * item.quantity, 0))
+                value: reduceAndRound<Item>(inventory.contents, (acc, item) => {
+                    return acc + (item.definition.cost / item.definition.bundleSize) * item.quantity
+                })
             }
-        })
+        }) as Container[]
 
-        const totalContainerWealth = roundToTwoDecimalPlaces(containers.reduce((acc, value) => acc + value.value, 0))
+        const totalContainerWealth = reduceAndRound<Container>(containers, (acc, container) => acc + container.value)
         const totalWealth = totalContainerWealth + characterData.currencies.total
 
         return {
