@@ -21,6 +21,10 @@ export default function Wealth() {
         })
     }, [])
 
+    const totalWealth = () => {
+        return Math.round(wealth.reduce((total: number, wealthData: WealthData) => total += wealthData.totalWealth, 0) * 100) / 100
+    }
+
     const cardStyling = {
         display: 'flex',
         padding: '5px',
@@ -34,7 +38,16 @@ export default function Wealth() {
     return (
         <React.Fragment>
             <Title>Wealth</Title>
-
+            <Card variant="outlined" sx={cardStyling}>
+                <CardContent>
+                    <Grid item display="flex" sx={{ margin: '.2rem' }}>
+                        <Typography component="div" variant="h6" sx={{ mx: '.2rem' }}>
+                            Party Total:
+                        </Typography>
+                        <Currency size='large' amount={totalWealth()} icon='gold' />
+                    </Grid>
+                </CardContent>
+            </Card>
             <Grid
                 container
                 direction="row"
