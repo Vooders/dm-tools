@@ -120,16 +120,19 @@ export default class CharacterSheetProcessor {
         return [
             {
                 name: 'Equipment',
+                equipped: true,
                 contents: this.fillBag(this.dndBeyondJson.data.id, items)
             },
             ...containers.map(container => {
                 return {
                     name: container.definition.name,
+                    equipped: container.equipped,
                     contents: this.fillBag(container.id, items)
                 }
             }),
             {
                 name: 'Custom Items',
+                equipped: true,
                 contents: customItems
             },
         ]
@@ -508,7 +511,7 @@ export default class CharacterSheetProcessor {
     }
 
     private removeUnequippedContainers(inventory: any): any[] {
-       return inventory.filter((item: any) => 
+        return inventory.filter((item: any) =>
             (item.definition.isContainer && !item.equipped) === false
         )
     }
@@ -516,7 +519,7 @@ export default class CharacterSheetProcessor {
     private totalCarriedItemsWeight(): number {
         const inventory = this.dndBeyondJson.data.inventory
         const equippedContainerIds = this.findEquippedContainerIds(inventory)
-        
+
         let carriedItems: any = []
         equippedContainerIds.forEach((id: number) => {
             carriedItems.push(inventory.filter((item: any) =>
@@ -583,7 +586,8 @@ export type DmToolsData = {
 }
 
 export type ItemContainer = {
-    name: string,
+    name: string
+    equipped: boolean
     contents: Item[]
 }
 

@@ -73,8 +73,8 @@ export default function Inventory() {
                 return (
                   <Card variant="outlined">
                     <CardContent>
+                      {container.equipped ? '✔️ ' : '❌ '}
                       {container.name}
-
                       <Table size="small">
                         <TableHead>
                           <TableRow>
@@ -82,8 +82,10 @@ export default function Inventory() {
                             <TableCell>Name</TableCell>
                             <TableCell>Quantity</TableCell>
                             <TableCell>Weight</TableCell>
-                            <TableCell>{container.name === 'Custom Items' ? 'Description' : 'Rarity'}</TableCell>
-                            <TableCell>{container.name === 'Custom Items' ? 'Notes' : 'Type'}</TableCell>
+                            <TableCell>Rarity</TableCell>
+                            <TableCell>Type</TableCell>
+                            <TableCell>Description</TableCell>
+                            <TableCell>Notes</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
@@ -93,8 +95,10 @@ export default function Inventory() {
                               <TableCell>{item.definition.name}</TableCell>
                               <TableCell>{item.quantity}</TableCell>
                               <TableCell>{item.definition.weight} lbs</TableCell>
-                              <TableCell>{item.definition.description ? item.definition.description : item.definition.rarity}</TableCell>
-                              <TableCell>{item.definition.description ? item.definition.notes : item.definition.filterType}</TableCell>
+                              <TableCell>{item.definition.rarity}</TableCell>
+                              <TableCell>{item.definition.filterType}</TableCell>
+                              <TableCell>{item.definition.description}</TableCell>
+                              <TableCell>{item.definition.notes}</TableCell>
                             </TableRow>
                           ))}
                         </TableBody>
