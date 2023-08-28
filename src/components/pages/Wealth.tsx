@@ -21,8 +21,16 @@ export default function Wealth() {
         })
     }, [])
 
+    function reduceAndRound<T>(someArray: T[], reduceFunc: (acc: number, item: T) => number): number {
+        const result = someArray.reduce(reduceFunc, 0)
+        return Math.round(result * 100) / 100
+    }
+
     const totalWealth = () => {
-        return Math.round(wealth.reduce((total: number, wealthData: WealthData) => total += wealthData.totalWealth, 0) * 100) / 100
+        return reduceAndRound<WealthData>(wealth, (total, wealthData) => total += wealthData.totalWealth)
+    }
+    const totalCurrency = () => {
+        return reduceAndRound<WealthData>(wealth, (total, wealthData) => total += wealthData.currencies.total)
     }
 
     const cardStyling = {
@@ -40,11 +48,15 @@ export default function Wealth() {
             <Title>Wealth</Title>
             <Card variant="outlined" sx={cardStyling}>
                 <CardContent>
-                    <Grid item display="flex" sx={{ margin: '.2rem' }}>
-                        <Typography component="div" variant="h6" sx={{ mx: '.2rem' }}>
-                            Party Total:
+                    <Grid item display="flex">
+                        <Typography component="div" variant="h6" sx={{ mr: '5em' }}>
+                            Party Total Currency
+                            <Currency size='large' amount={totalCurrency()} icon='gold' />
                         </Typography>
-                        <Currency size='large' amount={totalWealth()} icon='gold' />
+                        <Typography component="div" variant="h6">
+                            Party Total Wealth
+                            <Currency size='large' amount={totalWealth()} icon='gold' />
+                        </Typography>
                     </Grid>
                 </CardContent>
             </Card>
