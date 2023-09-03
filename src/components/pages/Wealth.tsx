@@ -34,7 +34,6 @@ export default function Wealth() {
     }
 
     const cardStyling = {
-        display: 'flex',
         padding: '5px',
         variant: "outlined",
         boxShadow: 5,
@@ -48,15 +47,19 @@ export default function Wealth() {
             <Title>Wealth</Title>
             <Card variant="outlined" sx={cardStyling}>
                 <CardContent>
-                    <Grid item display="flex">
-                        <Typography component="div" variant="h6" sx={{ mr: '5em' }}>
-                            Party Total Currency
-                            <Currency size='large' amount={totalCurrency()} icon='gold' />
-                        </Typography>
-                        <Typography component="div" variant="h6">
-                            Party Total Wealth
-                            <Currency size='large' amount={totalWealth()} icon='gold' />
-                        </Typography>
+                    <Grid container >
+                        <Grid item xs={6} >
+                            <Typography component="div" variant="h6" sx={{ mx: '.5em' }} >
+                                Party Total Currency
+                                <Currency size='large' amount={totalCurrency()} icon='gold' />
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Typography component="div" variant="h6" sx={{ mx: '.5em' }}>
+                                Party Total Wealth
+                                <Currency size='large' amount={totalWealth()} icon='gold' />
+                            </Typography>
+                        </Grid>
                     </Grid>
                 </CardContent>
             </Card>

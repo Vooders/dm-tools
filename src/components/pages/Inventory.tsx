@@ -75,6 +75,7 @@ export default function Inventory() {
                     <CardContent>
                       {container.equipped ? '✔️ ' : '❌ '}
                       {container.name}
+                      {container.capacity}
                       <Table size="small">
                         <TableHead>
                           <TableRow>
