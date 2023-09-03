@@ -70,7 +70,6 @@ export default class CharacterSheetProcessor {
 
     private buildInventory(): ItemContainer[] {
         const inventory = this.dndBeyondJson.data.inventory
-        const characterValues = this.dndBeyondJson.data.characterValues
 
         const items = inventory.map((item: any): Item => {
             const newItem = {
@@ -90,7 +89,7 @@ export default class CharacterSheetProcessor {
                 equipped: item.equipped,
                 quantity: item.quantity
             }
-            return this.addCustomCosts(this.addCustomNames(newItem, characterValues), characterValues)
+            return this.addCustomValues(newItem)
         })
         const customItemInventory = this.dndBeyondJson.data.customItems
 
@@ -139,26 +138,33 @@ export default class CharacterSheetProcessor {
         ]
     }
 
-    private addCustomNames(item: Item, characterValues: CharacterValues[]): Item {
-        const renames = characterValues.filter(characterValue => characterValue.typeId === 8)
-
-        renames.forEach(value => {
+    private addCustomValues(item: Item): Item {
+        this.findCustomData(8).forEach(value => {
             if (value.valueId === item.id.toString()) {
                 item.definition.name = value.value
+            }
+        })
+        this.findCustomData(9).forEach(value => {
+            if (value.valueId === item.id.toString()) {
+                item.definition.notes = value.value
+            }
+        })
+        this.findCustomData(19).forEach(value => {
+            if (value.valueId === item.id.toString()) {
+                item.definition.cost = parseInt(value.value)
+            }
+        })
+        this.findCustomData(22).forEach(value => {
+            if (value.valueId === item.id.toString()) {
+                item.definition.weight = parseInt(value.value)
             }
         })
         return item
     }
 
-    private addCustomCosts(item: Item, characterValues: CharacterValues[]): Item {
-        const recosts = characterValues.filter(characterValue => characterValue.typeId === 19)
-
-        recosts.forEach(value => {
-            if (value.valueId === item.id.toString()) {
-                item.definition.cost = parseInt(value.value)
-            }
-        })
-        return item
+    private findCustomData(id: number) {
+        const characterValues: CharacterValues[] = this.dndBeyondJson.data.characterValues
+        return characterValues.filter(characterValue => characterValue.typeId === id)
     }
 
     private buildProficienciesView(): ProficiencyView[] {
