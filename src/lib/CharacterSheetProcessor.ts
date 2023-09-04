@@ -124,7 +124,7 @@ export default class CharacterSheetProcessor {
             {
                 name: 'Equipment',
                 equipped: true,
-                capacity: this.findCarryCapacity(),
+                capacity: this.getCarryCapacity(),
                 contents: this.fillBag(this.dndBeyondJson.data.id, items)
             },
             ...containers.map(container => {
@@ -145,39 +145,55 @@ export default class CharacterSheetProcessor {
     }
 
     private addCustomValues(item: Item): Item {
-        const itemId = item.id.toString()
 
-        this.findCustomValues(8).forEach(value => {
-            if (value.valueId === itemId) {
-                item.definition.name = value.value
-            }
-        })
-        this.findCustomValues(9).forEach(value => {
-            if (value.valueId === itemId) {
-                item.definition.notes = value.value
-            }
-        })
-        this.findCustomValues(19).forEach(value => {
-            if (value.valueId === itemId) {
-                item.definition.cost = parseInt(value.value)
-            }
-        })
-        this.findCustomValues(22).forEach(value => {
-            if (value.valueId === itemId) {
-                item.definition.weight = parseInt(value.value)
-            }
-        })
-        this.findCustomValues(50).forEach(value => {
-            if (value.valueId === itemId) {
-                item.definition.capacity = parseInt(value.value)
+        this.getCustomValues().forEach(value => {
+            if (value.valueId === item.id.toString()) {
+                if (value.typeId === 8) {
+                    item.definition.name = value.value
+                }
+                if (value.typeId === 9) {
+                    item.definition.notes = value.value
+                }
+                if (value.typeId === 19) {
+                    item.definition.cost = parseInt(value.value)
+                }
+                if (value.typeId === 22) {
+                    item.definition.weight = parseInt(value.value)
+                }
+                if (value.typeId === 50) {
+                    item.definition.capacity = parseInt(value.value)
+                }
             }
         })
         return item
     }
 
-    private findCustomValues(id: number): CharacterValues[] {
+    // private addCustomValues(item: Item): Item {
+    //     const itemId = item.id.toString()
+
+    //     this.getCustomValues().forEach(value => {
+    //         if (value.valueId === itemId) {
+    //             switch (value.typeId) {
+    //                 case 8:
+    //                     item.definition.name = value.value
+    //                 case 9:
+    //                     item.definition.notes = value.value
+    //                 case 19:
+    //                     item.definition.cost = parseInt(value.value)
+    //                 case 22:
+    //                     item.definition.weight = parseInt(value.value)
+    //                 case 50:
+    //                     item.definition.capacity = parseInt(value.value)
+    //             }
+    //         }
+    //     })
+    //     return item
+
+    // }
+
+    private getCustomValues(): CharacterValues[] {
         const characterValues: CharacterValues[] = this.dndBeyondJson.data.characterValues
-        return characterValues.filter(characterValue => characterValue.typeId === id)
+        return characterValues.filter(characterValue => characterValue.typeId === 8 || 9 || 19 || 22 || 50)
     }
 
     private buildProficienciesView(): ProficiencyView[] {
@@ -516,7 +532,7 @@ export default class CharacterSheetProcessor {
     }
 
     private buildWeightData(): WeightData {
-        const carryCapacity = this.findCarryCapacity()
+        const carryCapacity = this.getCarryCapacity()
         const totalCarriedItemsWeight = this.totalCarriedItemsWeight()
         const totalCustomItemsWeight = this.totalCustomItemsWeight()
         const totalCoinWeight = this.totalCoinWeight()
@@ -567,7 +583,7 @@ export default class CharacterSheetProcessor {
             acc + (item.weight * item.quantity), 0)
     }
 
-    private findCarryCapacity() {
+    private getCarryCapacity() {
         return this.dndBeyondJson.data.stats[0].value * 15
     }
 

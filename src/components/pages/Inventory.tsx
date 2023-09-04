@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Title from '../Title';
 import { ItemContainer } from '../../lib/CharacterSheetProcessor';
-import { Card, CardContent } from '@mui/material';
+import { Card, CardContent, Grid } from '@mui/material';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -73,9 +73,10 @@ export default function Inventory() {
                 return (
                   <Card variant="outlined">
                     <CardContent>
-                      {container.equipped ? '✔️ ' : '❌ '}
-                      {container.name}
-                      {container.capacity}
+                      <Grid container direction="row" spacing={2}>
+                        <Grid item>{container.equipped ? '✔️ ' : '❌ '}{container.name}</Grid>
+                        <Grid item>{container.capacity}{container.capacity ? 'lb capacity' : ''}</Grid>
+                      </Grid>              
                       <Table size="small">
                         <TableHead>
                           <TableRow>
