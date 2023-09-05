@@ -48,17 +48,17 @@ export default function Wealth() {
             <Card variant="outlined" sx={cardStyling}>
                 <CardContent>
                     <Grid container >
-                        <Grid item xs={6} >
+                        <Grid item display="flex" xs={6} >
                             <Typography component="div" variant="h6" sx={{ mx: '.5em' }} >
-                                Party Total Currency
-                                <Currency size='large' amount={totalCurrency()} icon='gold' />
+                                Total Currency:
                             </Typography>
+                            <Currency size='large' amount={totalCurrency()} icon='gold' />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item display="flex" xs={6}>
                             <Typography component="div" variant="h6" sx={{ mx: '.5em' }}>
-                                Party Total Wealth
-                                <Currency size='large' amount={totalWealth()} icon='gold' />
+                                Total Wealth:
                             </Typography>
+                            <Currency size='large' amount={totalWealth()} icon='gold' />
                         </Grid>
                     </Grid>
                 </CardContent>
