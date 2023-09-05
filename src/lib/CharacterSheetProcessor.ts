@@ -145,22 +145,29 @@ export default class CharacterSheetProcessor {
     }
 
     private addCustomValues(item: Item): Item {
+        const valueType = {
+            name: 8,
+            notes: 9,
+            cost: 19,
+            weight: 22,
+            capacity: 50
+        }
         this.dndBeyondJson.data.characterValues.forEach((value: CharacterValues) => {
             if (value.valueId === item.id.toString()) {
                 switch (value.typeId) {
-                    case 8:
+                    case valueType.name:
                         item.definition.name = value.value
                         break
-                    case 9:
+                    case valueType.notes:
                         item.definition.notes = value.value
                         break
-                    case 19:
+                    case valueType.cost:
                         item.definition.cost = parseInt(value.value)
                         break
-                    case 22:
+                    case valueType.weight:
                         item.definition.weight = parseInt(value.value)
                         break
-                    case 50:
+                    case valueType.capacity:
                         item.definition.capacity = parseInt(value.value)
                 }
             }
