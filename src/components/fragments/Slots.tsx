@@ -36,9 +36,9 @@ export default function Slots(props: SlotsProps) {
     const id = open ? 'simple-popover' : undefined;
 
     return (
-        <Box m={2} >
-            <Typography component="legend">{props.title}</Typography>
-            { props.max < 10 ?
+        <Box mr={4} my={0.5} >
+            <Typography component="legend"> {props.title}</Typography>
+            {props.max < 10 ?
                 <StyledRating
                     onClick={handleClick}
                     name="customized-color"

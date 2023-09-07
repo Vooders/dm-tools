@@ -11,13 +11,14 @@ import Title from '../Title'
 import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'
 import Slots from '../fragments/Slots'
 import Currencies from '../fragments/Currencies'
+import { Grid } from '@mui/material'
 
 export default function Health() {
     const [health, setHealth] = useState<HealthData[]>([])
 
     const cardStyling = {
         display: 'flex',
-        padding: '10px',
+        padding: '8px',
         variant: "outlined",
         boxShadow: 5,
         borderRadius: 2,
@@ -49,7 +50,7 @@ export default function Health() {
         return (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ width: '100%', mr: 1 }}>
-                    <LinearProgress sx={{ height: '8px', borderRadius: 2 }} variant="determinate" color={healthBarColour(props.value)} {...props} />
+                    <LinearProgress sx={{ height: '6px', borderRadius: 2 }} variant="determinate" color={healthBarColour(props.value)} {...props} />
                 </Box>
                 <Box sx={{ minWidth: 35 }}>
                     <Typography variant="body2" color="text.secondary">{`${Math.round(
@@ -81,15 +82,19 @@ export default function Health() {
                     <Card sx={cardStyling}>
                         <CardMedia
                             component="img"
-                            sx={{ height: 240, width: 151, variant: "rounded" }}
+                            sx={{ height: 190, width: 145, variant: "rounded" }}
                             image={character.avatarPath}
                             alt={character.name}
                         />
                         <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', padding: '5px' }}>
-                            <Typography component="div" variant="h5">
-                                {character.name}
-                            </Typography>
-                            <Currencies showZeroes={false} align='right' currencies={character.currencies} />
+                            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                                <Box sx={{ paddingY: '2px' }}>
+                                    <Typography component="div" variant="h5" noWrap={true}>
+                                        {character.name}
+                                    </Typography>
+                                </Box>
+                                <Currencies showZeroes={false} align='right' currencies={character.currencies} />
+                            </Box>
                             <Typography component="div" variant="subtitle1">
                                 HP - {hpView(character.hp)}
                             </Typography>
@@ -102,7 +107,7 @@ export default function Health() {
                                 }
                             </Typography>
                             <LinearProgressWithLabel value={calculateHpPercent(character.hp)} />
-                            <Box sx={{ display: 'flex', paddingBottom: '10px' }}>
+                            <Box sx={{ display: 'flex', paddingY: '3px' }}>
                                 {character.spellSlots.map(spellSlot => {
                                     return (
                                         <Slots title={`Level ${spellSlot.level}`} max={spellSlot.max} used={spellSlot.used} description='' />
@@ -110,7 +115,7 @@ export default function Health() {
                                 })}
                             </Box>
 
-                            <Box sx={{ display: 'flex', paddingBottom: '10px' }}>
+                            <Box sx={{ display: 'flex', paddingY: '3px' }}>
                                 {character.limitedUseActions.map(limitedUseAction => {
                                     return (
                                         <Slots
