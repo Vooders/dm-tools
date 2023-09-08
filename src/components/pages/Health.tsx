@@ -50,7 +50,7 @@ export default function Health() {
         return (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ width: '100%', mr: 1 }}>
-                    <LinearProgress sx={{ height: '6px', borderRadius: 2 }} variant="determinate" color={healthBarColour(props.value)} {...props} />
+                    <LinearProgress sx={{ height: '8px', borderRadius: 2, boxShadow: 4 }} variant="determinate" color={healthBarColour(props.value)} {...props} />
                 </Box>
                 <Box sx={{ minWidth: 35 }}>
                     <Typography variant="body2" color="text.secondary">{`${Math.round(
@@ -82,14 +82,14 @@ export default function Health() {
                     <Card sx={cardStyling}>
                         <CardMedia
                             component="img"
-                            sx={{ height: 190, width: 145, variant: "rounded" }}
+                            sx={{ height: 195, width: 150, variant: "rounded" }}
                             image={character.avatarPath}
                             alt={character.name}
                         />
                         <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', padding: '5px' }}>
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                                 <Box sx={{ paddingY: '2px' }}>
-                                    <Typography component="div" variant="h5" noWrap={true}>
+                                    <Typography component="div" variant="h5" noWrap={true} >
                                         {character.name}
                                     </Typography>
                                 </Box>

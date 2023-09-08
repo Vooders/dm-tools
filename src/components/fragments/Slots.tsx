@@ -7,20 +7,27 @@ import Typography from '@mui/material/Typography'
 import Popover from '@mui/material/Popover'
 
 import Brightness1Icon from '@mui/icons-material/Brightness1'
-import BlockIcon from '@mui/icons-material/Block'
+import { RadioButtonUnchecked } from '@mui/icons-material'
 
 export default function Slots(props: SlotsProps) {
     const StyledRating = styled(Rating)({
         '& .MuiRating-iconFilled': {
-            color: '#ddd',
+            color: 'rgb(220,220,220)',
         },
         '& .MuiRating-iconHover': {
             color: '#ff3d47',
         },
         '& .MuiRating-iconEmpty': {
-            color: '#ff6d75'
+            color: 'rgb(100, 100, 100)'
         }
     });
+
+    const style = props.max - props.used != 0 ? {
+        color: 'rgb(220,220,220)',
+        boxShadow: 3
+    } : {
+        color: 'rgb(200, 200, 200)'
+    }
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
@@ -36,7 +43,17 @@ export default function Slots(props: SlotsProps) {
     const id = open ? 'simple-popover' : undefined;
 
     return (
-        <Box mr={4} my={0.5} >
+        <Box mr={3}
+            p={1}
+            display='flex'
+            flexDirection='column'
+            justifyContent='center'
+            alignItems='center'
+            border={1}
+            borderRadius={2}
+            borderColor='rgb(10, 35, 57)'
+            sx={style}
+        >
             <Typography component="legend"> {props.title}</Typography>
             {props.max < 10 ?
                 <StyledRating
@@ -47,7 +64,7 @@ export default function Slots(props: SlotsProps) {
                     readOnly
                     precision={0.5}
                     icon={<Brightness1Icon fontSize="inherit" />}
-                    emptyIcon={<BlockIcon fontSize="inherit" />}
+                    emptyIcon={<RadioButtonUnchecked fontSize="inherit" />}
                 />
                 :
                 <Typography variant='h6'>{`${props.max - props.used} / ${props.max}`}</Typography>
