@@ -64,7 +64,7 @@ export default function Inventory() {
       <FormGroup>
         <TextField id="standard-basic" label="Search" variant="standard" onChange={(e) => search(e.target.value)} />
       </FormGroup>
-      <Stack spacing={2}>
+      <Stack spacing={2} mt={2}>
         {inventory.map(character => {
           return (
             <>

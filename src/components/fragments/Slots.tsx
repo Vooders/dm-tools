@@ -24,7 +24,9 @@ export default function Slots(props: SlotsProps) {
 
     const style = props.max - props.used != 0 ? {
         color: 'rgb(220,220,220)',
-        boxShadow: 3
+        boxShadow: 3,
+        border: 1,
+        backgroundColor: 'rgb(8,48,77)'
     } : {
         color: 'rgb(200, 200, 200)'
     }
