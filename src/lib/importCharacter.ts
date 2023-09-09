@@ -11,11 +11,12 @@ export default async (id: string): Promise<ImportResponse> => {
         }
     } else if (response.status === 404) {
         return error(`Character ${id} not found`)
+    } else if (response.status === 403) {
+        return error(`Character ${id} is set to be private`)
     } else {
         return error(response)
     }
 }
-
 
 const respond = (status: string, value: string): ImportResponse => {
     const response = { status, value }
