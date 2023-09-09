@@ -14,8 +14,8 @@ export default async (id: string): Promise<ImportResponse> => {
     } else if (response.status === 403) {
         return error(`Character ${id} is set to be private`)
     } else {
-        const error = await response.json()
-        return error(`${error.message}: ${error.data.serverMessage}`)
+        const errorResponse = await response.json()
+        return error(`${errorResponse.message}: ${errorResponse.data.serverMessage}`)
     }
 }
 
