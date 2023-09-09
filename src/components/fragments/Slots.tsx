@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography'
 import Popover from '@mui/material/Popover'
 
 import Brightness1Icon from '@mui/icons-material/Brightness1'
-import { RadioButtonUnchecked } from '@mui/icons-material'
+import BlockIcon from '@mui/icons-material/Block'
 
 export default function Slots(props: SlotsProps) {
     const StyledRating = styled(Rating)({
@@ -18,7 +18,7 @@ export default function Slots(props: SlotsProps) {
             color: '#ff3d47',
         },
         '& .MuiRating-iconEmpty': {
-            color: 'rgb(100, 100, 100)'
+            color: '#ff6d75'
         }
     });
 
@@ -66,7 +66,7 @@ export default function Slots(props: SlotsProps) {
                     readOnly
                     precision={0.5}
                     icon={<Brightness1Icon fontSize="inherit" />}
-                    emptyIcon={<RadioButtonUnchecked fontSize="inherit" />}
+                    emptyIcon={<BlockIcon fontSize="inherit" />}
                 />
                 :
                 <Typography variant='h6'>{`${props.max - props.used} / ${props.max}`}</Typography>
