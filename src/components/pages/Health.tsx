@@ -50,7 +50,7 @@ export default function Health() {
         return (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ width: '100%', mr: 1 }}>
-                    <LinearProgress sx={{ height: '8px', borderRadius: 2, boxShadow: 4 }} variant="determinate" color={healthBarColour(props.value)} {...props} />
+                    <LinearProgress sx={{ height: '10px', borderRadius: 2, boxShadow: 4 }} variant="determinate" color={healthBarColour(props.value)} {...props} />
                 </Box>
                 <Box sx={{ minWidth: 35 }}>
                     <Typography variant="body2" color="text.secondary">{`${Math.round(
@@ -89,23 +89,25 @@ export default function Health() {
                         <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', padding: '5px' }}>
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                                 <Box sx={{ paddingY: '2px' }}>
-                                    <Typography component="div" variant="h5" noWrap={true} >
+                                    <Typography component="div" variant="h5" noWrap={true} fontSize={20}>
                                         {character.name}
                                     </Typography>
                                 </Box>
                                 <Currencies showZeroes={false} align='right' currencies={character.currencies} />
                             </Box>
-                            <Typography component="div" variant="subtitle1">
-                                HP - {hpView(character.hp)}
-                            </Typography>
-                            <Typography component="div" variant="subtitle1">
-                                {(character.hp.temporary > 0) ?
-                                    <>
-                                        Temporary - {character.hp.temporary}
-                                    </>
-                                    : <></>
-                                }
-                            </Typography>
+                            <Box display='flex'>
+                                <Typography component="div" variant="subtitle1" mr={2}>
+                                    {hpView(character.hp)} HP
+                                </Typography>
+                                <Typography component="div" variant="subtitle1">
+                                    {(character.hp.temporary > 0) ?
+                                        <>
+                                            {character.hp.temporary} Temp
+                                        </>
+                                        : <></>
+                                    }
+                                </Typography>
+                            </Box>
                             <LinearProgressWithLabel value={calculateHpPercent(character.hp)} />
                             <Box sx={{ display: 'flex', paddingY: '3px' }}>
                                 {character.spellSlots.map(spellSlot => {

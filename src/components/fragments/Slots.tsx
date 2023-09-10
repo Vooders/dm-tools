@@ -46,7 +46,8 @@ export default function Slots(props: SlotsProps) {
 
     return (
         <Box mr={3}
-            p={1}
+            px={1}
+            py={0.5}
             display='flex'
             flexDirection='column'
             justifyContent='center'
@@ -56,7 +57,7 @@ export default function Slots(props: SlotsProps) {
             borderColor='rgb(10, 35, 57)'
             sx={style}
         >
-            <Typography component="legend"> {props.title}</Typography>
+            <Typography component="legend" fontSize={18}> {props.title}</Typography>
             {props.max < 10 ?
                 <StyledRating
                     onClick={handleClick}
