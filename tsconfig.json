@@ -9,12 +9,12 @@
     "noImplicitAny": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "outDir": "dist",
+    "outDir": "js",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "paths": {
       "*": ["node_modules/*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "test/**/*"]
 }
