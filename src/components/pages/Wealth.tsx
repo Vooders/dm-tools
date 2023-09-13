@@ -34,12 +34,12 @@ export default function Wealth() {
     }
 
     const cardStyling = {
-        padding: '5px',
+        padding: '.3rem',
         variant: "outlined",
         boxShadow: 5,
         borderRadius: 2,
         margin: 0.5,
-        backgroundColor: 'rgb(10, 35, 57)'
+        backgroundColor: 'rgb(10, 35, 57)',
     }
 
     return (
@@ -49,13 +49,13 @@ export default function Wealth() {
                 <CardContent>
                     <Grid container >
                         <Grid item display="flex" xs={6} >
-                            <Typography component="div" variant="h6" sx={{ mx: '.5em' }} >
+                            <Typography component="div" variant="h6" mx='.5rem' >
                                 Total Currency:
                             </Typography>
                             <Currency size='large' amount={totalCurrency()} icon='gold' />
                         </Grid>
                         <Grid item display="flex" xs={6}>
-                            <Typography component="div" variant="h6" sx={{ mx: '.5em' }}>
+                            <Typography component="div" variant="h6" mx='.5rem'>
                                 Total Wealth:
                             </Typography>
                             <Currency size='large' amount={totalWealth()} icon='gold' />
@@ -75,42 +75,42 @@ export default function Wealth() {
                         <Grid item >
                             <Card variant="outlined" sx={cardStyling}>
                                 <CardContent>
-                                    <Typography component="div" variant="h5" sx={{ m: '.2rem' }}>
+                                    <Typography component="div" variant="h5" m='.2rem'>
                                         {character.name}
                                     </Typography>
                                     <Divider />
-                                    <Grid item display="flex" sx={{ margin: '.2rem' }}>
-                                        <Typography component="div" variant="h6" sx={{ mr: '.2rem' }}>
+                                    <Grid item display="flex" m='.2rem'>
+                                        <Typography component="div" variant="h6" mr='.2rem'>
                                             Total Wealth:
                                         </Typography >
-                                        <Currency size="large" amount={character.totalWealth} icon='gold' />
+                                        <Currency size="large" amount={character.totalWealth} icon='gold'/>
                                     </Grid>
                                     <Divider />
-                                    <Grid item sx={{ mx: '.2rem' }}>
-                                        <Currencies showZeroes={true} align='left' currencies={character.currencies} />
+                                    <Grid item mx='.2rem'>
+                                        <Currencies showZeroes={true} align='left' currencies={character.currencies}/>
                                         <Grid item display="flex" >
-                                            <Typography component="div" variant="h6" sx={{ mr: '.2rem' }}>
+                                            <Typography component="div" variant="h6" mr='.2rem'>
                                                 Currency:
                                             </Typography>
-                                            <Currency size='large' amount={character.currencies.total} icon='gold' />
+                                            <Currency size='large' amount={character.currencies.total} icon='gold'/>
                                         </Grid>
                                     </Grid>
                                     <Divider />
-                                    <Grid container sx={{ margin: '.2rem' }}></Grid>
+                                    <Grid container m='.2rem'></Grid>
                                     {character.containers.map(container => {
                                         return <>
                                             <Grid item display="flex">
-                                                <Typography sx={{ fontSize: '14px', mx: '.2rem' }}>
+                                                <Typography mx='.2rem' fontSize='0.9rem'>
                                                     {container.name}: {container.value}
                                                 </Typography>
                                             </Grid>
                                         </>
                                     })}
                                     <Grid item display="flex">
-                                        <Typography component="div" variant="h6" sx={{ mx: '.2rem' }}>
+                                        <Typography component="div" variant="h6" mx= '.2rem'>
                                             Items:
                                         </Typography>
-                                        <Currency size="large" amount={character.totalContainerWealth} icon='gold' />
+                                        <Currency size="large" amount={character.totalContainerWealth} icon='gold'/>
                                     </Grid>
                                 </CardContent>
                             </Card>

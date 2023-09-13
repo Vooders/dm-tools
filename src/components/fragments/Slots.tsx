@@ -24,11 +24,11 @@ export default function Slots(props: SlotsProps) {
 
     const style = props.max - props.used != 0 ? {
         color: 'rgb(220,220,220)',
-        boxShadow: 3,
+        boxShadow: 5,
         border: 1,
-        backgroundColor: 'rgb(8,48,77)'
+        background: 'linear-Gradient(rgb(8,48,77), rgb(20,60,89))'
     } : {
-        color: 'rgb(200, 200, 200)'
+        color: 'rgb(190, 190, 190)'
     }
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
@@ -57,7 +57,7 @@ export default function Slots(props: SlotsProps) {
             borderColor='rgb(10, 35, 57)'
             sx={style}
         >
-            <Typography component="legend" fontSize={18}> {props.title}</Typography>
+            <Typography component="legend" fontSize={17}> {props.title}</Typography>
             {props.max < 10 ?
                 <StyledRating
                     onClick={handleClick}

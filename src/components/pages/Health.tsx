@@ -7,11 +7,11 @@ import Typography from '@mui/material/Typography'
 import LinearProgress from '@mui/material/LinearProgress'
 
 import { HealthData } from '../../handlers/getHealth'
-import Title from '../Title'
 import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'
 import Slots from '../fragments/Slots'
 import Currencies from '../fragments/Currencies'
-import { Grid } from '@mui/material'
+import { createTheme } from '@mui/material'
+import { ThemeProvider } from '@emotion/react'
 
 export default function Health() {
     const [health, setHealth] = useState<HealthData[]>([])
@@ -23,8 +23,9 @@ export default function Health() {
         boxShadow: 5,
         borderRadius: 2,
         margin: 1,
-        backgroundColor: 'rgb(10, 35, 57)'
+        background: 'linear-gradient(rgb(10, 35, 57), rgb(20,45,67))',
     }
+    
 
     const getSenses = async () => {
         console.log('getting Health')
@@ -50,7 +51,7 @@ export default function Health() {
         return (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ width: '100%', mr: 1 }}>
-                    <LinearProgress sx={{ height: '10px', borderRadius: 2, boxShadow: 4 }} variant="determinate" color={healthBarColour(props.value)} {...props} />
+                    <LinearProgress sx={{ height: '9px', borderRadius: 2, boxShadow: 4 }} variant="determinate" color={healthBarColour(props.value)} {...props} />
                 </Box>
                 <Box sx={{ minWidth: 35 }}>
                     <Typography variant="body2" color="text.secondary">{`${Math.round(
@@ -75,18 +76,16 @@ export default function Health() {
 
     return (
         <React.Fragment>
-            <Title>Health</Title>
-
             {health.map(character => {
                 return (
                     <Card sx={cardStyling}>
                         <CardMedia
                             component="img"
-                            sx={{ height: 195, width: 150, variant: "rounded" }}
+                            sx={{ height: 190, width: 150, variant: "rounded" }}
                             image={character.avatarPath}
                             alt={character.name}
                         />
-                        <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', padding: '5px' }}>
+                        <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', px: '5px' }}>
                             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                                 <Box sx={{ paddingY: '2px' }}>
                                     <Typography component="div" variant="h5" noWrap={true} fontSize={20}>
@@ -116,7 +115,6 @@ export default function Health() {
                                     )
                                 })}
                             </Box>
-
                             <Box sx={{ display: 'flex', paddingY: '3px' }}>
                                 {character.limitedUseActions.map(limitedUseAction => {
                                     return (
