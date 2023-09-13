@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Currency(props: CurrencyProps) {
     const variant = props.size === 'large' ? 'h6' : 'subtitle1'
-    const iconSize = props.size === 'large' ? '20px' : '15px'
+    const iconSize = props.size === 'large' ? '20px' : '18px'
 
     const container = {
         display: "inline-block"

@@ -12,6 +12,8 @@ import Slots from '../fragments/Slots'
 import Currencies from '../fragments/Currencies'
 import { createTheme } from '@mui/material'
 import { ThemeProvider } from '@emotion/react'
+import { ThemeOptions } from '@mui/material/styles';
+
 
 export default function Health() {
     const [health, setHealth] = useState<HealthData[]>([])
@@ -25,7 +27,30 @@ export default function Health() {
         margin: 1,
         background: 'linear-gradient(rgb(10, 35, 57), rgb(20,45,67))',
     }
-    
+
+    const healthTheme: ThemeOptions = createTheme({
+        palette: {
+            text: {
+                primary: 'white'
+            }
+        },
+        typography: {
+            h1: {
+                fontSize: '1.4rem',
+            },
+            subtitle1: {
+                fontSize: '1rem',
+            },
+            body2: {
+                fontSize: '0.9rem',
+            },
+            subtitle2: {
+                fontSize: '0.98rem',
+                lineHeight: '1.4'
+            },
+        }
+    })
+
 
     const getSenses = async () => {
         console.log('getting Health')
@@ -51,10 +76,10 @@ export default function Health() {
         return (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ width: '100%', mr: 1 }}>
-                    <LinearProgress sx={{ height: '9px', borderRadius: 2, boxShadow: 4 }} variant="determinate" color={healthBarColour(props.value)} {...props} />
+                    <LinearProgress sx={{ height: '9px', borderRadius: 2, boxShadow: 5 }} variant="determinate" color={healthBarColour(props.value)} {...props} />
                 </Box>
                 <Box sx={{ minWidth: 35 }}>
-                    <Typography variant="body2" color="text.secondary">{`${Math.round(
+                    <Typography variant="body2">{`${Math.round(
                         props.value,
                     )}%`}</Typography>
                 </Box>
@@ -78,56 +103,60 @@ export default function Health() {
         <React.Fragment>
             {health.map(character => {
                 return (
-                    <Card sx={cardStyling}>
-                        <CardMedia
-                            component="img"
-                            sx={{ height: 190, width: 150, variant: "rounded" }}
-                            image={character.avatarPath}
-                            alt={character.name}
-                        />
-                        <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', px: '5px' }}>
-                            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                                <Box sx={{ paddingY: '2px' }}>
-                                    <Typography component="div" variant="h5" noWrap={true} fontSize={20}>
-                                        {character.name}
-                                    </Typography>
+                    <ThemeProvider theme={healthTheme}>
+                        <Card sx={cardStyling}>
+                            <CardMedia
+                                component="img"
+                                sx={{ height: 200, width: 160, variant: "rounded", p: '5px' }}
+                                image={character.avatarPath}
+                                alt={character.name}
+                            />
+                            <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', px: '5px' }}>
+                                <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                                    <Box sx={{ display: 'flex', flexDirection: 'column', lineHeight: '8'}}>
+                                        <Box sx={{ paddingY: '2px' }}>
+                                            <Typography component="div" variant="h1" noWrap={true} >
+                                                {character.name}
+                                            </Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                                            <Typography component="div" variant="subtitle2" mr={2} noWrap={true}>
+                                                {hpView(character.hp)} HP
+                                            </Typography>
+                                            <Typography component="div" variant="subtitle2" noWrap={true}>
+                                                {(character.hp.temporary > 0) ?
+                                                    <>
+                                                        {character.hp.temporary} Temp
+                                                    </>
+                                                    : <></>
+                                                }
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+                                    <Currencies showZeroes={false} align='right' currencies={character.currencies} />
                                 </Box>
-                                <Currencies showZeroes={false} align='right' currencies={character.currencies} />
+                                <LinearProgressWithLabel value={calculateHpPercent(character.hp)} />
+                                <Box sx={{ display: 'flex', paddingY: '3px' }}>
+                                    {character.spellSlots.map(spellSlot => {
+                                        return (
+                                            <Slots title={`Level ${spellSlot.level}`} max={spellSlot.max} used={spellSlot.used} description='' />
+                                        )
+                                    })}
+                                </Box>
+                                <Box sx={{ display: 'flex', paddingY: '3px' }}>
+                                    {character.limitedUseActions.map(limitedUseAction => {
+                                        return (
+                                            <Slots
+                                                title={`${limitedUseAction.name}`}
+                                                max={limitedUseAction.limitedUse.maxUses}
+                                                used={limitedUseAction.limitedUse.numberUsed}
+                                                description={limitedUseAction.snippet} />
+                                        )
+                                    })}
+                                </Box>
                             </Box>
-                            <Box display='flex'>
-                                <Typography component="div" variant="subtitle1" mr={2}>
-                                    {hpView(character.hp)} HP
-                                </Typography>
-                                <Typography component="div" variant="subtitle1">
-                                    {(character.hp.temporary > 0) ?
-                                        <>
-                                            {character.hp.temporary} Temp
-                                        </>
-                                        : <></>
-                                    }
-                                </Typography>
-                            </Box>
-                            <LinearProgressWithLabel value={calculateHpPercent(character.hp)} />
-                            <Box sx={{ display: 'flex', paddingY: '3px' }}>
-                                {character.spellSlots.map(spellSlot => {
-                                    return (
-                                        <Slots title={`Level ${spellSlot.level}`} max={spellSlot.max} used={spellSlot.used} description='' />
-                                    )
-                                })}
-                            </Box>
-                            <Box sx={{ display: 'flex', paddingY: '3px' }}>
-                                {character.limitedUseActions.map(limitedUseAction => {
-                                    return (
-                                        <Slots
-                                            title={`${limitedUseAction.name}`}
-                                            max={limitedUseAction.limitedUse.maxUses}
-                                            used={limitedUseAction.limitedUse.numberUsed}
-                                            description={limitedUseAction.snippet} />
-                                    )
-                                })}
-                            </Box>
-                        </Box>
-                    </Card>
+                        </Card>
+                    </ThemeProvider>
                 )
             })}
         </React.Fragment>

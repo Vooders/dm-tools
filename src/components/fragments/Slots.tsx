@@ -28,7 +28,8 @@ export default function Slots(props: SlotsProps) {
         border: 1,
         background: 'linear-Gradient(rgb(8,48,77), rgb(20,60,89))'
     } : {
-        color: 'rgb(190, 190, 190)'
+        color: 'rgb(190, 190, 190)',
+        boxShadow: 1
     }
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
