@@ -12,7 +12,8 @@ import Slots from '../fragments/Slots'
 import Currencies from '../fragments/Currencies'
 import { createTheme } from '@mui/material'
 import { ThemeProvider } from '@emotion/react'
-import { ThemeOptions } from '@mui/material/styles';
+import { ThemeOptions } from '@mui/material/styles'
+import DeathSaves from '../fragments/DeathSaves'
 
 
 export default function Health() {
@@ -26,6 +27,13 @@ export default function Health() {
         borderRadius: 2,
         margin: 1,
         background: 'linear-gradient(rgb(10, 35, 57), rgb(20,45,67))',
+    }
+
+    const boxStyling = {
+        width: '100%',
+        flexDirection: 'column',
+        paddingLeft: '5px',
+        paddingRight: '5px'
     }
 
     const healthTheme: ThemeOptions = createTheme({
@@ -111,19 +119,19 @@ export default function Health() {
                                 image={character.avatarPath}
                                 alt={character.name}
                             />
-                            <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column', px: '5px' }}>
-                                <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                                    <Box sx={{ display: 'flex', flexDirection: 'column', lineHeight: '8'}}>
+                            <Box sx={boxStyling}>
+                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                    <Box>
                                         <Box sx={{ paddingY: '2px' }}>
                                             <Typography component="div" variant="h1" noWrap={true} >
                                                 {character.name}
                                             </Typography>
                                         </Box>
                                         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                                            <Typography component="div" variant="subtitle2" mr={2} noWrap={true}>
+                                            <Typography component="div" variant="subtitle2" mr={2} noWrap={true} overflow='visible'>
                                                 {hpView(character.hp)} HP
                                             </Typography>
-                                            <Typography component="div" variant="subtitle2" noWrap={true}>
+                                            <Typography component="div" variant="subtitle2" noWrap={true} overflow='visible'>
                                                 {(character.hp.temporary > 0) ?
                                                     <>
                                                         {character.hp.temporary} Temp
@@ -133,13 +141,26 @@ export default function Health() {
                                             </Typography>
                                         </Box>
                                     </Box>
+                                    <Box ml={30} >
+                                        <DeathSaves
+                                            display={calculateHpPercent(character.hp) === 0}
+                                            failCount={character.deathSaves.failCount}
+                                            successCount={character.deathSaves.successCount}
+                                            isStabilized={true}
+                                        />
+                                    </Box>
                                     <Currencies showZeroes={false} align='right' currencies={character.currencies} />
                                 </Box>
                                 <LinearProgressWithLabel value={calculateHpPercent(character.hp)} />
                                 <Box sx={{ display: 'flex', paddingY: '3px' }}>
                                     {character.spellSlots.map(spellSlot => {
                                         return (
-                                            <Slots title={`Level ${spellSlot.level}`} max={spellSlot.max} used={spellSlot.used} description='' />
+                                            <Slots
+                                                title={`Level ${spellSlot.level}`}
+                                                max={spellSlot.max} used={spellSlot.used}
+                                                description=''
+                                                display={calculateHpPercent(character.hp) > 0}
+                                            />
                                         )
                                     })}
                                 </Box>
@@ -150,7 +171,9 @@ export default function Health() {
                                                 title={`${limitedUseAction.name}`}
                                                 max={limitedUseAction.limitedUse.maxUses}
                                                 used={limitedUseAction.limitedUse.numberUsed}
-                                                description={limitedUseAction.snippet} />
+                                                description={limitedUseAction.snippet}
+                                                display={calculateHpPercent(character.hp) > 0}
+                                            />
                                         )
                                     })}
                                 </Box>

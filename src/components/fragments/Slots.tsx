@@ -22,14 +22,19 @@ export default function Slots(props: SlotsProps) {
         }
     });
 
-    const style = props.max - props.used != 0 ? {
-        color: 'rgb(220,220,220)',
-        boxShadow: 5,
-        border: 1,
-        background: 'linear-Gradient(rgb(8,48,77), rgb(20,60,89))'
-    } : {
-        color: 'rgb(190, 190, 190)',
-        boxShadow: 1
+    const style = () => {
+        if (props.max - props.used != 0 && props.display) {
+            return {
+                color: 'rgb(220,220,220)',
+                boxShadow: 5,
+                border: 1,
+                background: 'linear-Gradient(rgb(8,48,77), rgb(20,60,89))'
+            }
+        }
+        return {
+            color: 'rgb(190, 190, 190)',
+            boxShadow: 1
+        }
     }
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
@@ -93,5 +98,6 @@ interface SlotsProps {
     title: string,
     max: number,
     used: number,
-    description: string
+    description: string,
+    display: boolean
 }

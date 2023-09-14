@@ -56,7 +56,8 @@ export default class CharacterSheetProcessor {
             currencies: this.buildCurrencies(),
             inventory: this.buildInventory(),
             weightData: this.buildWeightData(),
-            customItems: this.dndBeyondJson.data.customItems
+            customItems: this.dndBeyondJson.data.customItems,
+            deathSaves: this.dndBeyondJson.data.deathSaves
         }
     }
 
@@ -613,6 +614,7 @@ export type DmToolsData = {
     inventory: ItemContainer[]
     weightData: WeightData
     customItems: CustomItem[]
+    deathSaves: DeathSaves
 }
 
 export type ItemContainer = {
@@ -659,6 +661,12 @@ export type CustomItem = {
     cost: number
     quantity: number
     notes: string
+}
+
+export type DeathSaves = {
+    failCount: number
+    successCount: number
+    isStabilized: boolean
 }
 
 export type Currencies = {
