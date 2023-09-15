@@ -23,7 +23,7 @@ export default function Slots(props: SlotsProps) {
     });
 
     const style = () => {
-        if (props.max - props.used != 0 && props.display) {
+        if (props.max - props.used != 0 && props.highlight) {
             return {
                 color: 'rgb(220,220,220)',
                 boxShadow: 5,
@@ -99,5 +99,5 @@ interface SlotsProps {
     max: number,
     used: number,
     description: string,
-    display: boolean
+    highlight: boolean
 }

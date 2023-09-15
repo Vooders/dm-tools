@@ -29,11 +29,40 @@ export default function Health() {
         background: 'linear-gradient(rgb(10, 35, 57), rgb(20,45,67))',
     }
 
-    const boxStyling = {
+    const avatarStyling = {
+        height: 200,
+        width: 160,
+        variant: "rounded",
+        p: '5px'
+    }
+
+    const slotStyling = {
+        display: 'flex',
+        paddingY: '3px'
+    }
+
+    const mainBox = {
         width: '100%',
         flexDirection: 'column',
         paddingLeft: '5px',
         paddingRight: '5px'
+    }
+
+    const topStatsBox = {
+        display: 'flex',
+        direction: 'row',
+        alignItems: 'center',
+        justifyContent: "space-between"
+
+    }
+
+    const hpBox = {
+        display: 'flex',
+        flexDirection: 'row'
+    }
+
+    const nameBox = {
+        paddingY: '2px'
     }
 
     const healthTheme: ThemeOptions = createTheme({
@@ -58,7 +87,6 @@ export default function Health() {
             },
         }
     })
-
 
     const getSenses = async () => {
         console.log('getting Health')
@@ -115,23 +143,23 @@ export default function Health() {
                         <Card sx={cardStyling}>
                             <CardMedia
                                 component="img"
-                                sx={{ height: 200, width: 160, variant: "rounded", p: '5px' }}
+                                sx={avatarStyling}
                                 image={character.avatarPath}
                                 alt={character.name}
                             />
-                            <Box sx={boxStyling}>
-                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <Box sx={mainBox}>
+                                <Box sx={topStatsBox}>
                                     <Box>
-                                        <Box sx={{ paddingY: '2px' }}>
-                                            <Typography component="div" variant="h1" noWrap={true} >
+                                        <Box sx={nameBox}>
+                                            <Typography variant="h1" >
                                                 {character.name}
                                             </Typography>
                                         </Box>
-                                        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                                            <Typography component="div" variant="subtitle2" mr={2} noWrap={true} overflow='visible'>
+                                        <Box sx={hpBox}>
+                                            <Typography variant="subtitle2" mr={2} >
                                                 {hpView(character.hp)} HP
                                             </Typography>
-                                            <Typography component="div" variant="subtitle2" noWrap={true} overflow='visible'>
+                                            <Typography variant="subtitle2" >
                                                 {(character.hp.temporary > 0) ?
                                                     <>
                                                         {character.hp.temporary} Temp
@@ -141,30 +169,34 @@ export default function Health() {
                                             </Typography>
                                         </Box>
                                     </Box>
-                                    <Box ml={30} >
-                                        <DeathSaves
-                                            display={calculateHpPercent(character.hp) === 0}
-                                            failCount={character.deathSaves.failCount}
-                                            successCount={character.deathSaves.successCount}
-                                            isStabilized={true}
+                                    <DeathSaves
+                                        display={calculateHpPercent(character.hp) === 0}
+                                        failCount={character.deathSaves.failCount}
+                                        successCount={character.deathSaves.successCount}
+                                        isStabilized={character.deathSaves.isStabilized}
+                                    />
+                                    <Box >
+                                        <Currencies
+                                            showZeroes={false}
+                                            currencies={character.currencies}
+                                            align='right'
                                         />
                                     </Box>
-                                    <Currencies showZeroes={false} align='right' currencies={character.currencies} />
                                 </Box>
                                 <LinearProgressWithLabel value={calculateHpPercent(character.hp)} />
-                                <Box sx={{ display: 'flex', paddingY: '3px' }}>
+                                <Box sx={slotStyling}>
                                     {character.spellSlots.map(spellSlot => {
                                         return (
                                             <Slots
                                                 title={`Level ${spellSlot.level}`}
                                                 max={spellSlot.max} used={spellSlot.used}
                                                 description=''
-                                                display={calculateHpPercent(character.hp) > 0}
+                                                highlight={calculateHpPercent(character.hp) > 0}
                                             />
                                         )
                                     })}
                                 </Box>
-                                <Box sx={{ display: 'flex', paddingY: '3px' }}>
+                                <Box sx={slotStyling}>
                                     {character.limitedUseActions.map(limitedUseAction => {
                                         return (
                                             <Slots
@@ -172,7 +204,7 @@ export default function Health() {
                                                 max={limitedUseAction.limitedUse.maxUses}
                                                 used={limitedUseAction.limitedUse.numberUsed}
                                                 description={limitedUseAction.snippet}
-                                                display={calculateHpPercent(character.hp) > 0}
+                                                highlight={calculateHpPercent(character.hp) > 0}
                                             />
                                         )
                                     })}
