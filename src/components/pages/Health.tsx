@@ -53,7 +53,6 @@ export default function Health() {
         direction: 'row',
         alignItems: 'center',
         justifyContent: "space-between"
-
     }
 
     const hpBox = {
@@ -110,16 +109,18 @@ export default function Health() {
 
     function LinearProgressWithLabel(props: any & { value: number }) {
         return (
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Box sx={{ width: '100%', mr: 1 }}>
-                    <LinearProgress sx={{ height: '9px', borderRadius: 2, boxShadow: 5 }} variant="determinate" color={healthBarColour(props.value)} {...props} />
+            (props.value > 0) ?
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Box sx={{ width: '100%', mr: 1 }}>
+                        <LinearProgress sx={{ height: '9px', borderRadius: 2, boxShadow: 5 }} variant="determinate" color={healthBarColour(props.value)} {...props} />
+                    </Box>
+                    <Box sx={{ minWidth: 35 }}>
+                        <Typography variant="body2">{`${Math.round(
+                            props.value,
+                        )}%`}</Typography>
+                    </Box>
                 </Box>
-                <Box sx={{ minWidth: 35 }}>
-                    <Typography variant="body2">{`${Math.round(
-                        props.value,
-                    )}%`}</Typography>
-                </Box>
-            </Box>
+                : <></>
         );
     }
 
@@ -138,6 +139,7 @@ export default function Health() {
     return (
         <React.Fragment>
             {health.map(character => {
+                const hitPoints = calculateHpPercent(character.hp)
                 return (
                     <ThemeProvider theme={healthTheme}>
                         <Card sx={cardStyling}>
@@ -170,7 +172,7 @@ export default function Health() {
                                         </Box>
                                     </Box>
                                     <DeathSaves
-                                        display={calculateHpPercent(character.hp) === 0}
+                                        display={hitPoints === 0}
                                         failCount={character.deathSaves.failCount}
                                         successCount={character.deathSaves.successCount}
                                         isStabilized={character.deathSaves.isStabilized}
@@ -183,7 +185,7 @@ export default function Health() {
                                         />
                                     </Box>
                                 </Box>
-                                <LinearProgressWithLabel value={calculateHpPercent(character.hp)} />
+                                <LinearProgressWithLabel value={hitPoints} />
                                 <Box sx={slotStyling}>
                                     {character.spellSlots.map(spellSlot => {
                                         return (
@@ -191,7 +193,7 @@ export default function Health() {
                                                 title={`Level ${spellSlot.level}`}
                                                 max={spellSlot.max} used={spellSlot.used}
                                                 description=''
-                                                highlight={calculateHpPercent(character.hp) > 0}
+                                                highlight={hitPoints > 0}
                                             />
                                         )
                                     })}
@@ -204,7 +206,7 @@ export default function Health() {
                                                 max={limitedUseAction.limitedUse.maxUses}
                                                 used={limitedUseAction.limitedUse.numberUsed}
                                                 description={limitedUseAction.snippet}
-                                                highlight={calculateHpPercent(character.hp) > 0}
+                                                highlight={hitPoints > 0}
                                             />
                                         )
                                     })}

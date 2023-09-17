@@ -27,13 +27,12 @@ export default function Slots(props: SlotsProps) {
             return {
                 color: 'rgb(220,220,220)',
                 boxShadow: 5,
-                border: 1,
-                background: 'linear-Gradient(rgb(8,48,77), rgb(20,60,89))'
+                background: 'linear-Gradient(rgb(10,50,90), rgb(30,70,110))',
             }
         }
         return {
             color: 'rgb(190, 190, 190)',
-            boxShadow: 1
+            boxShadow: 1        
         }
     }
 
