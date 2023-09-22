@@ -39,23 +39,23 @@ export default function Wealth() {
         boxShadow: 5,
         borderRadius: 2,
         margin: 0.5,
-        backgroundColor: 'rgb(10, 35, 57)',
+        backgroundColor: 'rgb(10, 35, 57)'
     }
 
     return (
         <React.Fragment>
             <Title>Wealth</Title>
-            <Card variant="outlined" sx={cardStyling}>
+            <Card sx={cardStyling}>
                 <CardContent>
                     <Grid container >
                         <Grid item display="flex" xs={6} >
-                            <Typography component="div" variant="h6" mx='.5rem' >
+                            <Typography variant="h6" mx='.5rem' >
                                 Total Currency:
                             </Typography>
                             <Currency size='large' amount={totalCurrency()} icon='gold' />
                         </Grid>
                         <Grid item display="flex" xs={6}>
-                            <Typography component="div" variant="h6" mx='.5rem'>
+                            <Typography variant="h6" mx='.5rem'>
                                 Total Wealth:
                             </Typography>
                             <Currency size='large' amount={totalWealth()} icon='gold' />
@@ -73,14 +73,14 @@ export default function Wealth() {
                 {wealth.map(character => {
                     return (
                         <Grid item >
-                            <Card variant="outlined" sx={cardStyling}>
+                            <Card sx={cardStyling}>
                                 <CardContent>
-                                    <Typography component="div" variant="h5" m='.2rem'>
+                                    <Typography variant="h5" m='.2rem'>
                                         {character.name}
                                     </Typography>
                                     <Divider />
                                     <Grid item display="flex" m='.2rem'>
-                                        <Typography component="div" variant="h6" mr='.2rem'>
+                                        <Typography variant="h6" mr='.2rem'>
                                             Total Wealth:
                                         </Typography >
                                         <Currency size="large" amount={character.totalWealth} icon='gold'/>
@@ -89,7 +89,7 @@ export default function Wealth() {
                                     <Grid item mx='.2rem'>
                                         <Currencies showZeroes={true} align='left' currencies={character.currencies}/>
                                         <Grid item display="flex" >
-                                            <Typography component="div" variant="h6" mr='.2rem'>
+                                            <Typography variant="h6" mr='.2rem'>
                                                 Currency:
                                             </Typography>
                                             <Currency size='large' amount={character.currencies.total} icon='gold'/>
@@ -107,7 +107,7 @@ export default function Wealth() {
                                         </>
                                     })}
                                     <Grid item display="flex">
-                                        <Typography component="div" variant="h6" mx= '.2rem'>
+                                        <Typography variant="h6" mx= '.2rem'>
                                             Items:
                                         </Typography>
                                         <Currency size="large" amount={character.totalContainerWealth} icon='gold'/>
