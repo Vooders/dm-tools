@@ -24,7 +24,9 @@ export default async (): Promise<HealthData[]> => {
             spellSlots: characterData.spellSlots,
             limitedUseActions,
             currencies: characterData.currencies,
-            deathSaves: characterData.deathSaves
+            deathSaves: characterData.deathSaves,
+            experience: characterData.profile.xp,
+            level: characterData.profile.level
         }
     }))
 }
@@ -36,5 +38,7 @@ export type HealthData = {
     spellSlots: SpellSlot[],
     limitedUseActions: Action[],
     currencies: Currencies,
-    deathSaves: DeathSaves
+    deathSaves: DeathSaves,
+    experience: number,
+    level: number
 }
