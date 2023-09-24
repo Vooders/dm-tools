@@ -90,11 +90,6 @@ export default function Health() {
         spacing: 5,
         palette: {
             mode: 'dark',
-            background: {
-                // default: 'rgb(10,10,10)',
-                // paper: 'linear-gradient(rgb(10, 35, 57), rgb(20,45,67))'
-
-            },
         },
         typography: {
             h1: {
@@ -133,33 +128,36 @@ export default function Health() {
         else return 'success'
     }
 
-    const calculateXpPercent = (currentXp: number, xpToNextLevel: number) => {       
-        return (currentXp / xpToNextLevel) * 100
+    const xpLevels = [
+        300,
+        900,
+        2700,
+        6500,
+        14000,
+        23000,
+        34000,
+        48000,
+        64000,
+        85000,
+        100000,
+        120000,
+        140000,
+        165000,
+        195000,
+        225000,
+        265000,
+        305000,
+        355000
+    ]
+
+    const getLevelXpTotal = (level: number): number => {
+        return xpLevels[level - 1]
     }
 
-    const xpToNextLevel = (level: number): number => {
-        const xpLevels = [
-            300,
-            900,
-            2700,
-            6500,
-            14000,
-            23000,
-            34000,
-            48000,
-            64000,
-            85000,
-            100000,
-            120000,
-            140000,
-            165000,
-            195000,
-            225000,
-            265000,
-            305000,
-            355000
-        ]
-        return xpLevels[level - 1]
+    const calculateXpPercent = (currentXp: number, level: number) => {
+        const xpToNextLevel = getLevelXpTotal(level)
+        const xpToPrevLevel = getLevelXpTotal(level - 1)
+        return ((currentXp - xpToPrevLevel) / (xpToNextLevel - xpToPrevLevel)) * 100
     }
 
     function LinearProgressWithLabel(props: any & { value: number }, color: string) {
@@ -195,7 +193,7 @@ export default function Health() {
         <React.Fragment>
             {health.map(character => {
                 const hpPercent = calculateHpPercent(character.hp)
-                const xpPercent = calculateXpPercent(character.experience, xpToNextLevel(character.level))
+                const xpPercent = calculateXpPercent(character.experience, character.level)
                 return (
                     <ThemeProvider theme={healthTheme}>
                         <Card sx={cardStyling}>
@@ -226,10 +224,10 @@ export default function Health() {
                                                 }
                                             </Typography>
                                             <Typography variant="subtitle2" >
-                                                {(character.experience > 0) ?
+                                                {(xpPercent > 0) ?
                                                     <>
-                                                        {character.experience}/ 
-                                                        {xpToNextLevel(character.level)} XP
+                                                        {character.experience}/
+                                                        {getLevelXpTotal(character.level)} XP
                                                     </>
                                                     : <></>
                                                 }
