@@ -14,6 +14,7 @@ import { createTheme } from '@mui/material'
 import { ThemeProvider } from '@emotion/react'
 import { ThemeOptions } from '@mui/material/styles'
 import DeathSaves from '../fragments/DeathSaves'
+import Experience from '../fragments/Experience'
 
 
 export default function Health() {
@@ -80,12 +81,6 @@ export default function Health() {
         boxShadow: 5
     }
 
-    const xpBar = {
-        height: '5px',
-        borderRadius: 2,
-        boxShadow: 5
-    }
-
     const healthTheme: ThemeOptions = createTheme({
         spacing: 5,
         palette: {
@@ -128,38 +123,6 @@ export default function Health() {
         else return 'success'
     }
 
-    const xpLevels = [
-        300,
-        900,
-        2700,
-        6500,
-        14000,
-        23000,
-        34000,
-        48000,
-        64000,
-        85000,
-        100000,
-        120000,
-        140000,
-        165000,
-        195000,
-        225000,
-        265000,
-        305000,
-        355000
-    ]
-
-    const getLevelXpTotal = (level: number): number => {
-        return xpLevels[level - 1]
-    }
-
-    const calculateXpPercent = (currentXp: number, level: number) => {
-        const xpToNextLevel = getLevelXpTotal(level)
-        const xpToPrevLevel = getLevelXpTotal(level - 1)
-        return ((currentXp - xpToPrevLevel) / (xpToNextLevel - xpToPrevLevel)) * 100
-    }
-
     function LinearProgressWithLabel(props: any & { value: number }, color: string) {
         return (
             (props.value > 0) ?
@@ -193,7 +156,6 @@ export default function Health() {
         <React.Fragment>
             {health.map(character => {
                 const hpPercent = calculateHpPercent(character.hp)
-                const xpPercent = calculateXpPercent(character.experience, character.level)
                 return (
                     <ThemeProvider theme={healthTheme}>
                         <Card sx={cardStyling}>
@@ -211,28 +173,6 @@ export default function Health() {
                                                 {character.name}
                                             </Typography>
                                         </Box>
-                                        <Box sx={hpBox}>
-                                            <Typography variant="subtitle2" mr={2} >
-                                                {hpView(character.hp)} HP
-                                            </Typography>
-                                            <Typography variant="subtitle2" mr={2}>
-                                                {(character.hp.temporary > 0) ?
-                                                    <>
-                                                        {character.hp.temporary} Temp
-                                                    </>
-                                                    : <></>
-                                                }
-                                            </Typography>
-                                            <Typography variant="subtitle2" >
-                                                {(xpPercent > 0) ?
-                                                    <>
-                                                        {character.experience}/
-                                                        {getLevelXpTotal(character.level)} XP
-                                                    </>
-                                                    : <></>
-                                                }
-                                            </Typography>
-                                        </Box>
                                     </Box>
                                     <DeathSaves
                                         display={hpPercent === 0}
@@ -248,7 +188,20 @@ export default function Health() {
                                         />
                                     </Box>
                                 </Box>
-                                <LinearProgressWithLabel value={xpPercent} sx={xpBar} color='inherit' />
+                                <Experience level={character.level} experience={character.experience} />
+                                <Box sx={hpBox}>
+                                    <Typography variant="subtitle2" mr={2} >
+                                        {hpView(character.hp)} HP
+                                    </Typography>
+                                    <Typography variant="subtitle2" mr={2}>
+                                        {(character.hp.temporary > 0) ?
+                                            <>
+                                                {character.hp.temporary} Temp
+                                            </>
+                                            : <></>
+                                        }
+                                    </Typography>
+                                </Box>
                                 <LinearProgressWithLabel value={hpPercent} sx={hpBar} color={healthBarColour(hpPercent)} />
                                 <Box sx={slotStyling}>
                                     {character.spellSlots.map(spellSlot => {
