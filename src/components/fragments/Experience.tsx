@@ -16,7 +16,8 @@ export default function Experience(props: ExperienceProps) {
     const xpBar = {
         height: '5px',
         borderRadius: 2,
-        boxShadow: 5
+        boxShadow: 5,
+        mb:2
     }
 
     const xpLevels = [
@@ -48,7 +49,7 @@ export default function Experience(props: ExperienceProps) {
     const calculateXpPercent = () => {
         const xpToNextLevel = getXpLevel(props.level)
         const xpToPrevLevel = getXpLevel(props.level - 1)
-        return ((props.experience - xpToPrevLevel) / (xpToNextLevel - xpToPrevLevel)) * 100
+        return Math.round(((props.experience - xpToPrevLevel) / (xpToNextLevel - xpToPrevLevel)) * 100)
     }
 
     const xpPercent = calculateXpPercent()
@@ -66,9 +67,9 @@ export default function Experience(props: ExperienceProps) {
                         <LinearProgress value={xpPercent} variant="determinate" color='inherit' sx={xpBar} {...props} />
                     </Box>
                     <Box sx={{ minWidth: 35 }}>
-                        <Typography variant="body2">{`${Math.round(
-                            xpPercent
-                        )}%`}</Typography>
+                        <Typography variant="body2">
+                            {xpPercent}%
+                        </Typography>
                     </Box>
                 </Box>
             </> : <></>
