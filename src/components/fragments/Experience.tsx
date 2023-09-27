@@ -23,7 +23,6 @@ export default function Experience(props: ExperienceProps) {
         minWidth: 35
     })
 
-
     const xpToLevel = [
         0,
         300,
@@ -46,20 +45,20 @@ export default function Experience(props: ExperienceProps) {
         305000,
         355000
     ]
+    const xpToNextLevel = xpToLevel[props.level]
+    const xpToPrevLevel = xpToLevel[props.level - 1]
+    const currentXp = props.experience
 
     const calculateXpPercent = () => {
-        const xpToNextLevel = xpToLevel[props.level]
-        const xpToPrevLevel = xpToLevel[props.level - 1]
-        return Math.round(((props.experience - xpToPrevLevel) / (xpToNextLevel - xpToPrevLevel)) * 100)
+        return Math.round(((currentXp - xpToPrevLevel) / (xpToNextLevel - xpToPrevLevel)) * 100)
     }
-
     const xpPercent = calculateXpPercent()
 
     return (
         (xpPercent > 0) ?
             <>
                 <Typography variant="subtitle2" >
-                    {props.experience} / {xpToLevel[props.level]} XP
+                    {currentXp} / {xpToNextLevel} XP
                 </Typography>
                 <XpBarBox>
                     <XpBarInnerBox>
