@@ -1,23 +1,28 @@
+import styled from "@emotion/styled"
 import { Box, LinearProgress, Typography } from "@mui/material"
 import React from "react"
 
 export default function Experience(props: ExperienceProps) {
 
-    const xpBarBox = {
+    const XpBarInnerBox = styled(Box)({
+        width: '100%',
+        marginRight: 8
+    })
+
+    const XpBar = styled(LinearProgress)({
+        height: '5px',
+        borderRadius: 2
+    })
+
+    const XpBarBox = styled(Box)({
         display: 'flex',
         alignItems: 'center'
-    }
+    })
 
-    const xpBarInnerBox = {
-        width: '100%',
-        mr: 1
-    }
+    const XpPercentBox = styled(Box)({
+        minWidth: 35
+    })
 
-    const xpBar = {
-        height: '5px',
-        borderRadius: 2,
-        boxShadow: 5
-    }
 
     const xpToLevel = [
         0,
@@ -56,16 +61,16 @@ export default function Experience(props: ExperienceProps) {
                 <Typography variant="subtitle2" >
                     {props.experience} / {xpToLevel[props.level]} XP
                 </Typography>
-                <Box sx={xpBarBox}>
-                    <Box sx={xpBarInnerBox}>
-                        <LinearProgress value={xpPercent} variant="determinate" sx={xpBar} />
-                    </Box>
-                    <Box sx={{ minWidth: 35 }}>
+                <XpBarBox>
+                    <XpBarInnerBox>
+                        <XpBar value={xpPercent} variant="determinate" />
+                    </XpBarInnerBox>
+                    <XpPercentBox>
                         <Typography variant="body2">
                             {xpPercent}%
                         </Typography>
-                    </Box>
-                </Box>
+                    </XpPercentBox>
+                </XpBarBox>
             </> : <></>
     )
 }
