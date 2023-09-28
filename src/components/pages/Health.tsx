@@ -22,19 +22,14 @@ export default function Health() {
 
     const cardStyling = {
         display: 'flex',
-        padding: '8px',
-        variant: "outlined",
-        boxShadow: 5,
-        borderRadius: 2,
-        margin: 1,
-        background: 'linear-gradient(rgb(10, 35, 57), rgb(20,45,67))',
+        variant: "outlined"
     }
 
     const avatarStyling = {
         height: 200,
         width: 160,
         variant: "rounded",
-        p: '5px'
+        padding: '5px'
     }
 
     const slotStyling = {
@@ -84,7 +79,7 @@ export default function Health() {
     const healthTheme: ThemeOptions = createTheme({
         spacing: 5,
         palette: {
-            mode: 'dark',
+            mode: 'dark'
         },
         typography: {
             h1: {
@@ -100,6 +95,19 @@ export default function Health() {
                 fontSize: '0.98rem',
                 lineHeight: '1.4'
             },
+        },
+        components: {
+            MuiCard: {
+                styleOverrides: {
+                    root: {
+                        background: 'linear-gradient(rgb(10, 35, 57), rgb(20,45,67))',
+                        margin: 4,
+                        borderRadius: 8,
+                        boxShadow: '0 3px 5px 2px rgba(120,120,120, .4)',
+                        padding: '8px',
+                    }
+                }
+            }
         }
     })
 
