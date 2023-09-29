@@ -6,21 +6,33 @@ export default function armor(dndBeyondJson: any) {
     const wisMod = getModifier(3)
     const className = dndBeyondJson.data.classes[0].definition.name
 
-    const equippedArmor = dndBeyondJson.data.inventory.filter((item: any) => {
+    const equippedItems = dndBeyondJson.data.inventory.filter((item: any) => {
         return item.definition.armorClass && item.equipped
     })
-    const acFromArmor = equippedArmor.reduce((total: number, item: any) => {
+    const acFromItems = equippedItems.reduce((total: number, item: any) => {
         return total + item.definition.armorClass
     }, 0)
+    const armorTypeIds = equippedItems.map((item: any) => {
+        return item.definition.armorTypeId
+    })
 
-    if (acFromArmor > 0) {
-        return acFromArmor + dexMod
+    let ac = acFromItems
+    if (acFromItems > 10) {
+        if (armorTypeIds.includes(1)) {
+            ac += dexMod
+        }
+        if (armorTypeIds.includes(2)) {
+            ac += dexMod < 2 ? dexMod : 2
+        }
     }
-    if (className === 'Barbarian') {
-        return dexMod + conMod + 10
+    if (acFromItems < 11) {
+        if (className === 'Barbarian') {
+            ac += dexMod + conMod + 10
+        } else if (className === 'Monk') {
+            ac += dexMod + wisMod + 10
+        } else {
+            ac += dexMod + 10
+        }
     }
-    if (className === 'Monk') {
-        return dexMod + wisMod + 10
-    }
-    return dexMod + 10
+    return ac
 }
