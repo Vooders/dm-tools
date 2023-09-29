@@ -16,7 +16,6 @@ import { ThemeOptions } from '@mui/material/styles'
 import DeathSaves from '../fragments/DeathSaves'
 import Experience from '../fragments/Experience'
 
-
 export default function Health() {
     const [health, setHealth] = useState<HealthData[]>([])
 
@@ -208,6 +207,9 @@ export default function Health() {
                                             </>
                                             : <></>
                                         }
+                                    </Typography>
+                                    <Typography>
+                                         {character.ac} AC
                                     </Typography>
                                 </Box>
                                 <LinearProgressWithLabel value={hpPercent} sx={hpBar} color={healthBarColour(hpPercent)} />

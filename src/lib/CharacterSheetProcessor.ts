@@ -1,6 +1,6 @@
 import { app } from 'electron'
 import path from 'path'
-import armour from '../lib/character-sheet-processor/armour'
+import armor from './character-sheet-processor/armor'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -59,7 +59,7 @@ export default class CharacterSheetProcessor {
             weightData: this.buildWeightData(),
             customItems: this.dndBeyondJson.data.customItems,
             deathSaves: this.dndBeyondJson.data.deathSaves,
-            ac: armour(this.dndBeyondJson)
+            ac: armor(this.dndBeyondJson)
         }
     }
 
