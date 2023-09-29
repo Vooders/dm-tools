@@ -26,7 +26,8 @@ export default async (): Promise<HealthData[]> => {
             currencies: characterData.currencies,
             deathSaves: characterData.deathSaves,
             experience: characterData.profile.xp,
-            level: characterData.profile.level
+            level: characterData.profile.level,
+            ac: characterData.ac
         }
     }))
 }
@@ -40,5 +41,6 @@ export type HealthData = {
     currencies: Currencies,
     deathSaves: DeathSaves,
     experience: number,
-    level: number
+    level: number,
+    ac: number
 }
