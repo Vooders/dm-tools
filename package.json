@@ -13,7 +13,7 @@
     "postinstall": "electron-builder install-app-deps",
     "build": "electron-forge make",
     "release": "electron-builder --mac --windows --linux --publish always",
-    "pretest": "tsc",
+    "pretest": "rm -rf js && tsc",
     "test": "mocha --recursive js/test"
   },
   "keywords": [],
