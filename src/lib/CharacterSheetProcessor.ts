@@ -57,7 +57,6 @@ export default class CharacterSheetProcessor {
             currencies: this.buildCurrencies(),
             inventory: this.buildInventory(),
             weightData: this.buildWeightData(),
-            customItems: this.dndBeyondJson.data.customItems,
             deathSaves: this.dndBeyondJson.data.deathSaves,
             ac: armor(this.dndBeyondJson)
         }
@@ -615,7 +614,6 @@ export type DmToolsData = {
     currencies: Currencies
     inventory: ItemContainer[]
     weightData: WeightData
-    customItems: CustomItem[]
     deathSaves: DeathSaves
     ac: number
 }
@@ -742,7 +740,7 @@ export type Skill = {
 
 type ModifierFilterFunction = (arg0: Modifier) => boolean
 
-type CharacterProfile = {
+export type CharacterProfile = {
     name: string
     race: string
     level: number
