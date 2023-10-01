@@ -5,23 +5,24 @@ export default function armor(dndBeyondJson: any) {
     const conMod = getModifier(2)
     const wisMod = getModifier(3)
     const className = dndBeyondJson.data.classes[0].definition.name
-
     const equippedItems = dndBeyondJson.data.inventory.filter((item: any) => {
         return item.definition.armorClass && item.equipped
     })
     const acFromItems = equippedItems.reduce((total: number, item: any) => {
         return total + item.definition.armorClass
     }, 0)
-    const armorTypeIds = equippedItems.map((item: any) => {
+    const armorTypes = equippedItems.map((item: any) => {
         return item.definition.armorTypeId
     })
+    const lightArmor = 1
+    const mediumArmor = 2
 
     let ac = acFromItems
     if (acFromItems > 10) {
-        if (armorTypeIds.includes(1)) {
+        if (armorTypes.includes(lightArmor)) {
             ac += dexMod
         }
-        if (armorTypeIds.includes(2)) {
+        if (armorTypes.includes(mediumArmor)) {
             ac += dexMod < 2 ? dexMod : 2
         }
     }
