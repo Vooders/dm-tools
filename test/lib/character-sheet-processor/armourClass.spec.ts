@@ -1,36 +1,32 @@
-import { Ability } from '../../../src/lib/CharacterSheetProcessor'
+import { Ability, Modifier, Modifiers } from '../../../src/lib/CharacterSheetProcessor'
 import armourClass from '../../../src/lib/character-sheet-processor/armourClass'
 
 describe('Armour Class', () => {
     it("should add dex modifier to 10", () => {
-        const dex: Ability = buildAbility('Dexterity', 14)
-        const profile = buildProfile('Paladin')
-        const ac = armourClass([dex], profile)
+        const abilities: Ability[] = buildAbilities(0, 14, 0, 0, 0, 0)
+        const modifiers = buildModifiers()
+        const ac = armourClass(abilities, modifiers)
         ac.should.equal(12)
     })
 
     it("should be lower than 10 with negative DEX mod", () => {
-        const dex: Ability = buildAbility('Dexterity', 8)
-        const profile = buildProfile('Paladin')
-        const ac = armourClass([dex], profile)
+        const abilities: Ability[] = buildAbilities(0, 8, 0, 0, 0, 0)
+        const modifiers = buildModifiers()
+        const ac = armourClass(abilities, modifiers)
         ac.should.equal(9)
     })
 
-    it("should add dex and con modifiers to 10 if the class is Barbarian", () => {
-        const dex: Ability = buildAbility('Dexterity', 14)
-        const con: Ability = buildAbility('Constitution', 14)
-        const profile = buildProfile('Barbarian')
-        const ac = armourClass([dex, con], profile)
+    it("should add unarmored modifier and dex modifier to 10 if the class has an unarmored armor modifier", () => {
+        const abilities: Ability[] = buildAbilities(0, 14, 14, 0, 0, 0)
+        const modifiers = buildModifiers('unarmored-armor-class', 3)
+        const ac = armourClass(abilities, modifiers)
         ac.should.equal(14)
+        const abilities2: Ability[] = buildAbilities(0, 6, 0, 0, 14, 0)
+        const modifiers2 = buildModifiers('unarmored-armor-class', 5)
+        const ac2 = armourClass(abilities2, modifiers2)
+        ac2.should.equal(10)
     })
 
-    it("should add dex and wis modifiers to 10 if the class is Monk", () => {
-        const dex: Ability = buildAbility('Dexterity', 16)
-        const wis: Ability = buildAbility('Wisdom', 16)
-        const profile = buildProfile('Monk')
-        const ac = armourClass([dex, wis], profile)
-        ac.should.equal(16)
-    })
 })
 
 function buildAbility(name: string, value: number) {
@@ -42,25 +38,51 @@ function buildAbility(name: string, value: number) {
     }
 }
 
-function buildProfile(className: string) {
+function buildAbilities(str: number, dex: number, con: number, int: number, wis: number, cha: number) {
+    return [
+        buildAbility('Strength', str),
+        buildAbility('Dexterity', dex),
+        buildAbility('Constitution', con),
+        buildAbility('Intelligence', int),
+        buildAbility('Wisdom', wis),
+        buildAbility('Charisma', cha),
+    ]
+}
+
+
+
+
+function buildModifiers(subType: string = '', statId: number = 0): Modifiers {
+
+    const modifier: Modifier = {
+        fixedValue: 0,
+        id: 0,
+        entityId: 0,
+        entityTypeId: 0,
+        type: '',
+        subType,
+        dice: null,
+        restriction: '',
+        statId,
+        requiresAttunement: false,
+        duration: null,
+        friendlyTypeName: '',
+        friendlySubtypeName: '',
+        isGranted: true,
+        bonusTypes: [],
+        value: 0,
+        availableToMulticlass: true,
+        modifierTypeId: 0,
+        modifierSubTypeId: 0,
+        componentId: 0,
+        componentTypeId: 0
+    }
     return {
-        name: '',
-    race: '',
-    level: 0,
-    classes: className,
-    background: '',
-    alignment: '',
-    appearance: {
-        size: '',
-        gender: '',
-        faith: '',
-        age: 0,
-        hair: '',
-        eyes: '',
-        skin: '',
-        height: '',
-        weight: 0
-    },
-    xp: 0
+        race: [modifier],
+        class: [modifier],
+        background: [modifier],
+        item: [modifier],
+        feat: [modifier],
+        condition: [modifier]
     }
 }
