@@ -804,7 +804,7 @@ type Stat = {
     value: number
 }
 
-type Modifiers = {
+export type Modifiers = {
     race: Modifier[]
     class: Modifier[]
     background: Modifier[]
@@ -815,7 +815,7 @@ type Modifiers = {
 
 type ModifierKeys = keyof Modifiers
 
-type Modifier = {
+export type Modifier = {
     fixedValue: number
     id: number
     entityId: number
@@ -824,7 +824,7 @@ type Modifier = {
     subType: string
     dice: null
     restriction: string
-    statId: null
+    statId: number
     requiresAttunement: boolean
     duration: null
     friendlyTypeName: string
