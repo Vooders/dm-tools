@@ -27,7 +27,7 @@ export default async (): Promise<WealthData[]> => {
         const characterData = await getCharacter(null, characterId)
         const containers = buildContainers(characterData.inventory)
         const totalContainerWealth = reduceAndRound<Container>(containers, (total, container) => total + container.value)
-        const totalWealth = totalContainerWealth + characterData.currencies.total
+        const totalWealth = Math.round(totalContainerWealth + characterData.currencies.total * 100) / 100
 
         return {
             name: characterData.profile.name,

@@ -87,7 +87,9 @@ export default class CharacterSheetProcessor {
                     cost: item.definition.cost,
                     bundleSize: item.definition.bundleSize,
                     notes: item.definition.notes,
-                    capacity: item.definition.capacityWeight
+                    capacity: item.definition.capacityWeight,
+                    armorClass: item.definition.armorClass,
+                    armorTypeId: item.definition.armorTypeId
                 },
                 containerId: item.containerEntityId,
                 equipped: item.equipped,
@@ -112,7 +114,10 @@ export default class CharacterSheetProcessor {
                     bundleSize: 1,
                     description: item.description,
                     notes: item.notes,
-                    capacity: null
+                    capacity: null,
+                    armorClass: null,
+                    armorTypeId: null
+
                 },
                 containerId: null,
                 equipped: item.equipped,
@@ -648,6 +653,8 @@ export type Item = {
         description?: string
         notes: string
         capacity: number
+        armorClass: number
+        armorTypeId: number
     },
     containerId: number
     equipped: boolean
