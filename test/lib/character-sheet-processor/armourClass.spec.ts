@@ -1,30 +1,41 @@
-import { Ability, Modifier, Modifiers } from '../../../src/lib/CharacterSheetProcessor'
+import { Modifier } from '../../../src/lib/CharacterSheetProcessor'
 import armourClass from '../../../src/lib/character-sheet-processor/armourClass'
 
 describe('Armour Class', () => {
     it("should add dex modifier to 10", () => {
-        const abilities: Ability[] = buildAbilities(0, 14, 0, 0, 0, 0)
+        const abilities = buildAbilities(0, 14, 0, 0, 0, 0)
         const modifiers = buildModifiers()
-        const ac = armourClass(abilities, modifiers)
+        const inventory = buildInventory()
+        const ac = armourClass(abilities, modifiers, inventory)
         ac.should.equal(12)
     })
 
     it("should be lower than 10 with negative DEX mod", () => {
-        const abilities: Ability[] = buildAbilities(0, 8, 0, 0, 0, 0)
+        const abilities = buildAbilities(0, 8, 0, 0, 0, 0)
         const modifiers = buildModifiers()
-        const ac = armourClass(abilities, modifiers)
+        const inventory = buildInventory()
+        const ac = armourClass(abilities, modifiers, inventory)
         ac.should.equal(9)
     })
 
     it("should add unarmored modifier and dex modifier to 10 if the class has an unarmored armor modifier", () => {
-        const abilities: Ability[] = buildAbilities(0, 14, 14, 0, 0, 0)
+        const abilities = buildAbilities(0, 14, 14, 0, 0, 0)
         const modifiers = buildModifiers('unarmored-armor-class', 3)
-        const ac = armourClass(abilities, modifiers)
+        const inventory = buildInventory()
+        const ac = armourClass(abilities, modifiers, inventory)
         ac.should.equal(14)
-        const abilities2: Ability[] = buildAbilities(0, 6, 0, 0, 14, 0)
+        const abilities2 = buildAbilities(0, 6, 0, 0, 14, 0)
         const modifiers2 = buildModifiers('unarmored-armor-class', 5)
-        const ac2 = armourClass(abilities2, modifiers2)
+        const ac2 = armourClass(abilities2, modifiers2, inventory)
         ac2.should.equal(10)
+    })
+
+    it('should return the ac value for equipped armor', () => {
+        const abilities = buildAbilities()
+        const modifiers = buildModifiers()
+        const inventory = buildInventory(15, 5)
+        const ac = armourClass(abilities, modifiers, inventory)
+        ac.should.equal(20)
     })
 
 })
@@ -38,7 +49,13 @@ function buildAbility(name: string, value: number) {
     }
 }
 
-function buildAbilities(str: number, dex: number, con: number, int: number, wis: number, cha: number) {
+function buildAbilities(
+    str: number = 10,
+    dex: number = 10,
+    con: number = 10,
+    int: number = 10,
+    wis: number = 10,
+    cha: number = 10) {
     return [
         buildAbility('Strength', str),
         buildAbility('Dexterity', dex),
@@ -49,10 +66,47 @@ function buildAbilities(str: number, dex: number, con: number, int: number, wis:
     ]
 }
 
+function buildInventory(armor1: number = 0, armor2: number = 0) {
+    return [{
+        name: '',
+        equipped: true,
+        capacity: 0,
+        contents: [
+            buildItem('Armor', armor1),
+            buildItem('Armor', armor2),
+            buildItem('Weapon')
+        ]
+    }]
+}
+
+function buildItem(filterType: string = '', armorClass: number = 0) {
+    return {
+        id: 0,
+        definition: {
+            id: '',
+            avatarUrl: '',
+            name: '',
+            weight: 0,
+            rarity: '',
+            filterType,
+            isContainer: false,
+            cost: 0,
+            bundleSize: 1,
+            description: '',
+            notes: '',
+            capacity: 0,
+            armorClass,
+            armorTypeId: 0
+
+        },
+        containerId: 0,
+        equipped: true,
+        quantity: 1
+    }
+}
 
 
-
-function buildModifiers(subType: string = '', statId: number = 0): Modifiers {
+function buildModifiers(subType: string = '', statId: number = 0) {
 
     const modifier: Modifier = {
         fixedValue: 0,
