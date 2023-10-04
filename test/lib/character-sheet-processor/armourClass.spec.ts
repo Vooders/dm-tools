@@ -18,7 +18,7 @@ describe('Armour Class', () => {
         ac.should.equal(9)
     })
 
-    it("should add unarmored modifier and dex modifier to 10 if the class has an unarmored armor modifier", () => {
+    it("should add unarmored modifier if the class has an unarmored armor modifier", () => {
         const abilities = buildAbilities(0, 14, 14, 0, 0, 0)
         const modifiers = buildModifiers('unarmored-armor-class', 3)
         const ac = armourClass(abilities, modifiers, inventory)
@@ -27,6 +27,19 @@ describe('Armour Class', () => {
         const modifiers2 = buildModifiers('unarmored-armor-class', 5)
         const ac2 = armourClass(abilities2, modifiers2, inventory)
         ac2.should.equal(10)
+    })
+
+    it("should add armored modifier if the class has an armored armor modifier", () => {
+        const abilities = buildAbilities(0, 14, 14, 0, 0, 0)
+        const modifiers = buildModifiers('armored-armor-class', 0, 1)
+        const inventory = buildInventory(18, 2, 3)
+        const ac = armourClass(abilities, modifiers, inventory)
+        ac.should.equal(21)
+        const abilities2 = buildAbilities(0, 16, 0, 0, 14, 0)
+        const modifiers2 = buildModifiers('armored-armor-class', 0, 1)
+        const inventory2 = buildInventory(16, 1, 2)
+        const ac2 = armourClass(abilities2, modifiers2, inventory2)
+        ac2.should.equal(20)
     })
 
     it('should return the ac value for equipped armor', () => {
@@ -79,15 +92,15 @@ describe('Armour Class', () => {
         ac2.should.equal(17)
     })
 
-    it('should add ac from items and unarmored modifier if not wearing armor', () => {
+    it('should add ac from items to the unarmored modifier if not wearing armor', () => {
         const inventory = buildInventory(5, 0, 4)
         const abilities = buildAbilities(0, 18, 18)
         const modifiers = buildModifiers('unarmored-armor-class', 3)
         const ac = armourClass(abilities, modifiers, inventory)
         ac.should.equal(23)
         const inventory2 = buildInventory(3, 0, 4)
-        const abilities2 = buildAbilities(0, 20, 20)
-        const modifiers2 = buildModifiers('unarmored-armor-class', 3)
+        const abilities2 = buildAbilities(0, 20, 20, 20, 20)
+        const modifiers2 = buildModifiers('unarmored-armor-class', 5)
         const ac2 = armourClass(abilities2, modifiers2, inventory2)
         ac2.should.equal(23)
     })
@@ -159,10 +172,10 @@ function buildItem(filterType: string = '', armorClass: number = 0, armorTypeId:
 }
 
 
-function buildModifiers(subType: string = '', statId: number = 0) {
+function buildModifiers(subType: string = '', statId: number = 0, fixedValue: number = 0) {
 
     const modifier: Modifier = {
-        fixedValue: 0,
+        fixedValue,
         id: 0,
         entityId: 0,
         entityTypeId: 0,
