@@ -1,6 +1,6 @@
 import { app } from 'electron'
 import path from 'path'
-import armor from './character-sheet-processor/armor'
+import armourClass from './character-sheet-processor/armourClass'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -58,7 +58,7 @@ export default class CharacterSheetProcessor {
             inventory: this.buildInventory(),
             weightData: this.buildWeightData(),
             deathSaves: this.dndBeyondJson.data.deathSaves,
-            ac: armor(this.dndBeyondJson)
+            ac: this.buildArmour()
         }
     }
 
@@ -494,6 +494,13 @@ export default class CharacterSheetProcessor {
                 spells: spells.filter((s: SpellType) => s.level === index)
             }
         }).filter((spellLevel) => spellLevel.spells.length > 0)
+    }
+
+    private buildArmour() {
+        const abilities = this.abilities
+        const modifiers = this.modifiers
+        const inventory = this.buildInventory()
+        return armourClass(abilities, modifiers, inventory)
     }
 
     private buildCurrencies(): Currencies {
