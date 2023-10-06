@@ -7,98 +7,98 @@ const inventory = buildInventory()
 
 describe('Armour Class', () => {
     it("should add dex modifier to 10", () => {
-        const abilities = buildAbilities(0, 14, 0, 0, 0, 0)
+        const abilities = buildAbilities(0, 14)
         const ac = armourClass(abilities, modifiers, inventory)
         ac.should.equal(12)
     })
 
     it("should be lower than 10 with negative DEX mod", () => {
-        const abilities = buildAbilities(0, 8, 0, 0, 0, 0)
+        const abilities = buildAbilities(0, 8)
         const ac = armourClass(abilities, modifiers, inventory)
         ac.should.equal(9)
     })
 
     it("should add unarmored modifier if the class has an unarmored armor modifier", () => {
-        const abilities = buildAbilities(0, 14, 14, 0, 0, 0)
+        const abilities = buildAbilities(0, 14, 14)
         const modifiers = buildModifiers('unarmored-armor-class', 3)
         const ac = armourClass(abilities, modifiers, inventory)
         ac.should.equal(14)
-        const abilities2 = buildAbilities(0, 6, 0, 0, 14, 0)
+        const abilities2 = buildAbilities(0, 6, 0, 0, 14)
         const modifiers2 = buildModifiers('unarmored-armor-class', 5)
         const ac2 = armourClass(abilities2, modifiers2, inventory)
         ac2.should.equal(10)
     })
 
     it("should add armored modifier if the class has an armored armor modifier", () => {
-        const abilities = buildAbilities(0, 14, 14, 0, 0, 0)
+        const abilities = buildAbilities(0, 14, 14)
         const modifiers = buildModifiers('armored-armor-class', 0, 1)
-        const inventory = buildInventory(18, 2, 3)
+        const inventory = buildInventory('Armor', 18, 3, 'Armor', 2)
         const ac = armourClass(abilities, modifiers, inventory)
         ac.should.equal(21)
-        const abilities2 = buildAbilities(0, 16, 0, 0, 14, 0)
+        const abilities2 = buildAbilities(0, 16, 0, 0, 14)
         const modifiers2 = buildModifiers('armored-armor-class', 0, 1)
-        const inventory2 = buildInventory(16, 1, 2)
+        const inventory2 = buildInventory('Armor', 16, 2, 'Armor', 1)
         const ac2 = armourClass(abilities2, modifiers2, inventory2)
         ac2.should.equal(20)
     })
 
     it('should return the ac value for equipped armor', () => {
-        const inventory = buildInventory(15, 5, 1)
+        const inventory = buildInventory('Armor', 15, 1, 'Armor', 5)
         const ac = armourClass(abilities, modifiers, inventory)
         ac.should.equal(20)
     })
 
     it('should add dex modifier to light armor', () => {
-        const inventory = buildInventory(15, 5, 1)
+        const inventory = buildInventory('Armor', 15, 1, 'Armor', 5)
         const abilities = buildAbilities(0, 14)
         const ac = armourClass(abilities, modifiers, inventory)
         ac.should.equal(22)
-        const inventory2 = buildInventory(15, 0, 1)
+        const inventory2 = buildInventory('Armor', 15, 1)
         const abilities2 = buildAbilities(0, 16)
         const ac2 = armourClass(abilities2, modifiers, inventory2)
         ac2.should.equal(18)
     })
 
     it('should add dex modifier to medium armor', () => {
-        const inventory = buildInventory(12, 5, 2)
+        const inventory = buildInventory('Armor', 12, 2, 'Armor', 5)
         const abilities = buildAbilities(0, 14)
         const ac = armourClass(abilities, modifiers, inventory)
         ac.should.equal(19)
-        const inventory2 = buildInventory(15, 0, 2)
-        const abilities2 = buildAbilities(0, 14)
+        const inventory2 = buildInventory('Armor', 2, 4, 'Armor', 15, 2)
+        const abilities2 = buildAbilities(0, 12)
         const ac2 = armourClass(abilities2, modifiers, inventory2)
-        ac2.should.equal(17)
+        ac2.should.equal(18)
     })
 
     it('should add 2 to medium armor if dex modifier is more than 2', () => {
-        const inventory = buildInventory(10, 5, 2)
+        const inventory = buildInventory('Armor', 2, 4, 'Armor', 10, 2)
         const abilities = buildAbilities(0, 18)
         const ac = armourClass(abilities, modifiers, inventory)
-        ac.should.equal(17)
-        const inventory2 = buildInventory(15, 0, 2)
+        ac.should.equal(14)
+        const inventory2 = buildInventory('Armor', 15, 2)
         const abilities2 = buildAbilities(0, 20)
         const ac2 = armourClass(abilities2, modifiers, inventory2)
         ac2.should.equal(17)
     })
 
     it('should add 0 to heavy armor', () => {
-        const inventory = buildInventory(18, 5, 3)
+        const inventory = buildInventory('Armor', 18, 3, 'Armor', 5, 4)
         const abilities = buildAbilities(0, 18)
         const ac = armourClass(abilities, modifiers, inventory)
         ac.should.equal(23)
-        const inventory2 = buildInventory(17, 0, 3)
+        const inventory2 = buildInventory('Armor', 2, 4, 'Armor', 17, 3)
         const abilities2 = buildAbilities(0, 20)
         const ac2 = armourClass(abilities2, modifiers, inventory2)
-        ac2.should.equal(17)
+        ac2.should.equal(19)
     })
 
     it('should add ac from items to the unarmored modifier if not wearing armor', () => {
-        const inventory = buildInventory(5, 0, 4)
+        const inventory = buildInventory('Armor', 5, 4)
         const abilities = buildAbilities(0, 18, 18)
         const modifiers = buildModifiers('unarmored-armor-class', 3)
         const ac = armourClass(abilities, modifiers, inventory)
         ac.should.equal(23)
-        const inventory2 = buildInventory(3, 0, 4)
+        const inventory2 = buildInventory('Armor', 3, 4)
         const abilities2 = buildAbilities(0, 20, 20, 20, 20)
         const modifiers2 = buildModifiers('unarmored-armor-class', 5)
         const ac2 = armourClass(abilities2, modifiers2, inventory2)
@@ -132,15 +132,22 @@ function buildAbilities(
     ]
 }
 
-function buildInventory(armor1: number = 0, armor2: number = 0, armorTypeId1: number = 0, armorTypeId2: number = 0) {
+function buildInventory(
+    filterType1: string = '',
+    armorClass1: number = 0,
+    armorTypeId1: number = 0,
+    filterType2: string = '',
+    armorClass2: number = 0,
+    armorTypeId2: number = 0) {
     return [{
         name: '',
         equipped: true,
         capacity: 0,
         contents: [
-            buildItem('Armor', armor1, armorTypeId1),
-            buildItem('Armor', armor2, armorTypeId2),
-            buildItem('Weapon')
+            buildItem(),
+            buildItem(filterType1, armorClass1, armorTypeId1),
+            buildItem(filterType2, armorClass2, armorTypeId2),
+            buildItem()
         ]
     }]
 }
