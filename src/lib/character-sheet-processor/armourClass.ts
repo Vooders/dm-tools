@@ -10,31 +10,37 @@ export default function armourClass(abilities: Ability[], modifiers: Modifiers, 
     const equippedArmorItemsAc = getEquippedArmorItemsAc(equippedArmorItems)
     const armorTypeModifier = getArmorTypeModifier(equippedArmorItems, dexModifier)
 
-    if (equippedArmorItemsAc > 10) {
+    if (isArmored(equippedArmorItems)) {
         return equippedArmorItemsAc + armorTypeModifier + armoredModifier
     } else {
         return baseAC + dexModifier + unarmoredModifier + equippedArmorItemsAc
     }
 }
 
-function getArmorTypeModifier(items: Item[], dexModifier: number) {
-    const armorType = getArmorType(items)
+function getArmorTypeModifier(items: Item[], dexModifier: number): number {
+    const armorTypes = getArmorTypes(items)
 
-    if (armorType === 1) {
+    if (armorTypes.includes(1)) {
         return dexModifier
-    } else if (armorType === 2) {
+    } else if (armorTypes.includes(2)) {
         return dexModifier < 2 ? dexModifier : 2
     } else return 0
 }
 
-function getArmorType(items: Item[]) {
-    return items.length > 0 ? items.filter((item) => item.definition.armorTypeId === 1 || 2 || 3)[0].definition.armorTypeId : 0
+function getArmorTypes(items: Item[]):number[] {
+    return items.map((item) => item.definition.armorTypeId)
 }
 
-function getEquippedArmorItems(inventory: ItemContainer[]) {
+function isArmored(items: Item[]): boolean {
+    const armorTypes = getArmorTypes(items)
+    return armorTypes.includes(1) || armorTypes.includes(2) || armorTypes.includes(3)
+}
+
+function getEquippedArmorItems(inventory: ItemContainer[]): Item[] {
     return inventory.map((container) => container.contents).flat()
         .filter((item) => item.equipped && item.definition.filterType === 'Armor')
 }
+
 function getEquippedArmorItemsAc(items: Item[]): number {
     return items.reduce((total: number, item: any) => total + item.definition.armorClass, 0)
 }
@@ -49,6 +55,6 @@ function getArmoredModifier(modifiers: Modifiers): number {
     return modifier ? modifier.fixedValue : 0
 }
 
-function getAbilityModifier(shortName: string, abilities: Ability[]) {
+function getAbilityModifier(shortName: string, abilities: Ability[]): number {
     return abilities.filter((ability) => ability.shortName === shortName)[0].modifier
 }
