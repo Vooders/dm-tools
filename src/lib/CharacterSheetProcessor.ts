@@ -488,7 +488,7 @@ export default class CharacterSheetProcessor {
             })
         }).flat()
 
-        return new Array(10).fill('').map((spell: SpellType, index: number) => {
+        return new Array(10).fill('').map((index: number) => {
             return {
                 level: index,
                 spells: spells.filter((s: SpellType) => s.level === index)
@@ -496,10 +496,11 @@ export default class CharacterSheetProcessor {
         }).filter((spellLevel) => spellLevel.spells.length > 0)
     }
 
-    private buildArmour() {
+    private buildArmour(): number {
         const abilities = this.abilities
-        const modifiers = this.modifiers
         const inventory = this.buildInventory()
+        const modifiers = this.filterModifiersBySubType('unarmored-armor-class')
+            .concat(this.filterModifiersBySubType('armored-armor-class'))
         return armourClass(abilities, modifiers, inventory)
     }
 

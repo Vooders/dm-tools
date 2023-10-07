@@ -1,8 +1,8 @@
-import { Modifiers, Ability, ItemContainer, Item } from "../CharacterSheetProcessor"
+import { Ability, ItemContainer, Item, Modifier } from "../CharacterSheetProcessor"
 
 const baseAC = 10
 
-export default function armourClass(abilities: Ability[], modifiers: Modifiers, inventory: ItemContainer[]): number {
+export default function armourClass(abilities: Ability[], modifiers: Modifier[], inventory: ItemContainer[]): number {
     const dexModifier = getAbilityModifier('DEX', abilities)
     const unarmoredModifier = getUnarmoredModifier(abilities, modifiers)
     const armoredModifier = getArmoredModifier(modifiers)
@@ -27,7 +27,7 @@ function getArmorTypeModifier(items: Item[], dexModifier: number): number {
     } else return 0
 }
 
-function getArmorTypes(items: Item[]):number[] {
+function getArmorTypes(items: Item[]): number[] {
     return items.map((item) => item.definition.armorTypeId)
 }
 
@@ -45,13 +45,13 @@ function getEquippedArmorItemsAc(items: Item[]): number {
     return items.reduce((total: number, item: any) => total + item.definition.armorClass, 0)
 }
 
-function getUnarmoredModifier(abilities: Ability[], modifiers: Modifiers): number {
-    const modifier = modifiers.class.filter((modifier) => modifier.subType === 'unarmored-armor-class')[0]
+function getUnarmoredModifier(abilities: Ability[], modifiers: Modifier[]): number {
+    const modifier = modifiers.filter((modifier) => modifier.subType === 'unarmored-armor-class')[0]
     return modifier ? abilities[modifier.statId - 1].modifier : 0
 }
 
-function getArmoredModifier(modifiers: Modifiers): number {
-    const modifier = modifiers.class.filter((modifier) => modifier.subType === 'armored-armor-class')[0]
+function getArmoredModifier(modifiers: Modifier[]): number {
+    const modifier = modifiers.filter((modifier) => modifier.subType === 'armored-armor-class')[0]
     return modifier ? modifier.fixedValue : 0
 }
 

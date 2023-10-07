@@ -1,4 +1,4 @@
-import { Modifier } from '../../../src/lib/CharacterSheetProcessor'
+import { Ability, Item, ItemContainer, Modifier } from '../../../src/lib/CharacterSheetProcessor'
 import armourClass from '../../../src/lib/character-sheet-processor/armourClass'
 
 const abilities = buildAbilities()
@@ -98,15 +98,15 @@ describe('Armour Class', () => {
         const modifiers = buildModifiers('unarmored-armor-class', 3)
         const ac = armourClass(abilities, modifiers, inventory)
         ac.should.equal(23)
-        const inventory2 = buildInventory('Armor', 3, 4)
+        const inventory2 = buildInventory('Armor', 2, 4)
         const abilities2 = buildAbilities(0, 20, 20, 20, 20)
         const modifiers2 = buildModifiers('unarmored-armor-class', 5)
         const ac2 = armourClass(abilities2, modifiers2, inventory2)
-        ac2.should.equal(23)
+        ac2.should.equal(22)
     })
 })
 
-function buildAbility(name: string, value: number) {
+function buildAbility(name: string, value: number): Ability {
     return {
         name: name,
         value,
@@ -121,7 +121,7 @@ function buildAbilities(
     con: number = 10,
     int: number = 10,
     wis: number = 10,
-    cha: number = 10) {
+    cha: number = 10): Ability[] {
     return [
         buildAbility('Strength', str),
         buildAbility('Dexterity', dex),
@@ -138,21 +138,33 @@ function buildInventory(
     armorTypeId1: number = 0,
     filterType2: string = '',
     armorClass2: number = 0,
-    armorTypeId2: number = 0) {
-    return [{
-        name: '',
-        equipped: true,
-        capacity: 0,
-        contents: [
-            buildItem(),
-            buildItem(filterType1, armorClass1, armorTypeId1),
-            buildItem(filterType2, armorClass2, armorTypeId2),
-            buildItem()
-        ]
-    }]
+    armorTypeId2: number = 0): ItemContainer[] {
+    return [
+        {
+            name: '',
+            equipped: true,
+            capacity: 0,
+            contents: [
+                buildItem(),
+                buildItem(filterType1, armorClass1, armorTypeId1),
+                buildItem(),
+                buildItem()
+            ]
+        },
+        {
+            name: '',
+            equipped: true,
+            capacity: 0,
+            contents: [
+                buildItem(),
+                buildItem(),
+                buildItem(filterType2, armorClass2, armorTypeId2),
+                buildItem()
+            ]
+        }]
 }
 
-function buildItem(filterType: string = '', armorClass: number = 0, armorTypeId: number = 0) {
+function buildItem(filterType: string = null, armorClass: number = null, armorTypeId: number = null): Item {
     return {
         id: 0,
         definition: {
@@ -178,10 +190,16 @@ function buildItem(filterType: string = '', armorClass: number = 0, armorTypeId:
     }
 }
 
+function buildModifiers(subType: string = null, statId: number = null, fixedValue: number = null): Modifier[] {
+    return [
+        buildModifier(),
+        buildModifier(subType, statId, fixedValue),
+        buildModifier()
+    ]
+}
 
-function buildModifiers(subType: string = '', statId: number = 0, fixedValue: number = 0) {
-
-    const modifier: Modifier = {
+function buildModifier(subType: string = null, statId: number = null, fixedValue: number = null): Modifier {
+    return {
         fixedValue,
         id: 0,
         entityId: 0,
@@ -203,13 +221,5 @@ function buildModifiers(subType: string = '', statId: number = 0, fixedValue: nu
         modifierSubTypeId: 0,
         componentId: 0,
         componentTypeId: 0
-    }
-    return {
-        race: [modifier],
-        class: [modifier],
-        background: [modifier],
-        item: [modifier],
-        feat: [modifier],
-        condition: [modifier]
     }
 }
