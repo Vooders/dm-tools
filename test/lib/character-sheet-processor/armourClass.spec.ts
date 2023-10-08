@@ -2,106 +2,99 @@ import { Ability, Item, ItemContainer, Modifier } from '../../../src/lib/Charact
 import armourClass from '../../../src/lib/character-sheet-processor/armourClass'
 
 const abilities = buildAbilities()
-const modifiers = buildModifiers()
 const inventory = buildInventory()
 
 describe('Armour Class', () => {
     it("should add dex modifier to 10", () => {
         const abilities = buildAbilities(0, 14)
-        const ac = armourClass(abilities, modifiers, inventory)
+        const ac = armourClass(abilities, inventory)
         ac.should.equal(12)
     })
 
     it("should be lower than 10 with negative DEX mod", () => {
         const abilities = buildAbilities(0, 8)
-        const ac = armourClass(abilities, modifiers, inventory)
+        const ac = armourClass(abilities, inventory)
         ac.should.equal(9)
     })
 
     it("should add unarmored modifier if the class has an unarmored armor modifier", () => {
         const abilities = buildAbilities(0, 14, 14)
-        const modifiers = buildModifiers('unarmored-armor-class', 3)
-        const ac = armourClass(abilities, modifiers, inventory)
+        const ac = armourClass(abilities, inventory, 0, 3)
         ac.should.equal(14)
         const abilities2 = buildAbilities(0, 6, 0, 0, 14)
-        const modifiers2 = buildModifiers('unarmored-armor-class', 5)
-        const ac2 = armourClass(abilities2, modifiers2, inventory)
+        const ac2 = armourClass(abilities2, inventory, 0, 5)
         ac2.should.equal(10)
     })
 
     it("should add armored modifier if the class has an armored armor modifier", () => {
         const abilities = buildAbilities(0, 14, 14)
-        const modifiers = buildModifiers('armored-armor-class', 0, 1)
         const inventory = buildInventory('Armor', 18, 3, 'Armor', 2)
-        const ac = armourClass(abilities, modifiers, inventory)
+        const ac = armourClass(abilities, inventory, 1)
         ac.should.equal(21)
         const abilities2 = buildAbilities(0, 16, 0, 0, 14)
-        const modifiers2 = buildModifiers('armored-armor-class', 0, 1)
         const inventory2 = buildInventory('Armor', 16, 2, 'Armor', 1)
-        const ac2 = armourClass(abilities2, modifiers2, inventory2)
+        const ac2 = armourClass(abilities2, inventory2, 1)
         ac2.should.equal(20)
     })
 
     it('should return the ac value for equipped armor', () => {
         const inventory = buildInventory('Armor', 15, 1, 'Armor', 5)
-        const ac = armourClass(abilities, modifiers, inventory)
+        const ac = armourClass(abilities, inventory)
         ac.should.equal(20)
     })
 
     it('should add dex modifier to light armor', () => {
         const inventory = buildInventory('Armor', 15, 1, 'Armor', 5)
         const abilities = buildAbilities(0, 14)
-        const ac = armourClass(abilities, modifiers, inventory)
+        const ac = armourClass(abilities, inventory)
         ac.should.equal(22)
         const inventory2 = buildInventory('Armor', 15, 1)
         const abilities2 = buildAbilities(0, 16)
-        const ac2 = armourClass(abilities2, modifiers, inventory2)
+        const ac2 = armourClass(abilities2,inventory2)
         ac2.should.equal(18)
     })
 
     it('should add dex modifier to medium armor', () => {
         const inventory = buildInventory('Armor', 12, 2, 'Armor', 5)
         const abilities = buildAbilities(0, 14)
-        const ac = armourClass(abilities, modifiers, inventory)
+        const ac = armourClass(abilities, inventory)
         ac.should.equal(19)
         const inventory2 = buildInventory('Armor', 2, 4, 'Armor', 15, 2)
         const abilities2 = buildAbilities(0, 12)
-        const ac2 = armourClass(abilities2, modifiers, inventory2)
+        const ac2 = armourClass(abilities2, inventory2)
         ac2.should.equal(18)
     })
 
     it('should add 2 to medium armor if dex modifier is more than 2', () => {
         const inventory = buildInventory('Armor', 2, 4, 'Armor', 10, 2)
         const abilities = buildAbilities(0, 18)
-        const ac = armourClass(abilities, modifiers, inventory)
+        const ac = armourClass(abilities, inventory)
         ac.should.equal(14)
         const inventory2 = buildInventory('Armor', 15, 2)
         const abilities2 = buildAbilities(0, 20)
-        const ac2 = armourClass(abilities2, modifiers, inventory2)
+        const ac2 = armourClass(abilities2, inventory2)
         ac2.should.equal(17)
     })
 
     it('should add 0 to heavy armor', () => {
         const inventory = buildInventory('Armor', 18, 3, 'Armor', 5, 4)
         const abilities = buildAbilities(0, 18)
-        const ac = armourClass(abilities, modifiers, inventory)
+        const ac = armourClass(abilities, inventory)
         ac.should.equal(23)
         const inventory2 = buildInventory('Armor', 2, 4, 'Armor', 17, 3)
         const abilities2 = buildAbilities(0, 20)
-        const ac2 = armourClass(abilities2, modifiers, inventory2)
+        const ac2 = armourClass(abilities2, inventory2)
         ac2.should.equal(19)
     })
 
     it('should add ac from items to the unarmored modifier if not wearing armor', () => {
         const inventory = buildInventory('Armor', 5, 4)
         const abilities = buildAbilities(0, 18, 18)
-        const modifiers = buildModifiers('unarmored-armor-class', 3)
-        const ac = armourClass(abilities, modifiers, inventory)
+        const ac = armourClass(abilities, inventory, 0, 3)
         ac.should.equal(23)
         const inventory2 = buildInventory('Armor', 2, 4)
         const abilities2 = buildAbilities(0, 20, 20, 20, 20)
-        const modifiers2 = buildModifiers('unarmored-armor-class', 5)
-        const ac2 = armourClass(abilities2, modifiers2, inventory2)
+        const ac2 = armourClass(abilities2, inventory2, 0, 5)
         ac2.should.equal(22)
     })
 })
@@ -190,36 +183,6 @@ function buildItem(filterType: string = null, armorClass: number = null, armorTy
     }
 }
 
-function buildModifiers(subType: string = null, statId: number = null, fixedValue: number = null): Modifier[] {
-    return [
-        buildModifier(),
-        buildModifier(subType, statId, fixedValue),
-        buildModifier()
-    ]
-}
-
-function buildModifier(subType: string = null, statId: number = null, fixedValue: number = null): Modifier {
-    return {
-        fixedValue,
-        id: 0,
-        entityId: 0,
-        entityTypeId: 0,
-        type: '',
-        subType,
-        dice: null,
-        restriction: '',
-        statId,
-        requiresAttunement: false,
-        duration: null,
-        friendlyTypeName: '',
-        friendlySubtypeName: '',
-        isGranted: true,
-        bonusTypes: [],
-        value: 0,
-        availableToMulticlass: true,
-        modifierTypeId: 0,
-        modifierSubTypeId: 0,
-        componentId: 0,
-        componentTypeId: 0
-    }
+function buildModifiers() {
+    return 0
 }
