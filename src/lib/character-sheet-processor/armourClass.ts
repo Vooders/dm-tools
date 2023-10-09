@@ -37,9 +37,8 @@ function isArmored(items: Item[]): boolean {
 }
 
 function getArmoredModifier(modifiers: Modifier[]): number {
-    const armoredMod = modifiers.filter((modifier) => modifier.subType === 'armored-armor-class')
+    return modifiers.filter((modifier) => modifier.subType === 'armored-armor-class')
         .reduce((total: number, item: any) => total + item.fixedValue, 0)
-    return armoredMod ? armoredMod : 0
 }
 
 function getUnarmoredModifier(modifiers: Modifier[], abilities: Ability[]): number {
