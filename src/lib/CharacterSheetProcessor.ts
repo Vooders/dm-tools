@@ -499,9 +499,9 @@ export default class CharacterSheetProcessor {
     private buildArmour(): number {
         const abilities = this.abilities
         const inventory = this.buildInventory()
-        const armoredModifier = this.filterModifiersBySubType('armored-armor-class')[0].fixedValue
-        const unarmoredModifier = this.filterModifiersBySubType('unarmored-armor-class')[0].statId
-        return armourClass(abilities, inventory, armoredModifier, unarmoredModifier)
+        const modifiers = this.filterModifiersBySubType('armored-armor-class')
+            .concat(this.filterModifiersBySubType('unarmored-armor-class'))
+        return armourClass(abilities, inventory, modifiers)
     }
 
     private buildCurrencies(): Currencies {
