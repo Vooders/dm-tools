@@ -9,9 +9,9 @@ export default function armourClass(abilities: Ability[], inventory: ItemContain
     const armorTypeModifier = getArmorTypeModifier(equippedArmorItems, dexModifier)
     const unarmoredModifier = getUnarmoredModifier(modifiers, abilities)
     const armoredModifier = getArmoredModifier(modifiers)
-    const isWearingArmor = getEquippedArmorAc(equippedArmorItems) > 0
+    const armorIsEquipped = isWearingArmor(equippedArmorItems)
 
-    if (isWearingArmor) {
+    if (armorIsEquipped) {
         return equippedArmorItemsAc + armorTypeModifier + armoredModifier
     } else {
         return baseAC + dexModifier + unarmoredModifier + equippedArmorItemsAc
@@ -28,6 +28,11 @@ function getArmorTypeModifier(items: Item[], dexModifier: number): number {
     } else if (armorType === 2) {
         return dexModifier < 2 ? dexModifier : 2
     } else return 0
+}
+
+function isWearingArmor(items: Item[]): boolean {
+    const equippedArmors = items.map((armor) => armor.definition.armorTypeId)
+    return equippedArmors.includes(1) || equippedArmors.includes(2) || equippedArmors.includes(3)
 }
 
 function getEquippedArmorItems(inventory: ItemContainer[]): Item[] {
@@ -47,7 +52,7 @@ function getEquippedShieldAc(items: Item[]): number {
     return getHighestAc(shieldAcs)
 }
 
-function getHighestAc(acValues: number[]) {
+function getHighestAc(acValues: number[]): number {
     return acValues.length > 0 ? Math.max(...acValues) : 0
 }
 

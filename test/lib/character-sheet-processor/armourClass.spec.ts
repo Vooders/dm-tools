@@ -121,10 +121,21 @@ describe('Armour Class', () => {
         const abilities = buildAbilities(0, 18, 18)
         const ac = armourClass(abilities, inventory, modifiers)
         ac.should.equal(19)
-        const inventory2 = buildInventory('Armor', 5, 4, 'Armor', 10, 4)
+        const inventory2 = buildInventory('Armor', 10, 4, 'Armor', 5, 4)
         const abilities2 = buildAbilities(0, 20, 20, 20, 20)
         const ac2 = armourClass(abilities2, inventory2, modifiers)
         ac2.should.equal(25)
+    })
+
+    it('should add the highest ac armor item only, if more than one type is equipped', () => {
+        const inventory = buildInventory('Armor', 10, 1, 'Armor', 15, 2)
+        const abilities = buildAbilities(0, 18, 18)
+        const ac = armourClass(abilities, inventory, modifiers)
+        ac.should.equal(17)
+        const inventory2 = buildInventory('Armor', 20, 3, 'Armor', 14, 2)
+        const abilities2 = buildAbilities(0, 20, 20, 20, 20)
+        const ac2 = armourClass(abilities2, inventory2, modifiers)
+        ac2.should.equal(20)
     })
 })
 
