@@ -31,8 +31,8 @@ function getArmorTypeModifier(items: Item[], dexModifier: number): number {
 }
 
 function isWearingArmor(items: Item[]): boolean {
-    const equippedArmors = items.map((armor) => armor.definition.armorTypeId)
-    return equippedArmors.includes(1) || equippedArmors.includes(2) || equippedArmors.includes(3)
+    const armorItems = items.map((armor) => armor.definition.armorTypeId)
+    return armorItems.includes(1) || armorItems.includes(2) || armorItems.includes(3)
 }
 
 function getEquippedArmorItems(inventory: ItemContainer[]): Item[] {
