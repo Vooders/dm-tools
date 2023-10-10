@@ -9,8 +9,9 @@ export default function armourClass(abilities: Ability[], inventory: ItemContain
     const armorTypeModifier = getArmorTypeModifier(equippedArmorItems, dexModifier)
     const unarmoredModifier = getUnarmoredModifier(modifiers, abilities)
     const armoredModifier = getArmoredModifier(modifiers)
+    const isWearingArmor = getEquippedArmorAc(equippedArmorItems) > 0
 
-    if (isArmored(equippedArmorItems)) {
+    if (isWearingArmor) {
         return equippedArmorItemsAc + armorTypeModifier + armoredModifier
     } else {
         return baseAC + dexModifier + unarmoredModifier + equippedArmorItemsAc
@@ -18,7 +19,7 @@ export default function armourClass(abilities: Ability[], inventory: ItemContain
 }
 
 function getArmorTypeModifier(items: Item[], dexModifier: number): number {
-    const armorTypes = getArmorTypes(items)
+    const armorTypes = items.map((item) => item.definition.armorTypeId)
 
     if (armorTypes.includes(1)) {
         return dexModifier
@@ -27,18 +28,26 @@ function getArmorTypeModifier(items: Item[], dexModifier: number): number {
     } else return 0
 }
 
-function getArmorTypes(items: Item[]): number[] {
-    return items.map((item) => item.definition.armorTypeId)
-}
-
-function isArmored(items: Item[]): boolean {
-    const armorTypes = getArmorTypes(items)
-    return armorTypes.includes(1) || armorTypes.includes(2) || armorTypes.includes(3)
-}
-
 function getArmoredModifier(modifiers: Modifier[]): number {
     return modifiers.filter((modifier) => modifier.subType === 'armored-armor-class')
         .reduce((total: number, item: any) => total + item.fixedValue, 0)
+}
+
+function getEquippedArmorAc(items: Item[]) {
+    const armors = items.filter((item) => item.definition.armorTypeId < 4)
+        .map((armor) => armor.definition.armorClass)
+    return armors.length > 0 ? Math.max(...armors) : 0
+}
+
+function getEquippedShieldAc(items: Item[]) {
+    const shields = items.filter((item) => item.definition.armorTypeId === 4)
+        .map((shield) => shield.definition.armorClass)
+    return shields.length > 0 ? Math.max(...shields) : 0
+}
+
+function getEquippedItemsAc(items: Item[]) {
+    return items.filter((item) => item.definition.armorTypeId > 4)
+        .reduce((total: number, item: any) => total + item.definition.armorClass, 0)
 }
 
 function getUnarmoredModifier(modifiers: Modifier[], abilities: Ability[]): number {
@@ -52,7 +61,7 @@ function getEquippedArmorItems(inventory: ItemContainer[]): Item[] {
 }
 
 function getEquippedArmorItemsAc(items: Item[]): number {
-    return items.reduce((total: number, item: any) => total + item.definition.armorClass, 0)
+    return getEquippedArmorAc(items) + getEquippedShieldAc(items) + getEquippedItemsAc(items)
 }
 
 function getAbilityModifier(shortName: string, abilities: Ability[]): number {
