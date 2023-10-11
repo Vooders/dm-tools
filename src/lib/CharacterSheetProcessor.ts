@@ -5,16 +5,7 @@ import abilities from './character-sheet-processor/abilities'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
-    private stats: Stat[]
-    private abilityNames = [
-        'Strength',
-        'Dexterity',
-        'Constitution',
-        'Intelligence',
-        'Wisdom',
-        'Charisma'
-    ]
-
+    private stats: Stat[] 
     private abilities: Ability[]
     private level: number
     private proficiency: number
@@ -250,6 +241,7 @@ export default class CharacterSheetProcessor {
     }
 
     private buildSkills(): Skill[] {
+        const abilityNames = this.buildAbilities().map(ability => ability.name)
         const base = [
             { mod: 'DEX', name: 'Acrobatics' },
             { mod: 'WIS', name: 'Animal Handling' },
@@ -271,7 +263,7 @@ export default class CharacterSheetProcessor {
             { mod: 'WIS', name: 'Survival' }
         ].concat(this.dndBeyondJson.data.customProficiencies.map((customProficiency: any) => {
             return {
-                mod: this.abilityNames[customProficiency.statId - 1].slice(0, 3).toUpperCase(),
+                mod: abilityNames[customProficiency.statId - 1].slice(0, 3).toUpperCase(),
                 name: customProficiency.name
             }
         }))
