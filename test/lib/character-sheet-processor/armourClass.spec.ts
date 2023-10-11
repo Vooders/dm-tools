@@ -37,7 +37,7 @@ describe('Armour Class', () => {
         ac.should.equal(21)
         const abilities2 = buildAbilities(0, 16, 0, 0, 14)
         const inventory2 = buildInventory('Armor', 16, 2, 'Armor', 1, 4)
-        const modifiers2 = buildModifiers('armored-armor-class', 0, 1, 'armored-armor-class', 0, 1)
+        const modifiers2 = buildModifiers('armored-armor-class', 0, 1, 0,'armored-armor-class', 0, 1)
         const ac2 = armourClass(abilities2, inventory2, modifiers2)
         ac2.should.equal(21)
     })
@@ -223,11 +223,11 @@ function buildItem(filterType: string = null, armorClass: number = null, armorTy
     }
 }
 
-function buildModifier(subType: string = null, statId: number = null, fixedValue: number = null): Modifier {
+ function buildModifier(subType: string = null, statId: number = null, fixedValue: number = null, entityId: number = null): Modifier {
     return {
         fixedValue,
         id: 0,
-        entityId: 0,
+        entityId,
         entityTypeId: 0,
         type: '',
         subType,
@@ -249,12 +249,12 @@ function buildModifier(subType: string = null, statId: number = null, fixedValue
     }
 }
 
-function buildModifiers(
-    subType: string = null, statId: number = null, fixedValue: number = null,
-    subType2: string = null, statId2: number = null, fixedValue2: number = null) {
+export function buildModifiers(
+    subType: string = null, statId: number = null, fixedValue: number = null, entityId: number = null,
+    subType2: string = null, statId2: number = null, fixedValue2: number = null, entityId2: number = null) {
     return [
-        buildModifier(subType2, statId2, fixedValue2),
-        buildModifier(subType, statId, fixedValue),
+        buildModifier(subType2, statId2, fixedValue2, entityId2),
+        buildModifier(subType, statId, fixedValue, entityId),
         buildModifier()
     ]
 }
