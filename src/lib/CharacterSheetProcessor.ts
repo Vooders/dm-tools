@@ -1,6 +1,7 @@
 import { app } from 'electron'
 import path from 'path'
 import armourClass from './character-sheet-processor/armourClass'
+import abilities from './character-sheet-processor/abilities'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -385,27 +386,10 @@ export default class CharacterSheetProcessor {
         }
     }
 
-    private buildAbilities() {
-        const stats = [...this.stats]
-        const bonusModifiers = this.filterModifiers((modifier) => {
-            return modifier.type === "bonus" && modifier.entityId !== null
-        })
-        stats.forEach(stat => {
-            bonusModifiers.forEach(modifier => {
-                if (stat.id === modifier.entityId) {
-                    stat.value = stat.value + modifier.fixedValue
-                }
-            })
-        })
-
-        return stats.map(stat => {
-            return {
-                name: this.abilityNames[stat.id - 1],
-                value: stat.value,
-                modifier: Math.floor((stat.value - 10) / 2),
-                shortName: this.abilityNames[stat.id - 1].slice(0, 3).toUpperCase()
-            }
-        })
+    private buildAbilities(): Ability[] {
+        const stats = this.stats
+        const modifiers = this.filterModifiersByType('bonus')
+        return abilities(stats, modifiers)
     }
 
     private buildSpellSlots(): SpellSlot[] {
@@ -813,7 +797,7 @@ export type SpellSlot = {
     used: number
 }
 
-type Stat = {
+export type Stat = {
     id: number
     name: string
     value: number
