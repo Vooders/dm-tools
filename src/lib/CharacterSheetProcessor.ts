@@ -2,6 +2,7 @@ import { app } from 'electron'
 import path from 'path'
 import armourClass from './character-sheet-processor/armourClass'
 import abilities from './character-sheet-processor/abilities'
+import spells from './character-sheet-processor/spells'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -424,52 +425,8 @@ export default class CharacterSheetProcessor {
         return 0
     }
 
-    private buildSpells(): Spells[] {
-        function getActionType(spell: any): CastingTime {
-            switch (spell.activation.activationType) {
-                case 1:
-                    return 'action'
-                case 3:
-                    return 'bonus'
-                case 4:
-                    return 'reaction'
-                case 6:
-                    return 'minutes'
-            }
-
-        }
-
-        function isPrepared(spell: any) {
-            if (spell.alwaysPrepared || spell.definition.level === 0) {
-                return true
-            } else {
-                return spell.prepared
-            }
-        }
-
-        const spells = this.dndBeyondJson.data.classSpells.map((classSpell: any) => {
-            return classSpell.spells.map((spell: any) => {
-                return {
-                    name: spell.definition.name,
-                    level: spell.definition.level,
-                    school: spell.definition.school,
-                    duration: spell.definition.duration,
-                    range: spell.definition.range,
-                    description: spell.definition.description,
-                    components: spell.definition.componentsDescription,
-                    tags: spell.definition.tags,
-                    prepared: isPrepared(spell),
-                    castingTime: getActionType(spell)
-                }
-            })
-        }).flat()
-
-        return new Array(10).fill('').map((index: number) => {
-            return {
-                level: index,
-                spells: spells.filter((s: SpellType) => s.level === index)
-            }
-        }).filter((spellLevel) => spellLevel.spells.length > 0)
+    private buildSpells() {
+        return spells(this.dndBeyondJson.data.classSpells)
     }
 
     private buildArmour(): number {
@@ -698,7 +655,7 @@ export type SpellType = {
     castingTime: CastingTime
 }
 
-type CastingTime = 'action' | 'bonus' | 'reaction' | 'minutes'
+export type CastingTime = 'action' | 'bonus' | 'reaction' | 'minutes'
 
 export type Action = {
     name: string
