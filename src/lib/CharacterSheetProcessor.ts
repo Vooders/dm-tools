@@ -4,6 +4,7 @@ import armourClass from './character-sheet-processor/armourClass'
 import abilities from './character-sheet-processor/abilities'
 import spells from './character-sheet-processor/spells'
 import inventory from './character-sheet-processor/inventory'
+import weight from './character-sheet-processor/weight'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -60,8 +61,35 @@ export default class CharacterSheetProcessor {
         const items = this.dndBeyondJson.data.inventory
         const customItems = this.dndBeyondJson.data.customItems
         const carryCapacity = this.getCarryCapacity()
+        const characterValues = this.dndBeyondJson.data.characterValues
+        const id = this.dndBeyondJson.data.id
+        return inventory(items, customItems, carryCapacity, characterValues, id)
+    }
 
-        return inventory(items, customItems, carryCapacity)
+    private buildArmour(): number {
+        const abilities = this.abilities
+        const inventory = this.buildInventory()
+        const modifiers = this.filterModifiersBySubType('armored-armor-class')
+            .concat(this.filterModifiersBySubType('unarmored-armor-class'))
+        return armourClass(abilities, inventory, modifiers)
+    }
+
+    private buildWeightData() {
+        const items = this.dndBeyondJson.data.inventory
+        const currencies = this.dndBeyondJson.data.currencies
+        const customItems = this.dndBeyondJson.data.customItems
+        const id = this.dndBeyondJson.data.id
+        return weight(items, customItems, currencies, id)
+    }
+
+    private buildAbilities(): Ability[] {
+        const stats = this.stats
+        const modifiers = this.filterModifiersByType('bonus')
+        return abilities(stats, modifiers)
+    }
+
+    private buildSpells() {
+        return spells(this.dndBeyondJson.data.classSpells)
     }
 
     private buildProficienciesView(): ProficiencyView[] {
@@ -268,12 +296,6 @@ export default class CharacterSheetProcessor {
         }
     }
 
-    private buildAbilities(): Ability[] {
-        const stats = this.stats
-        const modifiers = this.filterModifiersByType('bonus')
-        return abilities(stats, modifiers)
-    }
-
     private buildSpellSlots(): SpellSlot[] {
         const isCaster = this.dndBeyondJson.data.classes[0].definition.spellCastingAbilityId != null
         const levelSpellSlots = this.dndBeyondJson.data.classes[0].definition.spellRules.levelSpellSlots
@@ -314,18 +336,6 @@ export default class CharacterSheetProcessor {
         return 0
     }
 
-    private buildSpells() {
-        return spells(this.dndBeyondJson.data.classSpells)
-    }
-
-    private buildArmour(): number {
-        const abilities = this.abilities
-        const inventory = this.buildInventory()
-        const modifiers = this.filterModifiersBySubType('armored-armor-class')
-            .concat(this.filterModifiersBySubType('unarmored-armor-class'))
-        return armourClass(abilities, inventory, modifiers)
-    }
-
     private buildCurrencies(): Currencies {
         const currencies = this.dndBeyondJson.data.currencies
         return {
@@ -347,65 +357,8 @@ export default class CharacterSheetProcessor {
         return copper + silver + gold + electrum + platinum
     }
 
-    private buildWeightData(): WeightData {
-        const carryCapacity = this.getCarryCapacity()
-        const totalCarriedItemsWeight = this.totalCarriedItemsWeight()
-        const totalCustomItemsWeight = this.totalCustomItemsWeight()
-        const totalCoinWeight = this.totalCoinWeight()
-        const totalCarriedWeight = Math.round((totalCarriedItemsWeight + totalCoinWeight + totalCustomItemsWeight) * 100) / 100
-        return {
-            carryCapacity,
-            totalCarriedItemsWeight,
-            totalCustomItemsWeight,
-            totalCoinWeight,
-            totalCarriedWeight
-        }
-    }
-
-    private totalCoinWeight(): number {
-        const currencies = this.dndBeyondJson.data.currencies
-        const totalCoins = currencies.cp + currencies.sp + currencies.gp + currencies.ep + currencies.pp
-        return totalCoins * 0.02
-    }
-
-    private totalItemsWeight(inventory: any): number {
-        return inventory.reduce((acc: number, item: any) =>
-            acc + (item.definition.weight / item.definition.bundleSize) * item.quantity, 0)
-    }
-
-    private removeUnequippedContainers(inventory: any): any[] {
-        return inventory.filter((item: any) =>
-            (item.definition.isContainer && !item.equipped) === false
-        )
-    }
-
-    private totalCarriedItemsWeight(): number {
-        const inventory = this.dndBeyondJson.data.inventory
-        const equippedContainerIds = this.findEquippedContainerIds(inventory)
-
-        let carriedItems: any = []
-        equippedContainerIds.forEach((id: number) => {
-            carriedItems.push(inventory.filter((item: any) =>
-                item.containerEntityId === id
-            ))
-        })
-        const filteredCarriedItems = this.removeUnequippedContainers(carriedItems.flat())
-        return Math.round((this.totalItemsWeight(filteredCarriedItems)) * 100) / 100
-    }
-
-    private totalCustomItemsWeight() {
-        const customItems = this.dndBeyondJson.data.customItems
-        return customItems.reduce((acc: number, item: any) =>
-            acc + (item.weight * item.quantity), 0)
-    }
-
     private getCarryCapacity() {
         return this.dndBeyondJson.data.stats[0].value * 15
-    }
-
-    private findEquippedContainerIds(items: Item[]): any {
-        return items.filter(item => item.definition.isContainer && item.equipped)
-            .map((container: any) => container.id).concat(this.dndBeyondJson.data.id)
     }
 
     private abilityModifierByShortName(shortName: string): number {
@@ -461,10 +414,9 @@ export type ItemContainer = {
 }
 
 export type WeightData = {
-    carryCapacity: number
-    totalCarriedItemsWeight: number
-    totalCustomItemsWeight: number
-    totalCoinWeight: number
+    carriedItemsWeight: number
+    customItemsWeight: number
+    coinWeight: number
     totalCarriedWeight: number
 }
 

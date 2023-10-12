@@ -1,6 +1,6 @@
 import { CharacterValues, Item, ItemContainer } from "../CharacterSheetProcessor"
 
-export default function inventory(inventory: any, customItemInventory: any, carryCapacity: number): ItemContainer[] {
+export default function inventory(inventory: any, customItemInventory: any, carryCapacity: number, characterValues: CharacterValues[], id: number): ItemContainer[] {
     const items = inventory.map((item: any): Item => {
         const newItem = {
             id: item.id,
@@ -59,7 +59,7 @@ export default function inventory(inventory: any, customItemInventory: any, carr
             name: 'Equipment',
             equipped: true,
             capacity: carryCapacity,
-            contents: fillBag(this.dndBeyondJson.data.id, items)
+            contents: fillBag(id, items)
         },
         ...containers.map((container: any) => {
             return {
@@ -93,7 +93,7 @@ export default function inventory(inventory: any, customItemInventory: any, carr
             weight: 22,
             capacity: 50
         }
-        this.dndBeyondJson.data.characterValues.forEach((value: CharacterValues) => {
+        characterValues.forEach((value: CharacterValues) => {
             if (value.valueId === item.id.toString()) {
                 switch (value.typeId) {
                     case valueType.name:
