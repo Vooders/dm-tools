@@ -3,10 +3,11 @@ import path from 'path'
 import armourClass from './character-sheet-processor/armourClass'
 import abilities from './character-sheet-processor/abilities'
 import spells from './character-sheet-processor/spells'
+import inventory from './character-sheet-processor/inventory'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
-    private stats: Stat[] 
+    private stats: Stat[]
     private abilities: Ability[]
     private level: number
     private proficiency: number
@@ -55,124 +56,12 @@ export default class CharacterSheetProcessor {
         }
     }
 
-    private findContainers(items: Item[]): Item[] {
-        return items.filter(item => item.definition.isContainer)
-    }
-
-    private fillBag(id: number, items: Item[]): Item[] {
-        return items.filter(item => item.containerId === id)
-    }
-
     private buildInventory(): ItemContainer[] {
-        const inventory = this.dndBeyondJson.data.inventory
+        const items = this.dndBeyondJson.data.inventory
+        const customItems = this.dndBeyondJson.data.customItems
+        const carryCapacity = this.getCarryCapacity()
 
-        const items = inventory.map((item: any): Item => {
-            const newItem = {
-                id: item.id,
-                definition: {
-                    id: item.definition.id,
-                    avatarUrl: item.definition.avatarUrl,
-                    name: item.definition.name,
-                    weight: item.definition.weight,
-                    rarity: item.definition.rarity,
-                    filterType: item.definition.filterType,
-                    isContainer: item.definition.isContainer,
-                    cost: item.definition.cost,
-                    bundleSize: item.definition.bundleSize,
-                    notes: item.definition.notes,
-                    capacity: item.definition.capacityWeight,
-                    armorClass: item.definition.armorClass,
-                    armorTypeId: item.definition.armorTypeId
-                },
-                containerId: item.containerEntityId,
-                equipped: item.equipped,
-                quantity: item.quantity
-            }
-            return this.addCustomValues(newItem)
-        })
-        const customItemInventory = this.dndBeyondJson.data.customItems
-
-        const customItems = customItemInventory.map((item: any): Item => {
-            return {
-                id: item.id,
-                definition: {
-                    id: null,
-                    avatarUrl: null,
-                    name: item.name,
-                    weight: item.weight,
-                    rarity: null,
-                    filterType: null,
-                    isContainer: null,
-                    cost: item.cost,
-                    bundleSize: 1,
-                    description: item.description,
-                    notes: item.notes,
-                    capacity: null,
-                    armorClass: null,
-                    armorTypeId: null
-
-                },
-                containerId: null,
-                equipped: item.equipped,
-                quantity: item.quantity
-            }
-        })
-
-        const containers = this.findContainers(items)
-
-        return [
-            {
-                name: 'Equipment',
-                equipped: true,
-                capacity: this.getCarryCapacity(),
-                contents: this.fillBag(this.dndBeyondJson.data.id, items)
-            },
-            ...containers.map(container => {
-                return {
-                    name: container.definition.name,
-                    equipped: container.equipped,
-                    capacity: container.definition.capacity,
-                    contents: this.fillBag(container.id, items)
-                }
-            }),
-            {
-                name: 'Custom Items',
-                equipped: true,
-                capacity: null,
-                contents: customItems
-            },
-        ]
-    }
-
-    private addCustomValues(item: Item): Item {
-        const valueType = {
-            name: 8,
-            notes: 9,
-            cost: 19,
-            weight: 22,
-            capacity: 50
-        }
-        this.dndBeyondJson.data.characterValues.forEach((value: CharacterValues) => {
-            if (value.valueId === item.id.toString()) {
-                switch (value.typeId) {
-                    case valueType.name:
-                        item.definition.name = value.value
-                        break
-                    case valueType.notes:
-                        item.definition.notes = value.value
-                        break
-                    case valueType.cost:
-                        item.definition.cost = parseInt(value.value)
-                        break
-                    case valueType.weight:
-                        item.definition.weight = parseInt(value.value)
-                        break
-                    case valueType.capacity:
-                        item.definition.capacity = parseInt(value.value)
-                }
-            }
-        })
-        return item
+        return inventory(items, customItems, carryCapacity)
     }
 
     private buildProficienciesView(): ProficiencyView[] {
@@ -787,7 +676,7 @@ export type Modifier = {
     componentTypeId: number
 }
 
-type CharacterValues = {
+export type CharacterValues = {
     typeId: number,
     value: string,
     valueId: string
