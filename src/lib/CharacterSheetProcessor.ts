@@ -5,6 +5,7 @@ import abilities from './character-sheet-processor/abilities'
 import spells from './character-sheet-processor/spells'
 import inventory from './character-sheet-processor/inventory'
 import weight from './character-sheet-processor/weight'
+import proficienciesView from './character-sheet-processor/proficienciesView'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -93,48 +94,11 @@ export default class CharacterSheetProcessor {
     }
 
     private buildProficienciesView(): ProficiencyView[] {
-        const entityId = {
-            tools: 2103445194,
-            martialWeapons: 1782728300,
-            simpleWeapons: 660121713,
-            armour: 174869515
-        }
-        const customProficiencies = this.dndBeyondJson.data.customProficiencies.map((customProficiency: any) => customProficiency.name)
-        const skillNames = this.skills.map(skill => skill.name)
-        const proficiencies = this.filterModifiersByType('proficiency')
-            .filter(proficiency => !proficiency.subType.includes('saving-throws'))
-            .filter(proficiency => !skillNames.includes(proficiency.friendlySubtypeName) || customProficiencies.includes(proficiency.friendlySubtypeName))
-
+        const customProficiencies = this.dndBeyondJson.data.customProficiencies
+        const skills = this.skills
         const languages = this.filterModifiersByType('language')
-            .map(language => language.subType)
-            .join(', ')
-
-        return [
-            {
-                type: 'armour',
-                value: this.getSubTypeNamesByEntityId(proficiencies, entityId.armour)
-            },
-            {
-                type: 'Weapons',
-                value: this.getSubTypeNamesByEntityId(proficiencies, entityId.martialWeapons)
-                    .concat(', ', this.getSubTypeNamesByEntityId(proficiencies, entityId.simpleWeapons))
-            },
-            {
-                type: 'tools',
-                value: this.getSubTypeNamesByEntityId(proficiencies, entityId.tools)
-            },
-            {
-                type: 'Languages',
-                value: languages
-            }
-        ]
-    }
-
-    private getSubTypeNamesByEntityId(proficiencies: Modifier[], entityId: number): string {
-        const names = proficiencies.filter(proficiency => proficiency.entityTypeId === entityId)
-            .map(proficiency => proficiency.friendlySubtypeName)
-
-        return [...new Set(names)].join(', ')
+        const proficiencies = this.filterModifiersByType('proficiency')
+        return proficienciesView(customProficiencies, skills, proficiencies, languages)
     }
 
     private buildPassiveSkills(): PassiveSkill[] {
@@ -335,7 +299,6 @@ export default class CharacterSheetProcessor {
         }
         return 0
     }
-
 
     private buildCurrencies(): Currencies {
         const currencies = this.dndBeyondJson.data.currencies
