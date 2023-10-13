@@ -60,10 +60,16 @@ export default class CharacterSheetProcessor {
     private buildInventory(): ItemContainer[] {
         const items = this.dndBeyondJson.data.inventory
         const customItems = this.dndBeyondJson.data.customItems
-        const carryCapacity = this.getCarryCapacity()
+        const carryCapacity = this.dndBeyondJson.data.stats[0].value * 15
         const characterValues = this.dndBeyondJson.data.characterValues
         const id = this.dndBeyondJson.data.id
         return inventory(items, customItems, carryCapacity, characterValues, id)
+    }
+
+    private buildAbilities(): Ability[] {
+        const stats = this.stats
+        const modifiers = this.filterModifiersByType('bonus')
+        return abilities(stats, modifiers)
     }
 
     private buildArmour(): number {
@@ -80,12 +86,6 @@ export default class CharacterSheetProcessor {
         const customItems = this.dndBeyondJson.data.customItems
         const id = this.dndBeyondJson.data.id
         return weight(items, customItems, currencies, id)
-    }
-
-    private buildAbilities(): Ability[] {
-        const stats = this.stats
-        const modifiers = this.filterModifiersByType('bonus')
-        return abilities(stats, modifiers)
     }
 
     private buildSpells() {
@@ -336,6 +336,7 @@ export default class CharacterSheetProcessor {
         return 0
     }
 
+
     private buildCurrencies(): Currencies {
         const currencies = this.dndBeyondJson.data.currencies
         return {
@@ -355,10 +356,6 @@ export default class CharacterSheetProcessor {
         const electrum = currencies.ep / 2
         const platinum = currencies.pp * 10
         return copper + silver + gold + electrum + platinum
-    }
-
-    private getCarryCapacity() {
-        return this.dndBeyondJson.data.stats[0].value * 15
     }
 
     private abilityModifierByShortName(shortName: string): number {
