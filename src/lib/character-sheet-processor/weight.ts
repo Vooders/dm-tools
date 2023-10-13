@@ -1,6 +1,6 @@
 import { Currencies, Item, WeightData } from "../CharacterSheetProcessor"
 
-export default function weight(inventory: any, customItems: any, currencies: Currencies, id: number): WeightData {
+export default function weight(inventory: Item[], customItems: Item[], currencies: Currencies, id: number): WeightData {
     const carriedItemsWeight = totalCarriedItemsWeight()
     const customItemsWeight = totalCustomItemsWeight()
     const coinWeight = totalCoinWeight()
@@ -40,12 +40,13 @@ export default function weight(inventory: any, customItems: any, currencies: Cur
         const filteredCarriedItems = removeUnequippedContainers(carriedItems.flat())
         return Math.round((totalItemsWeight(filteredCarriedItems)) * 100) / 100
     }
-    function totalCustomItemsWeight() {
+
+    function totalCustomItemsWeight(): number {
         return customItems.reduce((acc: number, item: any) =>
             acc + (item.weight * item.quantity), 0)
     }
 
-    function findEquippedContainerIds(items: Item[]): any {
+    function findEquippedContainerIds(items: Item[]): number[] {
         return items.filter(item => item.definition.isContainer && item.equipped)
             .map((container: any) => container.id).concat(id)
     }
