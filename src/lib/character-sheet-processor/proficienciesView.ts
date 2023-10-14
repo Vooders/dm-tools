@@ -1,6 +1,6 @@
-import { Modifier, ProficiencyView } from "../CharacterSheetProcessor"
+import { Modifier, ProficiencyView, Skill } from "../CharacterSheetProcessor"
 
-export default function proficienciesView(customProfs: any, skills: any,  profs: any, langs: any): ProficiencyView[] {
+export default function proficienciesView(customProfs: any, skills: Skill[],  profs: Modifier[], langs: Modifier[]): ProficiencyView[] {
     const entityId = {
         tools: 2103445194,
         martialWeapons: 1782728300,
@@ -8,13 +8,13 @@ export default function proficienciesView(customProfs: any, skills: any,  profs:
         armour: 174869515
     }
     const customProficiencies = customProfs.map((customProficiency: any) => customProficiency.name)
-    const skillNames = skills.map((skill: any) => skill.name)
+    const skillNames = skills.map(skill => skill.name)
     const proficiencies = profs
-        .filter((proficiency: any) => !proficiency.subType.includes('saving-throws'))
-        .filter((proficiency: any) => !skillNames.includes(proficiency.friendlySubtypeName) || customProficiencies.includes(proficiency.friendlySubtypeName))
+        .filter(proficiency => !proficiency.subType.includes('saving-throws'))
+        .filter(proficiency => !skillNames.includes(proficiency.friendlySubtypeName) || customProficiencies.includes(proficiency.friendlySubtypeName))
 
     const languages = langs
-        .map((language: any) => language.subType)
+        .map(language => language.subType)
         .join(', ')
 
     return [
