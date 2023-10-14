@@ -103,7 +103,7 @@ export default class CharacterSheetProcessor {
     }
 
     private buildSkills(): Skill[] {
-        const abilityNames = this.buildAbilities()
+        const abilityNames = this.abilities
         const customProficiencies = this.dndBeyondJson.data.customProficiencies
         const skillProficiencies = this.filterModifiersByType('proficiency')
         const skillExpertise = this.filterModifiersByType('expertise')
