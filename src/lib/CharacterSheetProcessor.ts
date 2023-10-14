@@ -6,6 +6,7 @@ import spells from './character-sheet-processor/spells'
 import inventory from './character-sheet-processor/inventory'
 import weight from './character-sheet-processor/weight'
 import proficienciesView from './character-sheet-processor/proficienciesView'
+import skills from './character-sheet-processor/skills'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -101,6 +102,15 @@ export default class CharacterSheetProcessor {
         return proficienciesView(customProficiencies, skills, proficiencies, languages)
     }
 
+    private buildSkills(): Skill[] {
+        const abilityNames = this.buildAbilities()
+        const customProficiencies = this.dndBeyondJson.data.customProficiencies
+        const skillProficiencies = this.filterModifiersByType('proficiency')
+        const skillExpertise = this.filterModifiersByType('expertise')
+        const proficiencyBonus = this.proficiency
+        return skills(abilityNames, customProficiencies, skillProficiencies, skillExpertise, proficiencyBonus)
+    }
+
     private buildPassiveSkills(): PassiveSkill[] {
         const passiveBonuses = this.filterModifiersByType('bonus')
             .filter((bonus) => bonus.subType.includes('passive'))
@@ -118,64 +128,6 @@ export default class CharacterSheetProcessor {
             return {
                 ...passiveSkill,
                 score: passiveSkill.score + modifier + bonus
-            }
-        })
-    }
-
-    private buildSkills(): Skill[] {
-        const abilityNames = this.buildAbilities().map(ability => ability.name)
-        const base = [
-            { mod: 'DEX', name: 'Acrobatics' },
-            { mod: 'WIS', name: 'Animal Handling' },
-            { mod: 'INT', name: 'Arcana' },
-            { mod: 'STR', name: 'Athletics' },
-            { mod: 'CHA', name: 'Deception' },
-            { mod: 'INT', name: 'History' },
-            { mod: 'WIS', name: 'Insight' },
-            { mod: 'CHA', name: 'Intimidation' },
-            { mod: 'INT', name: 'Investigation' },
-            { mod: 'WIS', name: 'Medicine' },
-            { mod: 'INT', name: 'Nature' },
-            { mod: 'WIS', name: 'Perception' },
-            { mod: 'CHA', name: 'Performance' },
-            { mod: 'CHA', name: 'Persuasion' },
-            { mod: 'INT', name: 'Religion' },
-            { mod: 'DEX', name: 'Sleight of Hand' },
-            { mod: 'DEX', name: 'Stealth' },
-            { mod: 'WIS', name: 'Survival' }
-        ].concat(this.dndBeyondJson.data.customProficiencies.map((customProficiency: any) => {
-            return {
-                mod: abilityNames[customProficiency.statId - 1].slice(0, 3).toUpperCase(),
-                name: customProficiency.name
-            }
-        }))
-
-        const skillNames = base.map(skill => skill.name)
-        const skillProficiencies = this.filterModifiersByType('proficiency')
-            .filter(proficiency => skillNames.includes(proficiency.friendlySubtypeName))
-            .map(proficiency => proficiency.friendlySubtypeName)
-
-        const skillExpertise = this.filterModifiersByType('expertise')
-            .filter(proficiency => skillNames.includes(proficiency.friendlySubtypeName))
-            .map(proficiency => proficiency.friendlySubtypeName)
-
-        return base.map(skill => {
-            const proficient = skillProficiencies.includes(skill.name)
-            const expertise = skillExpertise.includes(skill.name)
-
-            const baseModifier = this.abilityModifierByShortName(skill.mod)
-            let abilityModifier = baseModifier
-            if (expertise) {
-                abilityModifier += (this.proficiency * 2)
-            } else if (proficient) {
-                abilityModifier += this.proficiency
-            }
-
-            return {
-                ...skill,
-                bonus: abilityModifier,
-                proficient,
-                expertise
             }
         })
     }
@@ -319,10 +271,6 @@ export default class CharacterSheetProcessor {
         const electrum = currencies.ep / 2
         const platinum = currencies.pp * 10
         return copper + silver + gold + electrum + platinum
-    }
-
-    private abilityModifierByShortName(shortName: string): number {
-        return this.abilities.find(ability => ability.shortName === shortName).modifier
     }
 
     private skillModifier(name: string): number {
