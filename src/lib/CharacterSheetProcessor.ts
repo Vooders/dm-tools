@@ -7,6 +7,7 @@ import inventory from './character-sheet-processor/inventory'
 import weight from './character-sheet-processor/weight'
 import proficienciesView from './character-sheet-processor/proficienciesView'
 import skills from './character-sheet-processor/skills'
+import passiveSkills from './character-sheet-processor/passiveSkills'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -90,7 +91,7 @@ export default class CharacterSheetProcessor {
         return weight(items, customItems, currencies, id)
     }
 
-    private buildSpells() {
+    private buildSpells(): Spells[] {
         return spells(this.dndBeyondJson.data.classSpells)
     }
 
@@ -103,33 +104,18 @@ export default class CharacterSheetProcessor {
     }
 
     private buildSkills(): Skill[] {
-        const abilityNames = this.abilities
+        const abilities = this.abilities
         const customProficiencies = this.dndBeyondJson.data.customProficiencies
-        const skillProficiencies = this.filterModifiersByType('proficiency')
-        const skillExpertise = this.filterModifiersByType('expertise')
-        const proficiencyBonus = this.proficiency
-        return skills(abilityNames, customProficiencies, skillProficiencies, skillExpertise, proficiencyBonus)
+        const proficiencies = this.filterModifiersByType('proficiency')
+        const expertise = this.filterModifiersByType('expertise')
+        const proficiency = this.proficiency
+        return skills(abilities, customProficiencies, proficiencies, expertise, proficiency)
     }
 
     private buildPassiveSkills(): PassiveSkill[] {
         const passiveBonuses = this.filterModifiersByType('bonus')
-            .filter((bonus) => bonus.subType.includes('passive'))
-
-        return [
-            { mod: 'WIS', name: 'Perception', score: 10 },
-            { mod: 'INT', name: 'Investigation', score: 10 },
-            { mod: 'WIS', name: 'Insight', score: 10 }
-        ].map(passiveSkill => {
-            const modifier = this.skillModifier(passiveSkill.name)
-            const bonus = passiveBonuses
-                .filter(passiveBonus => passiveBonus.friendlySubtypeName.includes(passiveSkill.name))
-                .reduce((total: number, passiveBonus) => total += passiveBonus.fixedValue, 0)
-
-            return {
-                ...passiveSkill,
-                score: passiveSkill.score + modifier + bonus
-            }
-        })
+        const skills = this.skills
+        return passiveSkills(skills, passiveBonuses)
     }
 
     private buildSaves(): Save[] {
@@ -242,7 +228,7 @@ export default class CharacterSheetProcessor {
         })
     }
 
-    private getMaxUses(action: any) {
+    private getMaxUses(action: any): number {
         if (action.limitedUse) {
             if (action.limitedUse.useProficiencyBonus) {
                 return this.proficiency
@@ -271,10 +257,6 @@ export default class CharacterSheetProcessor {
         const electrum = currencies.ep / 2
         const platinum = currencies.pp * 10
         return copper + silver + gold + electrum + platinum
-    }
-
-    private skillModifier(name: string): number {
-        return this.skills.find(skill => skill.name === name).bonus
     }
 
     private filterModifiersByType(type: string): Modifier[] {
