@@ -8,6 +8,7 @@ import weight from './character-sheet-processor/weight'
 import proficienciesView from './character-sheet-processor/proficienciesView'
 import skills from './character-sheet-processor/skills'
 import passiveSkills from './character-sheet-processor/passiveSkills'
+import saves from './character-sheet-processor/saves'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -83,7 +84,7 @@ export default class CharacterSheetProcessor {
         return armourClass(abilities, inventory, modifiers)
     }
 
-    private buildWeightData() {
+    private buildWeightData(): WeightData {
         const items = this.dndBeyondJson.data.inventory
         const currencies = this.dndBeyondJson.data.currencies
         const customItems = this.dndBeyondJson.data.customItems
@@ -119,29 +120,12 @@ export default class CharacterSheetProcessor {
     }
 
     private buildSaves(): Save[] {
-        let bannedIds: number[] = []
-        if (this.isMultiClass) {
-            const multiClasses = this.dndBeyondJson.data.classes.slice(1)
-            bannedIds = multiClasses.map((clas: any) => {
-                const multiClassProficiency = clas.definition.classFeatures.find((feature: any) => feature.name === 'Proficiencies')
-                if (multiClassProficiency) {
-                    return multiClassProficiency.id
-                }
-            })
-        }
-
-        const saveProficiencies = this.filterModifiersByType('proficiency')
-            .filter(proficiency => proficiency.subType.includes('saving-throws'))
-            .filter(proficiency => !bannedIds.includes(proficiency.componentId))
-            .map(proficientSave => proficientSave.friendlySubtypeName.split(' ')[0])
-
-        return this.abilities.map(ability => {
-            return {
-                name: ability.name,
-                modifier: saveProficiencies.includes(ability.name) ? ability.modifier + this.proficiency : ability.modifier,
-                shortName: ability.name.slice(0, 3).toUpperCase()
-            }
-        })
+        const classes = this.dndBeyondJson.data.classes
+        const proficiencies = this.filterModifiersByType('proficiency')
+        const abilities = this.abilities
+        const isMultiClass = this.isMultiClass
+        const proficiency = this.proficiency
+        return saves(classes, proficiencies, abilities, isMultiClass, proficiency)
     }
 
     private calculateProficiency(): number {
