@@ -1,6 +1,6 @@
-import { Currencies, ItemType, WeightData } from "../CharacterSheetProcessor"
+import { Currencies, Item, WeightData } from "../CharacterSheetProcessor"
 
-export default function weight(inventory: ItemType[], customItems: ItemType[], currencies: Currencies, id: number): WeightData {
+export default function weight(inventory: Item[], customItems: Item[], currencies: Currencies, id: number): WeightData {
     const carriedItemsWeight = totalCarriedItemsWeight()
     const customItemsWeight = totalCustomItemsWeight()
     const coinWeight = totalCoinWeight()
@@ -46,7 +46,7 @@ export default function weight(inventory: ItemType[], customItems: ItemType[], c
             acc + (item.weight * item.quantity), 0)
     }
 
-    function findEquippedContainerIds(items: ItemType[]): number[] {
+    function findEquippedContainerIds(items: Item[]): number[] {
         return items.filter(item => item.definition.isContainer && item.equipped)
             .map((container: any) => container.id).concat(id)
     }

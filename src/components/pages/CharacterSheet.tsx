@@ -127,7 +127,7 @@ export default function CharacterSheet() {
                                <Spells theSpells={character.spells} />
                             </TabPanel>
                             <TabPanel value={value} index={2}>
-                                ItemType Three
+                                Item Three
                             </TabPanel>
                         </Grid>
                     </Grid>

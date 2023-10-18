@@ -1,7 +1,7 @@
-import { ItemType, ItemContainer, Modifier } from '../../../src/lib/CharacterSheetProcessor'
+import { Item, ItemContainer, Modifier } from '../../../src/lib/CharacterSheetProcessor'
 import armourClass from '../../../src/lib/character-sheet-processor/armourClass'
 import Abilities from '../../builders/Abilities'
-import Item from '../../builders/Item'
+import ItemBuilder from '../../builders/ItemBuilder'
 
 const modifiers = buildModifiers()
 
@@ -38,7 +38,7 @@ describe('Armour Class', () => {
             .build()
 
         const inventory = buildItemContainer([
-            Item.builder()
+            new ItemBuilder()
                 .withFilterType('Armor')
                 .withArmorClass(18)
                 .withArmorType('medium')
@@ -54,13 +54,13 @@ describe('Armour Class', () => {
     it('should return the ac value for equipped armor', () => {
         // This seems wrong, should we add ACs together?
         const inventory = buildItemContainer([
-            Item.builder()
+            new ItemBuilder()
                 .withFilterType('Armor')
                 .withArmorClass(15)
                 .withArmorType('light')
                 .withEquipped(true)
                 .build(),
-            Item.builder()
+            new ItemBuilder()
                 .withFilterType('Armor')
                 .withArmorClass(5)
                 .withArmorTypeId(4)
@@ -73,7 +73,7 @@ describe('Armour Class', () => {
 
     it('should add dex modifier to light armor', () => {
         const inventory = buildItemContainer([
-            Item.builder()
+            new ItemBuilder()
                 .withFilterType('Armor')
                 .withArmorClass(15)
                 .withArmorType('light')
@@ -89,7 +89,7 @@ describe('Armour Class', () => {
 
     it('should add dex modifier to medium armor', () => {
         const inventory = buildItemContainer([
-            Item.builder()
+            new ItemBuilder()
                 .withFilterType('Armor')
                 .withArmorClass(12)
                 .withArmorType('medium')
@@ -105,7 +105,7 @@ describe('Armour Class', () => {
 
     it('should add 2 to medium armor if dex modifier is more than 2', () => {
         const inventory = buildItemContainer([
-            Item.builder()
+            new ItemBuilder()
                 .withFilterType('Armor')
                 .withArmorClass(12)
                 .withArmorType('medium')
@@ -121,7 +121,7 @@ describe('Armour Class', () => {
 
     it('should add 0 to heavy armor', () => {
         const inventory = buildItemContainer([
-            Item.builder()
+            new ItemBuilder()
                 .withFilterType('Armor')
                 .withArmorClass(18)
                 .withArmorType('heavy')
@@ -137,7 +137,7 @@ describe('Armour Class', () => {
 
     it('should add ac from items to the unarmored modifier if not wearing armor', () => {
         const inventory = buildItemContainer([
-            Item.builder()
+            new ItemBuilder()
                 .withFilterType('Armor')
                 .withArmorClass(18)
                 .withArmorType('heavy')
@@ -155,13 +155,13 @@ describe('Armour Class', () => {
 
     it('should add the highest ac armor item only, if more than one is equipped', () => {
         const inventory = buildItemContainer([
-            Item.builder()
+            new ItemBuilder()
                 .withFilterType('Armor')
                 .withArmorClass(18)
                 .withArmorType('heavy')
                 .withEquipped(true)
                 .build(),
-            Item.builder()
+            new ItemBuilder()
                 .withFilterType('Armor')
                 .withArmorClass(14)
                 .withArmorType('light')
@@ -176,13 +176,13 @@ describe('Armour Class', () => {
 
     it('should add the highest ac shield item only, if more than one is equipped', () => {
         const inventory = buildItemContainer([
-            Item.builder()
+            new ItemBuilder()
                 .withFilterType('Armor')
                 .withArmorClass(2)
                 .withArmorType('shield')
                 .withEquipped(true)
                 .build(),
-            Item.builder()
+            new ItemBuilder()
                 .withFilterType('Armor')
                 .withArmorClass(5)
                 .withArmorType('shield')
@@ -198,13 +198,13 @@ describe('Armour Class', () => {
 
     it('should add the highest ac armor item only, if more than one type is equipped', () => {
         const inventory = buildItemContainer([
-            Item.builder()
+            new ItemBuilder()
                 .withFilterType('Armor')
                 .withArmorClass(10)
                 .withArmorType('light')
                 .withEquipped(true)
                 .build(),
-            Item.builder()
+            new ItemBuilder()
                 .withFilterType('Armor')
                 .withArmorClass(15)
                 .withArmorType('medium')
@@ -219,7 +219,7 @@ describe('Armour Class', () => {
     })
 })
 
-function buildItemContainer(items: ItemType[]): ItemContainer {
+function buildItemContainer(items: Item[]): ItemContainer {
     return {
         name: '',
         equipped: true,

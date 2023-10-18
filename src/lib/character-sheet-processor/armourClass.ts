@@ -1,4 +1,4 @@
-import { Ability, ItemContainer, ItemType, Modifier } from "../CharacterSheetProcessor"
+import { Ability, ItemContainer, Item, Modifier } from "../CharacterSheetProcessor"
 
 const baseAC = 10
 
@@ -18,7 +18,7 @@ export default function armourClass(abilities: Ability[], inventory: ItemContain
     }
 }
 
-function getArmorTypeModifier(items: ItemType[], dexModifier: number): number {
+function getArmorTypeModifier(items: Item[], dexModifier: number): number {
     const armorTypes = items.filter((item) => (item.definition.armorTypeId < 4))
         .map((armor) => armor.definition.armorTypeId)
     const armorType = Math.max(...armorTypes)
@@ -30,23 +30,23 @@ function getArmorTypeModifier(items: ItemType[], dexModifier: number): number {
     } else return 0
 }
 
-function isWearingArmor(items: ItemType[]): boolean {
+function isWearingArmor(items: Item[]): boolean {
     const armorItems = items.map((armor) => armor.definition.armorTypeId)
     return armorItems.includes(1) || armorItems.includes(2) || armorItems.includes(3)
 }
 
-function getEquippedArmorItems(inventory: ItemContainer[]): ItemType[] {
+function getEquippedArmorItems(inventory: ItemContainer[]): Item[] {
     return inventory.map((container) => container.contents).flat()
         .filter((item) => item.equipped && item.definition.filterType === 'Armor')
 }
 
-function getEquippedArmorAc(items: ItemType[]): number {
+function getEquippedArmorAc(items: Item[]): number {
     const armorAcs = items.filter((item) => item.definition.armorTypeId < 4)
         .map((armor) => armor.definition.armorClass)
     return getHighestAc(armorAcs)
 }
 
-function getEquippedShieldAc(items: ItemType[]): number {
+function getEquippedShieldAc(items: Item[]): number {
     const shieldAcs = items.filter((item) => item.definition.armorTypeId === 4)
         .map((shield) => shield.definition.armorClass)
     return getHighestAc(shieldAcs)
@@ -56,12 +56,12 @@ function getHighestAc(acValues: number[]): number {
     return acValues.length > 0 ? Math.max(...acValues) : 0
 }
 
-function getEquippedItemsAc(items: ItemType[]): number {
+function getEquippedItemsAc(items: Item[]): number {
     return items.filter((item) => item.definition.armorTypeId > 4)
         .reduce((total: number, item: any) => total + item.definition.armorClass, 0)
 }
 
-function getEquippedArmorItemsAc(items: ItemType[]): number {
+function getEquippedArmorItemsAc(items: Item[]): number {
     return getEquippedArmorAc(items) + getEquippedShieldAc(items) + getEquippedItemsAc(items)
 }
 

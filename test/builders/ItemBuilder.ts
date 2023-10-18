@@ -1,7 +1,7 @@
-import { ItemType } from "../../src/lib/CharacterSheetProcessor"
+import { Item } from "../../src/lib/CharacterSheetProcessor"
 
-export default class Item {
-    private constructor(
+export default class ItemBuilder {
+    constructor(
         private id: number = 0,
         private definitionId: string = '',
         private avatarUrl: string = '',
@@ -21,10 +21,6 @@ export default class Item {
         private equipped: boolean = false,
         private quantity: number = 1
     ){}
-
-    public static builder() {
-        return new this()
-    }
 
     public withId(id: number) {
         this.id = id
@@ -129,7 +125,7 @@ export default class Item {
         return this
     }
 
-    public build(): ItemType {
+    public build(): Item {
         return {
             id: this.id,
             definition: {
