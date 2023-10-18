@@ -1,13 +1,13 @@
 import { Item, ItemContainer, Modifier } from '../../../src/lib/CharacterSheetProcessor'
 import armourClass from '../../../src/lib/character-sheet-processor/armourClass'
-import Abilities from '../../builders/Abilities'
+import AbilitiesBuilder from '../../builders/AbilitiesBuilder'
 import ItemBuilder from '../../builders/ItemBuilder'
 
 const modifiers = buildModifiers()
 
 describe('Armour Class', () => {
     it("should add dex modifier to 10", () => {
-        const abilities = Abilities.builder()
+        const abilities = new AbilitiesBuilder()
             .withDexterity(14)
             .build()
         const ac = armourClass(abilities, [], modifiers)
@@ -15,7 +15,7 @@ describe('Armour Class', () => {
     })
 
     it("should be lower than 10 with negative DEX mod", () => {
-        const abilities = Abilities.builder()
+        const abilities = new AbilitiesBuilder()
             .withDexterity(8)
             .build()
         const ac = armourClass(abilities, [], modifiers)
@@ -23,17 +23,17 @@ describe('Armour Class', () => {
     })
 
     it("should add unarmored modifier if the class has an unarmored armor modifier", () => {
-        const abilities = Abilities.builder()
+        const abilities = new AbilitiesBuilder()
             .withDexterity(14)
             .withConstitution(14)
             .build()
-        const modifiers = buildModifiers('unarmored-armor-class', Abilities.id('constitution'))
+        const modifiers = buildModifiers('unarmored-armor-class', AbilitiesBuilder.id('constitution'))
         const ac = armourClass(abilities, [], modifiers)
         ac.should.equal(14)
     })
 
     it("should add armored modifier if the class has an armored armor modifier", () => {
-        const abilities = Abilities.builder()
+        const abilities = new AbilitiesBuilder()
             .withDexterity(14)
             .build()
 
@@ -67,7 +67,7 @@ describe('Armour Class', () => {
                 .withEquipped(true)
                 .build()
         ])
-        const ac = armourClass(Abilities.builder().build(), [inventory], modifiers)
+        const ac = armourClass(new AbilitiesBuilder().build(), [inventory], modifiers)
         ac.should.equal(20)
     })
 
@@ -80,7 +80,7 @@ describe('Armour Class', () => {
                 .withEquipped(true)
                 .build()
         ])
-        const abilities = Abilities.builder()
+        const abilities = new AbilitiesBuilder()
             .withDexterity(14)
             .build()
         const ac = armourClass(abilities, [inventory], modifiers)
@@ -96,7 +96,7 @@ describe('Armour Class', () => {
                 .withEquipped(true)
                 .build()
         ])
-        const abilities = Abilities.builder()
+        const abilities = new AbilitiesBuilder()
             .withDexterity(14)
             .build()
         const ac = armourClass(abilities, [inventory], modifiers)
@@ -112,7 +112,7 @@ describe('Armour Class', () => {
                 .withEquipped(true)
                 .build()
         ])
-        const abilities = Abilities.builder()
+        const abilities = new AbilitiesBuilder()
             .withDexterity(18)
             .build()
         const ac = armourClass(abilities, [inventory], modifiers)
@@ -128,7 +128,7 @@ describe('Armour Class', () => {
                 .withEquipped(true)
                 .build()
         ])
-        const abilities = Abilities.builder()
+        const abilities = new AbilitiesBuilder()
             .withDexterity(18)
             .build()
         const ac = armourClass(abilities, [inventory], modifiers)
@@ -144,11 +144,11 @@ describe('Armour Class', () => {
                 .withEquipped(false)
                 .build()
         ])
-        const abilities = Abilities.builder()
+        const abilities = new AbilitiesBuilder()
             .withDexterity(14)
             .withConstitution(14)
             .build()
-        const modifiers = buildModifiers('unarmored-armor-class', Abilities.id('constitution'))
+        const modifiers = buildModifiers('unarmored-armor-class', AbilitiesBuilder.id('constitution'))
         const ac = armourClass(abilities, [inventory], modifiers)
         ac.should.equal(14)
     })
@@ -168,8 +168,7 @@ describe('Armour Class', () => {
                 .withEquipped(true)
                 .build()
         ])
-        const abilities = Abilities.builder()
-            .build()
+        const abilities = new AbilitiesBuilder().build()
         const ac = armourClass(abilities, [inventory], modifiers)
         ac.should.equal(18)
     })
@@ -189,7 +188,7 @@ describe('Armour Class', () => {
                 .withEquipped(true)
                 .build()
         ])
-        const abilities = Abilities.builder()
+        const abilities = new AbilitiesBuilder()
             .withDexterity(18)
             .build()
         const ac = armourClass(abilities, [inventory], modifiers)
@@ -211,7 +210,7 @@ describe('Armour Class', () => {
                 .withEquipped(true)
                 .build()
         ])
-        const abilities = Abilities.builder()
+        const abilities = new AbilitiesBuilder()
             .withDexterity(18)
             .build()
         const ac = armourClass(abilities, [inventory], modifiers)
