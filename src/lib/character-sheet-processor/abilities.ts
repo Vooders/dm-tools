@@ -1,4 +1,4 @@
-import { Ability, ModifierType, Stat } from "../CharacterSheetProcessor";
+import { Ability, Modifier, Stat } from "../CharacterSheetProcessor";
 
 const abilityNames = [
     'Strength',
@@ -9,7 +9,7 @@ const abilityNames = [
     'Charisma'
 ]
 
-export default function abilities(stats: Stat[], modifiers: ModifierType[]): Ability[] {
+export default function abilities(stats: Stat[], modifiers: Modifier[]): Ability[] {
     const bonusModifiers = modifiers.filter((modifier) => {
         return modifier.entityId !== null
     })

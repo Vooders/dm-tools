@@ -1,6 +1,6 @@
-import { Ability, ModifierType, Save } from "../CharacterSheetProcessor"
+import { Ability, Modifier, Save } from "../CharacterSheetProcessor"
 
-export default function saves(classes: any, proficiencies: ModifierType[], abilities: Ability[], isMultiClass: boolean, proficiency: number): Save[] {
+export default function saves(classes: any, proficiencies: Modifier[], abilities: Ability[], isMultiClass: boolean, proficiency: number): Save[] {
     let bannedIds: number[] = []
     if (isMultiClass) {
         const multiClasses = classes.slice(1)

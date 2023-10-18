@@ -146,7 +146,7 @@ export default class CharacterSheetProcessor {
 
     private buildHp(): CharacterProfileHp {
         const hpPerLevelBonus = this.filterModifiersBySubType("hit-points-per-level")
-            .reduce((total: number, modifier: ModifierType) => total + modifier.fixedValue, 0) * this.level
+            .reduce((total: number, modifier: Modifier) => total + modifier.fixedValue, 0) * this.level
 
         const constitutionModifier = this.abilities.filter(ability => ability.name === 'Constitution')[0].modifier
         return {
@@ -243,15 +243,15 @@ export default class CharacterSheetProcessor {
         return copper + silver + gold + electrum + platinum
     }
 
-    private filterModifiersByType(type: string): ModifierType[] {
+    private filterModifiersByType(type: string): Modifier[] {
         return this.filterModifiers((modifier) => modifier.type === type)
     }
 
-    private filterModifiersBySubType(subType: string): ModifierType[] {
+    private filterModifiersBySubType(subType: string): Modifier[] {
         return this.filterModifiers((modifier) => modifier.subType === subType)
     }
 
-    private filterModifiers(filterFunction: ModifierFilterFunction): ModifierType[] {
+    private filterModifiers(filterFunction: ModifierFilterFunction): Modifier[] {
         const keys = Object.keys(this.modifiers) as ModifierKeys[]
         return keys.map(modifierKey => {
             return this.modifiers[modifierKey].filter(filterFunction)
@@ -401,7 +401,7 @@ export type Skill = {
     expertise: boolean
 }
 
-type ModifierFilterFunction = (arg0: ModifierType) => boolean
+type ModifierFilterFunction = (arg0: Modifier) => boolean
 
 export type CharacterProfile = {
     name: string
@@ -468,17 +468,17 @@ export type Stat = {
 }
 
 export type Modifiers = {
-    race: ModifierType[]
-    class: ModifierType[]
-    background: ModifierType[]
-    item: ModifierType[]
-    feat: ModifierType[]
-    condition: ModifierType[]
+    race: Modifier[]
+    class: Modifier[]
+    background: Modifier[]
+    item: Modifier[]
+    feat: Modifier[]
+    condition: Modifier[]
 }
 
 type ModifierKeys = keyof Modifiers
 
-export type ModifierType = {
+export type Modifier = {
     fixedValue: number
     id: number
     entityId: number
