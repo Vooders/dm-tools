@@ -284,7 +284,7 @@ export type ItemContainer = {
     name: string
     equipped: boolean
     capacity: number
-    contents: Item[]
+    contents: ItemType[]
 }
 
 export type WeightData = {
@@ -294,7 +294,7 @@ export type WeightData = {
     totalCarriedWeight: number
 }
 
-export type Item = {
+export type ItemType = {
     id: number
     definition: {
         id: string

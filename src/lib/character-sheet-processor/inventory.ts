@@ -1,7 +1,7 @@
-import { CharacterValues, Item, ItemContainer } from "../CharacterSheetProcessor"
+import { CharacterValues, ItemType, ItemContainer } from "../CharacterSheetProcessor"
 
 export default function inventory(inventory: any, customItemInventory: any, carryCapacity: number, characterValues: CharacterValues[], id: number): ItemContainer[] {
-    const items = inventory.map((item: any): Item => {
+    const items = inventory.map((item: any): ItemType => {
         const newItem = {
             id: item.id,
             definition: {
@@ -26,7 +26,7 @@ export default function inventory(inventory: any, customItemInventory: any, carr
         return addCustomValues(newItem)
     })
 
-    const customItems = customItemInventory.map((item: any): Item => {
+    const customItems = customItemInventory.map((item: any): ItemType => {
         return {
             id: item.id,
             definition: {
@@ -77,15 +77,15 @@ export default function inventory(inventory: any, customItemInventory: any, carr
         },
     ]
 
-    function findContainers(items: Item[]): Item[] {
+    function findContainers(items: ItemType[]): ItemType[] {
         return items.filter(item => item.definition.isContainer)
     }
 
-    function fillBag(id: number, items: Item[]): Item[] {
+    function fillBag(id: number, items: ItemType[]): ItemType[] {
         return items.filter(item => item.containerId === id)
     }
 
-    function addCustomValues(item: Item): Item {
+    function addCustomValues(item: ItemType): ItemType {
         const valueType = {
             name: 8,
             notes: 9,

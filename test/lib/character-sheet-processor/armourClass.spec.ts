@@ -1,8 +1,8 @@
-import { Item, ItemContainer, Modifier } from '../../../src/lib/CharacterSheetProcessor'
+import { ItemType, ItemContainer, Modifier } from '../../../src/lib/CharacterSheetProcessor'
 import armourClass from '../../../src/lib/character-sheet-processor/armourClass'
 import Abilities from '../../builders/Abilities'
+import Item from '../../builders/Item'
 
-const inventory = buildInventory()
 const modifiers = buildModifiers()
 
 describe('Armour Class', () => {
@@ -10,7 +10,7 @@ describe('Armour Class', () => {
         const abilities = Abilities.builder()
             .withDexterity(14)
             .build()
-        const ac = armourClass(abilities, inventory, modifiers)
+        const ac = armourClass(abilities, [], modifiers)
         ac.should.equal(12)
     })
 
@@ -18,7 +18,7 @@ describe('Armour Class', () => {
         const abilities = Abilities.builder()
             .withDexterity(8)
             .build()
-        const ac = armourClass(abilities, inventory, modifiers)
+        const ac = armourClass(abilities, [], modifiers)
         ac.should.equal(9)
     })
 
@@ -28,7 +28,7 @@ describe('Armour Class', () => {
             .withConstitution(14)
             .build()
         const modifiers = buildModifiers('unarmored-armor-class', Abilities.id('constitution'))
-        const ac = armourClass(abilities, inventory, modifiers)
+        const ac = armourClass(abilities, [], modifiers)
         ac.should.equal(14)
     })
 
@@ -36,152 +36,199 @@ describe('Armour Class', () => {
         const abilities = Abilities.builder()
             .withDexterity(14)
             .build()
-        const inventory = buildInventory('Armor', 18, 3, 'Armor', 2, 4)
+
+        const inventory = buildItemContainer([
+            Item.builder()
+                .withFilterType('Armor')
+                .withArmorClass(18)
+                .withArmorType('medium')
+                .withEquipped(true)
+                .build()
+        ])
+
         const modifiers = buildModifiers('armored-armor-class', 0, 1)
-        const ac = armourClass(abilities, inventory, modifiers)
+        const ac = armourClass(abilities, [inventory], modifiers)
         ac.should.equal(21)
     })
 
     it('should return the ac value for equipped armor', () => {
-        const inventory = buildInventory('Armor', 15, 1, 'Armor', 5, 4)
-        const ac = armourClass(Abilities.builder().build(), inventory, modifiers)
+        // This seems wrong, should we add ACs together?
+        const inventory = buildItemContainer([
+            Item.builder()
+                .withFilterType('Armor')
+                .withArmorClass(15)
+                .withArmorType('light')
+                .withEquipped(true)
+                .build(),
+            Item.builder()
+                .withFilterType('Armor')
+                .withArmorClass(5)
+                .withArmorTypeId(4)
+                .withEquipped(true)
+                .build()
+        ])
+        const ac = armourClass(Abilities.builder().build(), [inventory], modifiers)
         ac.should.equal(20)
     })
 
     it('should add dex modifier to light armor', () => {
-        const inventory = buildInventory('Armor', 15, 1, 'Armor', 5, 4)
+        const inventory = buildItemContainer([
+            Item.builder()
+                .withFilterType('Armor')
+                .withArmorClass(15)
+                .withArmorType('light')
+                .withEquipped(true)
+                .build()
+        ])
         const abilities = Abilities.builder()
             .withDexterity(14)
             .build()
-        const ac = armourClass(abilities, inventory, modifiers)
-        ac.should.equal(22)
+        const ac = armourClass(abilities, [inventory], modifiers)
+        ac.should.equal(17)
     })
 
     it('should add dex modifier to medium armor', () => {
-        const inventory = buildInventory('Armor', 12, 2, 'Armor', 5, 4)
+        const inventory = buildItemContainer([
+            Item.builder()
+                .withFilterType('Armor')
+                .withArmorClass(12)
+                .withArmorType('medium')
+                .withEquipped(true)
+                .build()
+        ])
         const abilities = Abilities.builder()
             .withDexterity(14)
             .build()
-        const ac = armourClass(abilities, inventory, modifiers)
-        ac.should.equal(19)
+        const ac = armourClass(abilities, [inventory], modifiers)
+        ac.should.equal(14)
     })
 
     it('should add 2 to medium armor if dex modifier is more than 2', () => {
-        const inventory = buildInventory('Armor', 2, 4, 'Armor', 10, 2)
+        const inventory = buildItemContainer([
+            Item.builder()
+                .withFilterType('Armor')
+                .withArmorClass(12)
+                .withArmorType('medium')
+                .withEquipped(true)
+                .build()
+        ])
         const abilities = Abilities.builder()
             .withDexterity(18)
             .build()
-        const ac = armourClass(abilities, inventory, modifiers)
+        const ac = armourClass(abilities, [inventory], modifiers)
         ac.should.equal(14)
     })
 
     it('should add 0 to heavy armor', () => {
-        const inventory = buildInventory('Armor', 18, 3, 'Armor', 5, 4)
+        const inventory = buildItemContainer([
+            Item.builder()
+                .withFilterType('Armor')
+                .withArmorClass(18)
+                .withArmorType('heavy')
+                .withEquipped(true)
+                .build()
+        ])
         const abilities = Abilities.builder()
             .withDexterity(18)
             .build()
-        const ac = armourClass(abilities, inventory, modifiers)
-        ac.should.equal(23)
+        const ac = armourClass(abilities, [inventory], modifiers)
+        ac.should.equal(18)
     })
 
     it('should add ac from items to the unarmored modifier if not wearing armor', () => {
-        const inventory = buildInventory('Armor', 5, 4)
+        const inventory = buildItemContainer([
+            Item.builder()
+                .withFilterType('Armor')
+                .withArmorClass(18)
+                .withArmorType('heavy')
+                .withEquipped(false)
+                .build()
+        ])
         const abilities = Abilities.builder()
-            .withDexterity(18)
-            .withConstitution(18)
+            .withDexterity(14)
+            .withConstitution(14)
             .build()
         const modifiers = buildModifiers('unarmored-armor-class', Abilities.id('constitution'))
-        const ac = armourClass(abilities, inventory, modifiers)
-        ac.should.equal(23)
+        const ac = armourClass(abilities, [inventory], modifiers)
+        ac.should.equal(14)
     })
 
     it('should add the highest ac armor item only, if more than one is equipped', () => {
-        const inventory = buildInventory('Armor', 10, 2, 'Armor', 15, 2)
+        const inventory = buildItemContainer([
+            Item.builder()
+                .withFilterType('Armor')
+                .withArmorClass(18)
+                .withArmorType('heavy')
+                .withEquipped(true)
+                .build(),
+            Item.builder()
+                .withFilterType('Armor')
+                .withArmorClass(14)
+                .withArmorType('light')
+                .withEquipped(true)
+                .build()
+        ])
         const abilities = Abilities.builder()
-            .withDexterity(18)
             .build()
-        const ac = armourClass(abilities, inventory, modifiers)
-        ac.should.equal(17)
+        const ac = armourClass(abilities, [inventory], modifiers)
+        ac.should.equal(18)
     })
 
     it('should add the highest ac shield item only, if more than one is equipped', () => {
-        const inventory = buildInventory('Armor', 2, 4, 'Armor', 5, 4)
+        const inventory = buildItemContainer([
+            Item.builder()
+                .withFilterType('Armor')
+                .withArmorClass(2)
+                .withArmorType('shield')
+                .withEquipped(true)
+                .build(),
+            Item.builder()
+                .withFilterType('Armor')
+                .withArmorClass(5)
+                .withArmorType('shield')
+                .withEquipped(true)
+                .build()
+        ])
         const abilities = Abilities.builder()
             .withDexterity(18)
             .build()
-        const ac = armourClass(abilities, inventory, modifiers)
+        const ac = armourClass(abilities, [inventory], modifiers)
         ac.should.equal(19)
     })
 
     it('should add the highest ac armor item only, if more than one type is equipped', () => {
-        const inventory = buildInventory('Armor', 10, 1, 'Armor', 15, 2)
+        const inventory = buildItemContainer([
+            Item.builder()
+                .withFilterType('Armor')
+                .withArmorClass(10)
+                .withArmorType('light')
+                .withEquipped(true)
+                .build(),
+            Item.builder()
+                .withFilterType('Armor')
+                .withArmorClass(15)
+                .withArmorType('medium')
+                .withEquipped(true)
+                .build()
+        ])
         const abilities = Abilities.builder()
             .withDexterity(18)
             .build()
-        const ac = armourClass(abilities, inventory, modifiers)
+        const ac = armourClass(abilities, [inventory], modifiers)
         ac.should.equal(17)
     })
 })
 
-function buildInventory(
-    filterType1: string = null,
-    armorClass1: number = null,
-    armorTypeId1: number = null,
-    filterType2: string = null,
-    armorClass2: number = null,
-    armorTypeId2: number = null): ItemContainer[] {
-    return [
-        {
-            name: '',
-            equipped: true,
-            capacity: 0,
-            contents: [
-                buildItem(),
-                buildItem(filterType1, armorClass1, armorTypeId1),
-                buildItem(),
-                buildItem()
-            ]
-        },
-        {
-            name: '',
-            equipped: true,
-            capacity: 0,
-            contents: [
-                buildItem(),
-                buildItem(),
-                buildItem(filterType2, armorClass2, armorTypeId2),
-                buildItem()
-            ]
-        }]
-}
-
-function buildItem(filterType: string = null, armorClass: number = null, armorTypeId: number = null): Item {
+function buildItemContainer(items: ItemType[]): ItemContainer {
     return {
-        id: 0,
-        definition: {
-            id: '',
-            avatarUrl: '',
-            name: '',
-            weight: 0,
-            rarity: '',
-            filterType,
-            isContainer: false,
-            cost: 0,
-            bundleSize: 1,
-            description: '',
-            notes: '',
-            capacity: 0,
-            armorClass,
-            armorTypeId
-
-        },
-        containerId: 0,
+        name: '',
         equipped: true,
-        quantity: 1
+        capacity: 0,
+        contents: items
     }
 }
 
- function buildModifier(subType: string = null, statId: number = null, fixedValue: number = null, entityId: number = null): Modifier {
+function buildModifier(subType: string = null, statId: number = null, fixedValue: number = null, entityId: number = null): Modifier {
     return {
         fixedValue,
         id: 0,
