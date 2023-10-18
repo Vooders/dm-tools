@@ -1,6 +1,6 @@
 import { CastingTime, SpellType, Spells } from "../CharacterSheetProcessor"
 
-export default function spells(spellsArray: any): Spells[] {
+export default function spells(spellsArray: Spells[]): Spells[] {
     function getActionType(spell: any): CastingTime {
         switch (spell.activation.activationType) {
             case 1:

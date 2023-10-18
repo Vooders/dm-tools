@@ -184,11 +184,12 @@ export default class CharacterSheetProcessor {
 
     private buildSpellSlots(): SpellSlot[] {
         const isCaster = this.dndBeyondJson.data.classes[0].definition.spellCastingAbilityId != null
+        const canCastSpells = this.dndBeyondJson.data.classes[0].subclassDefinition.canCastSpells
         const levelSpellSlots = this.dndBeyondJson.data.classes[0].definition.spellRules.levelSpellSlots
         return levelSpellSlots[this.level].map((maxSlots: number, index: number) => {
             return {
                 level: index + 1,
-                max: (isCaster) ? maxSlots : 0,
+                max: (isCaster || canCastSpells) ? maxSlots : 0,
                 used: this.dndBeyondJson.data.spellSlots[index].used
             }
         }).filter((
