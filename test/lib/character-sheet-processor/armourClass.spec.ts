@@ -1,16 +1,15 @@
-import { Item, ItemContainer, Modifier } from '../../../src/lib/CharacterSheetProcessor'
+import { Item, ItemContainer } from '../../../src/lib/CharacterSheetProcessor'
 import armourClass from '../../../src/lib/character-sheet-processor/armourClass'
 import AbilitiesBuilder from '../../builders/AbilitiesBuilder'
 import ItemBuilder from '../../builders/ItemBuilder'
-
-const modifiers = buildModifiers()
+import ModifierBuilder from '../../builders/ModifierBuilder'
 
 describe('Armour Class', () => {
     it("should add dex modifier to 10", () => {
         const abilities = new AbilitiesBuilder()
             .withDexterity(14)
             .build()
-        const ac = armourClass(abilities, [], modifiers)
+        const ac = armourClass(abilities, [], [])
         ac.should.equal(12)
     })
 
@@ -18,7 +17,7 @@ describe('Armour Class', () => {
         const abilities = new AbilitiesBuilder()
             .withDexterity(8)
             .build()
-        const ac = armourClass(abilities, [], modifiers)
+        const ac = armourClass(abilities, [], [])
         ac.should.equal(9)
     })
 
@@ -27,8 +26,11 @@ describe('Armour Class', () => {
             .withDexterity(14)
             .withConstitution(14)
             .build()
-        const modifiers = buildModifiers('unarmored-armor-class', AbilitiesBuilder.id('constitution'))
-        const ac = armourClass(abilities, [], modifiers)
+        const unArmouredDefense = new ModifierBuilder()
+            .withSubType('unarmored-armor-class')
+            .withStat('constitution')
+            .build()
+        const ac = armourClass(abilities, [], [unArmouredDefense])
         ac.should.equal(14)
     })
 
@@ -46,13 +48,15 @@ describe('Armour Class', () => {
                 .build()
         ])
 
-        const modifiers = buildModifiers('armored-armor-class', 0, 1)
-        const ac = armourClass(abilities, [inventory], modifiers)
+        const armouredAC = new ModifierBuilder()
+            .withSubType('armored-armor-class')
+            .withFixedValue(1)
+            .build()
+        const ac = armourClass(abilities, [inventory], [armouredAC])
         ac.should.equal(21)
     })
 
     it('should return the ac value for equipped armor', () => {
-        // This seems wrong, should we add ACs together?
         const inventory = buildItemContainer([
             new ItemBuilder()
                 .withFilterType('Armor')
@@ -67,7 +71,7 @@ describe('Armour Class', () => {
                 .withEquipped(true)
                 .build()
         ])
-        const ac = armourClass(new AbilitiesBuilder().build(), [inventory], modifiers)
+        const ac = armourClass(new AbilitiesBuilder().build(), [inventory], [])
         ac.should.equal(20)
     })
 
@@ -83,7 +87,7 @@ describe('Armour Class', () => {
         const abilities = new AbilitiesBuilder()
             .withDexterity(14)
             .build()
-        const ac = armourClass(abilities, [inventory], modifiers)
+        const ac = armourClass(abilities, [inventory], [])
         ac.should.equal(17)
     })
 
@@ -99,7 +103,7 @@ describe('Armour Class', () => {
         const abilities = new AbilitiesBuilder()
             .withDexterity(14)
             .build()
-        const ac = armourClass(abilities, [inventory], modifiers)
+        const ac = armourClass(abilities, [inventory], [])
         ac.should.equal(14)
     })
 
@@ -115,7 +119,7 @@ describe('Armour Class', () => {
         const abilities = new AbilitiesBuilder()
             .withDexterity(18)
             .build()
-        const ac = armourClass(abilities, [inventory], modifiers)
+        const ac = armourClass(abilities, [inventory], [])
         ac.should.equal(14)
     })
 
@@ -131,7 +135,7 @@ describe('Armour Class', () => {
         const abilities = new AbilitiesBuilder()
             .withDexterity(18)
             .build()
-        const ac = armourClass(abilities, [inventory], modifiers)
+        const ac = armourClass(abilities, [inventory], [])
         ac.should.equal(18)
     })
 
@@ -148,8 +152,11 @@ describe('Armour Class', () => {
             .withDexterity(14)
             .withConstitution(14)
             .build()
-        const modifiers = buildModifiers('unarmored-armor-class', AbilitiesBuilder.id('constitution'))
-        const ac = armourClass(abilities, [inventory], modifiers)
+        const unArmouredDefense = new ModifierBuilder()
+            .withSubType('unarmored-armor-class')
+            .withStat('constitution')
+            .build()
+        const ac = armourClass(abilities, [inventory], [unArmouredDefense])
         ac.should.equal(14)
     })
 
@@ -169,7 +176,7 @@ describe('Armour Class', () => {
                 .build()
         ])
         const abilities = new AbilitiesBuilder().build()
-        const ac = armourClass(abilities, [inventory], modifiers)
+        const ac = armourClass(abilities, [inventory], [])
         ac.should.equal(18)
     })
 
@@ -191,7 +198,7 @@ describe('Armour Class', () => {
         const abilities = new AbilitiesBuilder()
             .withDexterity(18)
             .build()
-        const ac = armourClass(abilities, [inventory], modifiers)
+        const ac = armourClass(abilities, [inventory], [])
         ac.should.equal(19)
     })
 
@@ -213,7 +220,7 @@ describe('Armour Class', () => {
         const abilities = new AbilitiesBuilder()
             .withDexterity(18)
             .build()
-        const ac = armourClass(abilities, [inventory], modifiers)
+        const ac = armourClass(abilities, [inventory], [])
         ac.should.equal(17)
     })
 })
@@ -225,40 +232,4 @@ function buildItemContainer(items: Item[]): ItemContainer {
         capacity: 0,
         contents: items
     }
-}
-
-function buildModifier(subType: string = null, statId: number = null, fixedValue: number = null, entityId: number = null): Modifier {
-    return {
-        fixedValue,
-        id: 0,
-        entityId,
-        entityTypeId: 0,
-        type: '',
-        subType,
-        dice: null,
-        restriction: '',
-        statId,
-        requiresAttunement: false,
-        duration: null,
-        friendlyTypeName: '',
-        friendlySubtypeName: '',
-        isGranted: false,
-        bonusTypes: [],
-        value: 0,
-        availableToMulticlass: true,
-        modifierTypeId: 0,
-        modifierSubTypeId: 0,
-        componentId: 0,
-        componentTypeId: 0
-    }
-}
-
-export function buildModifiers(
-    subType: string = null, statId: number = null, fixedValue: number = null, entityId: number = null,
-    subType2: string = null, statId2: number = null, fixedValue2: number = null, entityId2: number = null) {
-    return [
-        buildModifier(subType2, statId2, fixedValue2, entityId2),
-        buildModifier(subType, statId, fixedValue, entityId),
-        buildModifier()
-    ]
 }
