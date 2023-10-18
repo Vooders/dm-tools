@@ -1,4 +1,4 @@
-import { ItemType, ItemContainer, Modifier } from '../../../src/lib/CharacterSheetProcessor'
+import { ItemType, ItemContainer, ModifierType } from '../../../src/lib/CharacterSheetProcessor'
 import armourClass from '../../../src/lib/character-sheet-processor/armourClass'
 import Abilities from '../../builders/Abilities'
 import Item from '../../builders/Item'
@@ -228,7 +228,7 @@ function buildItemContainer(items: ItemType[]): ItemContainer {
     }
 }
 
-function buildModifier(subType: string = null, statId: number = null, fixedValue: number = null, entityId: number = null): Modifier {
+function buildModifier(subType: string = null, statId: number = null, fixedValue: number = null, entityId: number = null): ModifierType {
     return {
         fixedValue,
         id: 0,

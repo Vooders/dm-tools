@@ -1,8 +1,8 @@
-import { Ability, ItemContainer, ItemType, Modifier } from "../CharacterSheetProcessor"
+import { Ability, ItemContainer, ItemType, ModifierType } from "../CharacterSheetProcessor"
 
 const baseAC = 10
 
-export default function armourClass(abilities: Ability[], inventory: ItemContainer[], modifiers: Modifier[]): number {
+export default function armourClass(abilities: Ability[], inventory: ItemContainer[], modifiers: ModifierType[]): number {
     const dexModifier = getAbilityModifier('DEX', abilities)
     const equippedArmorItems = getEquippedArmorItems(inventory)
     const equippedArmorItemsAc = getEquippedArmorItemsAc(equippedArmorItems)
@@ -65,12 +65,12 @@ function getEquippedArmorItemsAc(items: ItemType[]): number {
     return getEquippedArmorAc(items) + getEquippedShieldAc(items) + getEquippedItemsAc(items)
 }
 
-function getUnarmoredModifier(modifiers: Modifier[], abilities: Ability[]): number {
+function getUnarmoredModifier(modifiers: ModifierType[], abilities: Ability[]): number {
     const unarmoredMod = modifiers.filter((modifier) => modifier.subType === 'unarmored-armor-class')[0]
     return unarmoredMod ? abilities[unarmoredMod.statId - 1].modifier : 0
 }
 
-function getArmoredModifier(modifiers: Modifier[]): number {
+function getArmoredModifier(modifiers: ModifierType[]): number {
     return modifiers.filter((modifier) => modifier.subType === 'armored-armor-class')
         .reduce((total: number, item: any) => total + item.fixedValue, 0)
 }

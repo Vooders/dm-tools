@@ -1,6 +1,6 @@
-import { Modifier, PassiveSkill, Skill } from "../CharacterSheetProcessor"
+import { ModifierType, PassiveSkill, Skill } from "../CharacterSheetProcessor"
 
-export default function passiveSkills(skills: Skill[], bonuses: Modifier[]): PassiveSkill[] {
+export default function passiveSkills(skills: Skill[], bonuses: ModifierType[]): PassiveSkill[] {
     const passiveBonuses = bonuses
         .filter((bonus) => bonus.subType.includes('passive'))
 
