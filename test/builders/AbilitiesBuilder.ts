@@ -1,17 +1,6 @@
 import { Ability } from "../../src/lib/CharacterSheetProcessor"
 
-type abilityNames = 'strength' | 'dexterity' | 'constitution' | 'intelligence' | 'wisdom' | 'charisma'
-
 export default class AbilitiesBuilder {
-    private static ids = {
-        strength: 1,
-        dexterity: 2,
-        constitution: 3,
-        intelligence: 4,
-        wisdom: 5,
-        charisma: 6
-    }
-
     constructor (
         private strength: number = 10,
         private dexterity: number = 10,
@@ -20,10 +9,6 @@ export default class AbilitiesBuilder {
         private wisdom: number = 10,
         private charisma: number = 10
     ){}
-
-    public static id(name: abilityNames) {
-        return this.ids[name]
-    }
 
     public withStrength(strength: number) {
         this.strength = strength
