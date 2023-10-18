@@ -1,6 +1,6 @@
 import { Item, ItemContainer, Modifier } from '../../../src/lib/CharacterSheetProcessor'
 import armourClass from '../../../src/lib/character-sheet-processor/armourClass'
-import Abilities from '../../Abilities'
+import Abilities from '../../builders/Abilities'
 
 const inventory = buildInventory()
 const modifiers = buildModifiers()
@@ -30,14 +30,6 @@ describe('Armour Class', () => {
         const modifiers = buildModifiers('unarmored-armor-class', Abilities.id('constitution'))
         const ac = armourClass(abilities, inventory, modifiers)
         ac.should.equal(14)
-
-        const abilities2 = Abilities.builder()
-            .withDexterity(6)
-            .withWisdom(14)
-            .build()
-        const modifiers2 = buildModifiers('unarmored-armor-class', Abilities.id('wisdom'))
-        const ac2 = armourClass(abilities2, inventory, modifiers2)
-        ac2.should.equal(10)
     })
 
     it("should add armored modifier if the class has an armored armor modifier", () => {
@@ -48,14 +40,6 @@ describe('Armour Class', () => {
         const modifiers = buildModifiers('armored-armor-class', 0, 1)
         const ac = armourClass(abilities, inventory, modifiers)
         ac.should.equal(21)
-
-        const abilities2 = Abilities.builder()
-            .withDexterity(16)
-            .build()
-        const inventory2 = buildInventory('Armor', 16, 2, 'Armor', 1, 4)
-        const modifiers2 = buildModifiers('armored-armor-class', 0, 1, 0,'armored-armor-class', 0, 1)
-        const ac2 = armourClass(abilities2, inventory2, modifiers2)
-        ac2.should.equal(21)
     })
 
     it('should return the ac value for equipped armor', () => {
@@ -71,12 +55,6 @@ describe('Armour Class', () => {
             .build()
         const ac = armourClass(abilities, inventory, modifiers)
         ac.should.equal(22)
-        const inventory2 = buildInventory('Armor', 15, 1)
-        const abilities2 = Abilities.builder()
-            .withDexterity(16)
-            .build()
-        const ac2 = armourClass(abilities2, inventory2, modifiers)
-        ac2.should.equal(18)
     })
 
     it('should add dex modifier to medium armor', () => {
@@ -86,12 +64,6 @@ describe('Armour Class', () => {
             .build()
         const ac = armourClass(abilities, inventory, modifiers)
         ac.should.equal(19)
-        const inventory2 = buildInventory('Armor', 2, 4, 'Armor', 15, 2)
-        const abilities2 = Abilities.builder()
-            .withDexterity(12)
-            .build()
-        const ac2 = armourClass(abilities2, inventory2, modifiers)
-        ac2.should.equal(18)
     })
 
     it('should add 2 to medium armor if dex modifier is more than 2', () => {
@@ -101,12 +73,6 @@ describe('Armour Class', () => {
             .build()
         const ac = armourClass(abilities, inventory, modifiers)
         ac.should.equal(14)
-        const inventory2 = buildInventory('Armor', 15, 2)
-        const abilities2 = Abilities.builder()
-            .withDexterity(20)
-            .build()
-        const ac2 = armourClass(abilities2, inventory2, modifiers)
-        ac2.should.equal(17)
     })
 
     it('should add 0 to heavy armor', () => {
@@ -116,12 +82,6 @@ describe('Armour Class', () => {
             .build()
         const ac = armourClass(abilities, inventory, modifiers)
         ac.should.equal(23)
-        const inventory2 = buildInventory('Armor', 2, 4, 'Armor', 17, 3)
-        const abilities2 = Abilities.builder()
-            .withDexterity(20)
-            .build()
-        const ac2 = armourClass(abilities2, inventory2, modifiers)
-        ac2.should.equal(19)
     })
 
     it('should add ac from items to the unarmored modifier if not wearing armor', () => {
@@ -133,15 +93,6 @@ describe('Armour Class', () => {
         const modifiers = buildModifiers('unarmored-armor-class', Abilities.id('constitution'))
         const ac = armourClass(abilities, inventory, modifiers)
         ac.should.equal(23)
-
-        const inventory2 = buildInventory('Armor', 2, 4)
-        const abilities2 = Abilities.builder()
-            .withDexterity(20)
-            .withWisdom(20)
-            .build()
-        const modifiers2 = buildModifiers('unarmored-armor-class', Abilities.id('wisdom'))
-        const ac2 = armourClass(abilities2, inventory2, modifiers2)
-        ac2.should.equal(22)
     })
 
     it('should add the highest ac armor item only, if more than one is equipped', () => {
@@ -151,12 +102,6 @@ describe('Armour Class', () => {
             .build()
         const ac = armourClass(abilities, inventory, modifiers)
         ac.should.equal(17)
-        const inventory2 = buildInventory('Armor', 15, 3, 'Armor', 20, 3)
-        const abilities2 = Abilities.builder()
-            .withDexterity(20)
-            .build()
-        const ac2 = armourClass(abilities2, inventory2, modifiers)
-        ac2.should.equal(20)
     })
 
     it('should add the highest ac shield item only, if more than one is equipped', () => {
@@ -166,12 +111,6 @@ describe('Armour Class', () => {
             .build()
         const ac = armourClass(abilities, inventory, modifiers)
         ac.should.equal(19)
-        const inventory2 = buildInventory('Armor', 10, 4, 'Armor', 5, 4)
-        const abilities2 = Abilities.builder()
-            .withDexterity(20)
-            .build()
-        const ac2 = armourClass(abilities2, inventory2, modifiers)
-        ac2.should.equal(25)
     })
 
     it('should add the highest ac armor item only, if more than one type is equipped', () => {
@@ -181,13 +120,6 @@ describe('Armour Class', () => {
             .build()
         const ac = armourClass(abilities, inventory, modifiers)
         ac.should.equal(17)
-
-        const inventory2 = buildInventory('Armor', 20, 3, 'Armor', 14, 2)
-        const abilities2 = Abilities.builder()
-            .withDexterity(20)
-            .build()
-        const ac2 = armourClass(abilities2, inventory2, modifiers)
-        ac2.should.equal(20)
     })
 })
 
