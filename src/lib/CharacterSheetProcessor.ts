@@ -210,7 +210,17 @@ export default class CharacterSheetProcessor {
                     numberUsed: (action.limitedUse) ? action.limitedUse.numberUsed : 0
                 }
             }
-        })
+        }).concat(this.dndBeyondJson.data.spells.feat.map((feat: any) => {
+            return {
+                name: feat.definition.name,
+                description: feat.definition.description,
+                snippet: feat.definition.snippet,
+                limitedUse: {
+                    maxUses: this.getMaxUses(feat),
+                    numberUsed: (feat.limitedUse) ? feat.limitedUse.numberUsed : 0
+                }
+            }
+        }))
     }
 
     private getMaxUses(action: any): number {
