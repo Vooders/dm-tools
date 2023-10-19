@@ -182,7 +182,7 @@ describe('Armour Class', () => {
     })
 
     describe('With unarmoured defense', () => {
-        it("should add unarmored modifier if the class has an unarmored armor modifier", () => {
+        it("should add unarmored defense modifier if not wearing armor", () => {
             const abilities = new AbilitiesBuilder()
                 .withConstitution(14)
                 .build()
@@ -196,7 +196,7 @@ describe('Armour Class', () => {
             ac.should.equal(12)
         })
 
-        it('should add ac from items to the unarmored modifier if not wearing armor', () => {
+        it('should grant unarmored defense if carrying unequipped armor', () => {
             const abilities = new AbilitiesBuilder()
                 .withConstitution(14)
                 .build()
@@ -216,6 +216,28 @@ describe('Armour Class', () => {
             const ac = armourClass(abilities, [inventory], [unArmouredDefense])
 
             ac.should.equal(12)
+        })
+
+        it('should not grant unarmored defense if armour is equipped', () => {
+            const abilities = new AbilitiesBuilder()
+                .withConstitution(14)
+                .build()
+            const inventory = buildItemContainer([
+                new ItemBuilder()
+                    .withFilterType('Armor')
+                    .withArmorClass(18)
+                    .withArmorType('heavy')
+                    .withEquipped(true)
+                    .build()
+            ])
+            const unArmouredDefense = new ModifierBuilder()
+                .withSubType('unarmored-armor-class')
+                .withStat('constitution')
+                .build()
+
+            const ac = armourClass(abilities, [inventory], [unArmouredDefense])
+
+            ac.should.equal(18)
         })
     })
 
@@ -238,9 +260,9 @@ describe('Armour Class', () => {
                     .withEquipped(true)
                     .build()
             ])
-    
+
             const ac = armourClass(abilities, [inventory], [])
-    
+
             ac.should.equal(19)
         })
     })
