@@ -159,22 +159,6 @@ describe('Armour Class', () => {
 
             ac.should.equal(15)
         })
-    })
-
-    describe('With unarmoured defense', () => {
-        it("should add unarmored modifier if the class has an unarmored armor modifier", () => {
-            const abilities = new AbilitiesBuilder()
-                .withConstitution(14)
-                .build()
-            const unArmouredDefense = new ModifierBuilder()
-                .withSubType('unarmored-armor-class')
-                .withStat('constitution')
-                .build()
-
-            const ac = armourClass(abilities, [], [unArmouredDefense])
-
-            ac.should.equal(12)
-        })
 
         it("should add armored modifier if the class has an armored armor modifier", () => {
             const abilities = new AbilitiesBuilder().build()
@@ -195,7 +179,22 @@ describe('Armour Class', () => {
 
             ac.should.equal(20)
         })
+    })
 
+    describe('With unarmoured defense', () => {
+        it("should add unarmored modifier if the class has an unarmored armor modifier", () => {
+            const abilities = new AbilitiesBuilder()
+                .withConstitution(14)
+                .build()
+            const unArmouredDefense = new ModifierBuilder()
+                .withSubType('unarmored-armor-class')
+                .withStat('constitution')
+                .build()
+
+            const ac = armourClass(abilities, [], [unArmouredDefense])
+
+            ac.should.equal(12)
+        })
 
         it('should add ac from items to the unarmored modifier if not wearing armor', () => {
             const abilities = new AbilitiesBuilder()
