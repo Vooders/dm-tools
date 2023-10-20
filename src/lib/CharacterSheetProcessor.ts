@@ -9,6 +9,7 @@ import proficienciesView from './character-sheet-processor/proficienciesView'
 import skills from './character-sheet-processor/skills'
 import passiveSkills from './character-sheet-processor/passiveSkills'
 import saves from './character-sheet-processor/saves'
+import wealth from './character-sheet-processor/wealth'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -57,8 +58,15 @@ export default class CharacterSheetProcessor {
             inventory: this.buildInventory(),
             weightData: this.buildWeightData(),
             deathSaves: this.dndBeyondJson.data.deathSaves,
-            ac: this.buildArmour()
+            ac: this.buildArmour(),
+            wealth: this.buildWealth()
         }
+    }
+
+    private buildWealth() {
+        const inventory = this.buildInventory()
+        const currencies = this.buildCurrencies()
+        return wealth(inventory, currencies)
     }
 
     private buildInventory(): ItemContainer[] {
@@ -289,6 +297,7 @@ export type DmToolsData = {
     weightData: WeightData
     deathSaves: DeathSaves
     ac: number
+    wealth: Wealth
 }
 
 export type ItemContainer = {
@@ -517,4 +526,15 @@ export type CharacterValues = {
     typeId: number,
     value: string,
     valueId: string
+}
+
+export type Wealth = {
+    containers: ContainerWealth[]
+    totalContainerWealth: number
+    totalWealth: number
+}
+
+export type ContainerWealth = {
+    name: string
+    value: number
 }
