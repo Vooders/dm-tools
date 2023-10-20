@@ -25,7 +25,7 @@ describe('abilities', () => {
     })
 
     describe('short names', () => {
-        const shotNameTests = [
+        const shortNameTests = [
             {args: 0, expected: 'STR'},
             {args: 1, expected: 'DEX'},
             {args: 2, expected: 'CON'},
@@ -34,7 +34,7 @@ describe('abilities', () => {
             {args: 5, expected: 'CHA'}
         ];
 
-        shotNameTests.forEach((test) => {
+        shortNameTests.forEach((test) => {
             it(`Ability ${test.args + 1}'s short name should be ${test.expected}`, function() {
                 const stats = buildStats(10, 10, 10, 10, 10, 10)
 
