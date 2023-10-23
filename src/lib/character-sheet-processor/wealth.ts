@@ -1,6 +1,6 @@
-import { ContainerWealth, Currencies, Item, ItemContainer } from "../CharacterSheetProcessor"
+import { ContainerWealth, Item, ItemContainer } from "../CharacterSheetProcessor"
 
-export default function wealth(inventory: ItemContainer[], currencies: Currencies): Wealth {
+export default function wealth(inventory: ItemContainer[], totalCurrency: number): Wealth {
 
     function reduceAndRound<T>(someArray: T[], reduceFunc: (acc: number, item: T) => number): number {
         const result = someArray.reduce(reduceFunc, 0)
@@ -20,7 +20,7 @@ export default function wealth(inventory: ItemContainer[], currencies: Currencie
 
     const containers = buildContainers(inventory)
     const totalContainerWealth = reduceAndRound<ContainerWealth>(containers, (total, container) => total + container.value)
-    const totalWealth = Math.round(totalContainerWealth + (currencies.total * 100) / 100)
+    const totalWealth = Math.round(totalContainerWealth + (totalCurrency * 100) / 100)
 
     return {
         containers,
