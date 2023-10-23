@@ -65,8 +65,8 @@ export default class CharacterSheetProcessor {
 
     private buildWealth() {
         const inventory = this.buildInventory()
-        const currencies = this.buildCurrencies()
-        return wealth(inventory, currencies)
+        const totalCurrency = this.buildCurrencies().total
+        return wealth(inventory, totalCurrency)
     }
 
     private buildInventory(): ItemContainer[] {
