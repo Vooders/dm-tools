@@ -62,7 +62,7 @@ export default class ItemBuilder {
         return this
     }
 
-    public withIsCost(cost: number) {
+    public withCost(cost: number) {
         this.cost = cost
         return this
     }
