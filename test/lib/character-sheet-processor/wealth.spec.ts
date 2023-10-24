@@ -12,7 +12,7 @@ describe('Wealth', () => {
 
     it('should calculate the gold totals of the items in each container', () => {
         const containers = [
-            buildItemContainer(),
+            buildItemContainer([]),
             buildItemContainer([
                 new ItemBuilder()
                     .withCost(100)
@@ -71,7 +71,7 @@ describe('Wealth', () => {
     })
 })
 
-function buildItemContainer(items: Item[] = [new ItemBuilder().build()], name: string = ''): ItemContainer {
+function buildItemContainer(items: Item[], name: string = ''): ItemContainer {
     return {
         name,
         equipped: true,
