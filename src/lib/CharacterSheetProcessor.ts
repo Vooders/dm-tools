@@ -308,8 +308,8 @@ export type ItemContainer = {
 
 export type WeightData = {
     carriedItemsWeight: number
-    customItemsWeight: number
     coinWeight: number
+    containerWeights: ContainerWeight[]
     totalCarriedWeight: number
 }
 
@@ -536,4 +536,9 @@ export type Wealth = {
 export type ContainerWealth = {
     name: string
     value: number
+}
+
+export type ContainerWeight = {
+    name: string,
+    weight: number
 }

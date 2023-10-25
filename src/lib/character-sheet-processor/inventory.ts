@@ -36,7 +36,7 @@ export default function inventory(inventory: any, customItemInventory: any, carr
                 weight: item.weight,
                 rarity: null,
                 filterType: null,
-                isContainer: null,
+                isContainer: false,
                 cost: item.cost,
                 bundleSize: 1,
                 description: item.description,
@@ -47,7 +47,7 @@ export default function inventory(inventory: any, customItemInventory: any, carr
 
             },
             containerId: null,
-            equipped: item.equipped,
+            equipped: false,
             quantity: item.quantity
         }
     })
