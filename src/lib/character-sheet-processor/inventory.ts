@@ -58,6 +58,7 @@ export default function inventory(inventory: any, customItemInventory: any, carr
         {
             name: 'Equipment',
             equipped: true,
+            weight: 0,
             capacity: carryCapacity,
             contents: fillBag(id, items)
         },
@@ -65,6 +66,7 @@ export default function inventory(inventory: any, customItemInventory: any, carr
             return {
                 name: container.definition.name,
                 equipped: container.equipped,
+                weight: container.definition.weight,
                 capacity: container.definition.capacity,
                 contents: fillBag(container.id, items)
             }
@@ -72,6 +74,7 @@ export default function inventory(inventory: any, customItemInventory: any, carr
         {
             name: 'Custom Items',
             equipped: true,
+            weight: 0,
             capacity: null,
             contents: customItems
         },
