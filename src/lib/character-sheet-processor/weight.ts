@@ -3,16 +3,16 @@ import { ContainerWeight, Currencies, Item, ItemContainer, WeightData } from "..
 export default function weight(inventory: ItemContainer[], currencies: Currencies, ignoreCoinWeight: boolean): WeightData {
     const carriedItemsWeight = totalCarriedItemsWeight()
     const coinWeight = ignoreCoinWeight ? 0 : totalCoinWeight()
-    const containerWeights = buildContainerWeights()
+    const containers = buildContainers()
     const totalCarriedWeight = Math.round((carriedItemsWeight + coinWeight) * 100) / 100
     console.log(carriedItemsWeight)
     console.log(coinWeight)
-    console.log(containerWeights)
+    console.log(containers)
     console.log(totalCarriedWeight)
     return {
         carriedItemsWeight,
         coinWeight,
-        containerWeights,
+        containers,
         totalCarriedWeight
     }
 
@@ -26,26 +26,23 @@ export default function weight(inventory: ItemContainer[], currencies: Currencie
             acc + (item.definition.weight / item.definition.bundleSize) * item.quantity, 0)) * 100) / 100
     }
 
-    function removeUnequippedContainers(items: Item[]): Item[] {
-        return items.filter(item => (item.definition.isContainer && !item.equipped) === false)
+    function removeContainerItems(items: Item[]): Item[] {
+        return items.filter(item => !item.definition.isContainer)
     }
 
     function totalCarriedItemsWeight(): number {
-        const equippedItems = getEquippedContainers(inventory).map((container) => container.contents).flat()
-        const filteredEquippedItems = removeUnequippedContainers(equippedItems)
-        return totalItemsWeight(filteredEquippedItems)
+        return buildContainers().filter(container => container.equipped)
+            .reduce((acc, container) => acc + (container.contentsWeight + container.weight), 0)
     }
 
-    function getEquippedContainers(inventory: ItemContainer[]) {
-        return inventory.filter(container => container.equipped)
-    }
-
-    function buildContainerWeights(): ContainerWeight[] {
+    function buildContainers(): ContainerWeight[] {
         return inventory.map((container) => {
-            if (container.name === 'Equipment') container.contents = removeUnequippedContainers(container.contents)
+            if (container.name === 'Equipment') container.contents = removeContainerItems(container.contents)
             return {
                 name: container.name,
-                weight: totalItemsWeight(container.contents)
+                equipped: container.equipped,
+                weight: container.weight,
+                contentsWeight: totalItemsWeight(container.contents)
             }
         })
     }
