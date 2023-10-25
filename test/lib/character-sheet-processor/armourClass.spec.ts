@@ -272,6 +272,7 @@ function buildItemContainer(items: Item[]): ItemContainer {
     return {
         name: '',
         equipped: true,
+        weight: 1,
         capacity: 0,
         contents: items
     }
