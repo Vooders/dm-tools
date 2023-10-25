@@ -302,6 +302,7 @@ export type DmToolsData = {
 export type ItemContainer = {
     name: string
     equipped: boolean
+    weight: number
     capacity: number
     contents: Item[]
 }
@@ -309,7 +310,7 @@ export type ItemContainer = {
 export type WeightData = {
     carriedItemsWeight: number
     coinWeight: number
-    containerWeights: ContainerWeight[]
+    containers: ContainerWeight[]
     totalCarriedWeight: number
 }
 
@@ -522,8 +523,8 @@ export type Modifier = {
 }
 
 export type CharacterValues = {
-    typeId: number,
-    value: string,
+    typeId: number
+    value: string
     valueId: string
 }
 
@@ -539,6 +540,8 @@ export type ContainerWealth = {
 }
 
 export type ContainerWeight = {
-    name: string,
+    name: string
+    equipped: boolean
     weight: number
+    contentsWeight: number
 }
