@@ -93,11 +93,10 @@ export default class CharacterSheetProcessor {
     }
 
     private buildWeightData(): WeightData {
-        const items = this.dndBeyondJson.data.inventory
-        const currencies = this.dndBeyondJson.data.currencies
-        const customItems = this.dndBeyondJson.data.customItems
-        const id = this.dndBeyondJson.data.id
-        return weight(items, customItems, currencies, id)
+        const inventory = this.buildInventory()
+        const currencies = this.buildCurrencies()
+        const ignoreCoinWeight = this.dndBeyondJson.data.preferences.ignoreCoinWeight
+        return weight(inventory, currencies, ignoreCoinWeight)
     }
 
     private buildSpells(): Spells[] {
