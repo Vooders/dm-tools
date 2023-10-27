@@ -5,10 +5,7 @@ export default function weight(inventory: ItemContainer[], currencies: Currencie
     const coinWeight = ignoreCoinWeight ? 0 : totalCoinWeight()
     const containers = buildContainers()
     const totalCarriedWeight = Math.round((carriedItemsWeight + coinWeight) * 100) / 100
-    console.log(carriedItemsWeight)
-    console.log(coinWeight)
-    console.log(containers)
-    console.log(totalCarriedWeight)
+    
     return {
         carriedItemsWeight,
         coinWeight,
@@ -26,10 +23,6 @@ export default function weight(inventory: ItemContainer[], currencies: Currencie
             acc + (item.definition.weight / item.definition.bundleSize) * item.quantity, 0)) * 100) / 100
     }
 
-    function removeContainerItems(items: Item[]): Item[] {
-        return items.filter(item => !item.definition.isContainer)
-    }
-
     function totalCarriedItemsWeight(): number {
         return buildContainers().filter(container => container.equipped)
             .reduce((acc, container) => acc + (container.contentsWeight + container.weight), 0)
@@ -37,7 +30,10 @@ export default function weight(inventory: ItemContainer[], currencies: Currencie
 
     function buildContainers(): ContainerWeight[] {
         return inventory.map((container) => {
-            if (container.name === 'Equipment') container.contents = removeContainerItems(container.contents)
+            if (container.name === 'Equipment') {
+                container.contents = container.contents.filter(item => !item.definition.isContainer)
+            }
+
             return {
                 name: container.name,
                 equipped: container.equipped,
