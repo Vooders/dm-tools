@@ -305,12 +305,12 @@ export type ItemContainer = {
     weight: number
     capacity: number
     contents: Item[]
+    contentsWeight: number
 }
 
 export type WeightData = {
     carriedItemsWeight: number
     coinWeight: number
-    containers: ContainerWeight[]
     totalCarriedWeight: number
 }
 
@@ -537,11 +537,4 @@ export type Wealth = {
 export type ContainerWealth = {
     name: string
     value: number
-}
-
-export type ContainerWeight = {
-    name: string
-    equipped: boolean
-    weight: number
-    contentsWeight: number
 }
