@@ -274,6 +274,7 @@ function buildItemContainer(items: Item[]): ItemContainer {
         equipped: true,
         weight: 1,
         capacity: 0,
-        contents: items
+        contents: items,
+        contentsWeight: 1
     }
 }
