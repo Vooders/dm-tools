@@ -77,6 +77,7 @@ function buildItemContainer(items: Item[], name: string = ''): ItemContainer {
         equipped: true,
         weight: 1,
         capacity: 0,
-        contents: items
+        contents: items,
+        contentsWeight: 1
     }
 }
