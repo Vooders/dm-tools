@@ -53,6 +53,7 @@ export default function inventory(inventory: any, customItemInventory: any, carr
     })
 
     const containers = findContainers(items)
+    const equipmentItems = removeContainers(fillBag(id, items))
 
     return [
         {
@@ -60,15 +61,18 @@ export default function inventory(inventory: any, customItemInventory: any, carr
             equipped: true,
             weight: 0,
             capacity: carryCapacity,
-            contents: fillBag(id, items)
+            contents: equipmentItems,
+            contentsWeight: totalItemsWeight(equipmentItems)
         },
         ...containers.map((container: any) => {
+            const containerItems = fillBag(container.id, items)
             return {
                 name: container.definition.name,
                 equipped: container.equipped,
                 weight: container.definition.weight,
                 capacity: container.definition.capacity,
-                contents: fillBag(container.id, items)
+                contents: containerItems,
+                contentsWeight: totalItemsWeight(containerItems)
             }
         }),
         {
@@ -76,7 +80,8 @@ export default function inventory(inventory: any, customItemInventory: any, carr
             equipped: true,
             weight: 0,
             capacity: null,
-            contents: customItems
+            contents: customItems,
+            contentsWeight: totalItemsWeight(customItems)
         },
     ]
 
@@ -86,6 +91,11 @@ export default function inventory(inventory: any, customItemInventory: any, carr
 
     function fillBag(id: number, items: Item[]): Item[] {
         return items.filter(item => item.containerId === id)
+    }
+
+    function totalItemsWeight(items: Item[]): number {
+        return Math.round((items.reduce((acc, item) =>
+            acc + (item.definition.weight / item.definition.bundleSize) * item.quantity, 0)) * 100) / 100
     }
 
     function addCustomValues(item: Item): Item {
@@ -117,5 +127,9 @@ export default function inventory(inventory: any, customItemInventory: any, carr
             }
         })
         return item
+    }
+
+    function removeContainers(items: Item[]): Item[] {
+        return items.filter(item => !item.definition.isContainer)
     }
 }

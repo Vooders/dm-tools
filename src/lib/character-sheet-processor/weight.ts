@@ -1,15 +1,13 @@
-import { ContainerWeight, Currencies, Item, ItemContainer, WeightData } from "../CharacterSheetProcessor"
+import { Currencies, ItemContainer, WeightData } from "../CharacterSheetProcessor"
 
 export default function weight(inventory: ItemContainer[], currencies: Currencies, ignoreCoinWeight: boolean): WeightData {
     const carriedItemsWeight = totalCarriedItemsWeight()
     const coinWeight = ignoreCoinWeight ? 0 : totalCoinWeight()
-    const containers = buildContainers()
     const totalCarriedWeight = Math.round((carriedItemsWeight + coinWeight) * 100) / 100
-    
+
     return {
         carriedItemsWeight,
         coinWeight,
-        containers,
         totalCarriedWeight
     }
 
@@ -18,28 +16,8 @@ export default function weight(inventory: ItemContainer[], currencies: Currencie
         return totalCoins * 0.02
     }
 
-    function totalItemsWeight(items: Item[]): number {
-        return Math.round((items.reduce((acc, item) =>
-            acc + (item.definition.weight / item.definition.bundleSize) * item.quantity, 0)) * 100) / 100
-    }
-
     function totalCarriedItemsWeight(): number {
-        return buildContainers().filter(container => container.equipped)
+        return inventory.filter(container => container.equipped)
             .reduce((acc, container) => acc + (container.contentsWeight + container.weight), 0)
-    }
-
-    function buildContainers(): ContainerWeight[] {
-        return inventory.map((container) => {
-            if (container.name === 'Equipment') {
-                container.contents = container.contents.filter(item => !item.definition.isContainer)
-            }
-
-            return {
-                name: container.name,
-                equipped: container.equipped,
-                weight: container.weight,
-                contentsWeight: totalItemsWeight(container.contents)
-            }
-        })
     }
 }
