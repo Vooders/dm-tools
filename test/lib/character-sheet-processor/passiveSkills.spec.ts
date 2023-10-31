@@ -36,6 +36,32 @@ describe('Passive Skills', () => {
             score.should.equal(10)
         })
     })
+
+    it('should add the modifier to the score', () => {
+        const skills = [
+            new SkillBuilder().withName('Perception').withBonus(5).build(),
+            new SkillBuilder().withName('Investigation').build(),
+            new SkillBuilder().withName('Insight').build(),
+        ]
+        const bonus = [new ModifierBuilder().build()]
+
+        const score = passiveSkills(skills, bonus)[0].score
+        score.should.equal(15)
+    })
+
+    it('should add the passive bonus to the score', () => {
+        const skills = skillsBuilder()
+        const bonus = [
+            new ModifierBuilder()
+            .withSubType('passive')
+                .withFriendlySubTypeName('Investigation')
+                .withFixedValue(4)
+                .build()
+        ]
+
+        const score = passiveSkills(skills, bonus)[1].score
+        score.should.equal(14)
+    })
 })
 
 function skillsBuilder() {
