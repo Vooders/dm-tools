@@ -53,7 +53,7 @@ describe('Passive Skills', () => {
         const skills = skillsBuilder()
         const bonus = [
             new ModifierBuilder()
-            .withSubType('passive')
+                .withSubType('passive')
                 .withFriendlySubTypeName('Investigation')
                 .withFixedValue(4)
                 .build()
@@ -61,6 +61,25 @@ describe('Passive Skills', () => {
 
         const score = passiveSkills(skills, bonus)[1].score
         score.should.equal(14)
+    })
+
+    it('should add multiple passive bonuses to the score', () => {
+        const skills = skillsBuilder()
+        const bonus = [
+            new ModifierBuilder()
+                .withSubType('passive')
+                .withFriendlySubTypeName('Insight')
+                .withFixedValue(3)
+                .build(),
+            new ModifierBuilder()
+                .withSubType('passive')
+                .withFriendlySubTypeName('Insight')
+                .withFixedValue(2)
+                .build()
+        ]
+
+        const score = passiveSkills(skills, bonus)[2].score
+        score.should.equal(15)
     })
 })
 
