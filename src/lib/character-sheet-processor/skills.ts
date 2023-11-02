@@ -1,6 +1,6 @@
-import { Ability, Modifier, Skill } from "../CharacterSheetProcessor"
+import { Ability, CustomProficiency, Modifier, Skill } from "../CharacterSheetProcessor"
 
-export default function skills(abilities: Ability[], customProfs: any, proficiencies: Modifier[], expertise: Modifier[], proficiency: number): Skill[] {
+export default function skills(abilities: Ability[], customProfs: CustomProficiency[], proficiencies: Modifier[], expertise: Modifier[], proficiency: number): Skill[] {
     const abilityNames = abilities.map(ability => ability.name)
     const base = [
         { mod: 'DEX', name: 'Acrobatics' },
