@@ -538,3 +538,16 @@ export type ContainerWealth = {
     name: string
     value: number
 }
+
+export type CustomProficiency = {
+        id: number
+        name: string
+        type: number
+        statId: number
+        proficiencyLevel: number
+        notes: string
+        description: string
+        override: number
+        magicBonus: number
+        miscBonus: number
+}
