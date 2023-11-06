@@ -148,7 +148,7 @@ export default function Health() {
     }
 
     const maxHp = (hp: CharacterProfileHp) => {
-        return (hp.override) ? hp.override : hp.constitutionBonus + hp.base
+        return (hp.override) ? hp.override : hp.constitutionBonus + hp.base + hp.bonus
     }
 
     const calculateHpPercent = (hp: CharacterProfileHp) => {
