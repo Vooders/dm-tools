@@ -156,7 +156,10 @@ export default function Health() {
     }
 
     const hpView = (hp: CharacterProfileHp) => {
-        return `${maxHp(hp) - hp.removed} / ${maxHp(hp)}`
+        const trueHp = maxHp(hp) - hp.removed
+        const posIntHp = trueHp > 0 ? trueHp : 0
+
+        return `${trueHp} / ${maxHp(hp)}`
     }
 
     return (
@@ -197,19 +200,20 @@ export default function Health() {
                                 </Box>
                                 <Experience level={character.level} experience={character.experience} />
                                 <Box sx={hpBox}>
-                                    <Typography variant="subtitle2" mr={2} >
+                                    <Typography variant="subtitle2" mr={2}>
                                         {hpView(character.hp)} HP
                                     </Typography>
+                                    {(character.hp.temporary > 0) ?
+                                        <Typography variant="subtitle2" mr={2}>
+                                            {character.hp.temporary} Temp
+                                        </Typography>
+                                        : <></>
+                                    }
                                     <Typography variant="subtitle2" mr={2}>
-                                        {(character.hp.temporary > 0) ?
-                                            <>
-                                                {character.hp.temporary} Temp
-                                            </>
-                                            : <></>
-                                        }
+                                        {character.ac} AC
                                     </Typography>
                                     <Typography>
-                                         {character.ac} AC
+                                        {character.hitDice.total - character.hitDice.used}/{character.hitDice.total} Hit Dice
                                     </Typography>
                                 </Box>
                                 <LinearProgressWithLabel value={hpPercent} sx={hpBar} color={healthBarColour(hpPercent)} />

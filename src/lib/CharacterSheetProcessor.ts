@@ -59,11 +59,19 @@ export default class CharacterSheetProcessor {
             weightData: this.buildWeightData(),
             deathSaves: this.dndBeyondJson.data.deathSaves,
             ac: this.buildArmour(),
-            wealth: this.buildWealth()
+            wealth: this.buildWealth(),
+            hitDice: this.buildHitDice()
         }
     }
 
-    private buildWealth() {
+    private buildHitDice(): HitDice {
+        return {
+            total: this.level,
+            used: this.dndBeyondJson.data.classes[0].hitDiceUsed
+        }
+    }
+
+    private buildWealth(): Wealth {
         const inventory = this.buildInventory()
         const totalCurrency = this.buildCurrencies().total
         return wealth(inventory, totalCurrency)
@@ -297,6 +305,12 @@ export type DmToolsData = {
     deathSaves: DeathSaves
     ac: number
     wealth: Wealth
+    hitDice: HitDice
+}
+
+export type HitDice = {
+    total: number
+    used: number
 }
 
 export type ItemContainer = {

@@ -1,6 +1,6 @@
 import getSummaryData from '../lib/getSummary'
 import getCharacter from './getCharacter'
-import { CharacterProfileHp, SpellSlot, Action, Currencies, DeathSaves } from '../../src/lib/CharacterSheetProcessor'
+import { CharacterProfileHp, SpellSlot, Action, Currencies, DeathSaves, HitDice } from '../../src/lib/CharacterSheetProcessor'
 
 export default async (): Promise<HealthData[]> => {
     const summary = await getSummaryData()
@@ -27,7 +27,8 @@ export default async (): Promise<HealthData[]> => {
             deathSaves: characterData.deathSaves,
             experience: characterData.profile.xp,
             level: characterData.profile.level,
-            ac: characterData.ac
+            ac: characterData.ac,
+            hitDice: characterData.hitDice
         }
     }))
 }
@@ -42,5 +43,6 @@ export type HealthData = {
     deathSaves: DeathSaves,
     experience: number,
     level: number,
-    ac: number
+    ac: number,
+    hitDice: HitDice
 }
