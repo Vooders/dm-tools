@@ -212,9 +212,14 @@ export default function Health() {
                                     <Typography variant="subtitle2" mr={2}>
                                         {character.ac} AC
                                     </Typography>
-                                    <Typography>
-                                        {character.hitDice.total - character.hitDice.used}/{character.hitDice.total} Hit Dice
-                                    </Typography>
+                                    {character.hitDice.map((hitDice) => {
+                                        return (
+                                            <Typography>
+                                                {hitDice.max - hitDice.used}/{hitDice.max} {hitDice.dice}
+                                            </Typography>
+                                        )
+                                    })}
+
                                 </Box>
                                 <LinearProgressWithLabel value={hpPercent} sx={hpBar} color={healthBarColour(hpPercent)} />
                                 <Box sx={slotStyling}>

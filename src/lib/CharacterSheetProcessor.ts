@@ -66,7 +66,7 @@ export default class CharacterSheetProcessor {
     }
 
     private buildHitDice() {
-        return hitDice.calculate(this.level, this.dndBeyondJson.data.classes[0].hitDiceUsed)
+        return hitDice.calculate(this.dndBeyondJson.data.classes)
     }
 
     private buildWealth(): Wealth {
@@ -303,7 +303,7 @@ export type DmToolsData = {
     deathSaves: DeathSaves
     ac: number
     wealth: Wealth
-    hitDice: hitDice.HitDice
+    hitDice: hitDice.HitDice[]
 }
 
 export type ItemContainer = {
@@ -557,4 +557,8 @@ export type CustomProficiency = {
         override: number
         magicBonus: number
         miscBonus: number
+}
+
+export type CharacterClass = {
+    level: number
 }
