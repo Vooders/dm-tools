@@ -564,4 +564,5 @@ export type CharacterClass = {
     definition: {
         hitDice: number
     }
+    hitDiceUsed: number
 }

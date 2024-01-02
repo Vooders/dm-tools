@@ -6,7 +6,7 @@ export function calculate(classes: CharacterClass[]): HitDice[] {
         return {
             dice: `d${clazz.definition.hitDice}`,
             max: clazz.level,
-            used: 1
+            used: clazz.hitDiceUsed
         }
     })
 }
