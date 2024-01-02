@@ -1,12 +1,14 @@
 import { CharacterClass } from "../CharacterSheetProcessor"
 
-
 export function calculate(classes: CharacterClass[]): HitDice[] {
-    return [{
-        dice: 'd6',
-        max: 1,
-        used: 1
-    }]
+
+    return classes.map((clazz) => {
+        return {
+            dice: 'd6',
+            max: clazz.level,
+            used: 1
+        }
+    })
 }
 
 export type HitDice = {
