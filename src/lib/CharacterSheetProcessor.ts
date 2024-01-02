@@ -10,6 +10,7 @@ import skills from './character-sheet-processor/skills'
 import passiveSkills from './character-sheet-processor/passiveSkills'
 import saves from './character-sheet-processor/saves'
 import wealth from './character-sheet-processor/wealth'
+import * as hitDice from './character-sheet-processor/hitDice'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -64,11 +65,8 @@ export default class CharacterSheetProcessor {
         }
     }
 
-    private buildHitDice(): HitDice {
-        return {
-            total: this.level,
-            used: this.dndBeyondJson.data.classes[0].hitDiceUsed
-        }
+    private buildHitDice() {
+        return hitDice.calculate(this.level, this.dndBeyondJson.data.classes[0].hitDiceUsed)
     }
 
     private buildWealth(): Wealth {
@@ -305,12 +303,7 @@ export type DmToolsData = {
     deathSaves: DeathSaves
     ac: number
     wealth: Wealth
-    hitDice: HitDice
-}
-
-export type HitDice = {
-    total: number
-    used: number
+    hitDice: hitDice.HitDice
 }
 
 export type ItemContainer = {
