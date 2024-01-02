@@ -197,7 +197,7 @@ export default class CharacterSheetProcessor {
 
     private buildSpellSlots(): SpellSlot[] {
         const classes = this.dndBeyondJson.data.classes[0]
-        const canCastSpells = classes.definition.canCastSpells || classes.subclassDefinition.canCastSpells
+        const canCastSpells = this.canCastSpells(classes)
         const levelSpellSlots = classes.definition.spellRules.levelSpellSlots
         return levelSpellSlots[this.level].map((maxSlots: number, index: number) => {
             return {
@@ -209,6 +209,16 @@ export default class CharacterSheetProcessor {
             spellSlot: SpellSlot) => {
             return spellSlot.max > 0
         })
+    }
+
+    private canCastSpells(classes: any): boolean {
+        if(classes.definition.canCastSpells) {
+            return true
+        }
+        if(classes.subclassDefinition != undefined) {
+            return classes.subclassDefinition.canCastSpells
+        }
+        return false
     }
 
     private buildActions(): Action[] {
