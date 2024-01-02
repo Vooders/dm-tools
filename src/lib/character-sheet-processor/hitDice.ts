@@ -4,7 +4,7 @@ export function calculate(classes: CharacterClass[]): HitDice[] {
 
     return classes.map((clazz) => {
         return {
-            dice: 'd6',
+            dice: `d${clazz.definition.hitDice}`,
             max: clazz.level,
             used: 1
         }
@@ -12,7 +12,7 @@ export function calculate(classes: CharacterClass[]): HitDice[] {
 }
 
 export type HitDice = {
-    dice: 'd6' | 'd8' | 'd10' | 'd12'
+    dice: string
     max: number
     used: number
 }

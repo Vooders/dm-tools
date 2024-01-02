@@ -561,4 +561,7 @@ export type CustomProficiency = {
 
 export type CharacterClass = {
     level: number
+    definition: {
+        hitDice: number
+    }
 }
