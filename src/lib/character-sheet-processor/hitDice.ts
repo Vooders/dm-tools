@@ -2,11 +2,19 @@ import { CharacterClass } from "../CharacterSheetProcessor"
 
 export function calculate(classes: CharacterClass[]): HitDice[] {
 
-    return classes.map((clazz) => {
+    const combined = classes.reduce((obj: any, clazz) => {
+        obj[clazz.definition.hitDice] = {
+            max: clazz.level + (obj.max | 0),
+            used: clazz.hitDiceUsed + (obj.used | 0)
+        }
+        return obj
+    }, {})
+
+    return Object.keys(combined).map((dice) => {
         return {
-            dice: `d${clazz.definition.hitDice}`,
-            max: clazz.level,
-            used: clazz.hitDiceUsed
+            dice: `d${dice}`,
+            max: combined[dice].max,
+            used: combined[dice].used
         }
     })
 }

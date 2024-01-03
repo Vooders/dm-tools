@@ -48,4 +48,18 @@ describe('hitDice', () => {
             hitDiceUsed.should.equal(1)
     })
 
+    describe('Multi Class', () => {
+        it('with the same die, combines them', () => {
+            const firstClass = new ClassBuilder()
+                    .withHitDice(6)
+                    .build()
+            const secondClass = new ClassBuilder()
+                    .withHitDice(6)
+                    .build()
+
+            const characterHitDice = hitDice.calculate([firstClass, secondClass])
+
+            characterHitDice.length.should.equal(1)
+        })
+    })
 })
