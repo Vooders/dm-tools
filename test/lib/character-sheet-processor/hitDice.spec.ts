@@ -49,17 +49,51 @@ describe('hitDice', () => {
     })
 
     describe('Multi Class', () => {
-        it('with the same die, combines them', () => {
-            const firstClass = new ClassBuilder()
-                    .withHitDice(6)
-                    .build()
-            const secondClass = new ClassBuilder()
-                    .withHitDice(6)
-                    .build()
+        describe('with the same die', () => {
+            it('should combine them', () => {
+                const firstClass = new ClassBuilder()
+                        .withHitDice(6)
+                        .build()
+                const secondClass = new ClassBuilder()
+                        .withHitDice(6)
+                        .build()
+    
+                const characterHitDice = hitDice.calculate([firstClass, secondClass])
+    
+                characterHitDice.length.should.equal(1)
+            })
+    
+            it('should total the max', () => {
+                const firstClass = new ClassBuilder()
+                        .withHitDice(6)
+                        .withLevel(8)
+                        .build()
+                const secondClass = new ClassBuilder()
+                        .withHitDice(6)
+                        .withLevel(2)
+                        .build()
+    
+                const characterHitDice = hitDice.calculate([firstClass, secondClass])
+    
+                characterHitDice[0].max.should.equal(10)
+            })
 
-            const characterHitDice = hitDice.calculate([firstClass, secondClass])
-
-            characterHitDice.length.should.equal(1)
+            it('should total the used', () => {
+                const firstClass = new ClassBuilder()
+                        .withHitDice(6)
+                        .withLevel(8)
+                        .withHitDiceUsed(2)
+                        .build()
+                const secondClass = new ClassBuilder()
+                        .withHitDice(6)
+                        .withLevel(2)
+                        .withHitDiceUsed(2)
+                        .build()
+    
+                const characterHitDice = hitDice.calculate([firstClass, secondClass])
+    
+                characterHitDice[0].used.should.equal(4)
+            })
         })
     })
 })

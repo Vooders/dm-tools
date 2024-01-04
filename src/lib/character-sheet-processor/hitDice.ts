@@ -1,12 +1,19 @@
 import { CharacterClass } from "../CharacterSheetProcessor"
 
 export function calculate(classes: CharacterClass[]): HitDice[] {
+    const combined = classes.reduce((obj: combined, clazz) => {
+        const dice = clazz.definition.hitDice
 
-    const combined = classes.reduce((obj: any, clazz) => {
-        obj[clazz.definition.hitDice] = {
-            max: clazz.level + (obj.max | 0),
-            used: clazz.hitDiceUsed + (obj.used | 0)
+        if (obj[dice]) {
+            obj[dice].max += clazz.level
+            obj[dice].used += clazz.hitDiceUsed
+        } else {
+            obj[dice] = {
+                max: clazz.level,
+                used: clazz.hitDiceUsed
+            }
         }
+
         return obj
     }, {})
 
@@ -23,4 +30,11 @@ export type HitDice = {
     dice: string
     max: number
     used: number
+}
+
+type combined = {
+    [key: string]: {
+        max: number,
+        used: number
+    }
 }
