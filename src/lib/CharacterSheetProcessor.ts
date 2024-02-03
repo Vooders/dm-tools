@@ -223,6 +223,9 @@ export default class CharacterSheetProcessor {
 
     private buildActions(): Action[] {
         const actions = this.dndBeyondJson.data.actions
+        const items = this.dndBeyondJson.data.inventory.filter((item: any) => {
+            return item.definition.canEquip === true
+        })
         return [...actions.race, ...actions.class, ...actions.feat].map(action => {
             return {
                 name: action.name,
@@ -241,6 +244,16 @@ export default class CharacterSheetProcessor {
                 limitedUse: {
                     maxUses: this.getMaxUses(feat),
                     numberUsed: (feat.limitedUse) ? feat.limitedUse.numberUsed : 0
+                }
+            }
+        })).concat(items.map((item: any) => {
+            return {
+                name: item.definition.name,
+                description: item.definition.description,
+                snippet: item.definition.snippet,
+                limitedUse: {
+                    maxUses: this.getMaxUses(item),
+                    numberUsed: (item.limitedUse) ? item.limitedUse.numberUsed : 0
                 }
             }
         }))
