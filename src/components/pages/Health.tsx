@@ -214,7 +214,7 @@ export default function Health() {
                                     </Typography>
                                     {character.hitDice.map((hitDice) => {
                                         return (
-                                            <Typography>
+                                            <Typography variant="subtitle2" mr={2}>
                                                 {hitDice.max - hitDice.used}/{hitDice.max} {hitDice.dice}
                                             </Typography>
                                         )
