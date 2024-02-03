@@ -6,7 +6,7 @@
         "id": 99332929,
         "userId": 115152303,
         "readonlyUrl": "https://dndbeyond.com/characters/99332929",
-        "avatarUrl": "https://www.dndbeyond.com/avatars/17/444/636377888514060153.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp",
+        "avatarUrl": "https://www.dndbeyond.com/avatars/10/83/636339381554374819.png?width=150&height=150&fit=crop&quality=95&auto=webp",
         "frameAvatarUrl": null,
         "backdropAvatarUrl": null,
         "smallBackdropAvatarUrl": null,
@@ -18,7 +18,7 @@
             "largeBackdropAvatarUrl": "https://www.dndbeyond.com/avatars/61/546/636453167793515953.jpeg",
             "thumbnailBackdropAvatarUrl": "https://www.dndbeyond.com/avatars/61/547/636453167794140909.jpeg"
         },
-        "avatarId": 17444,
+        "avatarId": 10083,
         "frameAvatarId": null,
         "backdropAvatarId": null,
         "smallBackdropAvatarId": null,
@@ -27,7 +27,7 @@
         "themeColorId": null,
         "themeColor": null,
         "decorations": {
-            "avatarUrl": "https://www.dndbeyond.com/avatars/17/444/636377888514060153.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp",
+            "avatarUrl": "https://www.dndbeyond.com/avatars/10/83/636339381554374819.png?width=150&height=150&fit=crop&quality=95&auto=webp",
             "frameAvatarUrl": null,
             "backdropAvatarUrl": null,
             "smallBackdropAvatarUrl": null,
@@ -39,8 +39,8 @@
                 "largeBackdropAvatarUrl": "https://www.dndbeyond.com/avatars/61/546/636453167793515953.jpeg",
                 "thumbnailBackdropAvatarUrl": "https://www.dndbeyond.com/avatars/61/547/636453167794140909.jpeg"
             },
-            "avatarId": 17444,
-            "portraitDecorationKey": "307",
+            "avatarId": 10083,
+            "portraitDecorationKey": "21",
             "frameAvatarDecorationKey": null,
             "frameAvatarId": null,
             "backdropAvatarDecorationKey": null,
@@ -55,23 +55,23 @@
         },
         "name": "Smug Druggles",
         "socialName": null,
-        "gender": null,
-        "faith": null,
-        "age": null,
-        "hair": null,
-        "eyes": null,
-        "skin": null,
-        "height": null,
-        "weight": null,
+        "gender": "Male",
+        "faith": "",
+        "age": 22,
+        "hair": "Brown",
+        "eyes": "brown",
+        "skin": "White",
+        "height": "3ft 1in ",
+        "weight": 39,
         "inspiration": false,
-        "baseHitPoints": 14,
+        "baseHitPoints": 39,
         "bonusHitPoints": null,
         "overrideHitPoints": null,
         "removedHitPoints": 0,
         "temporaryHitPoints": 0,
-        "currentXp": 921,
-        "alignmentId": null,
-        "lifestyleId": null,
+        "currentXp": 30062,
+        "alignmentId": 3,
+        "lifestyleId": 5,
         "stats": [
             {
                 "id": 1,
@@ -81,7 +81,7 @@
             {
                 "id": 2,
                 "name": null,
-                "value": 17
+                "value": 19
             },
             {
                 "id": 3,
@@ -804,16 +804,16 @@
             "allies": null,
             "personalPossessions": "a pet mouse\na token to remember your parents by",
             "otherHoldings": null,
-            "organizations": null,
+            "organizations": "Harpers",
             "enemies": null,
-            "backstory": null,
-            "otherNotes": null
+            "backstory": "Early years, Smugs father had split before he was born and his mother tried to bring him up with very little money until he was 5. She then became ill and passed away leaving him nothing but a few small trinkets to his name. (a photo, small stud earrings)\n\nHe ended up on the streets of Neverwinter, where he became involved with the city's underground trying to survive. He had brushings with the thieves guild, where he learned to fight, beg, steal and sneak for survival. He took regular beatings from guards and other urchins that were bigger than him. He learned to fight dirty…\n\nHe learned thieves can't through his time there. \n\nIn his later teenage years, smug had always known that this lifestyle isn't what he wanted, and deep down he knew it wasn't what his mother had wanted for he had tried applying for jobs, but through living there his whole life, he had struggled getting a Job. \n\nAs he turned 20 an older travelling merchant  had come through the city as part of legitimate trade, and caught Smug looking through the back of his cart looking for food. Instead of the usual beatings, he decided to take him under his wing and offer him opportunity, working for him for a safe place to sleep, food and company and a modest wage. This felt like a fortune to smug. \n\n\n\nThe trader was a human called Eric Malmstein.\nEric is an elder gentleman who has seen some of the world through trade, Grey of hair and beard, a little rough looking through years on the road, but genital natured and wise through experience. He made his living though the trade of metals, tobaccos and spices?  Having seen the difference between the rich and the poor, Smug thinks he is perhaps more wealthy than average, but not Ritch.\n\n\nIt was at this point he was able to start travelling and for the first time in his life he properly left the city for the first time. After working for the merchant for a couple of years, he was working a job for his friend Eric, delivering a shipment to greenest where it wouldn't quite be the same again. \n\nBetween the memory of Smugs mother and the trader who offers him the opportunity to grow his life, it relit hope of decency within Smug. He loves the chaos, but tries to do it with,  mostly good intent.",
+            "otherNotes": ""
         },
         "traits": {
-            "personalityTraits": null,
-            "ideals": null,
-            "bonds": null,
-            "flaws": null,
+            "personalityTraits": "I hide scraps of food and trinkets away in my pockets.",
+            "ideals": "Aspiration. I’m going to prove that I’m worthy of a better life.",
+            "bonds": "",
+            "flaws": "",
             "appearance": null
         },
         "preferences": {
@@ -844,23 +844,199 @@
         "lifestyle": null,
         "inventory": [
             {
-                "id": 1221384746,
+                "id": 1303092411,
                 "entityTypeId": 1439493548,
                 "definition": {
-                    "id": 10,
+                    "id": 4613,
+                    "baseTypeId": 1782728300,
+                    "entityTypeId": 112130694,
+                    "definitionKey": "112130694:4613",
+                    "canEquip": true,
+                    "magic": true,
+                    "name": "Dagger of Venom",
+                    "snippet": "",
+                    "weight": 1,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Dagger",
+                    "description": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon.</p>\r\n<p>You can use an action to cause thick, black poison to coat the blade. The poison remains for 1 minute or until an attack using this weapon hits a creature. That creature must succeed on a DC 15 Constitution saving throw or take 2d10 poison damage and become poisoned for 1 minute. The dagger can't be used this way again until the next dawn.</p>",
+                    "canAttune": false,
+                    "attunementDescription": "",
+                    "rarity": "Rare",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": false,
+                    "bundleSize": 1,
+                    "avatarUrl": "https://www.dndbeyond.com/avatars/18/940/636381778002062759.jpeg?width=350&height=350&fit=bounds&quality=95&auto=webp",
+                    "largeAvatarUrl": "https://www.dndbeyond.com/avatars/7/176/636284724602236106.jpeg?width=1000&height=1000&fit=bounds&quality=95&auto=webp",
+                    "filterType": "Weapon",
+                    "cost": null,
+                    "isPack": false,
+                    "tags": [
+                        "Damage",
+                        "Debuff",
+                        "Combat"
+                    ],
+                    "grantedModifiers": [
+                        {
+                            "fixedValue": null,
+                            "id": "78",
+                            "entityId": 10,
+                            "entityTypeId": 349597128,
+                            "type": "damage",
+                            "subType": "poison",
+                            "dice": {
+                                "diceCount": 2,
+                                "diceValue": 10,
+                                "diceMultiplier": null,
+                                "fixedValue": null,
+                                "diceString": "2d10"
+                            },
+                            "restriction": "DC 15 Constitution Save Negates",
+                            "statId": null,
+                            "requiresAttunement": false,
+                            "duration": {
+                                "durationInterval": 1,
+                                "durationUnit": "Round"
+                            },
+                            "friendlyTypeName": "Damage",
+                            "friendlySubtypeName": "Poison",
+                            "isGranted": true,
+                            "bonusTypes": [],
+                            "value": null,
+                            "availableToMulticlass": true,
+                            "modifierTypeId": 2,
+                            "modifierSubTypeId": 56,
+                            "componentId": 4613,
+                            "componentTypeId": 112130694
+                        },
+                        {
+                            "fixedValue": 1,
+                            "id": "417",
+                            "entityId": null,
+                            "entityTypeId": null,
+                            "type": "bonus",
+                            "subType": "magic",
+                            "dice": null,
+                            "restriction": "",
+                            "statId": null,
+                            "requiresAttunement": false,
+                            "duration": null,
+                            "friendlyTypeName": "Bonus",
+                            "friendlySubtypeName": "Magic",
+                            "isGranted": true,
+                            "bonusTypes": [],
+                            "value": 1,
+                            "availableToMulticlass": true,
+                            "modifierTypeId": 1,
+                            "modifierSubTypeId": 312,
+                            "componentId": 4613,
+                            "componentTypeId": 112130694
+                        }
+                    ],
+                    "subType": null,
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": 3,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": {
+                        "diceCount": 1,
+                        "diceValue": 4,
+                        "diceMultiplier": null,
+                        "fixedValue": null,
+                        "diceString": "1d4"
+                    },
+                    "damageType": "Piercing",
+                    "fixedDamage": null,
+                    "properties": [
+                        {
+                            "id": 2,
+                            "name": "Finesse",
+                            "description": "When making an attack with a finesse weapon, you use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls. ",
+                            "notes": null
+                        },
+                        {
+                            "id": 4,
+                            "name": "Light",
+                            "description": "A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons. ",
+                            "notes": null
+                        },
+                        {
+                            "id": 10,
+                            "name": "Thrown",
+                            "description": "If a weapon has the thrown property, you can throw the weapon to make a ranged attack. If the weapon is a melee weapon, you use the same ability modifier for that attack roll and damage roll that you would use for a melee attack with the weapon. For example, if you throw a handaxe, you use your Strength, but if you throw a dagger, you can use either your Strength or your Dexterity, since the dagger has the finesse property. ",
+                            "notes": null
+                        }
+                    ],
+                    "attackType": 1,
+                    "categoryId": 1,
+                    "range": 20,
+                    "longRange": 60,
+                    "isMonkWeapon": true,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": 161,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": null,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": true,
+                "equippedEntityTypeId": 1581111423,
+                "equippedEntityId": 99332929,
+                "chargesUsed": 0,
+                "limitedUse": {
+                    "maxUses": 1,
+                    "numberUsed": 0,
+                    "resetType": "",
+                    "resetTypeDescription": ""
+                },
+                "containerEntityId": 99332929,
+                "containerEntityTypeId": 1581111423,
+                "containerDefinitionKey": "1581111423:99332929",
+                "currency": null
+            },
+            {
+                "id": 1256834135,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 3,
                     "baseTypeId": 701257905,
                     "entityTypeId": 701257905,
-                    "definitionKey": "701257905:10",
+                    "definitionKey": "701257905:3",
                     "canEquip": true,
                     "magic": false,
-                    "name": "Leather",
+                    "name": "Studded Leather",
                     "snippet": null,
-                    "weight": 10,
+                    "weight": 13,
                     "weightMultiplier": 1,
                     "capacity": null,
                     "capacityWeight": 0,
                     "type": "Light Armor",
-                    "description": "<p>The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials.</p>",
+                    "description": "<p>Made from tough but flexible leather, studded leather is reinforced with close-set rivets or spikes.</p>",
                     "canAttune": false,
                     "attunementDescription": null,
                     "rarity": "Common",
@@ -873,7 +1049,7 @@
                     "avatarUrl": null,
                     "largeAvatarUrl": null,
                     "filterType": "Armor",
-                    "cost": 10,
+                    "cost": 45,
                     "isPack": false,
                     "tags": [
                         "Warding"
@@ -882,10 +1058,10 @@
                     "subType": null,
                     "isConsumable": false,
                     "weaponBehaviors": [],
-                    "baseItemId": 10,
-                    "baseArmorName": "Leather",
+                    "baseItemId": 3,
+                    "baseArmorName": "Studded Leather",
                     "strengthRequirement": null,
-                    "armorClass": 11,
+                    "armorClass": 12,
                     "stealthCheck": 1,
                     "damage": null,
                     "damageType": null,
@@ -1046,6 +1222,424 @@
                 "currency": null
             },
             {
+                "id": 1250881373,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 17,
+                    "baseTypeId": 1782728300,
+                    "entityTypeId": 1782728300,
+                    "definitionKey": "1782728300:17",
+                    "canEquip": true,
+                    "magic": false,
+                    "name": "Shortbow",
+                    "snippet": null,
+                    "weight": 2,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Shortbow",
+                    "description": "<p>Proficiency with a shortbow allows you to add your proficiency bonus to the attack roll for any attack you make with it.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": false,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Weapon",
+                    "cost": 25,
+                    "isPack": false,
+                    "tags": [
+                        "Damage",
+                        "Combat"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": null,
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": 17,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": {
+                        "diceCount": 1,
+                        "diceValue": 6,
+                        "diceMultiplier": null,
+                        "fixedValue": null,
+                        "diceString": "1d6"
+                    },
+                    "damageType": "Piercing",
+                    "fixedDamage": null,
+                    "properties": [
+                        {
+                            "id": 1,
+                            "name": "Ammunition",
+                            "description": "You can use a weapon that has the ammunition property to make a ranged attack only if you have ammunition to fire from the weapon. Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack (you need a free hand to load a one-handed weapon). At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield. \r\nIf you use a weapon that has the ammunition property to make a melee attack, you treat the weapon as an improvised weapon (see \"Improvised Weapons\" later in the section). A sling must be loaded to deal any damage when used in this way. ",
+                            "notes": null
+                        },
+                        {
+                            "id": 7,
+                            "name": "Range",
+                            "description": "A weapon that can be used to make a ranged attack has a range in parentheses after the ammunition or thrown property. The range lists two numbers. The first is the weapon's normal range in feet, and the second indicates the weapon's long range. When attacking a target beyond normal range, you have disadvantage on the attack roll. You can't attack a target beyond the weapon's long range. ",
+                            "notes": null
+                        },
+                        {
+                            "id": 11,
+                            "name": "Two-Handed",
+                            "description": "This weapon requires two hands when you attack with it. ",
+                            "notes": null
+                        }
+                    ],
+                    "attackType": 2,
+                    "categoryId": 1,
+                    "range": 80,
+                    "longRange": 320,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": null,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": true,
+                "equippedEntityTypeId": 1581111423,
+                "equippedEntityId": 99332929,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 99332929,
+                "containerEntityTypeId": 1581111423,
+                "containerDefinitionKey": "1581111423:99332929",
+                "currency": null
+            },
+            {
+                "id": 1250880539,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 30,
+                    "baseTypeId": 1782728300,
+                    "entityTypeId": 1782728300,
+                    "definitionKey": "1782728300:30",
+                    "canEquip": true,
+                    "magic": false,
+                    "name": "Shortsword",
+                    "snippet": null,
+                    "weight": 2,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Shortsword",
+                    "description": "<p>Proficiency with a shortsword allows you to add your proficiency bonus to the attack roll for any attack you make with it.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": false,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Weapon",
+                    "cost": 10,
+                    "isPack": false,
+                    "tags": [
+                        "Damage",
+                        "Combat"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": null,
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": 30,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": {
+                        "diceCount": 1,
+                        "diceValue": 6,
+                        "diceMultiplier": null,
+                        "fixedValue": null,
+                        "diceString": "1d6"
+                    },
+                    "damageType": "Piercing",
+                    "fixedDamage": null,
+                    "properties": [
+                        {
+                            "id": 2,
+                            "name": "Finesse",
+                            "description": "When making an attack with a finesse weapon, you use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls. ",
+                            "notes": null
+                        },
+                        {
+                            "id": 4,
+                            "name": "Light",
+                            "description": "A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons. ",
+                            "notes": null
+                        }
+                    ],
+                    "attackType": 1,
+                    "categoryId": 2,
+                    "range": 5,
+                    "longRange": 5,
+                    "isMonkWeapon": true,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": null,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": true,
+                "equippedEntityTypeId": 1581111423,
+                "equippedEntityId": 99332929,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 99332929,
+                "containerEntityTypeId": 1581111423,
+                "containerDefinitionKey": "1581111423:99332929",
+                "currency": null
+            },
+            {
+                "id": 1256834769,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 30,
+                    "baseTypeId": 1782728300,
+                    "entityTypeId": 1782728300,
+                    "definitionKey": "1782728300:30",
+                    "canEquip": true,
+                    "magic": false,
+                    "name": "Shortsword",
+                    "snippet": null,
+                    "weight": 2,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Shortsword",
+                    "description": "<p>Proficiency with a shortsword allows you to add your proficiency bonus to the attack roll for any attack you make with it.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": false,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Weapon",
+                    "cost": 10,
+                    "isPack": false,
+                    "tags": [
+                        "Damage",
+                        "Combat"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": null,
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": 30,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": {
+                        "diceCount": 1,
+                        "diceValue": 6,
+                        "diceMultiplier": null,
+                        "fixedValue": null,
+                        "diceString": "1d6"
+                    },
+                    "damageType": "Piercing",
+                    "fixedDamage": null,
+                    "properties": [
+                        {
+                            "id": 2,
+                            "name": "Finesse",
+                            "description": "When making an attack with a finesse weapon, you use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls. ",
+                            "notes": null
+                        },
+                        {
+                            "id": 4,
+                            "name": "Light",
+                            "description": "A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons. ",
+                            "notes": null
+                        }
+                    ],
+                    "attackType": 1,
+                    "categoryId": 2,
+                    "range": 5,
+                    "longRange": 5,
+                    "isMonkWeapon": true,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": null,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": true,
+                "equippedEntityTypeId": 1581111423,
+                "equippedEntityId": 99332929,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 99332929,
+                "containerEntityTypeId": 1581111423,
+                "containerDefinitionKey": "1581111423:99332929",
+                "currency": null
+            },
+            {
+                "id": 1250880874,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 20,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:20",
+                    "canEquip": true,
+                    "magic": false,
+                    "name": "Backpack",
+                    "snippet": null,
+                    "weight": 5,
+                    "weightMultiplier": 1,
+                    "capacity": "",
+                    "capacityWeight": 30,
+                    "type": "Gear",
+                    "description": "<p>A backpack is a leather pack carried on the back, typically with straps to secure it. A backpack can hold&nbsp;1 cubic foot/ 30 pounds of gear.</p>\r\n<p>You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": false,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 2,
+                    "isPack": false,
+                    "tags": [
+                        "Container"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": true,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": true,
+                "equippedEntityTypeId": 1581111423,
+                "equippedEntityId": 99332929,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 99332929,
+                "containerEntityTypeId": 1581111423,
+                "containerDefinitionKey": "1581111423:99332929",
+                "currency": null
+            },
+            {
                 "id": 1221384752,
                 "entityTypeId": 1439493548,
                 "definition": {
@@ -1133,12 +1727,1616 @@
                 "containerEntityTypeId": 1581111423,
                 "containerDefinitionKey": "1581111423:99332929",
                 "currency": null
+            },
+            {
+                "id": 1256840167,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 42,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:42",
+                    "canEquip": true,
+                    "magic": false,
+                    "name": "Component Pouch",
+                    "snippet": null,
+                    "weight": 2,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>A component pouch is a small, watertight leather belt pouch that has compartments to hold all the material components and other special items you need to cast your spells, except for those components that have a specific cost (as indicated in a spell's description).</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": false,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 25,
+                    "isPack": false,
+                    "tags": [
+                        "Utility",
+                        "Container"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": true,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": true,
+                "equippedEntityTypeId": 1581111423,
+                "equippedEntityId": 99332929,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 99332929,
+                "containerEntityTypeId": 1581111423,
+                "containerDefinitionKey": "1581111423:99332929",
+                "currency": null
+            },
+            {
+                "id": 1309853809,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 72,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:72",
+                    "canEquip": true,
+                    "magic": false,
+                    "name": "Pouch",
+                    "snippet": null,
+                    "weight": 1,
+                    "weightMultiplier": 1,
+                    "capacity": "",
+                    "capacityWeight": 6,
+                    "type": "Gear",
+                    "description": "<p>A cloth or leather pouch can hold 1/5 cubic foot/ 6 pounds of gear - or up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": false,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 0.5,
+                    "isPack": false,
+                    "tags": [
+                        "Container"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": true,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": true,
+                "equippedEntityTypeId": 1581111423,
+                "equippedEntityId": 99332929,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 99332929,
+                "containerEntityTypeId": 1581111423,
+                "containerDefinitionKey": "1581111423:99332929",
+                "currency": null
+            },
+            {
+                "id": 1256841463,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 77,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:77",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Rope, Hempen (50 feet)",
+                    "snippet": null,
+                    "weight": 10,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>Rope,&nbsp;has 2 hit points and can be burst with a DC 17 Strength check.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 1,
+                    "isPack": false,
+                    "tags": [
+                        "Utility",
+                        "Exploration"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 99332929,
+                "containerEntityTypeId": 1581111423,
+                "containerDefinitionKey": "1581111423:99332929",
+                "currency": null
+            },
+            {
+                "id": 1256841451,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 21,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:21",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Ball Bearings (bag of 1,000)",
+                    "snippet": null,
+                    "weight": 2,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>As an action, you can spill these tiny metal balls from their pouch to cover a level, square area that is 10 feet on a side. A creature moving across the covered area must succeed on a DC 10 Dexterity saving throw or fall prone. A creature moving through the area at half speed doesn't need to make the save.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1000,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 1,
+                    "isPack": false,
+                    "tags": [
+                        "Control",
+                        "Utility",
+                        "Combat"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1000,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 1250880874,
+                "containerEntityTypeId": 1439493548,
+                "containerDefinitionKey": "1439493548:1250880874",
+                "currency": null
+            },
+            {
+                "id": 1256841453,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 25,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:25",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Bell",
+                    "snippet": null,
+                    "weight": 0,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>A standard bell&nbsp;that rings, typically used for signaling.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 1,
+                    "isPack": false,
+                    "tags": [
+                        "Communication",
+                        "Utility"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 1250880874,
+                "containerEntityTypeId": 1439493548,
+                "containerDefinitionKey": "1439493548:1250880874",
+                "currency": null
+            },
+            {
+                "id": 1256841454,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 31,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:31",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Candle",
+                    "snippet": null,
+                    "weight": 0,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>For 1 hour, a candle sheds bright light in a 5-foot radius and dim light for an additional 5 feet.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 0.01,
+                    "isPack": false,
+                    "tags": [
+                        "Utility",
+                        "Exploration",
+                        "Consumable"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 5,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 1250880874,
+                "containerEntityTypeId": 1439493548,
+                "containerDefinitionKey": "1439493548:1250880874",
+                "currency": null
+            },
+            {
+                "id": 1256841455,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 43,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:43",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Crowbar",
+                    "snippet": null,
+                    "weight": 5,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 2,
+                    "isPack": false,
+                    "tags": [
+                        "Utility",
+                        "Exploration"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 1250880874,
+                "containerEntityTypeId": 1439493548,
+                "containerDefinitionKey": "1439493548:1250880874",
+                "currency": null
+            },
+            {
+                "id": 1316401370,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 55,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:55",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Lamp",
+                    "snippet": null,
+                    "weight": 1,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>A lamp casts bright light in a 15-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 0.5,
+                    "isPack": false,
+                    "tags": [
+                        "Utility",
+                        "Exploration"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 1250880874,
+                "containerEntityTypeId": 1439493548,
+                "containerDefinitionKey": "1439493548:1250880874",
+                "currency": null
+            },
+            {
+                "id": 1256841459,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 63,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:63",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Oil (flask)",
+                    "snippet": null,
+                    "weight": 1,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>Oil usually comes in a clay flask that holds 1 pint. As an action, you can splash the oil in this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. Make a ranged attack against a target creature or object, treating the oil as an improvised weapon. On a hit, the target is covered in oil. If the target takes any fire damage before the oil dries (after 1 minute), the target takes an additional 5 fire damage from the burning oil. You can also pour a flask of oil on the ground to cover a 5-foot-square area, provided that the surface is level. If lit, the oil burns for 2 rounds and deals 5 fire damage to any creature that enters the area or ends its turn in the area. A creature can take this damage only once per turn.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 0.1,
+                    "isPack": false,
+                    "tags": [
+                        "Damage",
+                        "Utility",
+                        "Combat"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 1250880874,
+                "containerEntityTypeId": 1439493548,
+                "containerDefinitionKey": "1439493548:1250880874",
+                "currency": null
+            },
+            {
+                "id": 1256775514,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 71,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:71",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Potion of Healing",
+                    "snippet": null,
+                    "weight": 0.5,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>A character who drinks the magical red fluid in this vial regains 2d4 + 2 hit points. Drinking or administering a potion takes an action.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 50,
+                    "isPack": false,
+                    "tags": [
+                        "Healing",
+                        "Combat",
+                        "Consumable"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Potion",
+                    "isConsumable": true,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 6,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 3,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 1250880874,
+                "containerEntityTypeId": 1439493548,
+                "containerDefinitionKey": "1439493548:1250880874",
+                "currency": null
+            },
+            {
+                "id": 1256841460,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 75,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:75",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Rations (1 day)",
+                    "snippet": null,
+                    "weight": 2,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 0.5,
+                    "isPack": false,
+                    "tags": [
+                        "Social",
+                        "Utility",
+                        "Consumable"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 2,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 1250880874,
+                "containerEntityTypeId": 1439493548,
+                "containerDefinitionKey": "1439493548:1250880874",
+                "currency": null
+            },
+            {
+                "id": 1299287614,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 86,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:86",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Spellbook",
+                    "snippet": null,
+                    "weight": 3,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages suitable for recording spells.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 50,
+                    "isPack": false,
+                    "tags": [
+                        "Utility"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 1250880874,
+                "containerEntityTypeId": 1439493548,
+                "containerDefinitionKey": "1439493548:1250880874",
+                "currency": null
+            },
+            {
+                "id": 1256841461,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 90,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:90",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Tinderbox",
+                    "snippet": null,
+                    "weight": 1,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch -- or anything else with abundant, exposed fuel -- takes an action. Lighting any other fire takes 1 minute.</p>\r\n<p>&nbsp;</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 0.5,
+                    "isPack": false,
+                    "tags": [
+                        "Utility",
+                        "Exploration"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 1250880874,
+                "containerEntityTypeId": 1439493548,
+                "containerDefinitionKey": "1439493548:1250880874",
+                "currency": null
+            },
+            {
+                "id": 1256702665,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 91,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:91",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Torch",
+                    "snippet": null,
+                    "weight": 1,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 0.01,
+                    "isPack": false,
+                    "tags": [
+                        "Damage",
+                        "Utility",
+                        "Exploration",
+                        "Combat"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 1250880874,
+                "containerEntityTypeId": 1439493548,
+                "containerDefinitionKey": "1439493548:1250880874",
+                "currency": null
+            },
+            {
+                "id": 1250914110,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 92,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:92",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Waterskin",
+                    "snippet": null,
+                    "weight": 5,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>A waterskin can hold&nbsp;4 pints of liquid.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 0.2,
+                    "isPack": false,
+                    "tags": [
+                        "Container"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 1250880874,
+                "containerEntityTypeId": 1439493548,
+                "containerDefinitionKey": "1439493548:1250880874",
+                "currency": null
+            },
+            {
+                "id": 1256841462,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 92,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:92",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Waterskin",
+                    "snippet": null,
+                    "weight": 5,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>A waterskin can hold&nbsp;4 pints of liquid.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 0.2,
+                    "isPack": false,
+                    "tags": [
+                        "Container"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 1250880874,
+                "containerEntityTypeId": 1439493548,
+                "containerDefinitionKey": "1439493548:1250880874",
+                "currency": null
+            },
+            {
+                "id": 1250888546,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 126,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:126",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "Thieves' Tools",
+                    "snippet": null,
+                    "weight": 1,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>This set of tools includes a small file, a set of lock picks, a small mirror mounted on a metal handle, a set of narrow-bladed scissors, and a pair of pliers. Proficiency with these tools lets you add your proficiency bonus to any ability checks you make to disarm traps or open locks.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 25,
+                    "isPack": false,
+                    "tags": [
+                        "Utility",
+                        "Exploration"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Tool",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 11,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 1,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 1250880874,
+                "containerEntityTypeId": 1439493548,
+                "containerDefinitionKey": "1439493548:1250880874",
+                "currency": null
+            },
+            {
+                "id": 1256841452,
+                "entityTypeId": 1439493548,
+                "definition": {
+                    "id": 205,
+                    "baseTypeId": 2103445194,
+                    "entityTypeId": 2103445194,
+                    "definitionKey": "2103445194:205",
+                    "canEquip": false,
+                    "magic": false,
+                    "name": "String",
+                    "snippet": null,
+                    "weight": 0,
+                    "weightMultiplier": 1,
+                    "capacity": null,
+                    "capacityWeight": 0,
+                    "type": "Gear",
+                    "description": "<p>A 10-foot length of string, typically found in a burglar's pack.</p>",
+                    "canAttune": false,
+                    "attunementDescription": null,
+                    "rarity": "Common",
+                    "isHomebrew": false,
+                    "version": null,
+                    "sourceId": null,
+                    "sourcePageNumber": null,
+                    "stackable": true,
+                    "bundleSize": 1,
+                    "avatarUrl": null,
+                    "largeAvatarUrl": null,
+                    "filterType": "Other Gear",
+                    "cost": 0,
+                    "isPack": false,
+                    "tags": [
+                        "Utility"
+                    ],
+                    "grantedModifiers": [],
+                    "subType": "Adventuring Gear",
+                    "isConsumable": false,
+                    "weaponBehaviors": [],
+                    "baseItemId": null,
+                    "baseArmorName": null,
+                    "strengthRequirement": null,
+                    "armorClass": null,
+                    "stealthCheck": null,
+                    "damage": null,
+                    "damageType": null,
+                    "fixedDamage": null,
+                    "properties": null,
+                    "attackType": null,
+                    "categoryId": null,
+                    "range": null,
+                    "longRange": null,
+                    "isMonkWeapon": false,
+                    "levelInfusionGranted": null,
+                    "sources": [
+                        {
+                            "sourceId": 1,
+                            "pageNumber": null,
+                            "sourceType": 2
+                        },
+                        {
+                            "sourceId": 2,
+                            "pageNumber": null,
+                            "sourceType": 1
+                        }
+                    ],
+                    "armorTypeId": null,
+                    "gearTypeId": 1,
+                    "groupedId": null,
+                    "canBeAddedToInventory": true,
+                    "isContainer": false,
+                    "isCustomItem": false
+                },
+                "definitionId": 0,
+                "definitionTypeId": 0,
+                "displayAsAttack": null,
+                "quantity": 10,
+                "isAttuned": false,
+                "equipped": false,
+                "equippedEntityTypeId": null,
+                "equippedEntityId": null,
+                "chargesUsed": 0,
+                "limitedUse": null,
+                "containerEntityId": 1250880874,
+                "containerEntityTypeId": 1439493548,
+                "containerDefinitionKey": "1439493548:1250880874",
+                "currency": null
             }
         ],
         "currencies": {
             "cp": 0,
-            "sp": 0,
-            "gp": 0,
+            "sp": 147,
+            "gp": 209,
             "ep": 0,
             "pp": 0
         },
@@ -1146,7 +3344,7 @@
             {
                 "id": 146269825,
                 "entityTypeId": 1446578651,
-                "level": 3,
+                "level": 7,
                 "isStartingClass": true,
                 "hitDiceUsed": 0,
                 "definitionId": 0,
@@ -2496,15 +4694,15 @@
                             "entityID": "343"
                         },
                         "levelScale": {
-                            "id": 17,
-                            "level": 3,
-                            "description": "2d6",
+                            "id": 19,
+                            "level": 7,
+                            "description": "4d6",
                             "dice": {
-                                "diceCount": 2,
+                                "diceCount": 4,
                                 "diceValue": 6,
                                 "diceMultiplier": null,
                                 "fixedValue": null,
-                                "diceString": "2d6"
+                                "diceString": "4d6"
                             },
                             "fixedValue": null
                         }
@@ -3070,7 +5268,35 @@
         ],
         "spellDefenses": null,
         "customActions": [],
-        "characterValues": [],
+        "characterValues": [
+            {
+                "typeId": 8,
+                "value": "spellbook (spell level 3)",
+                "notes": null,
+                "valueId": "1299287614",
+                "valueTypeId": "1439493548",
+                "contextId": null,
+                "contextTypeId": null
+            },
+            {
+                "typeId": 22,
+                "value": 0,
+                "notes": null,
+                "valueId": "1256841462",
+                "valueTypeId": "1439493548",
+                "contextId": null,
+                "contextTypeId": null
+            },
+            {
+                "typeId": 8,
+                "value": "Waterskin empty",
+                "notes": null,
+                "valueId": "1256841462",
+                "valueTypeId": "1439493548",
+                "contextId": null,
+                "contextTypeId": null
+            }
+        ],
         "conditions": [],
         "deathSaves": {
             "failCount": 0,
@@ -3176,6 +5402,127 @@
         "choices": {
             "race": [],
             "class": [
+                {
+                    "componentId": 313,
+                    "componentTypeId": 12168134,
+                    "id": "1-313",
+                    "parentChoiceId": null,
+                    "type": 1,
+                    "subType": null,
+                    "optionValue": 695,
+                    "label": null,
+                    "isOptional": false,
+                    "isInfinite": false,
+                    "defaultSubtypes": [],
+                    "displayOrder": null,
+                    "options": [
+                        {
+                            "id": 695,
+                            "label": "Ability Score Improvement",
+                            "description": null
+                        },
+                        {
+                            "id": 696,
+                            "label": "Feat",
+                            "description": null
+                        }
+                    ],
+                    "optionIds": []
+                },
+                {
+                    "componentId": 313,
+                    "componentTypeId": 12168134,
+                    "id": "2-1749",
+                    "parentChoiceId": "1-313",
+                    "type": 2,
+                    "subType": 5,
+                    "optionValue": 3521,
+                    "label": "Choose an Ability Score",
+                    "isOptional": false,
+                    "isInfinite": false,
+                    "defaultSubtypes": [],
+                    "displayOrder": null,
+                    "options": [
+                        {
+                            "id": 3520,
+                            "label": "Strength Score",
+                            "description": null
+                        },
+                        {
+                            "id": 3521,
+                            "label": "Dexterity Score",
+                            "description": null
+                        },
+                        {
+                            "id": 3522,
+                            "label": "Constitution Score",
+                            "description": null
+                        },
+                        {
+                            "id": 3523,
+                            "label": "Intelligence Score",
+                            "description": null
+                        },
+                        {
+                            "id": 3524,
+                            "label": "Wisdom Score",
+                            "description": null
+                        },
+                        {
+                            "id": 3525,
+                            "label": "Charisma Score",
+                            "description": null
+                        }
+                    ],
+                    "optionIds": []
+                },
+                {
+                    "componentId": 313,
+                    "componentTypeId": 12168134,
+                    "id": "2-1831",
+                    "parentChoiceId": "1-313",
+                    "type": 2,
+                    "subType": 5,
+                    "optionValue": 3521,
+                    "label": "Choose an Ability Score",
+                    "isOptional": false,
+                    "isInfinite": false,
+                    "defaultSubtypes": [],
+                    "displayOrder": null,
+                    "options": [
+                        {
+                            "id": 3520,
+                            "label": "Strength Score",
+                            "description": null
+                        },
+                        {
+                            "id": 3521,
+                            "label": "Dexterity Score",
+                            "description": null
+                        },
+                        {
+                            "id": 3522,
+                            "label": "Constitution Score",
+                            "description": null
+                        },
+                        {
+                            "id": 3523,
+                            "label": "Intelligence Score",
+                            "description": null
+                        },
+                        {
+                            "id": 3524,
+                            "label": "Wisdom Score",
+                            "description": null
+                        },
+                        {
+                            "id": 3525,
+                            "label": "Charisma Score",
+                            "description": null
+                        }
+                    ],
+                    "optionIds": []
+                },
                 {
                     "componentId": 346,
                     "componentTypeId": 12168134,
@@ -3699,6 +6046,230 @@
                         {
                             "id": 4145,
                             "label": "Persuasion",
+                            "description": null
+                        }
+                    ],
+                    "optionIds": []
+                },
+                {
+                    "componentId": 471,
+                    "componentTypeId": 12168134,
+                    "id": "2-1855",
+                    "parentChoiceId": null,
+                    "type": 2,
+                    "subType": 2,
+                    "optionValue": 4255,
+                    "label": "Choose Rogue Expertise",
+                    "isOptional": false,
+                    "isInfinite": false,
+                    "defaultSubtypes": [],
+                    "displayOrder": null,
+                    "options": [
+                        {
+                            "id": 4247,
+                            "label": "Athletics",
+                            "description": null
+                        },
+                        {
+                            "id": 4246,
+                            "label": "Acrobatics",
+                            "description": null
+                        },
+                        {
+                            "id": 4255,
+                            "label": "Sleight of Hand",
+                            "description": null
+                        },
+                        {
+                            "id": 4256,
+                            "label": "Stealth",
+                            "description": null
+                        },
+                        {
+                            "id": 4369,
+                            "label": "Arcana",
+                            "description": null
+                        },
+                        {
+                            "id": 4370,
+                            "label": "History",
+                            "description": null
+                        },
+                        {
+                            "id": 4251,
+                            "label": "Investigation",
+                            "description": null
+                        },
+                        {
+                            "id": 4372,
+                            "label": "Nature",
+                            "description": null
+                        },
+                        {
+                            "id": 4373,
+                            "label": "Religion",
+                            "description": null
+                        },
+                        {
+                            "id": 4368,
+                            "label": "Animal Handling",
+                            "description": null
+                        },
+                        {
+                            "id": 4249,
+                            "label": "Insight",
+                            "description": null
+                        },
+                        {
+                            "id": 4371,
+                            "label": "Medicine",
+                            "description": null
+                        },
+                        {
+                            "id": 4252,
+                            "label": "Perception",
+                            "description": null
+                        },
+                        {
+                            "id": 4374,
+                            "label": "Survival",
+                            "description": null
+                        },
+                        {
+                            "id": 4248,
+                            "label": "Deception",
+                            "description": null
+                        },
+                        {
+                            "id": 4250,
+                            "label": "Intimidation",
+                            "description": null
+                        },
+                        {
+                            "id": 4253,
+                            "label": "Performance",
+                            "description": null
+                        },
+                        {
+                            "id": 4254,
+                            "label": "Persuasion",
+                            "description": null
+                        },
+                        {
+                            "id": 4257,
+                            "label": "Thieves' Tools",
+                            "description": null
+                        }
+                    ],
+                    "optionIds": []
+                },
+                {
+                    "componentId": 471,
+                    "componentTypeId": 12168134,
+                    "id": "2-1856",
+                    "parentChoiceId": null,
+                    "type": 2,
+                    "subType": 2,
+                    "optionValue": 4251,
+                    "label": "Choose Rogue Expertise",
+                    "isOptional": false,
+                    "isInfinite": false,
+                    "defaultSubtypes": [],
+                    "displayOrder": null,
+                    "options": [
+                        {
+                            "id": 4247,
+                            "label": "Athletics",
+                            "description": null
+                        },
+                        {
+                            "id": 4246,
+                            "label": "Acrobatics",
+                            "description": null
+                        },
+                        {
+                            "id": 4255,
+                            "label": "Sleight of Hand",
+                            "description": null
+                        },
+                        {
+                            "id": 4256,
+                            "label": "Stealth",
+                            "description": null
+                        },
+                        {
+                            "id": 4369,
+                            "label": "Arcana",
+                            "description": null
+                        },
+                        {
+                            "id": 4370,
+                            "label": "History",
+                            "description": null
+                        },
+                        {
+                            "id": 4251,
+                            "label": "Investigation",
+                            "description": null
+                        },
+                        {
+                            "id": 4372,
+                            "label": "Nature",
+                            "description": null
+                        },
+                        {
+                            "id": 4373,
+                            "label": "Religion",
+                            "description": null
+                        },
+                        {
+                            "id": 4368,
+                            "label": "Animal Handling",
+                            "description": null
+                        },
+                        {
+                            "id": 4249,
+                            "label": "Insight",
+                            "description": null
+                        },
+                        {
+                            "id": 4371,
+                            "label": "Medicine",
+                            "description": null
+                        },
+                        {
+                            "id": 4252,
+                            "label": "Perception",
+                            "description": null
+                        },
+                        {
+                            "id": 4374,
+                            "label": "Survival",
+                            "description": null
+                        },
+                        {
+                            "id": 4248,
+                            "label": "Deception",
+                            "description": null
+                        },
+                        {
+                            "id": 4250,
+                            "label": "Intimidation",
+                            "description": null
+                        },
+                        {
+                            "id": 4253,
+                            "label": "Performance",
+                            "description": null
+                        },
+                        {
+                            "id": 4254,
+                            "label": "Persuasion",
+                            "description": null
+                        },
+                        {
+                            "id": 4257,
+                            "label": "Thieves' Tools",
                             "description": null
                         }
                     ],
@@ -4389,11 +6960,11 @@
                     "actionType": 3,
                     "attackSubtype": null,
                     "dice": {
-                        "diceCount": 2,
+                        "diceCount": 4,
                         "diceValue": 6,
                         "diceMultiplier": null,
                         "fixedValue": null,
-                        "diceString": "2d6"
+                        "diceString": "4d6"
                     },
                     "value": null,
                     "damageTypeId": null,
@@ -4453,6 +7024,47 @@
                     "activation": {
                         "activationTime": 1,
                         "activationType": 3
+                    },
+                    "numberOfTargets": null,
+                    "fixedToHit": null,
+                    "ammunition": null
+                },
+                {
+                    "componentId": 347,
+                    "componentTypeId": 12168134,
+                    "id": "53397",
+                    "entityTypeId": "222216831",
+                    "limitedUse": null,
+                    "name": "Uncanny Dodge",
+                    "description": null,
+                    "snippet": "When an attacker that you can see hits you with an attack, you can use your reaction to halve the attack’s damage against you.",
+                    "abilityModifierStatId": null,
+                    "onMissDescription": null,
+                    "saveFailDescription": null,
+                    "saveSuccessDescription": null,
+                    "saveStatId": null,
+                    "fixedSaveDc": null,
+                    "attackTypeRange": null,
+                    "actionType": 3,
+                    "attackSubtype": null,
+                    "dice": null,
+                    "value": null,
+                    "damageTypeId": null,
+                    "isMartialArts": false,
+                    "isProficient": false,
+                    "spellRangeType": null,
+                    "displayAsAttack": null,
+                    "range": {
+                        "range": null,
+                        "longRange": null,
+                        "aoeType": null,
+                        "aoeSize": null,
+                        "hasAoeSpecialDescription": false,
+                        "minimumRange": null
+                    },
+                    "activation": {
+                        "activationTime": 1,
+                        "activationType": 4
                     },
                     "numberOfTargets": null,
                     "fixedToHit": null,
@@ -4623,6 +7235,52 @@
                 }
             ],
             "class": [
+                {
+                    "fixedValue": 1,
+                    "id": "1749",
+                    "entityId": 2,
+                    "entityTypeId": 1472902489,
+                    "type": "bonus",
+                    "subType": "dexterity-score",
+                    "dice": null,
+                    "restriction": null,
+                    "statId": null,
+                    "requiresAttunement": false,
+                    "duration": null,
+                    "friendlyTypeName": "Bonus",
+                    "friendlySubtypeName": "Dexterity Score",
+                    "isGranted": false,
+                    "bonusTypes": [],
+                    "value": 1,
+                    "availableToMulticlass": true,
+                    "modifierTypeId": 1,
+                    "modifierSubTypeId": 3,
+                    "componentId": 313,
+                    "componentTypeId": 12168134
+                },
+                {
+                    "fixedValue": 1,
+                    "id": "1831",
+                    "entityId": 2,
+                    "entityTypeId": 1472902489,
+                    "type": "bonus",
+                    "subType": "dexterity-score",
+                    "dice": null,
+                    "restriction": null,
+                    "statId": null,
+                    "requiresAttunement": false,
+                    "duration": null,
+                    "friendlyTypeName": "Bonus",
+                    "friendlySubtypeName": "Dexterity Score",
+                    "isGranted": false,
+                    "bonusTypes": [],
+                    "value": 1,
+                    "availableToMulticlass": true,
+                    "modifierTypeId": 1,
+                    "modifierSubTypeId": 3,
+                    "componentId": 313,
+                    "componentTypeId": 12168134
+                },
                 {
                     "fixedValue": null,
                     "id": "1447",
@@ -5013,6 +7671,52 @@
                     "modifierSubTypeId": 250,
                     "componentId": 467,
                     "componentTypeId": 12168134
+                },
+                {
+                    "fixedValue": null,
+                    "id": "1855",
+                    "entityId": 4,
+                    "entityTypeId": 1958004211,
+                    "type": "expertise",
+                    "subType": "sleight-of-hand",
+                    "dice": null,
+                    "restriction": "",
+                    "statId": null,
+                    "requiresAttunement": false,
+                    "duration": null,
+                    "friendlyTypeName": "Expertise",
+                    "friendlySubtypeName": "Sleight of Hand",
+                    "isGranted": false,
+                    "bonusTypes": [],
+                    "value": null,
+                    "availableToMulticlass": true,
+                    "modifierTypeId": 12,
+                    "modifierSubTypeId": 428,
+                    "componentId": 471,
+                    "componentTypeId": 12168134
+                },
+                {
+                    "fixedValue": null,
+                    "id": "1856",
+                    "entityId": 8,
+                    "entityTypeId": 1958004211,
+                    "type": "expertise",
+                    "subType": "investigation",
+                    "dice": null,
+                    "restriction": "",
+                    "statId": null,
+                    "requiresAttunement": false,
+                    "duration": null,
+                    "friendlyTypeName": "Expertise",
+                    "friendlySubtypeName": "Investigation",
+                    "isGranted": false,
+                    "bonusTypes": [],
+                    "value": null,
+                    "availableToMulticlass": true,
+                    "modifierTypeId": 12,
+                    "modifierSubTypeId": 432,
+                    "componentId": 471,
+                    "componentTypeId": 12168134
                 }
             ],
             "background": [
@@ -5109,7 +7813,63 @@
                     "componentTypeId": 1669830167
                 }
             ],
-            "item": [],
+            "item": [
+                {
+                    "fixedValue": null,
+                    "id": "78",
+                    "entityId": 10,
+                    "entityTypeId": 349597128,
+                    "type": "damage",
+                    "subType": "poison",
+                    "dice": {
+                        "diceCount": 2,
+                        "diceValue": 10,
+                        "diceMultiplier": null,
+                        "fixedValue": null,
+                        "diceString": "2d10"
+                    },
+                    "restriction": "DC 15 Constitution Save Negates",
+                    "statId": null,
+                    "requiresAttunement": false,
+                    "duration": {
+                        "durationInterval": 1,
+                        "durationUnit": "Round"
+                    },
+                    "friendlyTypeName": "Damage",
+                    "friendlySubtypeName": "Poison",
+                    "isGranted": true,
+                    "bonusTypes": [],
+                    "value": null,
+                    "availableToMulticlass": true,
+                    "modifierTypeId": 2,
+                    "modifierSubTypeId": 56,
+                    "componentId": 4613,
+                    "componentTypeId": 112130694
+                },
+                {
+                    "fixedValue": 1,
+                    "id": "417",
+                    "entityId": null,
+                    "entityTypeId": null,
+                    "type": "bonus",
+                    "subType": "magic",
+                    "dice": null,
+                    "restriction": "",
+                    "statId": null,
+                    "requiresAttunement": false,
+                    "duration": null,
+                    "friendlyTypeName": "Bonus",
+                    "friendlySubtypeName": "Magic",
+                    "isGranted": true,
+                    "bonusTypes": [],
+                    "value": 1,
+                    "availableToMulticlass": true,
+                    "modifierTypeId": 1,
+                    "modifierSubTypeId": 312,
+                    "componentId": 4613,
+                    "componentTypeId": 112130694
+                }
+            ],
             "feat": [],
             "condition": []
         },
@@ -5701,125 +8461,6 @@
                     {
                         "overrideSaveDc": null,
                         "limitedUse": null,
-                        "id": 137998,
-                        "entityTypeId": 435869154,
-                        "definition": {
-                            "id": 2127,
-                            "name": "Grease",
-                            "level": 1,
-                            "school": "Conjuration",
-                            "duration": {
-                                "durationInterval": 1,
-                                "durationUnit": "Minute",
-                                "durationType": "Time"
-                            },
-                            "activation": {
-                                "activationTime": 1,
-                                "activationType": 1
-                            },
-                            "range": {
-                                "origin": "Ranged",
-                                "rangeValue": 60,
-                                "aoeType": "Square",
-                                "aoeValue": 10
-                            },
-                            "asPartOfWeaponAttack": false,
-                            "description": "<p>Slick grease covers the ground in a 10-foot square centered on a point within range and turns it into difficult terrain for the duration.</p>\r\n<p>When the grease appears, each creature standing in its area must succeed on a Dexterity saving throw or fall prone. A creature that enters the area or ends its turn there must also succeed on a Dexterity saving throw or fall prone.</p>",
-                            "snippet": "",
-                            "concentration": false,
-                            "ritual": false,
-                            "rangeArea": null,
-                            "damageEffect": null,
-                            "components": [
-                                1,
-                                2,
-                                3
-                            ],
-                            "componentsDescription": "a bit of pork rind or butter",
-                            "saveDcAbilityId": 2,
-                            "healing": null,
-                            "healingDice": [],
-                            "tempHpDice": [],
-                            "attackType": null,
-                            "canCastAtHigherLevel": false,
-                            "isHomebrew": false,
-                            "version": null,
-                            "sourceId": null,
-                            "sourcePageNumber": 246,
-                            "requiresSavingThrow": true,
-                            "requiresAttackRoll": false,
-                            "atHigherLevels": {
-                                "scaleType": null,
-                                "higherLevelDefinitions": [],
-                                "additionalAttacks": [],
-                                "additionalTargets": [],
-                                "areaOfEffect": [],
-                                "duration": [],
-                                "creatures": [],
-                                "special": [],
-                                "points": []
-                            },
-                            "modifiers": [],
-                            "conditions": [
-                                {
-                                    "type": 1,
-                                    "conditionId": 12,
-                                    "conditionDuration": 0,
-                                    "durationUnit": "Round",
-                                    "exception": ""
-                                }
-                            ],
-                            "tags": [
-                                "Control"
-                            ],
-                            "castingTimeDescription": "",
-                            "scaleType": null,
-                            "sources": [
-                                {
-                                    "sourceId": 1,
-                                    "pageNumber": null,
-                                    "sourceType": 2
-                                },
-                                {
-                                    "sourceId": 2,
-                                    "pageNumber": 246,
-                                    "sourceType": 1
-                                }
-                            ],
-                            "spellGroups": []
-                        },
-                        "definitionId": 0,
-                        "prepared": false,
-                        "countsAsKnownSpell": true,
-                        "usesSpellSlot": true,
-                        "castAtLevel": null,
-                        "alwaysPrepared": false,
-                        "restriction": null,
-                        "spellCastingAbilityId": null,
-                        "displayAsAttack": null,
-                        "additionalDescription": null,
-                        "castOnlyAsRitual": false,
-                        "ritualCastingType": null,
-                        "range": {
-                            "origin": "Ranged",
-                            "rangeValue": 60,
-                            "aoeType": "Square",
-                            "aoeValue": 10
-                        },
-                        "activation": {
-                            "activationTime": 1,
-                            "activationType": 1
-                        },
-                        "baseLevelAtWill": false,
-                        "atWillLimitedUseLevel": null,
-                        "isSignatureSpell": null,
-                        "componentId": 0,
-                        "componentTypeId": 0,
-                        "spellListId": null
-                    },
-                    {
-                        "overrideSaveDc": null,
-                        "limitedUse": null,
                         "id": 138436,
                         "entityTypeId": 435869154,
                         "definition": {
@@ -6312,11 +8953,422 @@
                         "componentId": 0,
                         "componentTypeId": 0,
                         "spellListId": null
+                    },
+                    {
+                        "overrideSaveDc": null,
+                        "limitedUse": null,
+                        "id": 136248,
+                        "entityTypeId": 435869154,
+                        "definition": {
+                            "id": 2035,
+                            "name": "Comprehend Languages",
+                            "level": 1,
+                            "school": "Divination",
+                            "duration": {
+                                "durationInterval": 1,
+                                "durationUnit": "Hour",
+                                "durationType": "Time"
+                            },
+                            "activation": {
+                                "activationTime": 1,
+                                "activationType": 1
+                            },
+                            "range": {
+                                "origin": "Self",
+                                "rangeValue": 0,
+                                "aoeType": null,
+                                "aoeValue": null
+                            },
+                            "asPartOfWeaponAttack": false,
+                            "description": "<p>For the duration, you understand the literal meaning of any spoken language that you hear. You also understand any written language that you see, but you must be touching the surface on which the words are written. It takes about 1 minute to read one page of text.</p>\r\n<p>This spell doesn't decode secret messages in a text or a glyph, such as an arcane sigil, that isn't part of a written language.</p>",
+                            "snippet": "",
+                            "concentration": false,
+                            "ritual": true,
+                            "rangeArea": null,
+                            "damageEffect": null,
+                            "components": [
+                                1,
+                                2,
+                                3
+                            ],
+                            "componentsDescription": "a pinch of soot and salt",
+                            "saveDcAbilityId": null,
+                            "healing": null,
+                            "healingDice": [],
+                            "tempHpDice": [],
+                            "attackType": null,
+                            "canCastAtHigherLevel": false,
+                            "isHomebrew": false,
+                            "version": null,
+                            "sourceId": null,
+                            "sourcePageNumber": 224,
+                            "requiresSavingThrow": false,
+                            "requiresAttackRoll": false,
+                            "atHigherLevels": {
+                                "scaleType": null,
+                                "higherLevelDefinitions": [],
+                                "additionalAttacks": [],
+                                "additionalTargets": [],
+                                "areaOfEffect": [],
+                                "duration": [],
+                                "creatures": [],
+                                "special": [],
+                                "points": []
+                            },
+                            "modifiers": [],
+                            "conditions": [],
+                            "tags": [
+                                "Social"
+                            ],
+                            "castingTimeDescription": "",
+                            "scaleType": null,
+                            "sources": [
+                                {
+                                    "sourceId": 1,
+                                    "pageNumber": null,
+                                    "sourceType": 2
+                                },
+                                {
+                                    "sourceId": 2,
+                                    "pageNumber": 224,
+                                    "sourceType": 1
+                                }
+                            ],
+                            "spellGroups": []
+                        },
+                        "definitionId": 0,
+                        "prepared": false,
+                        "countsAsKnownSpell": true,
+                        "usesSpellSlot": true,
+                        "castAtLevel": null,
+                        "alwaysPrepared": false,
+                        "restriction": null,
+                        "spellCastingAbilityId": null,
+                        "displayAsAttack": null,
+                        "additionalDescription": null,
+                        "castOnlyAsRitual": false,
+                        "ritualCastingType": null,
+                        "range": {
+                            "origin": "Self",
+                            "rangeValue": 0,
+                            "aoeType": null,
+                            "aoeValue": null
+                        },
+                        "activation": {
+                            "activationTime": 1,
+                            "activationType": 1
+                        },
+                        "baseLevelAtWill": false,
+                        "atWillLimitedUseLevel": null,
+                        "isSignatureSpell": null,
+                        "componentId": 0,
+                        "componentTypeId": 0,
+                        "spellListId": null
+                    },
+                    {
+                        "overrideSaveDc": null,
+                        "limitedUse": null,
+                        "id": 138509,
+                        "entityTypeId": 435869154,
+                        "definition": {
+                            "id": 2195,
+                            "name": "Misty Step",
+                            "level": 2,
+                            "school": "Conjuration",
+                            "duration": {
+                                "durationInterval": 0,
+                                "durationUnit": null,
+                                "durationType": "Instantaneous"
+                            },
+                            "activation": {
+                                "activationTime": 1,
+                                "activationType": 3
+                            },
+                            "range": {
+                                "origin": "Self",
+                                "rangeValue": 0,
+                                "aoeType": null,
+                                "aoeValue": null
+                            },
+                            "asPartOfWeaponAttack": false,
+                            "description": "<p>Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space that you can see.</p>",
+                            "snippet": "",
+                            "concentration": false,
+                            "ritual": false,
+                            "rangeArea": null,
+                            "damageEffect": null,
+                            "components": [
+                                1
+                            ],
+                            "componentsDescription": "",
+                            "saveDcAbilityId": null,
+                            "healing": null,
+                            "healingDice": [],
+                            "tempHpDice": [],
+                            "attackType": null,
+                            "canCastAtHigherLevel": false,
+                            "isHomebrew": false,
+                            "version": null,
+                            "sourceId": null,
+                            "sourcePageNumber": 260,
+                            "requiresSavingThrow": false,
+                            "requiresAttackRoll": false,
+                            "atHigherLevels": {
+                                "scaleType": null,
+                                "higherLevelDefinitions": [],
+                                "additionalAttacks": [],
+                                "additionalTargets": [],
+                                "areaOfEffect": [],
+                                "duration": [],
+                                "creatures": [],
+                                "special": [],
+                                "points": []
+                            },
+                            "modifiers": [],
+                            "conditions": [],
+                            "tags": [
+                                "Teleportation"
+                            ],
+                            "castingTimeDescription": "",
+                            "scaleType": null,
+                            "sources": [
+                                {
+                                    "sourceId": 1,
+                                    "pageNumber": null,
+                                    "sourceType": 2
+                                },
+                                {
+                                    "sourceId": 2,
+                                    "pageNumber": 260,
+                                    "sourceType": 1
+                                }
+                            ],
+                            "spellGroups": []
+                        },
+                        "definitionId": 0,
+                        "prepared": false,
+                        "countsAsKnownSpell": true,
+                        "usesSpellSlot": true,
+                        "castAtLevel": null,
+                        "alwaysPrepared": false,
+                        "restriction": null,
+                        "spellCastingAbilityId": null,
+                        "displayAsAttack": null,
+                        "additionalDescription": null,
+                        "castOnlyAsRitual": false,
+                        "ritualCastingType": null,
+                        "range": {
+                            "origin": "Self",
+                            "rangeValue": 0,
+                            "aoeType": null,
+                            "aoeValue": null
+                        },
+                        "activation": {
+                            "activationTime": 1,
+                            "activationType": 3
+                        },
+                        "baseLevelAtWill": false,
+                        "atWillLimitedUseLevel": null,
+                        "isSignatureSpell": null,
+                        "componentId": 0,
+                        "componentTypeId": 0,
+                        "spellListId": null
+                    },
+                    {
+                        "overrideSaveDc": null,
+                        "limitedUse": null,
+                        "id": 136197,
+                        "entityTypeId": 435869154,
+                        "definition": {
+                            "id": 2025,
+                            "name": "Charm Person",
+                            "level": 1,
+                            "school": "Enchantment",
+                            "duration": {
+                                "durationInterval": 1,
+                                "durationUnit": "Hour",
+                                "durationType": "Time"
+                            },
+                            "activation": {
+                                "activationTime": 1,
+                                "activationType": 1
+                            },
+                            "range": {
+                                "origin": "Ranged",
+                                "rangeValue": 30,
+                                "aoeType": null,
+                                "aoeValue": null
+                            },
+                            "asPartOfWeaponAttack": false,
+                            "description": "<p>You attempt to charm a humanoid you can see within range. It must make a Wisdom saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p>\r\n<p><em><strong>At Higher Levels.</strong></em> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
+                            "snippet": "",
+                            "concentration": false,
+                            "ritual": false,
+                            "rangeArea": null,
+                            "damageEffect": null,
+                            "components": [
+                                1,
+                                2
+                            ],
+                            "componentsDescription": "",
+                            "saveDcAbilityId": 5,
+                            "healing": null,
+                            "healingDice": [],
+                            "tempHpDice": [],
+                            "attackType": null,
+                            "canCastAtHigherLevel": true,
+                            "isHomebrew": false,
+                            "version": null,
+                            "sourceId": null,
+                            "sourcePageNumber": 221,
+                            "requiresSavingThrow": true,
+                            "requiresAttackRoll": false,
+                            "atHigherLevels": {
+                                "scaleType": "spellscale",
+                                "higherLevelDefinitions": [
+                                    {
+                                        "level": 1,
+                                        "typeId": 1,
+                                        "dice": null,
+                                        "value": 1,
+                                        "details": "Creatures must be within 30 feet of each other"
+                                    }
+                                ],
+                                "additionalAttacks": [],
+                                "additionalTargets": [],
+                                "areaOfEffect": [],
+                                "duration": [],
+                                "creatures": [],
+                                "special": [],
+                                "points": []
+                            },
+                            "modifiers": [],
+                            "conditions": [
+                                {
+                                    "type": 1,
+                                    "conditionId": 2,
+                                    "conditionDuration": 1,
+                                    "durationUnit": "Hour",
+                                    "exception": "Spell duration or until harmful action"
+                                }
+                            ],
+                            "tags": [
+                                "Control",
+                                "Social"
+                            ],
+                            "castingTimeDescription": "",
+                            "scaleType": "spellscale",
+                            "sources": [
+                                {
+                                    "sourceId": 1,
+                                    "pageNumber": null,
+                                    "sourceType": 2
+                                },
+                                {
+                                    "sourceId": 2,
+                                    "pageNumber": 221,
+                                    "sourceType": 1
+                                }
+                            ],
+                            "spellGroups": []
+                        },
+                        "definitionId": 0,
+                        "prepared": false,
+                        "countsAsKnownSpell": true,
+                        "usesSpellSlot": true,
+                        "castAtLevel": null,
+                        "alwaysPrepared": false,
+                        "restriction": null,
+                        "spellCastingAbilityId": null,
+                        "displayAsAttack": null,
+                        "additionalDescription": null,
+                        "castOnlyAsRitual": false,
+                        "ritualCastingType": null,
+                        "range": {
+                            "origin": "Ranged",
+                            "rangeValue": 30,
+                            "aoeType": null,
+                            "aoeValue": null
+                        },
+                        "activation": {
+                            "activationTime": 1,
+                            "activationType": 1
+                        },
+                        "baseLevelAtWill": false,
+                        "atWillLimitedUseLevel": null,
+                        "isSignatureSpell": null,
+                        "componentId": 0,
+                        "componentTypeId": 0,
+                        "spellListId": null
                     }
                 ]
             }
         ],
-        "customItems": [],
+        "customItems": [
+            {
+                "id": 20178886,
+                "name": "Harper pin",
+                "description": null,
+                "weight": null,
+                "cost": null,
+                "quantity": 1,
+                "notes": null
+            },
+            {
+                "id": 21039160,
+                "name": "semi precious stones worth 100gp",
+                "description": null,
+                "weight": 0,
+                "cost": null,
+                "quantity": 3,
+                "notes": null
+            },
+            {
+                "id": 21092399,
+                "name": "semi precious/fancy gems",
+                "description": "(2x50) (5x100) (1x200) (1x400) (1x600) - values",
+                "weight": null,
+                "cost": null,
+                "quantity": 1,
+                "notes": null
+            },
+            {
+                "id": 21199314,
+                "name": "ermine pelt",
+                "description": null,
+                "weight": 0,
+                "cost": null,
+                "quantity": 8,
+                "notes": null
+            },
+            {
+                "id": 21338327,
+                "name": "letters from thay (evidence)",
+                "description": "saying not all red wizards are for the cults doing",
+                "weight": null,
+                "cost": null,
+                "quantity": 1,
+                "notes": null
+            },
+            {
+                "id": 21338360,
+                "name": "letters from serverin the red (evidence)",
+                "description": "letters showing that severing the red has good connections with red wizards",
+                "weight": 1,
+                "cost": 0,
+                "quantity": 1,
+                "notes": null
+            },
+            {
+                "id": 21339217,
+                "name": "book, beyond the iron gate",
+                "description": "demonic book on summoning entery on summoning tiamat and the cost and sacrifice of doing so",
+                "weight": null,
+                "cost": null,
+                "quantity": 1,
+                "notes": null
+            }
+        ],
         "campaign": {
             "id": 4504162,
             "name": "Backup Campaign",
@@ -6343,7 +9395,7 @@
                     "characterId": 99332929,
                     "characterName": "Smug Druggles",
                     "characterUrl": "/profile/JonBDnD/characters/99332929",
-                    "avatarUrl": "https://www.dndbeyond.com/avatars/17/444/636377888514060153.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp",
+                    "avatarUrl": "https://www.dndbeyond.com/avatars/10/83/636339381554374819.png?width=150&height=150&fit=crop&quality=95&auto=webp",
                     "privacyType": 3,
                     "campaignId": null,
                     "isAssigned": true
@@ -6382,7 +9434,7 @@
                 "affectedClassFeatureDefinitionKey": null
             }
         ],
-        "dateModified": "2023-10-19T18:15:18.667503Z",
+        "dateModified": "2024-02-02T22:59:15.461652Z",
         "providedFrom": "database"
     },
     "pagination": null,
@@ -6398,8 +9450,8 @@
             },
             {
                 "name": "Dexterity",
-                "value": 17,
-                "modifier": 3,
+                "value": 19,
+                "modifier": 4,
                 "shortName": "DEX"
             },
             {
@@ -6430,32 +9482,32 @@
         "profile": {
             "name": "Smug Druggles",
             "race": "Lightfoot Halfling",
-            "level": 3,
-            "classes": "Rogue 3",
+            "level": 7,
+            "classes": "Rogue 7",
             "background": "Urchin",
             "alignment": "",
             "appearance": {
                 "size": "",
-                "gender": null,
-                "faith": null,
-                "age": null,
-                "hair": null,
-                "eyes": null,
-                "skin": null,
-                "height": null,
-                "weight": null
+                "gender": "Male",
+                "faith": "",
+                "age": 22,
+                "hair": "Brown",
+                "eyes": "brown",
+                "skin": "White",
+                "height": "3ft 1in ",
+                "weight": 39
             },
-            "xp": 921
+            "xp": 30062
         },
         "hp": {
-            "constitutionBonus": 3,
-            "base": 14,
+            "constitutionBonus": 7,
+            "base": 39,
             "bonus": null,
             "override": null,
             "removed": 0,
             "temporary": 0
         },
-        "proficiency": 2,
+        "proficiency": 3,
         "saves": [
             {
                 "name": "Strength",
@@ -6464,7 +9516,7 @@
             },
             {
                 "name": "Dexterity",
-                "modifier": 5,
+                "modifier": 7,
                 "shortName": "DEX"
             },
             {
@@ -6474,7 +9526,7 @@
             },
             {
                 "name": "Intelligence",
-                "modifier": 4,
+                "modifier": 5,
                 "shortName": "INT"
             },
             {
@@ -6492,7 +9544,7 @@
             {
                 "mod": "DEX",
                 "name": "Acrobatics",
-                "bonus": 3,
+                "bonus": 4,
                 "proficient": false,
                 "expertise": false
             },
@@ -6513,14 +9565,14 @@
             {
                 "mod": "STR",
                 "name": "Athletics",
-                "bonus": 2,
+                "bonus": 3,
                 "proficient": true,
                 "expertise": false
             },
             {
                 "mod": "CHA",
                 "name": "Deception",
-                "bonus": 1,
+                "bonus": 2,
                 "proficient": true,
                 "expertise": false
             },
@@ -6548,9 +9600,9 @@
             {
                 "mod": "INT",
                 "name": "Investigation",
-                "bonus": 4,
+                "bonus": 8,
                 "proficient": true,
-                "expertise": false
+                "expertise": true
             },
             {
                 "mod": "WIS",
@@ -6569,7 +9621,7 @@
             {
                 "mod": "WIS",
                 "name": "Perception",
-                "bonus": 3,
+                "bonus": 4,
                 "proficient": true,
                 "expertise": false
             },
@@ -6597,14 +9649,14 @@
             {
                 "mod": "DEX",
                 "name": "Sleight of Hand",
-                "bonus": 5,
+                "bonus": 10,
                 "proficient": true,
-                "expertise": false
+                "expertise": true
             },
             {
                 "mod": "DEX",
                 "name": "Stealth",
-                "bonus": 7,
+                "bonus": 10,
                 "proficient": true,
                 "expertise": true
             },
@@ -6618,7 +9670,7 @@
             {
                 "mod": "DEX",
                 "name": "Thieves' Tools",
-                "bonus": 7,
+                "bonus": 10,
                 "proficient": true,
                 "expertise": true
             }
@@ -6627,12 +9679,12 @@
             {
                 "mod": "WIS",
                 "name": "Perception",
-                "score": 13
+                "score": 14
             },
             {
                 "mod": "INT",
                 "name": "Investigation",
-                "score": 14
+                "score": 18
             },
             {
                 "mod": "WIS",
@@ -6661,6 +9713,11 @@
         "spellSlots": [
             {
                 "level": 1,
+                "max": 4,
+                "used": 0
+            },
+            {
+                "level": 2,
                 "max": 2,
                 "used": 0
             }
@@ -6679,6 +9736,15 @@
                 "name": "Cunning Action",
                 "description": null,
                 "snippet": "You can take a bonus action on each of your turns to take the Dash, Disengage, or Hide action.",
+                "limitedUse": {
+                    "maxUses": 0,
+                    "numberUsed": 0
+                }
+            },
+            {
+                "name": "Uncanny Dodge",
+                "description": null,
+                "snippet": "When an attacker that you can see hits you with an attack, you can use your reaction to halve the attack’s damage against you.",
                 "limitedUse": {
                     "maxUses": 0,
                     "numberUsed": 0
@@ -6823,59 +9889,132 @@
                         "castingTime": "reaction"
                     },
                     {
-                        "name": "Grease",
+                        "name": "Comprehend Languages",
                         "level": 1,
-                        "school": "Conjuration",
+                        "school": "Divination",
                         "duration": {
                             "durationInterval": 1,
-                            "durationUnit": "Minute",
+                            "durationUnit": "Hour",
+                            "durationType": "Time"
+                        },
+                        "range": {
+                            "origin": "Self",
+                            "rangeValue": 0,
+                            "aoeType": null,
+                            "aoeValue": null
+                        },
+                        "description": "<p>For the duration, you understand the literal meaning of any spoken language that you hear. You also understand any written language that you see, but you must be touching the surface on which the words are written. It takes about 1 minute to read one page of text.</p>\r\n<p>This spell doesn't decode secret messages in a text or a glyph, such as an arcane sigil, that isn't part of a written language.</p>",
+                        "components": "a pinch of soot and salt",
+                        "tags": [
+                            "Social"
+                        ],
+                        "prepared": false,
+                        "castingTime": "action"
+                    },
+                    {
+                        "name": "Charm Person",
+                        "level": 1,
+                        "school": "Enchantment",
+                        "duration": {
+                            "durationInterval": 1,
+                            "durationUnit": "Hour",
                             "durationType": "Time"
                         },
                         "range": {
                             "origin": "Ranged",
-                            "rangeValue": 60,
-                            "aoeType": "Square",
-                            "aoeValue": 10
+                            "rangeValue": 30,
+                            "aoeType": null,
+                            "aoeValue": null
                         },
-                        "description": "<p>Slick grease covers the ground in a 10-foot square centered on a point within range and turns it into difficult terrain for the duration.</p>\r\n<p>When the grease appears, each creature standing in its area must succeed on a Dexterity saving throw or fall prone. A creature that enters the area or ends its turn there must also succeed on a Dexterity saving throw or fall prone.</p>",
-                        "components": "a bit of pork rind or butter",
+                        "description": "<p>You attempt to charm a humanoid you can see within range. It must make a Wisdom saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p>\r\n<p><em><strong>At Higher Levels.</strong></em> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
+                        "components": "",
                         "tags": [
-                            "Control"
+                            "Control",
+                            "Social"
                         ],
                         "prepared": false,
                         "castingTime": "action"
+                    }
+                ]
+            },
+            {
+                "level": 2,
+                "spells": [
+                    {
+                        "name": "Misty Step",
+                        "level": 2,
+                        "school": "Conjuration",
+                        "duration": {
+                            "durationInterval": 0,
+                            "durationUnit": null,
+                            "durationType": "Instantaneous"
+                        },
+                        "range": {
+                            "origin": "Self",
+                            "rangeValue": 0,
+                            "aoeType": null,
+                            "aoeValue": null
+                        },
+                        "description": "<p>Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space that you can see.</p>",
+                        "components": "",
+                        "tags": [
+                            "Teleportation"
+                        ],
+                        "prepared": false,
+                        "castingTime": "bonus"
                     }
                 ]
             }
         ],
         "currencies": {
             "cp": 0,
-            "sp": 0,
-            "gp": 0,
+            "sp": 147,
+            "gp": 209,
             "ep": 0,
             "pp": 0,
-            "total": 0
+            "total": 223.7
         },
         "inventory": [
             {
                 "name": "Equipment",
                 "equipped": true,
+                "weight": 0,
                 "capacity": 150,
                 "contents": [
                     {
-                        "id": 1221384746,
+                        "id": 1303092411,
                         "definition": {
-                            "id": 10,
+                            "id": 4613,
+                            "avatarUrl": "https://www.dndbeyond.com/avatars/18/940/636381778002062759.jpeg?width=350&height=350&fit=bounds&quality=95&auto=webp",
+                            "name": "Dagger of Venom",
+                            "weight": 1,
+                            "rarity": "Rare",
+                            "filterType": "Weapon",
+                            "isContainer": false,
+                            "cost": null,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 99332929,
+                        "equipped": true,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 1256834135,
+                        "definition": {
+                            "id": 3,
                             "avatarUrl": null,
-                            "name": "Leather",
-                            "weight": 10,
+                            "name": "Studded Leather",
+                            "weight": 13,
                             "rarity": "Common",
                             "filterType": "Armor",
                             "isContainer": false,
-                            "cost": 10,
+                            "cost": 45,
                             "bundleSize": 1,
                             "capacity": 0,
-                            "armorClass": 11,
+                            "armorClass": 12,
                             "armorTypeId": 1
                         },
                         "containerId": 99332929,
@@ -6893,6 +10032,66 @@
                             "filterType": "Weapon",
                             "isContainer": false,
                             "cost": 2,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 99332929,
+                        "equipped": true,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 1250881373,
+                        "definition": {
+                            "id": 17,
+                            "avatarUrl": null,
+                            "name": "Shortbow",
+                            "weight": 2,
+                            "rarity": "Common",
+                            "filterType": "Weapon",
+                            "isContainer": false,
+                            "cost": 25,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 99332929,
+                        "equipped": true,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 1250880539,
+                        "definition": {
+                            "id": 30,
+                            "avatarUrl": null,
+                            "name": "Shortsword",
+                            "weight": 2,
+                            "rarity": "Common",
+                            "filterType": "Weapon",
+                            "isContainer": false,
+                            "cost": 10,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 99332929,
+                        "equipped": true,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 1256834769,
+                        "definition": {
+                            "id": 30,
+                            "avatarUrl": null,
+                            "name": "Shortsword",
+                            "weight": 2,
+                            "rarity": "Common",
+                            "filterType": "Weapon",
+                            "isContainer": false,
+                            "cost": 10,
                             "bundleSize": 1,
                             "capacity": 0,
                             "armorClass": null,
@@ -6921,27 +10120,562 @@
                         "containerId": 99332929,
                         "equipped": false,
                         "quantity": 1
+                    },
+                    {
+                        "id": 1256841463,
+                        "definition": {
+                            "id": 77,
+                            "avatarUrl": null,
+                            "name": "Rope, Hempen (50 feet)",
+                            "weight": 10,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 1,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 99332929,
+                        "equipped": false,
+                        "quantity": 1
                     }
-                ]
+                ],
+                "contentsWeight": 34
+            },
+            {
+                "name": "Backpack",
+                "equipped": true,
+                "weight": 5,
+                "capacity": 30,
+                "contents": [
+                    {
+                        "id": 1256841451,
+                        "definition": {
+                            "id": 21,
+                            "avatarUrl": null,
+                            "name": "Ball Bearings (bag of 1,000)",
+                            "weight": 2,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 1,
+                            "bundleSize": 1000,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 1250880874,
+                        "equipped": false,
+                        "quantity": 1000
+                    },
+                    {
+                        "id": 1256841453,
+                        "definition": {
+                            "id": 25,
+                            "avatarUrl": null,
+                            "name": "Bell",
+                            "weight": 0,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 1,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 1250880874,
+                        "equipped": false,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 1256841454,
+                        "definition": {
+                            "id": 31,
+                            "avatarUrl": null,
+                            "name": "Candle",
+                            "weight": 0,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 0.01,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 1250880874,
+                        "equipped": false,
+                        "quantity": 5
+                    },
+                    {
+                        "id": 1256841455,
+                        "definition": {
+                            "id": 43,
+                            "avatarUrl": null,
+                            "name": "Crowbar",
+                            "weight": 5,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 2,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 1250880874,
+                        "equipped": false,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 1316401370,
+                        "definition": {
+                            "id": 55,
+                            "avatarUrl": null,
+                            "name": "Lamp",
+                            "weight": 1,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 0.5,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 1250880874,
+                        "equipped": false,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 1256841459,
+                        "definition": {
+                            "id": 63,
+                            "avatarUrl": null,
+                            "name": "Oil (flask)",
+                            "weight": 1,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 0.1,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 1250880874,
+                        "equipped": false,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 1256775514,
+                        "definition": {
+                            "id": 71,
+                            "avatarUrl": null,
+                            "name": "Potion of Healing",
+                            "weight": 0.5,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 50,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 1250880874,
+                        "equipped": false,
+                        "quantity": 3
+                    },
+                    {
+                        "id": 1256841460,
+                        "definition": {
+                            "id": 75,
+                            "avatarUrl": null,
+                            "name": "Rations (1 day)",
+                            "weight": 2,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 0.5,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 1250880874,
+                        "equipped": false,
+                        "quantity": 2
+                    },
+                    {
+                        "id": 1299287614,
+                        "definition": {
+                            "id": 86,
+                            "avatarUrl": null,
+                            "name": "spellbook (spell level 3)",
+                            "weight": 3,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 50,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 1250880874,
+                        "equipped": false,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 1256841461,
+                        "definition": {
+                            "id": 90,
+                            "avatarUrl": null,
+                            "name": "Tinderbox",
+                            "weight": 1,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 0.5,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 1250880874,
+                        "equipped": false,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 1256702665,
+                        "definition": {
+                            "id": 91,
+                            "avatarUrl": null,
+                            "name": "Torch",
+                            "weight": 1,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 0.01,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 1250880874,
+                        "equipped": false,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 1250914110,
+                        "definition": {
+                            "id": 92,
+                            "avatarUrl": null,
+                            "name": "Waterskin",
+                            "weight": 5,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 0.2,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 1250880874,
+                        "equipped": false,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 1256841462,
+                        "definition": {
+                            "id": 92,
+                            "avatarUrl": null,
+                            "name": "Waterskin empty",
+                            "weight": 0,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 0.2,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 1250880874,
+                        "equipped": false,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 1250888546,
+                        "definition": {
+                            "id": 126,
+                            "avatarUrl": null,
+                            "name": "Thieves' Tools",
+                            "weight": 1,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 25,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 1250880874,
+                        "equipped": false,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 1256841452,
+                        "definition": {
+                            "id": 205,
+                            "avatarUrl": null,
+                            "name": "String",
+                            "weight": 0,
+                            "rarity": "Common",
+                            "filterType": "Other Gear",
+                            "isContainer": false,
+                            "cost": 0,
+                            "bundleSize": 1,
+                            "capacity": 0,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": 1250880874,
+                        "equipped": false,
+                        "quantity": 10
+                    }
+                ],
+                "contentsWeight": 25.5
+            },
+            {
+                "name": "Component Pouch",
+                "equipped": true,
+                "weight": 2,
+                "capacity": 0,
+                "contents": [],
+                "contentsWeight": 0
+            },
+            {
+                "name": "Pouch",
+                "equipped": true,
+                "weight": 1,
+                "capacity": 6,
+                "contents": [],
+                "contentsWeight": 0
             },
             {
                 "name": "Custom Items",
                 "equipped": true,
+                "weight": 0,
                 "capacity": null,
-                "contents": []
+                "contents": [
+                    {
+                        "id": 20178886,
+                        "definition": {
+                            "id": null,
+                            "avatarUrl": null,
+                            "name": "Harper pin",
+                            "weight": null,
+                            "rarity": null,
+                            "filterType": null,
+                            "isContainer": false,
+                            "cost": null,
+                            "bundleSize": 1,
+                            "description": null,
+                            "notes": null,
+                            "capacity": null,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": null,
+                        "equipped": false,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 21039160,
+                        "definition": {
+                            "id": null,
+                            "avatarUrl": null,
+                            "name": "semi precious stones worth 100gp",
+                            "weight": 0,
+                            "rarity": null,
+                            "filterType": null,
+                            "isContainer": false,
+                            "cost": null,
+                            "bundleSize": 1,
+                            "description": null,
+                            "notes": null,
+                            "capacity": null,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": null,
+                        "equipped": false,
+                        "quantity": 3
+                    },
+                    {
+                        "id": 21092399,
+                        "definition": {
+                            "id": null,
+                            "avatarUrl": null,
+                            "name": "semi precious/fancy gems",
+                            "weight": null,
+                            "rarity": null,
+                            "filterType": null,
+                            "isContainer": false,
+                            "cost": null,
+                            "bundleSize": 1,
+                            "description": "(2x50) (5x100) (1x200) (1x400) (1x600) - values",
+                            "notes": null,
+                            "capacity": null,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": null,
+                        "equipped": false,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 21199314,
+                        "definition": {
+                            "id": null,
+                            "avatarUrl": null,
+                            "name": "ermine pelt",
+                            "weight": 0,
+                            "rarity": null,
+                            "filterType": null,
+                            "isContainer": false,
+                            "cost": null,
+                            "bundleSize": 1,
+                            "description": null,
+                            "notes": null,
+                            "capacity": null,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": null,
+                        "equipped": false,
+                        "quantity": 8
+                    },
+                    {
+                        "id": 21338327,
+                        "definition": {
+                            "id": null,
+                            "avatarUrl": null,
+                            "name": "letters from thay (evidence)",
+                            "weight": null,
+                            "rarity": null,
+                            "filterType": null,
+                            "isContainer": false,
+                            "cost": null,
+                            "bundleSize": 1,
+                            "description": "saying not all red wizards are for the cults doing",
+                            "notes": null,
+                            "capacity": null,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": null,
+                        "equipped": false,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 21338360,
+                        "definition": {
+                            "id": null,
+                            "avatarUrl": null,
+                            "name": "letters from serverin the red (evidence)",
+                            "weight": 1,
+                            "rarity": null,
+                            "filterType": null,
+                            "isContainer": false,
+                            "cost": 0,
+                            "bundleSize": 1,
+                            "description": "letters showing that severing the red has good connections with red wizards",
+                            "notes": null,
+                            "capacity": null,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": null,
+                        "equipped": false,
+                        "quantity": 1
+                    },
+                    {
+                        "id": 21339217,
+                        "definition": {
+                            "id": null,
+                            "avatarUrl": null,
+                            "name": "book, beyond the iron gate",
+                            "weight": null,
+                            "rarity": null,
+                            "filterType": null,
+                            "isContainer": false,
+                            "cost": null,
+                            "bundleSize": 1,
+                            "description": "demonic book on summoning entery on summoning tiamat and the cost and sacrifice of doing so",
+                            "notes": null,
+                            "capacity": null,
+                            "armorClass": null,
+                            "armorTypeId": null
+                        },
+                        "containerId": null,
+                        "equipped": false,
+                        "quantity": 1
+                    }
+                ],
+                "contentsWeight": 1
             }
         ],
         "weightData": {
-            "carriedItemsWeight": 14,
-            "customItemsWeight": 0,
-            "coinWeight": 0,
-            "totalCarriedWeight": 14
+            "carriedItemsWeight": 68.5,
+            "coinWeight": 7.12,
+            "totalCarriedWeight": 75.62
         },
         "deathSaves": {
             "failCount": 0,
             "successCount": 0,
             "isStabilized": false
         },
-        "ac": 14
+        "ac": 16,
+        "wealth": {
+            "containers": [
+                {
+                    "name": "Equipment",
+                    "value": 93.5
+                },
+                {
+                    "name": "Backpack",
+                    "value": 231.56
+                },
+                {
+                    "name": "Component Pouch",
+                    "value": 0
+                },
+                {
+                    "name": "Pouch",
+                    "value": 0
+                },
+                {
+                    "name": "Custom Items",
+                    "value": 0
+                }
+            ],
+            "totalContainerWealth": 325.06,
+            "totalWealth": 549
+        },
+        "hitDice": [
+            {
+                "dice": "d8",
+                "max": 7,
+                "used": 0
+            }
+        ]
     }
 }
