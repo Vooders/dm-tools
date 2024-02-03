@@ -27,6 +27,7 @@ export default function Slots(props: SlotsProps) {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
+        textAlign: 'center',
         alignItems: 'center',
         borderRadius: 8
     })
