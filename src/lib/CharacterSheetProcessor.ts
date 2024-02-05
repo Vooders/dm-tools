@@ -11,6 +11,7 @@ import passiveSkills from './character-sheet-processor/passiveSkills'
 import saves from './character-sheet-processor/saves'
 import wealth from './character-sheet-processor/wealth'
 import * as hitDice from './character-sheet-processor/hitDice'
+import action from './character-sheet-processor/actions'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -141,6 +142,13 @@ export default class CharacterSheetProcessor {
         return saves(classes, proficiencies, abilities, isMultiClass, proficiency)
     }
 
+    private buildActions(): Action[] {
+        const actions = this.dndBeyondJson.data.actions
+        const feats = this.dndBeyondJson.data.spells.feat
+        const inventory = this.dndBeyondJson.data.inventory
+        return action(actions, feats, inventory)
+    }
+
     private calculateProficiency(): number {
         if (this.level < 5) {
             return 2
@@ -212,61 +220,13 @@ export default class CharacterSheetProcessor {
     }
 
     private canCastSpells(classes: any): boolean {
-        if(classes.definition.canCastSpells) {
+        if (classes.definition.canCastSpells) {
             return true
         }
-        if(classes.subclassDefinition != undefined) {
+        if (classes.subclassDefinition != undefined) {
             return classes.subclassDefinition.canCastSpells
         }
         return false
-    }
-
-    private buildActions(): Action[] {
-        const actions = this.dndBeyondJson.data.actions
-        const items = this.dndBeyondJson.data.inventory.filter((item: any) => {
-            return item.definition.canEquip === true
-        })
-        return [...actions.race, ...actions.class, ...actions.feat].map(action => {
-            return {
-                name: action.name,
-                description: action.description,
-                snippet: action.snippet,
-                limitedUse: {
-                    maxUses: this.getMaxUses(action),
-                    numberUsed: (action.limitedUse) ? action.limitedUse.numberUsed : 0
-                }
-            }
-        }).concat(this.dndBeyondJson.data.spells.feat.map((feat: any) => {
-            return {
-                name: feat.definition.name,
-                description: feat.definition.description,
-                snippet: feat.definition.snippet,
-                limitedUse: {
-                    maxUses: this.getMaxUses(feat),
-                    numberUsed: (feat.limitedUse) ? feat.limitedUse.numberUsed : 0
-                }
-            }
-        })).concat(items.map((item: any) => {
-            return {
-                name: item.definition.name,
-                description: item.definition.description,
-                snippet: item.definition.snippet,
-                limitedUse: {
-                    maxUses: this.getMaxUses(item),
-                    numberUsed: (item.limitedUse) ? item.limitedUse.numberUsed : 0
-                }
-            }
-        }))
-    }
-
-    private getMaxUses(action: any): number {
-        if (action.limitedUse) {
-            if (action.limitedUse.useProficiencyBonus) {
-                return this.proficiency
-            }
-            return action.limitedUse.maxUses
-        }
-        return 0
     }
 
     private buildCurrencies(): Currencies {
@@ -570,16 +530,16 @@ export type ContainerWealth = {
 }
 
 export type CustomProficiency = {
-        id: number
-        name: string
-        type: number
-        statId: number
-        proficiencyLevel: number
-        notes: string
-        description: string
-        override: number
-        magicBonus: number
-        miscBonus: number
+    id: number
+    name: string
+    type: number
+    statId: number
+    proficiencyLevel: number
+    notes: string
+    description: string
+    override: number
+    magicBonus: number
+    miscBonus: number
 }
 
 export type CharacterClass = {

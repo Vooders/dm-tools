@@ -159,7 +159,7 @@ export default function Health() {
         const trueHp = maxHp(hp) - hp.removed
         const posIntHp = trueHp > 0 ? trueHp : 0
 
-        return `${trueHp} / ${maxHp(hp)}`
+        return `${posIntHp} / ${maxHp(hp)}`
     }
 
     return (
