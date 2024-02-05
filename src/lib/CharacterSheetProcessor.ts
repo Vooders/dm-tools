@@ -146,7 +146,7 @@ export default class CharacterSheetProcessor {
         const actions = this.dndBeyondJson.data.actions
         const feats = this.dndBeyondJson.data.spells.feat
         const inventory = this.dndBeyondJson.data.inventory
-        return action(actions, feats, inventory)
+        return action(actions, feats, inventory, this.proficiency)
     }
 
     private calculateProficiency(): number {

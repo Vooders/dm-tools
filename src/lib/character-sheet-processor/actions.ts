@@ -1,6 +1,6 @@
 import { Action } from "../CharacterSheetProcessor"
 
-export default function action(actions: any, feats: any, inventory: any): Action[] {
+export default function action(actions: any, feats: any, inventory: any, proficiency: number): Action[] {
 
     const items = inventory.filter((item: any) => {
         return item.definition.canEquip === true
@@ -41,7 +41,7 @@ export default function action(actions: any, feats: any, inventory: any): Action
     function getMaxUses(action: any): number {
         if (action.limitedUse) {
             if (action.limitedUse.useProficiencyBonus) {
-                return this.proficiency
+                return proficiency
             }
             return action.limitedUse.maxUses
         }
