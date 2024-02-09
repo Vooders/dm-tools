@@ -321,10 +321,17 @@ export type Item = {
         capacity: number
         armorClass: number
         armorTypeId: number
+        snippet: string
+        canEquip: boolean
     },
     containerId: number
     equipped: boolean
     quantity: number
+    limitedUse: {
+        maxUses: number
+        numberUsed: number
+        useProficiencyBonus: boolean
+    }
 }
 
 export type CustomItem = {
