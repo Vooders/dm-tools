@@ -17,11 +17,18 @@ export default function inventory(inventory: any, customItemInventory: any, carr
                 notes: item.definition.notes,
                 capacity: item.definition.capacityWeight,
                 armorClass: item.definition.armorClass,
-                armorTypeId: item.definition.armorTypeId
+                armorTypeId: item.definition.armorTypeId,
+                snippet: item.definition.snippet,
+                canEquip: item.definition.canEquip
             },
             containerId: item.containerEntityId,
             equipped: item.equipped,
-            quantity: item.quantity
+            quantity: item.quantity,
+            limitedUse: {
+                maxUses: item.limitedUse.maxUses,
+                numberUsed: item.limitedUse.numberUsed,
+                useProficiencyBonus: item.limitedUse.useProficiencyBonus
+            }
         }
         return addCustomValues(newItem)
     })
@@ -43,12 +50,19 @@ export default function inventory(inventory: any, customItemInventory: any, carr
                 notes: item.notes,
                 capacity: null,
                 armorClass: null,
-                armorTypeId: null
+                armorTypeId: null,
+                snippet: null,
+                canEquip: null
 
             },
             containerId: null,
             equipped: false,
-            quantity: item.quantity
+            quantity: item.quantity,
+            limitedUse: {
+                maxUses: null,
+                numberUsed: null,
+                useProficiencyBonus: null
+            }
         }
     })
 
