@@ -19,7 +19,12 @@ export default class ItemBuilder {
         private armorTypeId: number = 0,
         private containerId: number = 0,
         private equipped: boolean = false,
-        private quantity: number = 1
+        private quantity: number = 1,
+        private snippet: string = '',
+        private canEquip: boolean = false,
+        private maxUses: number = 0,
+        private numberUsed: number = 0,
+        private useProficiencyBonus: boolean = false
     ){}
 
     public withId(id: number) {
@@ -142,12 +147,19 @@ export default class ItemBuilder {
                 notes: this.notes,
                 capacity: this.capacity,
                 armorClass: this.armorClass,
-                armorTypeId: this.armorTypeId
+                armorTypeId: this.armorTypeId,
+                snippet: this.snippet,
+                canEquip: this.canEquip
     
             },
             containerId: this.containerId,
             equipped: this.equipped,
-            quantity: this.quantity
+            quantity: this.quantity,
+            limitedUse: {
+                maxUses: this.maxUses,
+                numberUsed: this.numberUsed,
+                useProficiencyBonus: this.useProficiencyBonus
+            }
         }
     }
 }
