@@ -6,7 +6,7 @@ export default class ActionBuilder {
         private snippet: string = '',
         private maxUses: number = 0,
         private numberUsed: number = 0,
-        private useProficiencyBonus: boolean = true
+        private useProficiencyBonus: boolean = false
     ) { }
 
     public withName(name: string) {
