@@ -21,7 +21,8 @@ export default function inventory(inventory: any, customItemInventory: any, carr
             },
             containerId: item.containerEntityId,
             equipped: item.equipped,
-            quantity: item.quantity
+            quantity: item.quantity,
+            limitedUse: {}
         }
         return addCustomValues(newItem)
     })
@@ -48,6 +49,7 @@ export default function inventory(inventory: any, customItemInventory: any, carr
             containerId: null,
             equipped: false,
             quantity: item.quantity,
+            limitedUse: {}
         }
     })
 
