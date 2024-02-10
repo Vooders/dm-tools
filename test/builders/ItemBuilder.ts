@@ -20,7 +20,12 @@ export default class ItemBuilder {
         private containerId: number = 0,
         private equipped: boolean = false,
         private quantity: number = 1,
-    ){}
+        private snippet: string = '',
+        private canEquip: boolean = false,
+        private maxUses: number = 0,
+        private numberUsed: number = 0,
+        private useProficiencyBonus: boolean = false
+    ) { }
 
     public withId(id: number) {
         this.id = id
@@ -125,6 +130,30 @@ export default class ItemBuilder {
         return this
     }
 
+    public withSnippet(snippet: string) {
+        this.snippet = snippet
+        return this
+    }
+
+    public withCanEquip(canEquip: boolean) {
+        this.canEquip = canEquip
+        return this
+    }
+
+    public withMaxUses(maxUses: number) {
+        this.maxUses = maxUses
+        return this
+    }
+
+    public withNumberUsed(numberUsed: number) {
+        this.numberUsed = numberUsed
+        return this
+    }
+
+    public withUseProficiencyBonus(useProficiencyBonus: boolean) {
+        this.useProficiencyBonus = useProficiencyBonus
+        return this
+    }
     public build(): Item {
         return {
             id: this.id,
@@ -142,11 +171,18 @@ export default class ItemBuilder {
                 notes: this.notes,
                 capacity: this.capacity,
                 armorClass: this.armorClass,
-                armorTypeId: this.armorTypeId
+                armorTypeId: this.armorTypeId,
+                snippet: this.snippet,
+                canEquip: this.canEquip
             },
             containerId: this.containerId,
             equipped: this.equipped,
-            quantity: this.quantity
+            quantity: this.quantity,
+            limitedUse: {
+                maxUses: this.maxUses,
+                numberUsed: this.numberUsed,
+                useProficiencyBonus: this.useProficiencyBonus
+            }
         }
     }
 }
