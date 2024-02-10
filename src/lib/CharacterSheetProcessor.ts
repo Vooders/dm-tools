@@ -327,7 +327,7 @@ export type Item = {
     containerId: number
     equipped: boolean
     quantity: number
-    limitedUse?: {
+    limitedUse: {
         maxUses?: number
         numberUsed?: number
         useProficiencyBonus?: boolean
