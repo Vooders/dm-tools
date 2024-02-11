@@ -237,7 +237,7 @@ export default class CharacterSheetProcessor {
             gp: currencies.gp,
             ep: currencies.ep,
             pp: currencies.pp,
-            total: this.totalGold(currencies)
+            total: Math.round(this.totalGold(currencies) * 100)/100
         }
     }
 
