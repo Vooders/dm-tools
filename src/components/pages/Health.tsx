@@ -4,7 +4,6 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import LinearProgress from '@mui/material/LinearProgress'
 
 import { HealthData } from '../../handlers/getHealth'
 import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'
@@ -15,6 +14,7 @@ import { ThemeProvider } from '@emotion/react'
 import { ThemeOptions } from '@mui/material/styles'
 import DeathSaves from '../fragments/DeathSaves'
 import Experience from '../fragments/Experience'
+import HpBar from '../fragments/HpBar'
 
 export default function Health() {
     const [health, setHealth] = useState<HealthData[]>([])
@@ -56,22 +56,6 @@ export default function Health() {
 
     const nameBox = {
         paddingY: '2px'
-    }
-
-    const hpBarBox = {
-        display: 'flex',
-        alignItems: 'center'
-    }
-
-    const hpBarInnerBox = {
-        width: '100%',
-        mr: 1
-    }
-
-    const hpBar = {
-        height: '9px',
-        borderRadius: 2,
-        boxShadow: 5
     }
 
     const deathSaves = {
@@ -134,33 +118,8 @@ export default function Health() {
         })
     }, [])
 
-    const healthBarColour = (percent: number) => {
-        if (percent < 20) return 'error'
-        else if (percent < 50) return 'warning'
-        else return 'success'
-    }
-
-    function LinearProgressWithLabel(props: any & { value: number }, color: string) {
-        return (
-                <Box sx={hpBarBox}>
-                    <Box sx={hpBarInnerBox}>
-                        <LinearProgress variant="determinate" color={color} {...props} />
-                    </Box>
-                    <Box sx={{ minWidth: 35 }}>
-                        <Typography variant="body2">{`${Math.round(
-                            props.value,
-                        )}%`}</Typography>
-                    </Box>
-                </Box>
-        );
-    }
-
     const maxHp = (hp: CharacterProfileHp) => {
         return (hp.override) ? hp.override : hp.constitutionBonus + hp.base + hp.bonus
-    }
-
-    const calculateHpPercent = (hp: CharacterProfileHp) => {
-        return 100 - ((hp.removed / maxHp(hp))) * 100
     }
 
     const hpView = (hp: CharacterProfileHp) => {
@@ -170,12 +129,15 @@ export default function Health() {
         return `${posIntHp} / ${maxHp(hp)}`
     }
 
+    const isUnconscious = (hp: CharacterProfileHp) => {
+        return hp.removed >= maxHp(hp)
+    }
+
     return (
         <React.Fragment>
-            {health.map(character => {
-                const hpPercent = calculateHpPercent(character.hp)
-                return (
-                    <ThemeProvider theme={healthTheme}>
+            <ThemeProvider theme={healthTheme}>
+                {health.map(character => {
+                    return (
                         <Card sx={cardStyling}>
                             <CardMedia
                                 component="img"
@@ -192,19 +154,10 @@ export default function Health() {
                                             </Typography>
                                         </Box>
                                     </Box>
-                                    <Box>
-                                    </Box>
-                                    <Box sx={currencyBox}>
-                                        <Currencies
-                                            showZeroes={false}
-                                            currencies={character.currencies}
-                                            align='right'
-                                        />
-                                    </Box>
                                 </Box>
                                 <Box sx={deathSaves}>
                                     <DeathSaves
-                                        display={hpPercent === 0}
+                                        display={isUnconscious(character.hp)}
                                         failCount={character.deathSaves.failCount}
                                         successCount={character.deathSaves.successCount}
                                         isStabilized={character.deathSaves.isStabilized}
@@ -233,7 +186,7 @@ export default function Health() {
                                     })}
 
                                 </Box>
-                                <LinearProgressWithLabel value={hpPercent} sx={hpBar} color={healthBarColour(hpPercent)} />
+                                <HpBar hpMax={maxHp(character.hp)} hpRemoved={character.hp.removed} />
                                 <Box sx={slotStyling}>
                                     {character.spellSlots.map(spellSlot => {
                                         return (
@@ -241,7 +194,7 @@ export default function Health() {
                                                 title={`Level ${spellSlot.level}`}
                                                 max={spellSlot.max} used={spellSlot.used}
                                                 description=''
-                                                highlight={hpPercent > 0}
+                                                highlight={!isUnconscious(character.hp)}
                                             />
                                         )
                                     })}
@@ -254,16 +207,16 @@ export default function Health() {
                                                 max={limitedUseAction.limitedUse.maxUses}
                                                 used={limitedUseAction.limitedUse.numberUsed}
                                                 description={limitedUseAction.snippet}
-                                                highlight={hpPercent > 0}
+                                                highlight={!isUnconscious(character.hp)}
                                             />
                                         )
                                     })}
                                 </Box>
                             </Box>
                         </Card>
-                    </ThemeProvider>
-                )
-            })}
+                    )
+                })}
+            </ThemeProvider>
         </React.Fragment>
     )
 }
