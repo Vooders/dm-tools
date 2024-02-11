@@ -46,7 +46,6 @@ export default function Health() {
     const topStatsBox = {
         display: 'flex',
         direction: 'row',
-        alignItems: 'center',
         justifyContent: "space-between"
     }
 
@@ -73,6 +72,17 @@ export default function Health() {
         height: '9px',
         borderRadius: 2,
         boxShadow: 5
+    }
+
+    const deathSaves = {
+        display: 'flex',
+        justifyContent: "center"
+
+    }
+
+    const currencyBox = {
+        display: 'flex',
+        flexDirection: 'row'
     }
 
     const healthTheme: ThemeOptions = createTheme({
@@ -132,7 +142,6 @@ export default function Health() {
 
     function LinearProgressWithLabel(props: any & { value: number }, color: string) {
         return (
-            (props.value > 0) ?
                 <Box sx={hpBarBox}>
                     <Box sx={hpBarInnerBox}>
                         <LinearProgress variant="determinate" color={color} {...props} />
@@ -143,7 +152,6 @@ export default function Health() {
                         )}%`}</Typography>
                     </Box>
                 </Box>
-                : <></>
         );
     }
 
@@ -184,19 +192,23 @@ export default function Health() {
                                             </Typography>
                                         </Box>
                                     </Box>
-                                    <DeathSaves
-                                        display={hpPercent === 0}
-                                        failCount={character.deathSaves.failCount}
-                                        successCount={character.deathSaves.successCount}
-                                        isStabilized={character.deathSaves.isStabilized}
-                                    />
-                                    <Box >
+                                    <Box>
+                                    </Box>
+                                    <Box sx={currencyBox}>
                                         <Currencies
                                             showZeroes={false}
                                             currencies={character.currencies}
                                             align='right'
                                         />
                                     </Box>
+                                </Box>
+                                <Box sx={deathSaves}>
+                                    <DeathSaves
+                                        display={hpPercent === 0}
+                                        failCount={character.deathSaves.failCount}
+                                        successCount={character.deathSaves.successCount}
+                                        isStabilized={character.deathSaves.isStabilized}
+                                    />
                                 </Box>
                                 <Experience level={character.level} experience={character.experience} />
                                 <Box sx={hpBox}>
