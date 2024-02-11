@@ -50,12 +50,13 @@ export default function Experience(props: ExperienceProps) {
     const currentXp = props.experience
 
     const calculateXpPercent = () => {
-        return Math.round(((currentXp - xpToPrevLevel) / (xpToNextLevel - xpToPrevLevel)) * 100)
+        const xp = Math.round(((currentXp - xpToPrevLevel) / (xpToNextLevel - xpToPrevLevel)) * 100)
+        return (xp > 0) ? xp : 0
     }
     const xpPercent = calculateXpPercent()
 
     return (
-        (xpPercent > 0) ?
+        (props.experience > 0) ?
             <>
                 <Typography variant="subtitle2" >
                     {currentXp} / {xpToNextLevel} XP
