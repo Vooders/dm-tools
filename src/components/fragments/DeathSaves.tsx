@@ -25,13 +25,13 @@ export default function DeathSaves(props: DeathSavesProps) {
 
     const iconStyle = {
         mx: 0.5,
-        fontSize: 45
+        fontSize: 60
     }
 
     return (
         (props.display && !props.isStabilized) &&
         <>
-            <SuccessfulSave
+            <SuccessfulSave sx={{ mr: 10}}
                 defaultValue={props.successCount}
                 max={3}
                 readOnly
