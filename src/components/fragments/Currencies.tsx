@@ -1,8 +1,12 @@
-import { Grid } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 import React from 'react'
 import { Currencies } from '../../lib/CharacterSheetProcessor'
 import Currency from './Currency'
 
+const style = {
+  display: 'flex',
+  flexDirection: 'row'
+}
 
 export default function Currencies(props: CurrenciesProps) {
   const currencyAmount = props.currencies
@@ -13,7 +17,7 @@ export default function Currencies(props: CurrenciesProps) {
   }
 
   return (
-    <>
+    <Box sx={style}>
       <Grid container padding={0} columnSpacing={1} direction={direction} justifyContent="flex-start" >
 
         {displayCurrency(currencyAmount.cp) &&
@@ -42,7 +46,7 @@ export default function Currencies(props: CurrenciesProps) {
           </Grid>
         }
       </Grid>
-    </>
+    </Box>
   )
 }
 

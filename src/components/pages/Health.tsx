@@ -45,11 +45,6 @@ export default function Health() {
         paddingY: '2px'
     }
 
-    const currencyBox = {
-        display: 'flex',
-        flexDirection: 'row'
-    }
-
     const getSenses = async () => {
         console.log('getting Health')
         setHealth(await window.electron.getHealth())
@@ -92,13 +87,11 @@ export default function Health() {
                                         </Typography>
                                     </Box>
                                 </Box>
-                                <Box sx={currencyBox}>
-                                    <Currencies
-                                        showZeroes={false}
-                                        currencies={character.currencies}
-                                        align='right'
-                                    />
-                                </Box>
+                                <Currencies
+                                    showZeroes={false}
+                                    currencies={character.currencies}
+                                    align='right'
+                                />
                             </Box>
                             <DeathSaves
                                 display={isUnconscious(character.hp)}
@@ -107,8 +100,8 @@ export default function Health() {
                                 isStabilized={character.deathSaves.isStabilized}
                             />
                             <Experience level={character.level} experience={character.experience} />
-                            <Hp hp={character.hp} hitDice={character.hitDice}/>
-                            <Actions 
+                            <Hp hp={character.hp} hitDice={character.hitDice} />
+                            <Actions
                                 spellSlots={character.spellSlots}
                                 limitedUseActions={character.limitedUseActions}
                                 isUnconscious={isUnconscious(character.hp)}
