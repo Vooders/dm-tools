@@ -12,6 +12,7 @@ import saves from './character-sheet-processor/saves'
 import wealth from './character-sheet-processor/wealth'
 import * as hitDice from './character-sheet-processor/hitDice'
 import action from './character-sheet-processor/actions'
+import healthPotions from './character-sheet-processor/healthPotions'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -62,8 +63,13 @@ export default class CharacterSheetProcessor {
             deathSaves: this.dndBeyondJson.data.deathSaves,
             ac: this.buildArmour(),
             wealth: this.buildWealth(),
-            hitDice: this.buildHitDice()
+            hitDice: this.buildHitDice(),
+            healthPotions: this.buildHealthPotions()
         }
+    }
+
+    private buildHealthPotions() {
+        return healthPotions(this.dndBeyondJson.data.inventory)
     }
 
     private buildHitDice() {
@@ -287,6 +293,7 @@ export type DmToolsData = {
     ac: number
     wealth: Wealth
     hitDice: hitDice.HitDice[]
+    healthPotions: HealthPotions
 }
 
 export type ItemContainer = {
@@ -555,4 +562,9 @@ export type CharacterClass = {
         hitDice: number
     }
     hitDiceUsed: number
+}
+
+export type HealthPotions = {
+    normal: number
+    greater: number
 }
