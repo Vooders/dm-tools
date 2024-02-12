@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
-import CardMedia from '@mui/material/CardMedia'
 
 import { HealthData } from '../../handlers/getHealth'
 import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'
@@ -11,6 +10,7 @@ import Experience from '../fragments/Experience'
 import Actions from '../fragments/Actions'
 import Hp from '../fragments/Hp'
 import CharacterDetails from '../fragments/CharacterDetails'
+import Avatar from '../fragments/Avatar'
 
 export default function Health() {
     const [health, setHealth] = useState<HealthData[]>([])
@@ -18,13 +18,6 @@ export default function Health() {
     const cardStyling = {
         display: 'flex',
         variant: "outlined"
-    }
-
-    const avatarStyling = {
-        height: 200,
-        width: 160,
-        variant: "rounded",
-        padding: '5px'
     }
 
     const mainBox = {
@@ -61,12 +54,7 @@ export default function Health() {
             {health.map(character => {
                 return (
                     <Card sx={cardStyling}>
-                        <CardMedia
-                            component="img"
-                            sx={avatarStyling}
-                            image={character.avatarPath}
-                            alt={character.name}
-                        />
+                        <Avatar name={character.name} avatarPath={character.avatarPath}/>
                         <Box sx={mainBox}>
                             <CharacterDetails name={character.name} currencies={character.currencies}/>
                             <DeathSaves
