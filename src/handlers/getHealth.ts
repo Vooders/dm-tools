@@ -1,6 +1,6 @@
 import getSummaryData from '../lib/getSummary'
 import getCharacter from './getCharacter'
-import { CharacterProfileHp, SpellSlot, Action, CurrenciesType, DeathSaves} from '../../src/lib/CharacterSheetProcessor'
+import { CharacterProfileHp, SpellSlot, Action, CurrenciesType, DeathSaves, HealthPotions} from '../../src/lib/CharacterSheetProcessor'
 import { HitDice } from '../../src/lib/character-sheet-processor/hitDice'
 
 export default async (): Promise<HealthData[]> => {
@@ -29,21 +29,23 @@ export default async (): Promise<HealthData[]> => {
             experience: characterData.profile.xp,
             level: characterData.profile.level,
             ac: characterData.ac,
-            hitDice: characterData.hitDice
+            hitDice: characterData.hitDice,
+            healthPotions: characterData.healthPotions
         }
     }))
 }
 
 export type HealthData = {
     name: string,
-    hp: CharacterProfileHp,
-    avatarPath: string,
-    spellSlots: SpellSlot[],
-    limitedUseActions: Action[],
-    currencies: CurrenciesType,
-    deathSaves: DeathSaves,
-    experience: number,
-    level: number,
-    ac: number,
+    hp: CharacterProfileHp
+    avatarPath: string
+    spellSlots: SpellSlot[]
+    limitedUseActions: Action[]
+    currencies: CurrenciesType
+    deathSaves: DeathSaves
+    experience: number
+    level: number
+    ac: number
     hitDice: HitDice[]
+    healthPotions: HealthPotions
 }
