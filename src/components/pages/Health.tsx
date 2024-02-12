@@ -12,6 +12,7 @@ import DeathSaves from '../fragments/DeathSaves'
 import Experience from '../fragments/Experience'
 import HpBar from '../fragments/HpBar'
 import Currencies from '../fragments/Currencies'
+import Actions from '../fragments/Actions'
 
 export default function Health() {
     const [health, setHealth] = useState<HealthData[]>([])
@@ -26,11 +27,6 @@ export default function Health() {
         width: 160,
         variant: "rounded",
         padding: '5px'
-    }
-
-    const slotStyling = {
-        display: 'flex',
-        paddingY: '3px'
     }
 
     const mainBox = {
@@ -155,31 +151,11 @@ export default function Health() {
 
                             </Box>
                             <HpBar hpMax={maxHp(character.hp)} hpRemoved={character.hp.removed} />
-                            <Box sx={slotStyling}>
-                                {character.spellSlots.map(spellSlot => {
-                                    return (
-                                        <Slots
-                                            title={`Level ${spellSlot.level}`}
-                                            max={spellSlot.max} used={spellSlot.used}
-                                            description=''
-                                            highlight={!isUnconscious(character.hp)}
-                                        />
-                                    )
-                                })}
-                            </Box>
-                            <Box sx={slotStyling}>
-                                {character.limitedUseActions.map(limitedUseAction => {
-                                    return (
-                                        <Slots
-                                            title={`${limitedUseAction.name}`}
-                                            max={limitedUseAction.limitedUse.maxUses}
-                                            used={limitedUseAction.limitedUse.numberUsed}
-                                            description={limitedUseAction.snippet}
-                                            highlight={!isUnconscious(character.hp)}
-                                        />
-                                    )
-                                })}
-                            </Box>
+                            <Actions 
+                                spellSlots={character.spellSlots}
+                                limitedUseActions={character.limitedUseActions}
+                                isUnconscious={isUnconscious(character.hp)}
+                            />
                         </Box>
                     </Card>
                 )
