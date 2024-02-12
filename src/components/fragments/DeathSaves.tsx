@@ -4,6 +4,13 @@ import { styled } from '@mui/material/styles'
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied'
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied'
 import SentimentNeutralIcon from '@mui/icons-material/SentimentNeutral'
+import { Box } from '@mui/material'
+
+const style = {
+    display: 'flex',
+    justifyContent: "center"
+
+}
 
 export default function DeathSaves(props: DeathSavesProps) {
     const FailedSave = styled(Rating)({
@@ -30,7 +37,7 @@ export default function DeathSaves(props: DeathSavesProps) {
 
     return (
         (props.display && !props.isStabilized) &&
-        <>
+        <Box sx={style}>
             <SuccessfulSave sx={{ mr: 10}}
                 defaultValue={props.successCount}
                 max={3}
@@ -45,8 +52,7 @@ export default function DeathSaves(props: DeathSavesProps) {
                 icon={<SentimentVeryDissatisfiedIcon sx={iconStyle} />}
                 emptyIcon={<SentimentNeutralIcon sx={iconStyle} />}
             />
-        </>
-
+        </Box>
     )
 }
 

@@ -9,7 +9,6 @@ import { HealthData } from '../../handlers/getHealth'
 import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'
 import DeathSaves from '../fragments/DeathSaves'
 import Experience from '../fragments/Experience'
-import HpBar from '../fragments/HpBar'
 import Currencies from '../fragments/Currencies'
 import Actions from '../fragments/Actions'
 import Hp from '../fragments/Hp'
@@ -44,12 +43,6 @@ export default function Health() {
 
     const nameBox = {
         paddingY: '2px'
-    }
-
-    const deathSaves = {
-        display: 'flex',
-        justifyContent: "center"
-
     }
 
     const currencyBox = {
@@ -107,14 +100,12 @@ export default function Health() {
                                     />
                                 </Box>
                             </Box>
-                            <Box sx={deathSaves}>
-                                <DeathSaves
-                                    display={isUnconscious(character.hp)}
-                                    failCount={character.deathSaves.failCount}
-                                    successCount={character.deathSaves.successCount}
-                                    isStabilized={character.deathSaves.isStabilized}
-                                />
-                            </Box>
+                            <DeathSaves
+                                display={isUnconscious(character.hp)}
+                                failCount={character.deathSaves.failCount}
+                                successCount={character.deathSaves.successCount}
+                                isStabilized={character.deathSaves.isStabilized}
+                            />
                             <Experience level={character.level} experience={character.experience} />
                             <Hp hp={character.hp} hitDice={character.hitDice}/>
                             <Actions 
