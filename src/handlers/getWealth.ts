@@ -1,6 +1,6 @@
 import getSummaryData from '../lib/getSummary'
 import getCharacter from './getCharacter'
-import { ContainerWealth, Currencies } from '../lib/CharacterSheetProcessor'
+import { ContainerWealth, CurrenciesType } from '../lib/CharacterSheetProcessor'
 
 export default async (): Promise<WealthData[]> => {
     const summary = await getSummaryData()
@@ -21,7 +21,7 @@ export default async (): Promise<WealthData[]> => {
 
 export type WealthData = {
     name: string
-    currencies: Currencies
+    currencies: CurrenciesType
     containers: ContainerWealth[]
     totalContainerWealth: number
     totalWealth: number

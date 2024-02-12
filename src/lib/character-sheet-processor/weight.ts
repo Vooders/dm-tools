@@ -1,6 +1,6 @@
-import { Currencies, ItemContainer, WeightData } from "../CharacterSheetProcessor"
+import { CurrenciesType, ItemContainer, WeightData } from "../CharacterSheetProcessor"
 
-export default function weight(inventory: ItemContainer[], currencies: Currencies, ignoreCoinWeight: boolean): WeightData {
+export default function weight(inventory: ItemContainer[], currencies: CurrenciesType, ignoreCoinWeight: boolean): WeightData {
     const carriedItemsWeight = totalCarriedItemsWeight()
     const coinWeight = ignoreCoinWeight ? 0 : totalCoinWeight()
     const totalCarriedWeight = Math.round((carriedItemsWeight + coinWeight) * 100) / 100

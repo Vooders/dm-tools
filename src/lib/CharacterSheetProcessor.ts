@@ -229,7 +229,7 @@ export default class CharacterSheetProcessor {
         return false
     }
 
-    private buildCurrencies(): Currencies {
+    private buildCurrencies(): CurrenciesType {
         const currencies = this.dndBeyondJson.data.currencies
         return {
             cp: currencies.cp,
@@ -280,7 +280,7 @@ export type DmToolsData = {
     spellSlots: SpellSlot[]
     actions: Action[]
     spells: Spells[]
-    currencies: Currencies
+    currencies: CurrenciesType
     inventory: ItemContainer[]
     weightData: WeightData
     deathSaves: DeathSaves
@@ -350,7 +350,7 @@ export type DeathSaves = {
     isStabilized: boolean
 }
 
-export type Currencies = {
+export type CurrenciesType = {
     cp: number
     sp: number
     gp: number

@@ -1,6 +1,6 @@
 import getSummaryData from '../lib/getSummary'
 import getCharacter from './getCharacter'
-import { CharacterProfileHp, SpellSlot, Action, Currencies, DeathSaves} from '../../src/lib/CharacterSheetProcessor'
+import { CharacterProfileHp, SpellSlot, Action, CurrenciesType, DeathSaves} from '../../src/lib/CharacterSheetProcessor'
 import { HitDice } from '../../src/lib/character-sheet-processor/hitDice'
 
 export default async (): Promise<HealthData[]> => {
@@ -40,7 +40,7 @@ export type HealthData = {
     avatarPath: string,
     spellSlots: SpellSlot[],
     limitedUseActions: Action[],
-    currencies: Currencies,
+    currencies: CurrenciesType,
     deathSaves: DeathSaves,
     experience: number,
     level: number,

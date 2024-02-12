@@ -1,4 +1,4 @@
-import { Currencies } from "../../src/lib/CharacterSheetProcessor";
+import { CurrenciesType } from "../../src/lib/CharacterSheetProcessor";
 
 export default class CurrenciesBuilder {
     constructor(
@@ -43,7 +43,7 @@ export default class CurrenciesBuilder {
         return copper + silver + gold + electrum + platinum
     }
 
-    public build(): Currencies {
+    public build(): CurrenciesType {
         return {
             cp: this.copper,
             sp: this.silver,

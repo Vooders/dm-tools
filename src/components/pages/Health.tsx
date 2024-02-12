@@ -3,15 +3,14 @@ import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardMedia from '@mui/material/CardMedia'
-import Typography from '@mui/material/Typography'
 
 import { HealthData } from '../../handlers/getHealth'
 import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'
 import DeathSaves from '../fragments/DeathSaves'
 import Experience from '../fragments/Experience'
-import Currencies from '../fragments/Currencies'
 import Actions from '../fragments/Actions'
 import Hp from '../fragments/Hp'
+import CharacterDetails from '../fragments/CharacterDetails'
 
 export default function Health() {
     const [health, setHealth] = useState<HealthData[]>([])
@@ -33,16 +32,6 @@ export default function Health() {
         flexDirection: 'column',
         paddingLeft: '5px',
         paddingRight: '5px'
-    }
-
-    const topStatsBox = {
-        display: 'flex',
-        direction: 'row',
-        justifyContent: "space-between"
-    }
-
-    const nameBox = {
-        paddingY: '2px'
     }
 
     const getSenses = async () => {
@@ -79,20 +68,7 @@ export default function Health() {
                             alt={character.name}
                         />
                         <Box sx={mainBox}>
-                            <Box sx={topStatsBox}>
-                                <Box>
-                                    <Box sx={nameBox}>
-                                        <Typography variant="h1" >
-                                            {character.name}
-                                        </Typography>
-                                    </Box>
-                                </Box>
-                                <Currencies
-                                    showZeroes={false}
-                                    currencies={character.currencies}
-                                    align='right'
-                                />
-                            </Box>
+                            <CharacterDetails name={character.name} currencies={character.currencies}/>
                             <DeathSaves
                                 display={isUnconscious(character.hp)}
                                 failCount={character.deathSaves.failCount}

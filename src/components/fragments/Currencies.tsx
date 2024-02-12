@@ -1,6 +1,6 @@
 import { Box, Grid } from '@mui/material'
 import React from 'react'
-import { Currencies } from '../../lib/CharacterSheetProcessor'
+import { CurrenciesType } from '../../lib/CharacterSheetProcessor'
 import Currency from './Currency'
 
 const style = {
@@ -53,5 +53,5 @@ export default function Currencies(props: CurrenciesProps) {
 interface CurrenciesProps {
   showZeroes: boolean
   align: 'left' | 'right'
-  currencies: Currencies
+  currencies: CurrenciesType
 }
