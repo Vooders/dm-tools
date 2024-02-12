@@ -12,20 +12,21 @@ import Hp from '../fragments/Hp'
 import CharacterDetails from '../fragments/CharacterDetails'
 import Avatar from '../fragments/Avatar'
 
-export default function Health() {
-    const [health, setHealth] = useState<HealthData[]>([])
-
-    const cardStyling = {
+const style = {
+    outer: {
         display: 'flex',
         variant: "outlined"
-    }
-
-    const mainBox = {
+    },
+    inner: {
         width: '100%',
         flexDirection: 'column',
         paddingLeft: '5px',
         paddingRight: '5px'
     }
+}
+
+export default function Health() {
+    const [health, setHealth] = useState<HealthData[]>([])
 
     const getSenses = async () => {
         console.log('getting Health')
@@ -53,9 +54,9 @@ export default function Health() {
         <React.Fragment>
             {health.map(character => {
                 return (
-                    <Card sx={cardStyling}>
+                    <Card sx={style.outer}>
                         <Avatar name={character.name} avatarPath={character.avatarPath}/>
-                        <Box sx={mainBox}>
+                        <Box sx={style.inner}>
                             <CharacterDetails name={character.name} currencies={character.currencies}/>
                             <DeathSaves
                                 display={isUnconscious(character.hp)}
