@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -26,6 +26,7 @@ import Health from './pages/Health';
 import Wealth from './pages/Wealth';
 import MainMenu from './MainMenu';
 import ErrorBoundary from './ErrorBoundry';
+import Theme from './Theme';
 
 function Copyright(props: any) {
   return (
@@ -94,25 +95,7 @@ function DashboardContent() {
   };
 
   return (
-    <ThemeProvider
-      theme={createTheme({
-        components: {
-          MuiListItemButton: {
-            defaultProps: {
-              disableTouchRipple: true,
-            },
-          },
-        },
-        palette: {
-          mode: 'dark',
-          primary: { main: 'rgb(102, 157, 246)' },
-          background: { paper: 'rgb(5, 30, 52)' },
-        },
-        typography: {
-          fontSize: 11,
-        },
-      })}
-    >
+    <Theme>
       <HashRouter>
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
@@ -201,7 +184,7 @@ function DashboardContent() {
           </Box>
         </Box>
       </HashRouter>
-    </ThemeProvider>
+    </Theme>
   );
 }
 
