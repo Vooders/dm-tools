@@ -7,12 +7,12 @@ import Typography from '@mui/material/Typography'
 
 import { HealthData } from '../../handlers/getHealth'
 import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'
-import Slots from '../fragments/Slots'
 import DeathSaves from '../fragments/DeathSaves'
 import Experience from '../fragments/Experience'
 import HpBar from '../fragments/HpBar'
 import Currencies from '../fragments/Currencies'
 import Actions from '../fragments/Actions'
+import Hp from '../fragments/Hp'
 
 export default function Health() {
     const [health, setHealth] = useState<HealthData[]>([])
@@ -40,11 +40,6 @@ export default function Health() {
         display: 'flex',
         direction: 'row',
         justifyContent: "space-between"
-    }
-
-    const hpBox = {
-        display: 'flex',
-        flexDirection: 'row'
     }
 
     const nameBox = {
@@ -78,13 +73,6 @@ export default function Health() {
 
     const maxHp = (hp: CharacterProfileHp) => {
         return (hp.override) ? hp.override : hp.constitutionBonus + hp.base + hp.bonus
-    }
-
-    const hpView = (hp: CharacterProfileHp) => {
-        const trueHp = maxHp(hp) - hp.removed
-        const posIntHp = trueHp > 0 ? trueHp : 0
-
-        return `${posIntHp} / ${maxHp(hp)}`
     }
 
     const isUnconscious = (hp: CharacterProfileHp) => {
@@ -128,29 +116,7 @@ export default function Health() {
                                 />
                             </Box>
                             <Experience level={character.level} experience={character.experience} />
-                            <Box sx={hpBox}>
-                                <Typography variant="subtitle2" mr={2}>
-                                    {hpView(character.hp)} HP
-                                </Typography>
-                                {(character.hp.temporary > 0) ?
-                                    <Typography variant="subtitle2" mr={2}>
-                                        {character.hp.temporary} Temp
-                                    </Typography>
-                                    : <></>
-                                }
-                                <Typography variant="subtitle2" mr={2}>
-                                    {character.ac} AC
-                                </Typography>
-                                {character.hitDice.map((hitDice) => {
-                                    return (
-                                        <Typography variant="subtitle2" mr={2}>
-                                            {hitDice.max - hitDice.used}/{hitDice.max} {hitDice.dice}
-                                        </Typography>
-                                    )
-                                })}
-
-                            </Box>
-                            <HpBar hpMax={maxHp(character.hp)} hpRemoved={character.hp.removed} />
+                            <Hp hp={character.hp} hitDice={character.hitDice}/>
                             <Actions 
                                 spellSlots={character.spellSlots}
                                 limitedUseActions={character.limitedUseActions}
