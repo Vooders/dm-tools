@@ -28,17 +28,17 @@ const style = {
 export default function Health() {
     const [health, setHealth] = useState<HealthData[]>([])
 
-    const getSenses = async () => {
+    const getHealth = async () => {
         console.log('getting Health')
         setHealth(await window.electron.getHealth())
     }
 
     useEffect(() => {
-        getSenses()
+        getHealth()
             .catch(console.error)
 
         window.electron.characterUpdated(async () => {
-            await getSenses()
+            await getHealth()
         })
     }, [])
 
