@@ -2,21 +2,33 @@ import React from 'react'
 import { Box, Typography } from '@mui/material'
 import Currencies from './Currencies'
 import { CurrenciesType } from '../../lib/CharacterSheetProcessor'
+import Ac from './Ac'
 
 const style = {
-    display: 'flex',
-    direction: 'row',
-    justifyContent: "space-between"
+    outerContainer: {
+        display: 'flex',
+        direction: 'row',
+        justifyContent: "space-between",
+        marginBottom: '10px'
+    },
+    nameBox: {
+        display: 'flex',
+        paddingY: '2px'
+    },
+    name: {
+        paddingTop: '5px'
+    }
 }
 
 export default function CharacterDetails(props: CharacterDetailsProps) {
     return (
-        <Box sx={style}>
+        <Box sx={style.outerContainer}>
             <Box>
-                <Box sx={{paddingY: '2px'}}>
-                    <Typography variant="h1" >
+                <Box sx={style.nameBox}>
+                    <Typography variant="h1" sx={style.name}>
                         {props.name}
                     </Typography>
+                    <Ac ac={props.ac}/>
                 </Box>
             </Box>
             <Currencies
@@ -31,4 +43,5 @@ export default function CharacterDetails(props: CharacterDetailsProps) {
 interface CharacterDetailsProps {
     name: string
     currencies: CurrenciesType
+    ac: number
 }

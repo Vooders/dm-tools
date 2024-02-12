@@ -57,7 +57,10 @@ export default function Health() {
                     <Card sx={style.outer}>
                         <Avatar name={character.name} avatarPath={character.avatarPath}/>
                         <Box sx={style.inner}>
-                            <CharacterDetails name={character.name} currencies={character.currencies}/>
+                            <CharacterDetails 
+                                name={character.name}
+                                currencies={character.currencies}
+                                ac={character.ac}/>
                             <DeathSaves
                                 display={isUnconscious(character.hp)}
                                 failCount={character.deathSaves.failCount}

@@ -5,7 +5,8 @@ import Currency from './Currency'
 
 const style = {
   display: 'flex',
-  flexDirection: 'row'
+  flexDirection: 'row',
+  paddingTop: '5px'
 }
 
 export default function Currencies(props: CurrenciesProps) {
