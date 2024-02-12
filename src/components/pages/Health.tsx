@@ -11,6 +11,7 @@ import Slots from '../fragments/Slots'
 import DeathSaves from '../fragments/DeathSaves'
 import Experience from '../fragments/Experience'
 import HpBar from '../fragments/HpBar'
+import Currencies from '../fragments/Currencies'
 
 export default function Health() {
     const [health, setHealth] = useState<HealthData[]>([])
@@ -113,6 +114,13 @@ export default function Health() {
                                             {character.name}
                                         </Typography>
                                     </Box>
+                                </Box>
+                                <Box sx={currencyBox}>
+                                    <Currencies
+                                        showZeroes={false}
+                                        currencies={character.currencies}
+                                        align='right'
+                                    />
                                 </Box>
                             </Box>
                             <Box sx={deathSaves}>
