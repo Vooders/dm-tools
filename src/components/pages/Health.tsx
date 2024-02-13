@@ -56,14 +56,14 @@ export default function Health() {
             {health.map(character => {
                 return (
                     <Card sx={style.outer}>
-                        <Avatar name={character.name} avatarPath={character.avatarPath}/>
+                        <Avatar name={character.name} avatarPath={character.avatarPath} />
                         <Box sx={style.inner}>
-                            <CharacterDetails 
+                            <CharacterDetails
                                 name={character.name}
                                 currencies={character.currencies}
                                 ac={character.ac}
-                                />
-                                <HealthPotions normal={character.healthPotions.normal} greater={character.healthPotions.greater} />
+                            />
+                            <HealthPotions normal={character.healthPotions.normal} greater={character.healthPotions.greater} />
                             <DeathSaves
                                 display={isUnconscious(character.hp)}
                                 failCount={character.deathSaves.failCount}
