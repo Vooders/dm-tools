@@ -13,32 +13,33 @@ import CharacterDetails from '../fragments/CharacterDetails'
 import Avatar from '../fragments/Avatar'
 import HealthPotions from '../fragments/HealthPotions'
 
-export default function Health() {
-    const [health, setHealth] = useState<HealthData[]>([])
-
-    const cardStyling = {
+const style = {
+    outer: {
         display: 'flex',
         variant: "outlined"
-    }
-
-    const mainBox = {
+    },
+    inner: {
         width: '100%',
         flexDirection: 'column',
         paddingLeft: '5px',
         paddingRight: '5px'
     }
+}
 
-    const getSenses = async () => {
+export default function Health() {
+    const [health, setHealth] = useState<HealthData[]>([])
+
+    const getHealth = async () => {
         console.log('getting Health')
         setHealth(await window.electron.getHealth())
     }
 
     useEffect(() => {
-        getSenses()
+        getHealth()
             .catch(console.error)
 
         window.electron.characterUpdated(async () => {
-            await getSenses()
+            await getHealth()
         })
     }, [])
 
@@ -54,14 +55,15 @@ export default function Health() {
         <React.Fragment>
             {health.map(character => {
                 return (
-                    <Card sx={cardStyling}>
-                        <Avatar name={character.name} avatarPath={character.avatarPath} />
-                        <Box sx={mainBox}>
-                            <CharacterDetails name={character.name} currencies={character.currencies} />
-                            <HealthPotions
-                                normal={character.healthPotions.normal}
-                                greater={character.healthPotions.greater}
-                            />
+                    <Card sx={style.outer}>
+                        <Avatar name={character.name} avatarPath={character.avatarPath}/>
+                        <Box sx={style.inner}>
+                            <CharacterDetails 
+                                name={character.name}
+                                currencies={character.currencies}
+                                ac={character.ac}
+                                />
+                                <HealthPotions normal={character.healthPotions.normal} greater={character.healthPotions.greater} />
                             <DeathSaves
                                 display={isUnconscious(character.hp)}
                                 failCount={character.deathSaves.failCount}
