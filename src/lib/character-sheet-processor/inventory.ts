@@ -13,7 +13,7 @@ export default function inventory(inventory: any, customItemInventory: any, carr
                 filterType: item.definition.filterType,
                 isContainer: item.definition.isContainer,
                 cost: item.definition.cost,
-                bundleSize: item.definition.bundleSize,
+                bundleSize: item.definition.bundleSize > 0 ? item.definition.bundleSize : 1,
                 notes: item.definition.notes,
                 capacity: item.definition.capacityWeight,
                 armorClass: item.definition.armorClass,
@@ -56,6 +56,7 @@ export default function inventory(inventory: any, customItemInventory: any, carr
     const containers = findContainers(items)
     const equipmentItems = removeContainers(fillBag(id, items))
 
+    console.log(totalItemsWeight(equipmentItems))
     return [
         {
             name: 'Equipment',
