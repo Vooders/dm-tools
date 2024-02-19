@@ -42,9 +42,9 @@ export default function HpBar(props: HpBarProps) {
                         <LinearProgress variant="determinate" color={healthBarColour(percentHp)} {...props} />
                     </Box>
                     <Box sx={{ minWidth: 35 }}>
-                        <Typography variant="body2">{`${Math.round(
-                            percentHp,
-                        )}%`}</Typography>
+                        <Typography variant="body2">
+                            {`${Math.round(percentHp)}%`}
+                        </Typography>
                     </Box>
                 </Box>
                 : <></>

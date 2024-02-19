@@ -13,6 +13,7 @@ import wealth from './character-sheet-processor/wealth'
 import * as hitDice from './character-sheet-processor/hitDice'
 import action from './character-sheet-processor/actions'
 import healthPotions from './character-sheet-processor/healthPotions'
+import creatures, { Creature } from './character-sheet-processor/creatures'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -64,8 +65,19 @@ export default class CharacterSheetProcessor {
             ac: this.buildArmour(),
             wealth: this.buildWealth(),
             hitDice: this.buildHitDice(),
-            healthPotions: this.buildHealthPotions()
+            healthPotions: this.buildHealthPotions(),
+            creatures: this.buildCreatures()
         }
+    }
+
+    private buildCreatures() {
+        return creatures(this.dndBeyondJson.data.creatures).map((playerCreature: Creature) => {
+            if (playerCreature.name === 'Homunculus Servant') {
+                playerCreature.hp.max = 1 + this.getModifier('INT') + this.level
+            }
+
+            return playerCreature
+        })
     }
 
     private buildHealthPotions() {
@@ -169,6 +181,10 @@ export default class CharacterSheetProcessor {
             return 5
         }
         return 6
+    }
+
+    private getModifier(shortName:'CON'|'STR'|'DEX'|'INT'|'CHA'|'WIS' ): number {
+        return this.abilities.filter(ability => ability.shortName === shortName)[0].modifier
     }
 
     private buildHp(): CharacterProfileHp {
@@ -294,6 +310,7 @@ export type DmToolsData = {
     wealth: Wealth
     hitDice: hitDice.HitDice[]
     healthPotions: HealthPotions
+    creatures: Creature[]
 }
 
 export type ItemContainer = {

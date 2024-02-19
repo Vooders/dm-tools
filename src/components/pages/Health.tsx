@@ -12,6 +12,7 @@ import Hp from '../fragments/Hp'
 import CharacterDetails from '../fragments/CharacterDetails'
 import Avatar from '../fragments/Avatar'
 import HealthPotions from '../fragments/HealthPotions'
+import Creature from '../Creature'
 
 const style = {
     outer: {
@@ -23,6 +24,10 @@ const style = {
         flexDirection: 'column',
         paddingLeft: '5px',
         paddingRight: '5px'
+    },
+    creature: {
+        display: 'flex',
+        direction: 'row'
     }
 }
 
@@ -55,30 +60,39 @@ export default function Health() {
         <React.Fragment>
             {health.map(character => {
                 return (
-                    <Card sx={style.outer}>
-                        <Avatar name={character.name} avatarPath={character.avatarPath} />
-                        <Box sx={style.inner}>
-                            <CharacterDetails
-                                name={character.name}
-                                currencies={character.currencies}
-                                ac={character.ac}
-                            />
-                            <HealthPotions normal={character.healthPotions.normal} greater={character.healthPotions.greater} />
-                            <DeathSaves
-                                display={isUnconscious(character.hp)}
-                                failCount={character.deathSaves.failCount}
-                                successCount={character.deathSaves.successCount}
-                                isStabilized={character.deathSaves.isStabilized}
-                            />
-                            <Experience level={character.level} experience={character.experience} />
-                            <Hp hp={character.hp} hitDice={character.hitDice} />
-                            <Actions
-                                spellSlots={character.spellSlots}
-                                limitedUseActions={character.limitedUseActions}
-                                isUnconscious={isUnconscious(character.hp)}
-                            />
+                    <>
+                        <Card sx={style.outer}>
+                            <Avatar name={character.name} avatarPath={character.avatarPath} />
+                            <Box sx={style.inner}>
+                                <CharacterDetails
+                                    name={character.name}
+                                    currencies={character.currencies}
+                                    ac={character.ac}
+                                />
+                                <HealthPotions normal={character.healthPotions.normal} greater={character.healthPotions.greater} />
+                                <DeathSaves
+                                    display={isUnconscious(character.hp)}
+                                    failCount={character.deathSaves.failCount}
+                                    successCount={character.deathSaves.successCount}
+                                    isStabilized={character.deathSaves.isStabilized}
+                                />
+                                <Experience level={character.level} experience={character.experience} />
+                                <Hp hp={character.hp} hitDice={character.hitDice} />
+                                <Actions
+                                    spellSlots={character.spellSlots}
+                                    limitedUseActions={character.limitedUseActions}
+                                    isUnconscious={isUnconscious(character.hp)}
+                                />
+                            </Box>
+                        </Card>
+                        <Box sx={style.creature}>
+                            {character.creatures.map(creature => {
+                                return (
+                                    <Creature creature={creature}/>
+                                )
+                            })}
                         </Box>
-                    </Card>
+                    </>
                 )
             })}
         </React.Fragment>
