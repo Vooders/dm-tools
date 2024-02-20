@@ -3,6 +3,8 @@ import { Box, Typography } from '@mui/material'
 import Currencies from './Currencies'
 import { CurrenciesType } from '../../lib/CharacterSheetProcessor'
 import Ac from './Ac'
+import HealthPotions from './HealthPotions'
+import { HealthPotionsType } from '../../lib/character-sheet-processor/healthPotions'
 
 const style = {
     outerContainer: {
@@ -29,6 +31,7 @@ export default function CharacterDetails(props: CharacterDetailsProps) {
                         {props.name}
                     </Typography>
                     <Ac ac={props.ac}/>
+                    <HealthPotions healthPotions={props.healthPotions} />
                 </Box>
             </Box>
             <Currencies
@@ -44,4 +47,5 @@ interface CharacterDetailsProps {
     name: string
     currencies: CurrenciesType
     ac: number
+    healthPotions: HealthPotionsType
 }

@@ -1,6 +1,4 @@
-import { HealthPotions } from "../CharacterSheetProcessor"
-
-export default function healthPotions(inventory: any): HealthPotions {
+export default function healthPotions(inventory: any): HealthPotionsType {
 
     const calculateAmount = (potionName: string) => {
         return inventory.filter((item: any) => item.definition.name === potionName)
@@ -9,6 +7,15 @@ export default function healthPotions(inventory: any): HealthPotions {
 
     return {
         normal: calculateAmount('Potion of Healing'),
-        greater: calculateAmount('Potion of Healing (Greater)')
+        greater: calculateAmount('Potion of Healing (Greater)'),
+        superior: calculateAmount('Potion of Healing (Superior)'),
+        supreme: calculateAmount('Potion of Healing (Supreme)')
     }
+}
+
+export type HealthPotionsType = {
+    normal: number
+    greater: number
+    superior: number
+    supreme: number
 }

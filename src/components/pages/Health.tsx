@@ -11,7 +11,7 @@ import Actions from '../fragments/Actions'
 import Hp from '../fragments/Hp'
 import CharacterDetails from '../fragments/CharacterDetails'
 import Avatar from '../fragments/Avatar'
-import HealthPotions from '../fragments/HealthPotions'
+
 import Creature from '../Creature'
 
 const style = {
@@ -68,8 +68,8 @@ export default function Health() {
                                     name={character.name}
                                     currencies={character.currencies}
                                     ac={character.ac}
+                                    healthPotions={character.healthPotions}
                                 />
-                                <HealthPotions normal={character.healthPotions.normal} greater={character.healthPotions.greater} />
                                 <DeathSaves
                                     display={isUnconscious(character.hp)}
                                     failCount={character.deathSaves.failCount}

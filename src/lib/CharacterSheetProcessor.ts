@@ -12,7 +12,7 @@ import saves from './character-sheet-processor/saves'
 import wealth from './character-sheet-processor/wealth'
 import * as hitDice from './character-sheet-processor/hitDice'
 import action from './character-sheet-processor/actions'
-import healthPotions from './character-sheet-processor/healthPotions'
+import healthPotions, { HealthPotionsType } from './character-sheet-processor/healthPotions'
 import creatures, { Creature } from './character-sheet-processor/creatures'
 
 export default class CharacterSheetProcessor {
@@ -309,7 +309,7 @@ export type DmToolsData = {
     ac: number
     wealth: Wealth
     hitDice: hitDice.HitDice[]
-    healthPotions: HealthPotions
+    healthPotions: HealthPotionsType
     creatures: Creature[]
 }
 
@@ -579,9 +579,4 @@ export type CharacterClass = {
         hitDice: number
     }
     hitDiceUsed: number
-}
-
-export type HealthPotions = {
-    normal: number
-    greater: number
 }

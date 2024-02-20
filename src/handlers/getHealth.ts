@@ -1,6 +1,7 @@
 import getSummaryData from '../lib/getSummary'
 import getCharacter from './getCharacter'
-import { CharacterProfileHp, SpellSlot, Action, CurrenciesType, DeathSaves, HealthPotions} from '../../src/lib/CharacterSheetProcessor'
+import { CharacterProfileHp, SpellSlot, Action, CurrenciesType, DeathSaves} from '../../src/lib/CharacterSheetProcessor'
+import { HealthPotionsType } from '../lib/character-sheet-processor/healthPotions'
 import { HitDice } from '../../src/lib/character-sheet-processor/hitDice'
 import { Creature } from '../../src/lib/character-sheet-processor/creatures'
 
@@ -49,6 +50,6 @@ export type HealthData = {
     level: number
     ac: number
     hitDice: HitDice[]
-    healthPotions: HealthPotions
+    healthPotions: HealthPotionsType
     creatures: Creature[]
 }
