@@ -5,6 +5,7 @@ import { CurrenciesType } from '../../lib/CharacterSheetProcessor'
 import Ac from './Ac'
 import HealthPotions from './HealthPotions'
 import { HealthPotionsType } from '../../lib/character-sheet-processor/healthPotions'
+import Inspiration from './Inspiration'
 
 const style = {
     outerContainer: {
@@ -31,6 +32,7 @@ export default function CharacterDetails(props: CharacterDetailsProps) {
                         {props.name}
                     </Typography>
                     <Ac ac={props.ac}/>
+                    <Inspiration inspiration={props.inspiration}/>
                     <HealthPotions healthPotions={props.healthPotions} />
                 </Box>
             </Box>
@@ -48,4 +50,5 @@ interface CharacterDetailsProps {
     currencies: CurrenciesType
     ac: number
     healthPotions: HealthPotionsType
+    inspiration: boolean
 }

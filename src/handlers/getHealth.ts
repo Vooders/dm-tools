@@ -33,7 +33,8 @@ export default async (): Promise<HealthData[]> => {
             ac: characterData.ac,
             hitDice: characterData.hitDice,
             healthPotions: characterData.healthPotions,
-            creatures: characterData.creatures
+            creatures: characterData.creatures,
+            inspiration: characterData.inspiration
         }
     }))
 }
@@ -52,4 +53,5 @@ export type HealthData = {
     hitDice: HitDice[]
     healthPotions: HealthPotionsType
     creatures: Creature[]
+    inspiration: boolean
 }

@@ -69,6 +69,7 @@ export default function Health() {
                                     currencies={character.currencies}
                                     ac={character.ac}
                                     healthPotions={character.healthPotions}
+                                    inspiration={character.inspiration}
                                 />
                                 <DeathSaves
                                     display={isUnconscious(character.hp)}
