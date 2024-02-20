@@ -14,13 +14,19 @@ const style = {
     }
 }
 
-export default function Inspiration(props: InspirationProps) {
+function inspiration() {
     return (
         <Box sx={style.container}>
-            {props.inspiration ?
-                <GiInspiration style={style.icon} /> : 'bob'
-            }
+            <GiInspiration style={style.icon} />
         </Box>
+    )
+}
+
+export default function Inspiration(props: InspirationProps) {
+    return (
+        <>
+            { props.inspiration ? inspiration() : null}
+        </>
     )
 }
 
