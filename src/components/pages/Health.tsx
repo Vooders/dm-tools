@@ -77,7 +77,11 @@ export default function Health() {
                                     successCount={character.deathSaves.successCount}
                                     isStabilized={character.deathSaves.isStabilized}
                                 />
-                                <Experience level={character.level} experience={character.experience} />
+                                <Experience
+                                    level={character.level}
+                                    experience={character.experience}
+                                    isMilestone={character.milestoneProgression}
+                                />
                                 <Hp hp={character.hp} hitDice={character.hitDice} />
                                 <Actions
                                     spellSlots={character.spellSlots}

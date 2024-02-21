@@ -67,7 +67,8 @@ export default class CharacterSheetProcessor {
             hitDice: this.buildHitDice(),
             healthPotions: this.buildHealthPotions(),
             creatures: this.buildCreatures(),
-            inspiration: this.dndBeyondJson.data.inspiration
+            inspiration: this.dndBeyondJson.data.inspiration,
+            milestoneProgression: this.dndBeyondJson.data.preferences.progressionType === 2
         }
     }
 
@@ -313,6 +314,7 @@ export type DmToolsData = {
     healthPotions: HealthPotionsType
     creatures: Creature[]
     inspiration: boolean
+    milestoneProgression: boolean
 }
 
 export type ItemContainer = {

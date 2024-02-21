@@ -56,7 +56,7 @@ export default function Experience(props: ExperienceProps) {
     const xpPercent = calculateXpPercent()
 
     return (
-        (props.experience > 0) ?
+        (props.isMilestone) ?
             <>
                 <Typography variant="subtitle2" >
                     {currentXp} / {xpToNextLevel} XP
@@ -78,4 +78,5 @@ export default function Experience(props: ExperienceProps) {
 interface ExperienceProps {
     level: number
     experience: number
+    isMilestone: boolean
 }
