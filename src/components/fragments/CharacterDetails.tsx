@@ -28,11 +28,11 @@ export default function CharacterDetails(props: CharacterDetailsProps) {
         <Box sx={style.outerContainer}>
             <Box>
                 <Box sx={style.nameBox}>
+                    <Inspiration inspiration={props.inspiration}/>
                     <Typography variant="h1" sx={style.name}>
                         {props.name}
                     </Typography>
                     <Ac ac={props.ac}/>
-                    <Inspiration inspiration={props.inspiration}/>
                     <HealthPotions healthPotions={props.healthPotions} />
                 </Box>
             </Box>

@@ -5,7 +5,7 @@ import { GiInspiration } from "react-icons/gi"
 const style = {
     container: {
         paddingTop: '5px',
-        marginLeft: '10px'
+        marginRight: '10px'
     },
     icon: {
         color: '#FFD700',
@@ -25,7 +25,7 @@ function inspiration() {
 export default function Inspiration(props: InspirationProps) {
     return (
         <>
-            { props.inspiration ? inspiration() : null}
+            { props.inspiration ? inspiration() : null }
         </>
     )
 }
