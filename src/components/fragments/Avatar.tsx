@@ -3,7 +3,7 @@ import { CardMedia } from '@mui/material'
 
 const style = {
     height: 200,
-    width: 160,
+    width: '100%',
     variant: "rounded",
     padding: '5px'
 }

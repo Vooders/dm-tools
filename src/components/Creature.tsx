@@ -9,12 +9,15 @@ import Ac from './fragments/Ac'
 
 const style = {
     container: {
-        padding: '5px',
-        width: '25%'
+        padding: '5px'
     },
     content: {
         padding: '5px',
         paddingBottom: '5px !important'
+    },
+    name: {
+        fontSize: '17px',
+        paddingTop: '5px'
     },
     top: {
         display: 'flex',
@@ -30,7 +33,7 @@ export default function Creature(props: CreatureProps) {
         <Card sx={style.container}>
             <CardContent sx={style.content}>
                 <Box sx={style.top}>
-                    <Typography variant="h1">
+                    <Typography sx={style.name}>
                         {props.creature.customName ? props.creature.customName : props.creature.name}
                     </Typography>
                     <Ac ac={props.creature.ac} />

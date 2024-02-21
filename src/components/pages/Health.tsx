@@ -19,15 +19,16 @@ const style = {
         display: 'flex',
         variant: "outlined"
     },
-    inner: {
-        width: '100%',
+    right: {
+        width: '80%',
         flexDirection: 'column',
         paddingLeft: '5px',
-        paddingRight: '5px'
+        paddingRight: '5px',
     },
-    creature: {
+    left: {
         display: 'flex',
-        direction: 'row'
+        flexDirection: 'column',
+        width: '20%'
     }
 }
 
@@ -62,8 +63,15 @@ export default function Health() {
                 return (
                     <>
                         <Card sx={style.outer}>
-                            <Avatar name={character.name} avatarPath={character.avatarPath} />
-                            <Box sx={style.inner}>
+                            <Box sx={style.left}>
+                                <Avatar name={character.name} avatarPath={character.avatarPath} />
+                                {character.creatures.map(creature => {
+                                    return (
+                                        <Creature creature={creature}/>
+                                    )
+                                })}
+                            </Box>
+                            <Box sx={style.right}>
                                 <CharacterDetails
                                     name={character.name}
                                     currencies={character.currencies}
@@ -90,13 +98,6 @@ export default function Health() {
                                 />
                             </Box>
                         </Card>
-                        <Box sx={style.creature}>
-                            {character.creatures.map(creature => {
-                                return (
-                                    <Creature creature={creature}/>
-                                )
-                            })}
-                        </Box>
                     </>
                 )
             })}
