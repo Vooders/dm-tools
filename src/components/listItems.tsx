@@ -10,6 +10,7 @@ import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import InsightsIcon from '@mui/icons-material/Insights';
 import { Link } from 'react-router-dom';
 
 export const mainListItems = (
@@ -69,6 +70,15 @@ export const mainListItems = (
           <AttachMoneyIcon />
         </ListItemIcon>
         <ListItemText primary="Wealth" />
+      </ListItemButton>
+    </Link>
+
+    <Link to='/metrics'>
+      <ListItemButton>
+        <ListItemIcon>
+          <InsightsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Metrics" />
       </ListItemButton>
     </Link>
     

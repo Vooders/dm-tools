@@ -134,6 +134,8 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.103",
     "@mui/material": "^5.10.7",
+    "@mui/system": "^5.4.1",
+    "@mui/x-charts": "^6.19.4",
     "@types/path-browserify": "^1.0.0",
     "electron-fetch": "^1.9.1",
     "electron-squirrel-startup": "^1.0.0",

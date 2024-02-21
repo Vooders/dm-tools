@@ -4,6 +4,7 @@ import path from 'path'
 import getSummaryData from './getSummary';
 import fetch from 'electron-fetch'
 import CharacterSheetProcessor from '../lib/CharacterSheetProcessor';
+import saveMetrics from './saveMetrics';
 
 const directory = 'characters'
 const userDataPath = app.getPath('userData');
@@ -20,7 +21,7 @@ export default async (character: any) => {
         const processedCharacter = characterSheetProcessor.process()
         await writeFile(filePath, JSON.stringify(processedCharacter));
         console.log(`saved ${filename}`)
-        const summary = await updateSummary(character.data)
+        await updateSummary(character.data)
         await downloadAvatar(character.data)
         return true
     } catch (error) {

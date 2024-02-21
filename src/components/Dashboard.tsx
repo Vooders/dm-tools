@@ -27,6 +27,7 @@ import Wealth from './pages/Wealth';
 import MainMenu from './MainMenu';
 import ErrorBoundary from './ErrorBoundry';
 import Theme from './Theme';
+import Metrics from './pages/Metrics';
 
 function Copyright(props: any) {
   return (
@@ -173,6 +174,7 @@ function DashboardContent() {
                         <Route path="/skills" element={<Skills />} />
                         <Route path="/health" element={<Health />} />
                         <Route path="/wealth" element={<Wealth />} />
+                        <Route path="/metrics" element={<Metrics />} />
                         <Route path="/characterSheet/:characterId" element={<CharacterSheet />} />
                       </Routes>
                     </Paper>
