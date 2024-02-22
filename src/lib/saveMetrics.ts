@@ -40,7 +40,6 @@ export default async function saveMetrics(): Promise<void> {
 
         await Promise.all(characterIds.map(async (characterId) => {
             const characterData = await getCharacter(null, characterId)
-
             const characterIndex = getCharacterIndex(characterData, metrics)
 
             metrics.xp.series[characterIndex].data.push(characterData.profile.xp)
@@ -49,9 +48,24 @@ export default async function saveMetrics(): Promise<void> {
         }))
     }
 
-    await writeFile(metricsPath, JSON.stringify(metrics))
+    await writeFile(metricsPath, JSON.stringify(fillRemovedCharacters(metrics)))
 }
 
+function fillRemovedCharacters(metrics: Metrics): Metrics {
+    const numberOfDataPoints = metrics.xAxis.data.length
+    metrics.xp.series.forEach(fillDataPoint(numberOfDataPoints))
+    metrics.hp.series.forEach(fillDataPoint(numberOfDataPoints))
+    metrics.gold.series.forEach(fillDataPoint(numberOfDataPoints))
+    return metrics
+}
+
+function fillDataPoint(numberOfDataPoints: number) {
+    return (character: Metric) => {
+        if (character.data.length != numberOfDataPoints) {
+            character.data.push(null)
+        }
+    }
+}
 
 const hp = (characterData: DmToolsData) => {
     const hp = characterData.hp
