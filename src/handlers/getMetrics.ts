@@ -7,5 +7,8 @@ const userDataPath = app.getPath('userData');
 const metricsPath = path.join(userDataPath, 'metrics.json');
 
 export default async (): Promise<Metrics> => {
-    return await getFile(metricsPath)
+    const metrics = await getFile(metricsPath)
+    const stringData = metrics.xAxis.data
+    metrics.xAxis.data = stringData.map((d: string) => new Date(d))
+    return metrics
 } 

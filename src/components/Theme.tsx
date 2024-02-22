@@ -33,6 +33,7 @@ const theme: ThemeOptions = createTheme({
           root: {
             background: 'linear-gradient(rgb(10, 35, 57), rgb(20,45,67))',
             margin: 4,
+            marginBottom: 10,
             borderRadius: 8,
             boxShadow: '0 3px 5px 2px rgba(120,120,120, .4)',
             padding: '8px',
