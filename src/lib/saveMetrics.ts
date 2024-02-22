@@ -27,8 +27,11 @@ export default async function saveMetrics(): Promise<void> {
         metrics.hp = {
             series: []
         }
-    }
 
+        metrics.gold = {
+            series: []
+        }
+    }
 
     const now = thisMinute()
 
@@ -42,6 +45,7 @@ export default async function saveMetrics(): Promise<void> {
 
             metrics.xp.series[characterIndex].data.push(characterData.profile.xp)
             metrics.hp.series[characterIndex].data.push(hp(characterData))
+            metrics.gold.series[characterIndex].data.push(characterData.currencies.total)
         }))
     }
 
@@ -64,19 +68,19 @@ function getCharacterIndex(characterData: DmToolsData, metrics: Metrics) {
         return index
     }
 
-    metrics.xp.series.push({
-        id: characterData.id,
-        label: characterData.profile.name,
-        data: new Array(metrics.xAxis.data.length).fill(null)
-    })
-
-    metrics.hp.series.push({
-        id: characterData.id,
-        label: characterData.profile.name,
-        data: new Array(metrics.xAxis.data.length).fill(null)
-    })
+    metrics.xp.series.push(newMetric(characterData, metrics.xAxis))
+    metrics.hp.series.push(newMetric(characterData, metrics.xAxis))
+    metrics.gold.series.push(newMetric(characterData, metrics.xAxis))
 
     return metrics.xp.series.length - 1
+}
+
+function newMetric(characterData: DmToolsData, xAxis: XAxis) {
+    return {
+        id: characterData.id,
+        label: characterData.profile.name,
+        data: new Array(xAxis.data.length - 1).fill(null)
+    }
 }
 
 function thisMinute(): Date {
@@ -101,6 +105,9 @@ export type Metrics = {
         series: Metric[]
     }
     hp: {
+        series: Metric[]
+    }
+    gold: {
         series: Metric[]
     }
 }

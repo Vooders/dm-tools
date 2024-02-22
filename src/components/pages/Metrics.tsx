@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { LineChart } from '@mui/x-charts/LineChart'
 import { Metrics } from '../../lib/saveMetrics'
-import { Card, Typography } from '@mui/material'
 import Graph from '../fragments/Graph'
 
 export default function Metrics() {
@@ -13,6 +11,9 @@ export default function Metrics() {
             series: []
         },
         hp: {
+            series: []
+        },
+        gold: {
             series: []
         }
     })
@@ -31,18 +32,16 @@ export default function Metrics() {
         })
     }, [])
 
-    const style = {
-        graph: {
-            width: '100%',
-            height: '400px'
-        }
-    }
-
     return (
         <>
             <Graph
                 title='HP'
                 series={metrics.hp.series}
+                xAxis={metrics.xAxis.data}
+            />
+            <Graph
+                title='Gold'
+                series={metrics.gold.series}
                 xAxis={metrics.xAxis.data}
             />
             <Graph
