@@ -40,8 +40,8 @@ contextBridge.exposeInMainWorld('electron', {
   getHealth: async () => {
     return await ipcRenderer.invoke('health:get')
   },
-  getMetrics: async () => {
-    return await ipcRenderer.invoke('metrics:get')
+  getMetrics: async (timeRange) => {
+    return await ipcRenderer.invoke('metrics:get', timeRange)
   },
   getWealth: async () => {
     return await ipcRenderer.invoke('wealth:get')

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Metrics } from '../../lib/saveMetrics'
 import Graph from '../fragments/Graph'
+import { Box } from '@mui/system'
+import { Button, ButtonGroup } from '@mui/material'
 
 export default function Metrics() {
-    const [metrics, setMetrics] = useState<any>({
+    const emptyMetrics: any = {
         xAxis: {
             data: []
         },
@@ -16,24 +18,39 @@ export default function Metrics() {
         gold: {
             series: []
         }
-    })
+    }
+    const HOUR = 1000 * 60 * 60
+    const [metrics, setMetrics] = useState<any>(emptyMetrics)
+    const [timeRange, setTimeRange] = useState<number>(HOUR * 4)
 
-    const getMetrics = async () => {
+    const getMetrics = async (range: number) => {
         console.log('getting Metrics')
-        setMetrics(await window.electron.getMetrics())
+        await setTimeRange((r) => range)
+        console.log('getMetrics - range', timeRange)
+        setMetrics(await window.electron.getMetrics(range))
     }
 
     useEffect(() => {
-        getMetrics()
+        getMetrics(timeRange)
             .catch(console.error)
 
         window.electron.characterUpdated(async () => {
-            await getMetrics()
+            console.log('useEffect - range', timeRange)
+            await getMetrics(timeRange)
         })
     }, [])
 
     return (
         <>
+            {timeRange}
+            <Box>
+                <ButtonGroup variant="text" aria-label="Basic button group">
+                    <Button onClick={() => getMetrics(HOUR)}>One</Button>
+                    <Button onClick={() => getMetrics(HOUR * 2)}>Two</Button>
+                    <Button onClick={() => getMetrics(HOUR * 3)}>Three</Button>
+                    <Button onClick={() => getMetrics(HOUR * 4)}>Three</Button>
+                </ButtonGroup>
+            </Box>
             <Graph
                 title='HP'
                 series={metrics.hp.series}
