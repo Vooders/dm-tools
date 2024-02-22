@@ -85,7 +85,7 @@ function thisMinute(): Date {
     return new Date(Math.round(date.getTime() / coeff) * coeff)
 }
 
-type Metric = {
+export type Metric = {
     id: number
     label: string
     data: number[]

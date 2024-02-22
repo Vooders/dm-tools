@@ -4,7 +4,6 @@ import path from 'path'
 import getSummaryData from './getSummary';
 import fetch from 'electron-fetch'
 import CharacterSheetProcessor from '../lib/CharacterSheetProcessor';
-import saveMetrics from './saveMetrics';
 
 const directory = 'characters'
 const userDataPath = app.getPath('userData');
