@@ -56,7 +56,6 @@ export default function inventory(inventory: any, customItemInventory: any, carr
     const containers = findContainers(items)
     const equipmentItems = removeContainers(fillBag(id, items))
 
-    console.log(totalItemsWeight(equipmentItems))
     return [
         {
             name: 'Equipment',
