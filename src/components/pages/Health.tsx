@@ -13,6 +13,7 @@ import CharacterDetails from '../fragments/CharacterDetails'
 import Avatar from '../fragments/Avatar'
 
 import Creature from '../Creature'
+import HitDice from '../fragments/HitDice'
 
 const style = {
     outer: {
@@ -90,7 +91,8 @@ export default function Health() {
                                     experience={character.experience}
                                     isMilestone={character.milestoneProgression}
                                 />
-                                <Hp hp={character.hp} hitDice={character.hitDice} />
+                                <Hp hp={character.hp} />
+                                <HitDice hitDice={character.hitDice} />
                                 <Actions
                                     spellSlots={character.spellSlots}
                                     limitedUseActions={character.limitedUseActions}
