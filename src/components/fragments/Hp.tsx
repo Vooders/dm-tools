@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
 import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'
-import { HitDice } from '../../lib/character-sheet-processor/hitDice'
 import HpBar from './HpBar'
 
 const style = {
@@ -32,13 +31,6 @@ export default function Hp(props: HpProps) {
                     </Typography>
                     : <></>
                 }
-                {props.hitDice.map((hitDice) => {
-                    return (
-                        <Typography variant="subtitle2" mr={2}>
-                            {hitDice.max - hitDice.used}/{hitDice.max} {hitDice.dice}
-                        </Typography>
-                    )
-                })}
             </Box>
             <HpBar hpMax={maxHp(props.hp)} hpRemoved={props.hp.removed} />
         </React.Fragment>
@@ -47,5 +39,4 @@ export default function Hp(props: HpProps) {
 
 interface HpProps {
     hp: CharacterProfileHp
-    hitDice: HitDice[]
 }
