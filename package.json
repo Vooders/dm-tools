@@ -131,6 +131,8 @@
     "@electron/remote": "^2.0.8",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@mdi/js": "^7.4.47",
+    "@mdi/react": "^1.6.1",
     "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.103",
     "@mui/material": "^5.10.7",
