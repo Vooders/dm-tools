@@ -1,14 +1,25 @@
 import React from 'react'
 import {
     LinearProgress,
-    Typography,
     Box
 } from '@mui/material';
 
 export default function HpBar(props: HpBarProps) {
+
+    const hpBarWidth = ((props.hpMax / (props.hpMax + props.hpTemp)) * 100)
+
+    const tempBarWidth = 100 - hpBarWidth
+
+    const outerBox = {
+        display: 'flex',
+        flexDirection: 'row',
+        marginBottom: 1
+    }
+
     const hpBarBox = {
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        width: `${hpBarWidth}%`
     }
 
     const hpBarInnerBox = {
@@ -20,6 +31,10 @@ export default function HpBar(props: HpBarProps) {
         height: '9px',
         borderRadius: 2,
         boxShadow: 5
+    }
+
+    const tempBarBox = {
+        width: `${tempBarWidth}%`
     }
 
     const calculateHpPercent = (max: number, removed: number) => {
@@ -34,17 +49,19 @@ export default function HpBar(props: HpBarProps) {
 
     const percentHp = calculateHpPercent(props.hpMax, props.hpRemoved)
 
+
+
     function LinearProgressWithLabel(props: any & { value: number }) {
         return (
             (props.value > 0) ?
-                <Box sx={hpBarBox}>
-                    <Box sx={hpBarInnerBox}>
-                        <LinearProgress variant="determinate" color={healthBarColour(percentHp)} {...props} />
+                <Box sx={outerBox}>
+                    <Box sx={hpBarBox}>
+                        <Box sx={hpBarInnerBox}>
+                            <LinearProgress variant="determinate" color={healthBarColour(percentHp)} {...props} />
+                        </Box>
                     </Box>
-                    <Box sx={{ minWidth: 35 }}>
-                        <Typography variant="body2">
-                            {`${Math.round(percentHp)}%`}
-                        </Typography>
+                    <Box sx={tempBarBox}>
+                        <LinearProgress variant="determinate" color={'success'} {...props} />
                     </Box>
                 </Box>
                 : <></>
@@ -58,5 +75,6 @@ export default function HpBar(props: HpBarProps) {
 
 interface HpBarProps {
     hpMax: number,
-    hpRemoved: number
+    hpRemoved: number,
+    hpTemp: number
 }

@@ -10,17 +10,14 @@ export default function Experience(props: ExperienceProps) {
     })
 
     const XpBar = styled(LinearProgress)({
-        height: '5px',
+        height: '6px',
         borderRadius: 2
     })
 
     const XpBarBox = styled(Box)({
         display: 'flex',
-        alignItems: 'center'
-    })
-
-    const XpPercentBox = styled(Box)({
-        minWidth: 35
+        alignItems: 'center',
+        marginBottom: 8
     })
 
     const xpToLevel = [
@@ -57,21 +54,13 @@ export default function Experience(props: ExperienceProps) {
 
     return (
         (props.isMilestone) ?
-            <>
-                <Typography variant="subtitle2" >
-                    {currentXp} / {xpToNextLevel} XP
-                </Typography>
+            
                 <XpBarBox>
                     <XpBarInnerBox>
                         <XpBar value={xpPercent} variant="determinate" />
                     </XpBarInnerBox>
-                    <XpPercentBox>
-                        <Typography variant="body2">
-                            {xpPercent}%
-                        </Typography>
-                    </XpPercentBox>
                 </XpBarBox>
-            </> : <></>
+             : <></>
     )
 }
 

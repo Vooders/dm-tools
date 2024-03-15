@@ -38,7 +38,7 @@ export default function Creature(props: CreatureProps) {
                     </Typography>
                     <Ac ac={props.creature.ac} />
                 </Box>
-                <HpBar hpMax={props.creature.hp.max} hpRemoved={props.creature.hp.removed} />
+                <HpBar hpMax={props.creature.hp.max} hpRemoved={props.creature.hp.removed} hpTemp={0} />
             </CardContent>
         </Card>
     )

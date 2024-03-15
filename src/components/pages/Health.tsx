@@ -8,7 +8,6 @@ import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'
 import DeathSaves from '../fragments/DeathSaves'
 import Experience from '../fragments/Experience'
 import Actions from '../fragments/Actions'
-import Hp from '../fragments/Hp'
 import CharacterDetails from '../fragments/CharacterDetails'
 import Avatar from '../fragments/Avatar'
 
@@ -69,7 +68,7 @@ export default function Health() {
                                 <Avatar name={character.name} avatarPath={character.avatarPath} />
                                 {character.creatures.map(creature => {
                                     return (
-                                        <Creature creature={creature}/>
+                                        <Creature creature={creature} />
                                     )
                                 })}
                             </Box>
@@ -93,7 +92,11 @@ export default function Health() {
                                     experience={character.experience}
                                     isMilestone={character.milestoneProgression}
                                 />
-                                <HpBar hpMax={maxHp(character.hp)} hpRemoved={character.hp.removed} />
+                                <HpBar
+                                    hpMax={maxHp(character.hp)}
+                                    hpRemoved={character.hp.removed}
+                                    hpTemp={character.hp.temporary}
+                                />
                                 <HitDice hitDice={character.hitDice} />
                                 <Actions
                                     spellSlots={character.spellSlots}
