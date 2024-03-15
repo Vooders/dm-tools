@@ -14,6 +14,7 @@ import Avatar from '../fragments/Avatar'
 
 import Creature from '../Creature'
 import HitDice from '../fragments/HitDice'
+import HpBar from '../fragments/HpBar'
 
 const style = {
     outer: {
@@ -79,6 +80,7 @@ export default function Health() {
                                     ac={character.ac}
                                     healthPotions={character.healthPotions}
                                     inspiration={character.inspiration}
+                                    hp={character.hp}
                                 />
                                 <DeathSaves
                                     display={isUnconscious(character.hp)}
@@ -91,7 +93,7 @@ export default function Health() {
                                     experience={character.experience}
                                     isMilestone={character.milestoneProgression}
                                 />
-                                <Hp hp={character.hp} />
+                                <HpBar hpMax={maxHp(character.hp)} hpRemoved={character.hp.removed} />
                                 <HitDice hitDice={character.hitDice} />
                                 <Actions
                                     spellSlots={character.spellSlots}

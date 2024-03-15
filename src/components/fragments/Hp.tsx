@@ -1,11 +1,13 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
 import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'
-import HpBar from './HpBar'
 
 const style = {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    padding: '5px',
+    ml: '5px',
+    color: 'green',
 }
 
 export default function Hp(props: HpProps) {
@@ -22,17 +24,16 @@ export default function Hp(props: HpProps) {
     return (
         <React.Fragment>
             <Box sx={style}>
-                <Typography variant="subtitle2" mr={2}>
+                <Typography variant="h1" mr={2} sx={{ fontWeight: 700}}>
                     {hpView(props.hp)} HP
                 </Typography>
                 {(props.hp.temporary > 0) ?
-                    <Typography variant="subtitle2" mr={2}>
+                    <Typography variant="h1" mr={2} sx={{ fontWeight: 700}}>
                         {props.hp.temporary} Temp
                     </Typography>
                     : <></>
                 }
             </Box>
-            <HpBar hpMax={maxHp(props.hp)} hpRemoved={props.hp.removed} />
         </React.Fragment>
     )
 }

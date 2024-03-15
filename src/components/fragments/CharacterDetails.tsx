@@ -1,11 +1,12 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
 import Currencies from './Currencies'
-import { CurrenciesType } from '../../lib/CharacterSheetProcessor'
+import { CharacterProfileHp, CurrenciesType } from '../../lib/CharacterSheetProcessor'
 import Ac from './Ac'
 import HealthPotions from './HealthPotions'
 import { HealthPotionsType } from '../../lib/character-sheet-processor/healthPotions'
 import Inspiration from './Inspiration'
+import Hp from './Hp'
 
 const style = {
     outerContainer: {
@@ -28,11 +29,12 @@ export default function CharacterDetails(props: CharacterDetailsProps) {
         <Box sx={style.outerContainer}>
             <Box>
                 <Box sx={style.nameBox}>
-                    <Inspiration inspiration={props.inspiration}/>
+                    <Inspiration inspiration={props.inspiration} />
                     <Typography variant="h1" sx={style.name}>
                         {props.name}
                     </Typography>
-                    <Ac ac={props.ac}/>
+                    <Ac ac={props.ac} />
+                    <Hp hp={props.hp} />
                     <HealthPotions healthPotions={props.healthPotions} />
                 </Box>
             </Box>
@@ -51,4 +53,5 @@ interface CharacterDetailsProps {
     ac: number
     healthPotions: HealthPotionsType
     inspiration: boolean
+    hp: CharacterProfileHp
 }
