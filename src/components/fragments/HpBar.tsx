@@ -13,18 +13,17 @@ export default function HpBar(props: HpBarProps) {
     const outerBox = {
         display: 'flex',
         flexDirection: 'row',
-        marginBottom: 1
+        marginBottom: 1,
     }
 
     const hpBarBox = {
         display: 'flex',
         alignItems: 'center',
-        width: `${hpBarWidth}%`
+        width: `${hpBarWidth}%`,
     }
 
     const hpBarInnerBox = {
         width: '100%',
-        mr: 1
     }
 
     const hpBar = {
@@ -34,7 +33,7 @@ export default function HpBar(props: HpBarProps) {
     }
 
     const tempBarBox = {
-        width: `${tempBarWidth}%`
+        width: `${tempBarWidth}%`,
     }
 
     const calculateHpPercent = (max: number, removed: number) => {
@@ -49,8 +48,6 @@ export default function HpBar(props: HpBarProps) {
 
     const percentHp = calculateHpPercent(props.hpMax, props.hpRemoved)
 
-
-
     function LinearProgressWithLabel(props: any & { value: number }) {
         return (
             (props.value > 0) ?
@@ -60,9 +57,9 @@ export default function HpBar(props: HpBarProps) {
                             <LinearProgress variant="determinate" color={healthBarColour(percentHp)} {...props} />
                         </Box>
                     </Box>
-                    <Box sx={tempBarBox}>
-                        <LinearProgress variant="determinate" color={'success'} {...props} />
-                    </Box>
+                        <Box sx={tempBarBox}>
+                            <LinearProgress variant="determinate" color={'info'} value={100} sx={hpBar} />
+                        </Box>
                 </Box>
                 : <></>
         );

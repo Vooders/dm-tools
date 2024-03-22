@@ -1,12 +1,12 @@
 import styled from "@emotion/styled"
-import { Box, LinearProgress, Typography } from "@mui/material"
+import { Box, LinearProgress } from "@mui/material"
 import React from "react"
 
 export default function Experience(props: ExperienceProps) {
 
     const XpBarInnerBox = styled(Box)({
         width: '100%',
-        marginRight: 8
+        marginRight: 1
     })
 
     const XpBar = styled(LinearProgress)({
@@ -17,7 +17,7 @@ export default function Experience(props: ExperienceProps) {
     const XpBarBox = styled(Box)({
         display: 'flex',
         alignItems: 'center',
-        marginBottom: 8
+        marginBottom: 8,
     })
 
     const xpToLevel = [
@@ -54,7 +54,6 @@ export default function Experience(props: ExperienceProps) {
 
     return (
         (props.isMilestone) ?
-            
                 <XpBarBox>
                     <XpBarInnerBox>
                         <XpBar value={xpPercent} variant="determinate" />
