@@ -6,34 +6,18 @@ import {
 
 export default function HpBar(props: HpBarProps) {
 
-    const hpBarWidth = ((props.hpMax / (props.hpMax + props.hpTemp)) * 100)
-
-    const tempBarWidth = 100 - hpBarWidth
-
-    const outerBox = {
-        display: 'flex',
-        flexDirection: 'row',
-        marginBottom: 1,
-    }
-
-    const hpBarBox = {
-        display: 'flex',
-        alignItems: 'center',
-        width: `${hpBarWidth}%`,
-    }
-
-    const hpBarInnerBox = {
-        width: '100%',
-    }
-
     const hpBar = {
         height: '9px',
         borderRadius: 2,
-        boxShadow: 5
-    }
-
-    const tempBarBox = {
-        width: `${tempBarWidth}%`,
+        boxShadow: 5,
+        "& .MuiLinearProgress-dashed": {
+            backgroundColor: '#263029',
+            backgroundImage: "none",
+            animation: "none"
+          },
+          "& .MuiLinearProgress-bar2Buffer": {
+            backgroundColor: '#3498c7'
+          }
     }
 
     const calculateHpPercent = (max: number, removed: number) => {
@@ -46,27 +30,11 @@ export default function HpBar(props: HpBarProps) {
         else return 'success'
     }
 
-    const percentHp = calculateHpPercent(props.hpMax, props.hpRemoved)
-
-    function LinearProgressWithLabel(props: any & { value: number }) {
-        return (
-            (props.value > 0) ?
-                <Box sx={outerBox}>
-                    <Box sx={hpBarBox}>
-                        <Box sx={hpBarInnerBox}>
-                            <LinearProgress variant="determinate" color={healthBarColour(percentHp)} {...props} />
-                        </Box>
-                    </Box>
-                        <Box sx={tempBarBox}>
-                            <LinearProgress variant="determinate" color={'info'} value={100} sx={hpBar} />
-                        </Box>
-                </Box>
-                : <></>
-        );
-    }
+    const percentHp = calculateHpPercent((props.hpMax + props.hpTemp), props.hpRemoved)
+    const tempPercentHp = calculateHpPercent((props.hpMax + props.hpTemp), props.hpRemoved + props.hpTemp)
 
     return (
-        <LinearProgressWithLabel value={percentHp} sx={hpBar} />
+             <LinearProgress variant="buffer" value={tempPercentHp} color={healthBarColour(percentHp)} valueBuffer={percentHp} sx={hpBar} />
     )
 }
 
