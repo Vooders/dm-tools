@@ -6,7 +6,11 @@ export default function action(actions: any, feats: any, inventory: any, profici
         return item.definition.canEquip === true
     })
 
-    return [...actions.race, ...actions.class, ...actions.feat].map(action => {
+    const classActions = actions.class.filter((action: any) => {
+        return action.name != "Primal Companion: Take Action"
+    })
+
+    return [...actions.race, ...classActions, ...actions.feat].map(action => {
         return {
             name: action.name,
             description: action.description,
