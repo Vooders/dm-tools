@@ -1,23 +1,21 @@
 import React from 'react'
-import {
-    LinearProgress,
-    Box
-} from '@mui/material';
+import { LinearProgress } from '@mui/material';
 
 export default function HpBar(props: HpBarProps) {
 
     const hpBar = {
-        height: '9px',
+        height: '10px',
         borderRadius: 2,
         boxShadow: 5,
         "& .MuiLinearProgress-dashed": {
             backgroundColor: '#263029',
             backgroundImage: "none",
             animation: "none"
-          },
-          "& .MuiLinearProgress-bar2Buffer": {
+        },
+        "& .MuiLinearProgress-bar2Buffer": {
             backgroundColor: '#3498c7'
-          }
+        },
+        marginBottom: '10px'
     }
 
     const calculateHpPercent = (max: number, removed: number) => {
@@ -34,7 +32,7 @@ export default function HpBar(props: HpBarProps) {
     const tempPercentHp = calculateHpPercent((props.hpMax + props.hpTemp), props.hpRemoved + props.hpTemp)
 
     return (
-             <LinearProgress variant="buffer" value={tempPercentHp} color={healthBarColour(percentHp)} valueBuffer={percentHp} sx={hpBar} />
+        <LinearProgress variant="buffer" value={tempPercentHp} color={healthBarColour(percentHp)} valueBuffer={percentHp} sx={hpBar} />
     )
 }
 

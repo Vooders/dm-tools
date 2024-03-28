@@ -7,7 +7,7 @@ const style = {
     flexDirection: 'row',
     padding: '5px',
     ml: '5px',
-    color: 'green',
+    color: '#3cd64e',
 }
 
 export default function Hp(props: HpProps) {
