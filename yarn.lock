@@ -3995,6 +3995,17 @@
   "resolved" "https://registry.npmjs.org/extsprintf/-/extsprintf-1.4.1.tgz"
   "version" "1.4.1"
 
+"fantasy-name-generator@^2.0.0":
+  "integrity" "sha512-95FQrS7ZoB5cQEmSr9C1wViw5cueQU2+8OgO+4hmULVwXIrYDeC2jn+VHV5CDxv+tPtXfngfRVw/wC0uHYbcmw=="
+  "resolved" "https://registry.npmjs.org/fantasy-name-generator/-/fantasy-name-generator-2.0.0.tgz"
+  "version" "2.0.0"
+  dependencies:
+    "commander" "^2.20.0"
+    "lodash.capitalize" "^4.2.1"
+    "lodash.endswith" "^4.2.1"
+    "lodash.sample" "^4.2.1"
+    "lodash.startcase" "^4.4.0"
+
 "fast-deep-equal@^3.1.1", "fast-deep-equal@^3.1.3":
   "integrity" "sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q=="
   "resolved" "https://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz"
@@ -5407,6 +5418,16 @@
   "resolved" "https://registry.npmjs.org/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz"
   "version" "3.0.0"
 
+"lodash.capitalize@^4.2.1":
+  "integrity" "sha512-kZzYOKspf8XVX5AvmQF94gQW0lejFVgb80G85bU4ZWzoJ6C03PQg3coYAUpSTpQWelrZELd3XWgHzw4Ck5kaIw=="
+  "resolved" "https://registry.npmjs.org/lodash.capitalize/-/lodash.capitalize-4.2.1.tgz"
+  "version" "4.2.1"
+
+"lodash.endswith@^4.2.1":
+  "integrity" "sha512-pegckn1D2ohyUKt7OHrp7GpJVNnndjE+FpzULQ0pjQvbjdktdWGmKVth5wdSYWHzQSZA7OSGbIo0/AuwTeX1pA=="
+  "resolved" "https://registry.npmjs.org/lodash.endswith/-/lodash.endswith-4.2.1.tgz"
+  "version" "4.2.1"
+
 "lodash.escaperegexp@^4.1.2":
   "integrity" "sha512-TM9YBvyC84ZxE3rgfefxUWiQKLilstD6k7PTGt6wfbtXF8ixIJLOL3VYyV/z+ZiPLsVxAsKAFVwWlWeb2Y8Yyw=="
   "resolved" "https://registry.npmjs.org/lodash.escaperegexp/-/lodash.escaperegexp-4.1.2.tgz"
@@ -5426,6 +5447,16 @@
   "integrity" "sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ=="
   "resolved" "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz"
   "version" "4.6.2"
+
+"lodash.sample@^4.2.1":
+  "integrity" "sha512-odCZufa8jYDBZQ+JOSePWRs+iApPdvIp3qAiKc9F22RdSCMLuUu60Jvgs2M6qMisKAeBZoumAkqDiGr9HDym/Q=="
+  "resolved" "https://registry.npmjs.org/lodash.sample/-/lodash.sample-4.2.1.tgz"
+  "version" "4.2.1"
+
+"lodash.startcase@^4.4.0":
+  "integrity" "sha512-+WKqsK294HMSc2jEbNgpHpd0JfIBhp7rEV4aqXWqFr6AlXov+SlcgB1Fv01y2kGe3Gc8nMW7VA0SrGuSkRfIEg=="
+  "resolved" "https://registry.npmjs.org/lodash.startcase/-/lodash.startcase-4.4.0.tgz"
+  "version" "4.4.0"
 
 "lodash.template@^4.2.2":
   "integrity" "sha512-84vYFxIkmidUiFxidA/KjjH9pAycqW+h980j7Fuz5qxRtO9pgB7MDFTdys1N7A5mcucRiDyEq4fusljItR1T/A=="

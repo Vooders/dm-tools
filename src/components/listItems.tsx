@@ -11,6 +11,7 @@ import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import InsightsIcon from '@mui/icons-material/Insights';
+import AbcIcon from '@mui/icons-material/Abc';
 import { Link } from 'react-router-dom';
 
 export const mainListItems = (
@@ -79,6 +80,15 @@ export const mainListItems = (
           <InsightsIcon />
         </ListItemIcon>
         <ListItemText primary="Metrics" />
+      </ListItemButton>
+    </Link>
+
+    <Link to='/nameGenerator'>
+      <ListItemButton>
+        <ListItemIcon>
+          <AbcIcon />
+        </ListItemIcon>
+        <ListItemText primary="NameGenerator" />
       </ListItemButton>
     </Link>
     

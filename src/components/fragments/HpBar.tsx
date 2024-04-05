@@ -32,7 +32,13 @@ export default function HpBar(props: HpBarProps) {
     const tempPercentHp = calculateHpPercent((props.hpMax + props.hpTemp), props.hpRemoved + props.hpTemp)
 
     return (
-        <LinearProgress variant="buffer" value={tempPercentHp} color={healthBarColour(percentHp)} valueBuffer={percentHp} sx={hpBar} />
+        <LinearProgress
+            variant="buffer"
+            value={tempPercentHp}
+            color={healthBarColour(percentHp)}
+            valueBuffer={percentHp} 
+            sx={hpBar}
+        />
     )
 }
 
