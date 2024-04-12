@@ -5,13 +5,17 @@ import React from "react"
 export default function NameGenerator() {
   const [race, setRace] = React.useState('')
   const [name, setName] = React.useState('')
+  const [gender, setGender] = React.useState('male')
 
   const handleRaceChange = (event: SelectChangeEvent) => {
-    setRace(event.target.value as string);
+    setRace(event.target.value);
+  }
+  const handleGenderChange = (event: SelectChangeEvent) => {
+    setGender(event.target.value);
   }
 
   const generateName = () => {
-    setName(nameByRace(`${race}`, { gender: 'male', allowMultipleNames: true }).toString())
+    setName(nameByRace(`${race}`, { gender: `${gender}`, allowMultipleNames: true }).toString())
   }
 
   return (
@@ -45,6 +49,21 @@ export default function NameGenerator() {
               <MenuItem value={'human'}>Human</MenuItem>
               <MenuItem value={'ogre'}>Ogre</MenuItem>
               <MenuItem value={'orc'}>Orc</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        <Box sx={{ width: 220 }}>
+          <FormControl fullWidth>
+            <InputLabel id="gender-select-label">Gender</InputLabel>
+            <Select
+              labelId="gender-select-label"
+              id="gender-select"
+              value={gender}
+              label="Gender"
+              onChange={handleGenderChange}
+            >
+              <MenuItem value={'male'}>Male</MenuItem>
+              <MenuItem value={'female'}>Female</MenuItem>
             </Select>
           </FormControl>
         </Box>
