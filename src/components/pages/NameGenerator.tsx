@@ -15,7 +15,11 @@ export default function NameGenerator() {
   }
 
   const generateName = () => {
-    setName(nameByRace(`${race}`, { gender: `${gender}`, allowMultipleNames: true }).toString())
+    setName(nameByRace(`${race}`, { gender: `${gender}` as 'male' || 'female', allowMultipleNames: true }).toString())
+  }
+
+  const saveNpc = async (): Promise<void> => {
+    await window.electron.saveNpc()
   }
 
   return (
@@ -74,6 +78,9 @@ export default function NameGenerator() {
       </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'center' }} >
         <Button variant="outlined" sx={{ width: 220 }} onClick={() => { navigator.clipboard.writeText(`${name}`) }}>copy</Button>
+      </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }} >
+        <Button variant="outlined" sx={{ width: 220 }} onClick={saveNpc} >Save</Button>
       </Box>
     </>
   )

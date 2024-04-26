@@ -14,6 +14,7 @@ import * as hitDice from './character-sheet-processor/hitDice'
 import action from './character-sheet-processor/actions'
 import healthPotions, { HealthPotionsType } from './character-sheet-processor/healthPotions'
 import creatures, { Creature } from './character-sheet-processor/creatures'
+import saveNpc from './saveNpc'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers

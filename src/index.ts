@@ -16,6 +16,8 @@ import getHealth from './handlers/getHealth'
 import getWealth from './handlers/getWealth'
 import getMetrics from './handlers/getMetrics'
 import { autoUpdater } from 'electron-updater'
+import handleNpcSave from './handlers/saveNpc'
+
 
 app.on("ready", () => {
 	autoUpdater.checkForUpdatesAndNotify();
@@ -63,6 +65,7 @@ const createWindow = (): void => {
   app.whenReady().then(() => {
     ipcMain.handle('character:import', handleImport)
     ipcMain.handle('character:save', handleSave(mainWindow))
+    ipcMain.handle('npc:save', handleNpcSave())
 
     ipcMain.handle('character:updateAll', handleImportAll(mainWindow))
 
