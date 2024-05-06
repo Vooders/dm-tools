@@ -19,8 +19,12 @@ export default function NameGenerator() {
   }
 
   const saveNpc = async (): Promise<void> => {
-    console.log('presave name', name)
-    await window.electron.saveNpc(name)
+    const npc = {
+      name,
+      race,
+      gender
+    }
+    await window.electron.saveNpc(npc)
   }
 
   return (

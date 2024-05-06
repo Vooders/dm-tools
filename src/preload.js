@@ -52,8 +52,8 @@ contextBridge.exposeInMainWorld('electron', {
   summaryUpdate: async (callback) => {
     return ipcRenderer.on('character:summaryUpdate', callback)
   },
-  saveNpc: async (name) => {
-    return await ipcRenderer.invoke('npc:save', name)
+  saveNpc: async (npc) => {
+    return await ipcRenderer.invoke('npc:save', npc)
   }
 })
 

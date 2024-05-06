@@ -28,7 +28,7 @@ import MainMenu from './MainMenu';
 import ErrorBoundary from './ErrorBoundry';
 import Theme from './Theme';
 import Metrics from './pages/Metrics';
-import NameGenerator from './pages/NameGenerator';
+import NameGenerator from './pages/CreateNpc';
 
 function Copyright(props: any) {
   return (

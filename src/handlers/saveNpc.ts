@@ -1,6 +1,5 @@
 import saveNpc from "../lib/saveNpc"
 
-    export default async (_: Electron.IpcMainInvokeEvent, name: string): Promise<boolean> => {
-        console.log('handling name', name)
-        return await saveNpc(name)
+    export default async (_: Electron.IpcMainInvokeEvent, npc: any): Promise<boolean> => {
+        return await saveNpc(npc)
     }
