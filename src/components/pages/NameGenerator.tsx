@@ -19,7 +19,8 @@ export default function NameGenerator() {
   }
 
   const saveNpc = async (): Promise<void> => {
-    await window.electron.saveNpc()
+    console.log('presave name', name)
+    await window.electron.saveNpc(name)
   }
 
   return (

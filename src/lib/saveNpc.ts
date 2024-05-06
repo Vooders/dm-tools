@@ -5,8 +5,9 @@ import { writeFile } from 'fs/promises';
 const userDataPath = app.getPath('userData');
 const npcsPath = path.join(userDataPath, 'npcs.json');
 
-export default async function saveNpc() {
-    const newNpc = { name: 'testNpc' }
+export default async function saveNpc(name: string) {
+    console.log('saving name', name)
+    const newNpc = { name: name }
 
     try {
         await writeFile(npcsPath, JSON.stringify(newNpc))

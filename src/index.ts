@@ -65,7 +65,7 @@ const createWindow = (): void => {
   app.whenReady().then(() => {
     ipcMain.handle('character:import', handleImport)
     ipcMain.handle('character:save', handleSave(mainWindow))
-    ipcMain.handle('npc:save', handleNpcSave())
+    ipcMain.handle('npc:save', handleNpcSave)
 
     ipcMain.handle('character:updateAll', handleImportAll(mainWindow))
 
