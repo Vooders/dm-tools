@@ -1,6 +1,7 @@
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material"
 import { nameByRace } from "fantasy-name-generator"
 import React from "react"
+import Npcs from "./Npcs"
 
 export default function NameGenerator() {
   const [race, setRace] = React.useState('')
@@ -87,6 +88,7 @@ export default function NameGenerator() {
       <Box sx={{ display: 'flex', justifyContent: 'center' }} >
         <Button variant="outlined" sx={{ width: 220 }} onClick={saveNpc} >Save</Button>
       </Box>
+      <Npcs/>
     </>
   )
 

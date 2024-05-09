@@ -35,3 +35,11 @@ async function getSummary () {
     }
     return summary
 }
+
+export type Npc = {
+    name: string
+    id: string
+    filename: string
+    race?: string
+    gender?: string
+}

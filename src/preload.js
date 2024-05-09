@@ -54,6 +54,9 @@ contextBridge.exposeInMainWorld('electron', {
   },
   saveNpc: async (npc) => {
     return await ipcRenderer.invoke('npc:save', npc)
+  },
+  getNpcs: async () => {
+    return await ipcRenderer.invoke('npcs:get')
   }
 })
 

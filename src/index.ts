@@ -17,6 +17,7 @@ import getWealth from './handlers/getWealth'
 import getMetrics from './handlers/getMetrics'
 import { autoUpdater } from 'electron-updater'
 import handleNpcSave from './handlers/saveNpc'
+import getNpcs from './handlers/getNpcs'
 
 
 app.on("ready", () => {
@@ -40,6 +41,7 @@ const devMode = process.env.NODE_ENV === 'development'
 
 fs.mkdir(path.join(app.getPath('userData'), 'characters'))
 fs.mkdir(path.join(app.getPath('userData'), 'avatars'))
+fs.mkdir(path.join(app.getPath('userData'), 'npcs'))
 
 const createWindow = (): void => {
   // Create the browser window.
@@ -79,6 +81,7 @@ const createWindow = (): void => {
     ipcMain.handle('health:get', getHealth)
     ipcMain.handle('wealth:get', getWealth)
     ipcMain.handle('metrics:get', getMetrics)
+    ipcMain.handle('npcs:get', getNpcs)
   })
 };
 
