@@ -42,4 +42,5 @@ export type Npc = {
     filename: string
     race?: string
     gender?: string
+    notes?: string
 }

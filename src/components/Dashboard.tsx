@@ -28,7 +28,8 @@ import MainMenu from './MainMenu';
 import ErrorBoundary from './ErrorBoundry';
 import Theme from './Theme';
 import Metrics from './pages/Metrics';
-import NameGenerator from './pages/CreateNpc';
+import CreateNpc from './pages/CreateNpc';
+import Npcs from './pages/Npcs';
 
 function Copyright(props: any) {
   return (
@@ -176,7 +177,8 @@ function DashboardContent() {
                         <Route path="/health" element={<Health />} />
                         <Route path="/wealth" element={<Wealth />} />
                         <Route path="/metrics" element={<Metrics />} />
-                        <Route path="/nameGenerator" element={<NameGenerator />} />
+                        <Route path="/createNpc" element={<CreateNpc />} />
+                        <Route path="/npcs" element={<Npcs />} />
                         <Route path="/characterSheet/:characterId" element={<CharacterSheet />} />
                       </Routes>
                     </Paper>

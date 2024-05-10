@@ -11,8 +11,9 @@ import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import InsightsIcon from '@mui/icons-material/Insights';
-import AbcIcon from '@mui/icons-material/Abc';
 import { Link } from 'react-router-dom';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import { PersonAddAlt } from '@mui/icons-material';
 
 export const mainListItems = (
   <React.Fragment>
@@ -83,14 +84,24 @@ export const mainListItems = (
       </ListItemButton>
     </Link>
 
-    <Link to='/nameGenerator'>
+    <Link to='/npcs'>
       <ListItemButton>
         <ListItemIcon>
-          <AbcIcon />
+          <PersonOutlineIcon />
         </ListItemIcon>
-        <ListItemText primary="NameGenerator" />
+        <ListItemText primary="Npcs" />
       </ListItemButton>
     </Link>
+
+    <Link to='/createNpc'>
+      <ListItemButton>
+        <ListItemIcon>
+          <PersonAddAlt />
+        </ListItemIcon>
+        <ListItemText primary="Create Npc" />
+      </ListItemButton>
+    </Link>
+
     
   </React.Fragment>
 );
