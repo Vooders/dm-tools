@@ -18,6 +18,7 @@ import getMetrics from './handlers/getMetrics'
 import { autoUpdater } from 'electron-updater'
 import handleNpcSave from './handlers/saveNpc'
 import getNpcs from './handlers/getNpcs'
+import deleteNpc from './handlers/deleteNpc';
 
 
 app.on("ready", () => {
@@ -82,6 +83,7 @@ const createWindow = (): void => {
     ipcMain.handle('wealth:get', getWealth)
     ipcMain.handle('metrics:get', getMetrics)
     ipcMain.handle('npcs:get', getNpcs)
+    ipcMain.handle('npc:delete', deleteNpc)
   })
 };
 

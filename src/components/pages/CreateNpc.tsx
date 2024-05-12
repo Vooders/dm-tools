@@ -1,7 +1,6 @@
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
 import { nameByRace } from "fantasy-name-generator"
 import React from "react"
-import Npcs from "./Npcs"
 
 export default function CreateNpc() {
   const [race, setRace] = React.useState('human')

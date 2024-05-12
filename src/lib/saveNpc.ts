@@ -8,9 +8,13 @@ const userDataPath = app.getPath('userData');
 const npcsDirectory = path.join(userDataPath, 'npcs');
 const summaryPath = path.join(npcsDirectory, 'summary.json')
 
-export default async function saveNpc(npc: any) {
+export default async function saveNpc(npc: Npc) {
     const id = uuidv4()
     const filename = `${id}.json`
+    const newNpc = {
+        ...npc,
+        id
+    }
     try {
         const summary = await getSummary()
         summary.push({
@@ -19,7 +23,7 @@ export default async function saveNpc(npc: any) {
             filename
         })
         const npcPath = path.join(npcsDirectory, filename)
-        await writeFile(npcPath, JSON.stringify(npc))
+        await writeFile(npcPath, JSON.stringify(newNpc))
         await writeFile(summaryPath, JSON.stringify(summary))
         return true
     } catch (error) {
@@ -28,9 +32,9 @@ export default async function saveNpc(npc: any) {
     }
 }
 
-async function getSummary () {
+async function getSummary() {
     const summary = await getFile(summaryPath)
-    if(JSON.stringify(summary) === '{}') {
+    if (JSON.stringify(summary) === '{}') {
         return []
     }
     return summary
