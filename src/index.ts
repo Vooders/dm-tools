@@ -68,8 +68,8 @@ const createWindow = (): void => {
   app.whenReady().then(() => {
     ipcMain.handle('character:import', handleImport)
     ipcMain.handle('character:save', handleSave(mainWindow))
-    ipcMain.handle('npc:save', handleNpcSave)
-    ipcMain.handle('npc:edit', handleNpcEdit)
+    ipcMain.handle('npc:save', handleNpcSave(mainWindow))
+    ipcMain.handle('npc:edit', handleNpcEdit(mainWindow))
 
     ipcMain.handle('character:updateAll', handleImportAll(mainWindow))
 
@@ -84,7 +84,7 @@ const createWindow = (): void => {
     ipcMain.handle('wealth:get', getWealth)
     ipcMain.handle('metrics:get', getMetrics)
     ipcMain.handle('npcs:get', getNpcs)
-    ipcMain.handle('npc:delete', deleteNpc)
+    ipcMain.handle('npc:delete', deleteNpc(mainWindow))
   })
 };
 

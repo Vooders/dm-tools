@@ -33,7 +33,7 @@ export default function CreateNpc() {
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Box sx={{ width: 200 }}>
+            <Box sx={{ width: 0.3 }}>
               <FormControl fullWidth>
                 <InputLabel id="race-select-label">Race</InputLabel>
                 <Select
@@ -64,7 +64,7 @@ export default function CreateNpc() {
                 </Select>
               </FormControl>
             </Box>
-            <Box sx={{ width: 200 }}>
+            <Box sx={{ width: 0.3 }}>
               <FormControl fullWidth>
                 <InputLabel id="gender-select-label">Gender</InputLabel>
                 <Select
@@ -79,18 +79,18 @@ export default function CreateNpc() {
                 </Select>
               </FormControl>
             </Box>
-            <TextField value={name} sx={{ width: 300 }} label="Name" variant="outlined" onChange={(e) => setName(e.target.value)} />
+            <TextField value={name} sx={{ width: 0.4 }} label="Name" variant="outlined" onChange={(e) => setName(e.target.value)} />
           </Box>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <TextField sx={{ width: 700 }} onChange={(e) => {setNotes(e.target.value)}} label='notes' variant='outlined' multiline />
+            <TextField sx={{ width: 1 }} onChange={(e) => {setNotes(e.target.value)}} label='notes' variant='outlined' multiline />
           </Box>
         </Box>
-        <Box sx={{ width: 0.15, height: 1, marginX: 5 }}>
+        <Box sx={{ width: 0.15, height: 0.7, marginX: 5 }}>
         <Button variant="outlined"  onClick={generateName}>Generate Name</Button>
         </Box>
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center', margin: 5 }} >
-        <Button variant="outlined" sx={{ width: 220 }} onClick={saveNpc} >Save</Button>
+        <Button variant="outlined" sx={{ width: 0.2 }} onClick={saveNpc} >Save</Button>
       </Box>
     </>
   )

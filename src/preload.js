@@ -63,7 +63,10 @@ contextBridge.exposeInMainWorld('electron', {
   },
   saveEditedNpc: async (npc) => {
     return await ipcRenderer.invoke('npc:edit', npc)
-  }
+  },
+  npcUpdated: async (callback) => {
+    return await ipcRenderer.on('npc:updated', callback)
+  },
 })
 
 console.log('preload ran')
