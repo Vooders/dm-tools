@@ -1,12 +1,14 @@
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
+import React from "react";
+import { Npc } from "../../../src/lib/saveNpc";
 import { nameByRace } from "fantasy-name-generator"
-import React from "react"
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 
-export default function CreateNpc() {
-  const [race, setRace] = React.useState('human')
-  const [name, setName] = React.useState('')
-  const [gender, setGender] = React.useState('male')
-  const [notes, setNotes] = React.useState('')
+export default function editNpc(npc: Npc) {
+  const [race, setRace] = React.useState(npc.race)
+  const [name, setName] = React.useState(npc.name)
+  const [gender, setGender] = React.useState(npc.gender)
+  const [notes, setNotes] = React.useState(npc.notes)
+  const id = npc.id
 
   const handleRaceChange = (event: SelectChangeEvent) => {
     setRace(event.target.value);
@@ -23,11 +25,12 @@ export default function CreateNpc() {
       name,
       race,
       gender,
-      notes
+      notes,
+      id
     }
-    await window.electron.saveNpc(npc)
+    await window.electron.saveEditedNpc(npc)
   }
-
+  
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -94,5 +97,4 @@ export default function CreateNpc() {
       </Box>
     </>
   )
-
 }

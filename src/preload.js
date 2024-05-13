@@ -60,6 +60,9 @@ contextBridge.exposeInMainWorld('electron', {
   },
   deleteNpc: async (id) => {
     return await ipcRenderer.invoke('npc:delete', id)
+  },
+  saveEditedNpc: async (npc) => {
+    return await ipcRenderer.invoke('npc:edit', npc)
   }
 })
 

@@ -43,7 +43,7 @@ async function getSummary() {
 export type Npc = {
     name: string
     id: string
-    filename: string
+    filename?: string
     race?: string
     gender?: string
     notes?: string
