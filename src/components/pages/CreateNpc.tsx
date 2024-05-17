@@ -42,12 +42,36 @@ export default function CreateNpc() {
     await window.electron.saveNpc(npc)
   }
 
+  const style = {
+    centred: {
+      display: 'flex',
+      justifyContent: 'center'
+    },
+    textInput: {
+      width: 0.3
+    },
+    name: {
+      width: 0.4
+    },
+    notes: {
+      width: 1
+    },
+    nameButton: {
+      width: 0.15,
+      height: 0.7,
+      marginX: 5
+    },
+    saveButton: {
+      width: 0.2
+    }
+  }
+
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box sx={style.centred}>
         <Box>
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Box sx={{ width: 0.3 }}>
+          <Box sx={style.centred}>
+            <Box sx={style.textInput}>
               <FormControl fullWidth>
                 <InputLabel id="race-select-label">Race</InputLabel>
                 <Select
@@ -78,7 +102,7 @@ export default function CreateNpc() {
                 </Select>
               </FormControl>
             </Box>
-            <Box sx={{ width: 0.3 }}>
+            <Box sx={style.textInput}>
               <FormControl fullWidth>
                 <InputLabel id="gender-select-label">Gender</InputLabel>
                 <Select
@@ -93,21 +117,23 @@ export default function CreateNpc() {
                 </Select>
               </FormControl>
             </Box>
-            <TextField value={name} sx={{ width: 0.4 }} label="Name" variant="outlined" onChange={(e) => setName(e.target.value)} />
+            <Box sx={style.name}>
+              <TextField value={name} label="Name" variant="outlined" onChange={(e) => setName(e.target.value)} />
+            </Box>
           </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <TextField sx={{ width: 1 }} onChange={(e) => {setNotes(e.target.value)}} label='notes' variant='outlined' multiline />
+          <Box>
+            <TextField sx={style.notes} onChange={(e) => { setNotes(e.target.value) }} label='notes' variant='outlined' multiline />
           </Box>
         </Box>
-        <Box sx={{ width: 0.15, height: 0.7, marginX: 5 }}>
-        <Button variant="outlined"  onClick={generateName}>Generate Name</Button>
+        <Box sx={style.nameButton}>
+          <Button variant="outlined" onClick={generateName}>Generate Name</Button>
         </Box>
       </Box>
       <Box>
-      <NpcAbilitiesSelector callBack={handleAbilitiesChange} />
+        <NpcAbilitiesSelector callBack={handleAbilitiesChange} />
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'center', margin: 5 }} >
-        <Button variant="outlined" sx={{ width: 0.2 }} onClick={saveNpc} >Save</Button>
+      <Box sx={style.centred}>
+        <Button variant="outlined" sx={style.saveButton} onClick={saveNpc} >Save</Button>
       </Box>
     </>
   )
