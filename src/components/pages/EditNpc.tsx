@@ -2,12 +2,14 @@ import React from "react";
 import { Npc } from "../../../src/lib/saveNpc";
 import { nameByRace } from "fantasy-name-generator"
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import NpcAbilitiesSelector from "../fragments/NpcAbilitiesSelector";
 
 export default function editNpc(npc: Npc) {
   const [race, setRace] = React.useState(npc.race)
   const [name, setName] = React.useState(npc.name)
   const [gender, setGender] = React.useState(npc.gender)
   const [notes, setNotes] = React.useState(npc.notes)
+  const [abilities, setAbilities] = React.useState()
   const id = npc.id
 
   const handleRaceChange = (event: SelectChangeEvent) => {
@@ -19,6 +21,9 @@ export default function editNpc(npc: Npc) {
   const generateName = () => {
     setName(nameByRace(`${race}`, { gender: `${gender}` as 'male' || 'female', allowMultipleNames: true }).toString())
   }
+  const handleAbilitiesChange = (data: any) => {
+    setAbilities(data)
+  }
 
   const saveNpc = async (): Promise<void> => {
     const npc = {
@@ -26,6 +31,7 @@ export default function editNpc(npc: Npc) {
       race,
       gender,
       notes,
+      abilities,
       id
     }
     await window.electron.saveEditedNpc(npc)
@@ -91,6 +97,9 @@ export default function editNpc(npc: Npc) {
         <Box sx={{ width: 0.15, height: 0.7, marginX: 5 }}>
         <Button variant="outlined"  onClick={generateName}>Generate Name</Button>
         </Box>
+      </Box>
+      <Box>
+      <NpcAbilitiesSelector callBack={handleAbilitiesChange} />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center', margin: 5 }} >
         <Button variant="outlined" sx={{ width: 220 }} onClick={saveNpc} >Save</Button>

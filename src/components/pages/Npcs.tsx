@@ -32,6 +32,7 @@ export default function Npcs() {
                         gender={npc.gender}
                         notes={npc.notes}
                         id={npc.id}
+                        abilities={npc.abilities}
                     />
                 )
             })}

@@ -28,60 +28,98 @@ export default function Npc(npc: Npc) {
   return (
     <React.Fragment>
       <Card variant='outlined'>
-        {
-          !showEditor &&
-          <Box display='flex' flexDirection='row'>
-            <CardContent>
-              <Typography variant="h5" component="div">
-                {npc.name}
-              </Typography>
-              <Typography variant='h6' >
-                {npc.race}
-              </Typography>
-              <Typography variant='h6'>
-                {npc.gender}
-              </Typography>
-            </CardContent>
-            <CardContent>
-              <Typography>
-                {npc.notes}
-              </Typography>
-            </CardContent>
-            <Box sx={style.buttons}>
-              <Tooltip title="Edit">
-                <IconButton aria-label="edit" onClick={() => toggleEditor()}>
-                  <EditOutlined />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Delete">
-                <IconButton aria-label="delete" onClick={() => handleDelete(npc.id)}>
-                  <Delete />
-                </IconButton>
-              </Tooltip>
+        {!showEditor &&
+          <Box>
+            <Box display='flex' flexDirection='row'>
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  {npc.name}
+                </Typography>
+                <Typography variant='h6' >
+                  {npc.race}
+                </Typography>
+                <Typography variant='h6'>
+                  {npc.gender}
+                </Typography>
+              </CardContent>
+              <CardContent>
+                <Typography>
+                  {npc.notes}
+                </Typography>
+              </CardContent>
+              <Box sx={style.buttons}>
+                <Tooltip title="Edit">
+                  <IconButton aria-label="edit" onClick={() => toggleEditor()}>
+                    <EditOutlined />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <IconButton aria-label="delete" onClick={() => handleDelete(npc.id)}>
+                    <Delete />
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            </Box>
+            <Box display='flex' flexDirection='row'>
+              <Card>
+                <Typography>
+                  Strength
+                </Typography>
+                {npc.abilities.strength}
+              </Card>
+              <Card>
+                <Typography>
+                  Dexterity
+                </Typography>
+                {npc.abilities.dexterity}
+              </Card>
+              <Card>
+                <Typography>
+                  Constitution
+                </Typography>
+                {npc.abilities.constitution}
+              </Card>
+              <Card>
+                <Typography>
+                  Intelligence
+                </Typography>
+                {npc.abilities.intelligence}
+              </Card>
+              <Card>
+                <Typography>
+                  Wisdom
+                </Typography>
+                {npc.abilities.wisdom}
+              </Card>
+              <Card>
+                <Typography>
+                  Charisma
+                </Typography>
+                {npc.abilities.charisma}
+              </Card>
             </Box>
           </Box>
         }
-      {
-        showEditor &&
-        <Box>
-          <Box display='flex' flexDirection='row'>
-            <Box sx={style.buttons}>
-              <Tooltip title="Cancel">
-                <IconButton aria-label="cancel" onClick={() => toggleEditor()}>
-                  <CancelOutlined />
-                </IconButton>
-              </Tooltip>
+        {showEditor &&
+          <Box>
+            <Box display='flex' flexDirection='row'>
+              <Box sx={style.buttons}>
+                <Tooltip title="Cancel">
+                  <IconButton aria-label="cancel" onClick={() => toggleEditor()}>
+                    <CancelOutlined />
+                  </IconButton>
+                </Tooltip>
+              </Box>
             </Box>
+            <EditNpc
+              name={npc.name}
+              race={npc.race}
+              gender={npc.gender}
+              notes={npc.notes}
+              id={npc.id}
+            />
           </Box>
-          <EditNpc
-            name={npc.name}
-            race={npc.race}
-            gender={npc.gender}
-            notes={npc.notes}
-            id={npc.id}
-          />
-        </Box>
-      }
+        }
       </Card >
     </React.Fragment >
   )

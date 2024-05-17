@@ -47,4 +47,14 @@ export type Npc = {
     race?: string
     gender?: string
     notes?: string
+    abilities?: NpcAbilities
+}
+
+export type NpcAbilities = {
+    strength: number
+    dexterity: number
+    constitution: number
+    intelligence: number
+    wisdom: number
+    charisma: number
 }
