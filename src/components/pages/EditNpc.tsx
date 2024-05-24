@@ -2,7 +2,6 @@ import React from "react";
 import { Npc } from "../../../src/lib/saveNpc";
 import { nameByRace } from "fantasy-name-generator"
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
-import NpcAbilitiesSelector from "../fragments/NpcAbilitiesSelector";
 
 export default function editNpc(npc: Npc) {
   const [race, setRace] = React.useState(npc.race)
@@ -21,10 +20,7 @@ export default function editNpc(npc: Npc) {
   const generateName = () => {
     setName(nameByRace(`${race}`, { gender: `${gender}` as 'male' || 'female', allowMultipleNames: true }).toString())
   }
-  const handleAbilitiesChange = (data: any) => {
-    setAbilities(data)
-  }
-
+  
   const saveNpc = async (): Promise<void> => {
     const npc = {
       name,
@@ -99,7 +95,6 @@ export default function editNpc(npc: Npc) {
         </Box>
       </Box>
       <Box>
-      <NpcAbilitiesSelector callBack={handleAbilitiesChange} />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center', margin: 5 }} >
         <Button variant="outlined" sx={{ width: 220 }} onClick={saveNpc} >Save</Button>

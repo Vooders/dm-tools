@@ -1,37 +1,65 @@
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
 import { nameByRace } from "fantasy-name-generator"
 import React from "react"
-import NpcAbilitiesSelector from "../fragments/NpcAbilitiesSelector"
 
 export default function CreateNpc() {
-  const initialAbilities = {
-    strength: 10,
-    dexterity: 10,
-    constitution: 10,
-    intelligence: 10,
-    wisdom: 10,
-    charisma: 10
+  
+  const getAbilities = () => {
+    return {
+      strength,
+      dexterity,
+      constitution,
+      intelligence,
+      wisdom,
+      charisma
+    }
   }
   const [race, setRace] = React.useState('human')
   const [name, setName] = React.useState('')
   const [gender, setGender] = React.useState('male')
   const [notes, setNotes] = React.useState('')
-  const [abilities, setAbilities] = React.useState(initialAbilities)
+  const [strength, setStrength] = React.useState<number | null>(10)
+  const [dexterity, setDexterity] = React.useState<number | null>(10)
+  const [constitution, setConstitution] = React.useState<number | null>(10)
+  const [intelligence, setIntelligence] = React.useState<number | null>(10)
+  const [wisdom, setWisdom] = React.useState<number | null>(10)
+  const [charisma, setCharisma] = React.useState<number | null>(10)
+  const [abilities, setAbilities] = React.useState(getAbilities())
+
+  const handleStrength = () => {
+    const str = document.getElementById('strength').innerHTML
+    console.log('strength', str)
+    setStrength(Number(document.getElementById('strength').innerHTML))
+  }
+  const handleDexterity = () => {
+    setDexterity(Number(document.getElementById('dexterity').innerHTML))
+  }
+  const handleConstitution = () => {
+    setConstitution(Number(document.getElementById('constitution').innerHTML))
+  }
+  const handleIntelligence = () => {
+    setIntelligence(Number(document.getElementById('intelligence').innerHTML))
+  }
+  const handleWisdom = () => {
+    setWisdom(Number(document.getElementById('wisdom').innerHTML))
+  }
+  const handleCharisma = () => {
+    setCharisma(Number(document.getElementById('charisma').innerHTML))
+  }
 
   const handleRaceChange = (event: SelectChangeEvent) => {
-    setRace(event.target.value);
+    setRace(event.target.value)
   }
   const handleGenderChange = (event: SelectChangeEvent) => {
-    setGender(event.target.value);
+    setGender(event.target.value)
   }
   const generateName = () => {
     setName(nameByRace(`${race}`, { gender: `${gender}` as 'male' || 'female', allowMultipleNames: true }).toString())
   }
-  const handleAbilitiesChange = (data: any) => {
-    setAbilities(data)
-  }
 
   const saveNpc = async (): Promise<void> => {
+    setAbilities(getAbilities())
+
     const npc = {
       name,
       race,
@@ -129,8 +157,17 @@ export default function CreateNpc() {
           <Button variant="outlined" onClick={generateName}>Generate Name</Button>
         </Box>
       </Box>
+
+      <TextField type='number' id='strength' onChange={handleStrength} value={strength}/>
       <Box>
-        <NpcAbilitiesSelector callBack={handleAbilitiesChange} />
+        <input type='number' id='strength' onChange={handleStrength} value={strength} />
+        <input type='number' id='dexterity' onChange={handleDexterity}/>
+        <input type='number' id='constitution' onChange={handleConstitution}/>
+        <input type='number' id='intelligence' onChange={handleIntelligence}/>
+        <input type='number' id='wisdom' onChange={handleWisdom}/>
+        <input type='number' id='charisma' onChange={handleCharisma}/>
+      </Box>
+      <Box>
       </Box>
       <Box sx={style.centred}>
         <Button variant="outlined" sx={style.saveButton} onClick={saveNpc} >Save</Button>
