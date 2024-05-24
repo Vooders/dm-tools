@@ -8,8 +8,24 @@ export default function editNpc(npc: Npc) {
   const [name, setName] = React.useState(npc.name)
   const [gender, setGender] = React.useState(npc.gender)
   const [notes, setNotes] = React.useState(npc.notes)
-  const [abilities, setAbilities] = React.useState()
+  const [strength, setStrength] = React.useState<number | null>(10)
+  const [dexterity, setDexterity] = React.useState<number | null>(10)
+  const [constitution, setConstitution] = React.useState<number | null>(10)
+  const [intelligence, setIntelligence] = React.useState<number | null>(10)
+  const [wisdom, setWisdom] = React.useState<number | null>(10)
+  const [charisma, setCharisma] = React.useState<number | null>(10)
   const id = npc.id
+
+  function getAbilities() {
+    return {
+      strength,
+      dexterity,
+      constitution,
+      intelligence,
+      wisdom,
+      charisma
+    }
+  }
 
   const handleRaceChange = (event: SelectChangeEvent) => {
     setRace(event.target.value);
@@ -27,7 +43,7 @@ export default function editNpc(npc: Npc) {
       race,
       gender,
       notes,
-      abilities,
+      abilities: getAbilities(),
       id
     }
     await window.electron.saveEditedNpc(npc)
@@ -95,6 +111,12 @@ export default function editNpc(npc: Npc) {
         </Box>
       </Box>
       <Box>
+      <TextField label='strength' type='number' onChange={(e) => { setStrength(parseInt(e.target.value)) }} value={strength} />
+        <TextField label='dexterity' type='number' onChange={(e) => { setDexterity(parseInt(e.target.value)) }} value={dexterity} />
+        <TextField label='constitution' type='number' onChange={(e) => { setConstitution(parseInt(e.target.value)) }} value={constitution} />
+        <TextField label='intelligence' type='number' onChange={(e) => { setIntelligence(parseInt(e.target.value)) }} value={intelligence} />
+        <TextField label='wisdom' type='number' onChange={(e) => { setWisdom(parseInt(e.target.value)) }} value={wisdom} />
+        <TextField label='charisma' type='number' onChange={(e) => { setCharisma(parseInt(e.target.value)) }} value={charisma} />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center', margin: 5 }} >
         <Button variant="outlined" sx={{ width: 220 }} onClick={saveNpc} >Save</Button>

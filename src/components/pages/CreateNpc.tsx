@@ -3,17 +3,6 @@ import { nameByRace } from "fantasy-name-generator"
 import React from "react"
 
 export default function CreateNpc() {
-  
-  const getAbilities = () => {
-    return {
-      strength,
-      dexterity,
-      constitution,
-      intelligence,
-      wisdom,
-      charisma
-    }
-  }
   const [race, setRace] = React.useState('human')
   const [name, setName] = React.useState('')
   const [gender, setGender] = React.useState('male')
@@ -24,27 +13,16 @@ export default function CreateNpc() {
   const [intelligence, setIntelligence] = React.useState<number | null>(10)
   const [wisdom, setWisdom] = React.useState<number | null>(10)
   const [charisma, setCharisma] = React.useState<number | null>(10)
-  const [abilities, setAbilities] = React.useState(getAbilities())
 
-  const handleStrength = () => {
-    const str = document.getElementById('strength').innerHTML
-    console.log('strength', str)
-    setStrength(Number(document.getElementById('strength').innerHTML))
-  }
-  const handleDexterity = () => {
-    setDexterity(Number(document.getElementById('dexterity').innerHTML))
-  }
-  const handleConstitution = () => {
-    setConstitution(Number(document.getElementById('constitution').innerHTML))
-  }
-  const handleIntelligence = () => {
-    setIntelligence(Number(document.getElementById('intelligence').innerHTML))
-  }
-  const handleWisdom = () => {
-    setWisdom(Number(document.getElementById('wisdom').innerHTML))
-  }
-  const handleCharisma = () => {
-    setCharisma(Number(document.getElementById('charisma').innerHTML))
+  function getAbilities() {
+    return {
+      strength,
+      dexterity,
+      constitution,
+      intelligence,
+      wisdom,
+      charisma
+    }
   }
 
   const handleRaceChange = (event: SelectChangeEvent) => {
@@ -58,14 +36,12 @@ export default function CreateNpc() {
   }
 
   const saveNpc = async (): Promise<void> => {
-    setAbilities(getAbilities())
-
     const npc = {
       name,
       race,
       gender,
       notes,
-      abilities
+      abilities: getAbilities()
     }
     await window.electron.saveNpc(npc)
   }
@@ -157,15 +133,13 @@ export default function CreateNpc() {
           <Button variant="outlined" onClick={generateName}>Generate Name</Button>
         </Box>
       </Box>
-
-      <TextField type='number' id='strength' onChange={handleStrength} value={strength}/>
       <Box>
-        <input type='number' id='strength' onChange={handleStrength} value={strength} />
-        <input type='number' id='dexterity' onChange={handleDexterity}/>
-        <input type='number' id='constitution' onChange={handleConstitution}/>
-        <input type='number' id='intelligence' onChange={handleIntelligence}/>
-        <input type='number' id='wisdom' onChange={handleWisdom}/>
-        <input type='number' id='charisma' onChange={handleCharisma}/>
+        <TextField label='strength' type='number' onChange={(e) => { setStrength(parseInt(e.target.value)) }} value={strength} />
+        <TextField label='dexterity' type='number' onChange={(e) => { setDexterity(parseInt(e.target.value)) }} value={dexterity} />
+        <TextField label='constitution' type='number' onChange={(e) => { setConstitution(parseInt(e.target.value)) }} value={constitution} />
+        <TextField label='intelligence' type='number' onChange={(e) => { setIntelligence(parseInt(e.target.value)) }} value={intelligence} />
+        <TextField label='wisdom' type='number' onChange={(e) => { setWisdom(parseInt(e.target.value)) }} value={wisdom} />
+        <TextField label='charisma' type='number' onChange={(e) => { setCharisma(parseInt(e.target.value)) }} value={charisma} />
       </Box>
       <Box>
       </Box>
@@ -174,5 +148,4 @@ export default function CreateNpc() {
       </Box>
     </>
   )
-
 }
