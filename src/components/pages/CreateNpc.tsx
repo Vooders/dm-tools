@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
 import { nameByRace } from "fantasy-name-generator"
 import React from "react"
 
@@ -67,6 +67,12 @@ export default function CreateNpc() {
     },
     saveButton: {
       width: 0.2
+    },
+    abilities: {
+      display: 'flex',
+      justifyContent: 'center',
+      flexDirection: 'row',
+      margin: 2
     }
   }
 
@@ -133,14 +139,26 @@ export default function CreateNpc() {
           <Button variant="outlined" onClick={generateName}>Generate Name</Button>
         </Box>
       </Box>
-      <Box>
-        <TextField label='strength' type='number' onChange={(e) => { setStrength(parseInt(e.target.value)) }} value={strength} />
-        <TextField label='dexterity' type='number' onChange={(e) => { setDexterity(parseInt(e.target.value)) }} value={dexterity} />
-        <TextField label='constitution' type='number' onChange={(e) => { setConstitution(parseInt(e.target.value)) }} value={constitution} />
-        <TextField label='intelligence' type='number' onChange={(e) => { setIntelligence(parseInt(e.target.value)) }} value={intelligence} />
-        <TextField label='wisdom' type='number' onChange={(e) => { setWisdom(parseInt(e.target.value)) }} value={wisdom} />
-        <TextField label='charisma' type='number' onChange={(e) => { setCharisma(parseInt(e.target.value)) }} value={charisma} />
-      </Box>
+        <Grid container sx={style.abilities}>
+          <Grid item xs={2} md={1}>
+            <TextField label='STR' type='number' onChange={(e) => { setStrength(parseInt(e.target.value)) }} value={strength} />
+          </Grid>
+          <Grid item xs={2} md={1}>
+            <TextField label='DEX' type='number' onChange={(e) => { setDexterity(parseInt(e.target.value)) }} value={dexterity} />
+          </Grid>
+          <Grid item xs={2} md={1}>
+            <TextField label='CON' type='number' onChange={(e) => { setConstitution(parseInt(e.target.value)) }} value={constitution} />
+          </Grid>
+          <Grid item xs={2} md={1}>
+            <TextField label='INT' type='number' onChange={(e) => { setIntelligence(parseInt(e.target.value)) }} value={intelligence} />
+          </Grid>
+          <Grid item xs={2} md={1}>
+            <TextField label='WIS' type='number' onChange={(e) => { setWisdom(parseInt(e.target.value)) }} value={wisdom} />
+          </Grid>
+          <Grid item xs={2} md={1}>
+            <TextField label='CHA' type='number' onChange={(e) => { setCharisma(parseInt(e.target.value)) }} value={charisma} />
+          </Grid>
+        </Grid>
       <Box>
       </Box>
       <Box sx={style.centred}>
