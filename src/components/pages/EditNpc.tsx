@@ -1,19 +1,19 @@
 import React from "react"
 import { Npc } from "../../../src/lib/saveNpc"
 import { nameByRace } from "fantasy-name-generator"
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
 
 export default function editNpc(npc: Npc) {
-  const [race, setRace] = React.useState(npc.race)
-  const [name, setName] = React.useState(npc.name)
-  const [gender, setGender] = React.useState(npc.gender)
-  const [notes, setNotes] = React.useState(npc.notes)
-  const [strength, setStrength] = React.useState<number | null>(10)
-  const [dexterity, setDexterity] = React.useState<number | null>(10)
-  const [constitution, setConstitution] = React.useState<number | null>(10)
-  const [intelligence, setIntelligence] = React.useState<number | null>(10)
-  const [wisdom, setWisdom] = React.useState<number | null>(10)
-  const [charisma, setCharisma] = React.useState<number | null>(10)
+  const [race, setRace] = React.useState<string>(npc.race)
+  const [name, setName] = React.useState<string>(npc.name)
+  const [gender, setGender] = React.useState<string>(npc.gender)
+  const [notes, setNotes] = React.useState<string>(npc.notes)
+  const [strength, setStrength] = React.useState<number | null>(npc.abilities.strength)
+  const [dexterity, setDexterity] = React.useState<number | null>(npc.abilities.dexterity)
+  const [constitution, setConstitution] = React.useState<number | null>(npc.abilities.constitution)
+  const [intelligence, setIntelligence] = React.useState<number | null>(npc.abilities.intelligence)
+  const [wisdom, setWisdom] = React.useState<number | null>(npc.abilities.wisdom)
+  const [charisma, setCharisma] = React.useState<number | null>(npc.abilities.charisma)
   const id = npc.id
 
   function getAbilities() {
@@ -48,13 +48,48 @@ export default function editNpc(npc: Npc) {
     }
     await window.electron.saveEditedNpc(npc)
   }
+
+  const style = {
+    centred: {
+      display: 'flex',
+      justifyContent: 'center'
+    },
+    textInput: {
+      width: 0.3
+    },
+    name: {
+      width: 0.4
+    },
+    notes: {
+      width: 1
+    },
+    nameButton: {
+      width: 0.15,
+      height: 0.7,
+      marginX: 5
+    },
+    saveButton: {
+      width: 0.2
+    },
+    abilities: {
+      display: 'flex',
+      justifyContent: 'center',
+      flexDirection: 'row',
+      margin: 2
+    },
+    outer: {
+      display: 'flex',
+      justifyContent: 'center',
+      flexDirection: 'column'
+    }
+  }
   
   return (
-    <>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+    <Box sx={style.outer} >
+      <Box sx={style.centred}>
         <Box>
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Box sx={{ width: 0.3 }}>
+          <Box sx={style.centred}>
+            <Box sx={style.textInput}>
               <FormControl fullWidth>
                 <InputLabel id="race-select-label">Race</InputLabel>
                 <Select
@@ -85,7 +120,7 @@ export default function editNpc(npc: Npc) {
                 </Select>
               </FormControl>
             </Box>
-            <Box sx={{ width: 0.3 }}>
+            <Box sx={style.textInput}>
               <FormControl fullWidth>
                 <InputLabel id="gender-select-label">Gender</InputLabel>
                 <Select
@@ -100,27 +135,43 @@ export default function editNpc(npc: Npc) {
                 </Select>
               </FormControl>
             </Box>
-            <TextField value={name} sx={{ width: 0.4 }} label="Name" variant="outlined" onChange={(e) => setName(e.target.value)} />
+            <Box sx={style.name}>
+              <TextField value={name} label="Name" variant="outlined" onChange={(e) => setName(e.target.value)} />
+            </Box>
           </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <TextField value={notes} sx={{ width: 1 }} onChange={(e) => {setNotes(e.target.value)}} label='notes' variant='outlined' multiline />
+          <Box>
+            <TextField sx={style.notes} onChange={(e) => { setNotes(e.target.value) }} label='notes' variant='outlined' multiline />
           </Box>
         </Box>
-        <Box sx={{ width: 0.15, height: 0.7, marginX: 5 }}>
-        <Button variant="outlined"  onClick={generateName}>Generate Name</Button>
+        <Box sx={style.nameButton}>
+          <Button variant="outlined" onClick={generateName}>Generate Name</Button>
         </Box>
       </Box>
+        <Grid container sx={style.abilities}>
+          <Grid item xs={2} md={1}>
+            <TextField label='STR' type='number' onChange={(e) => { setStrength(parseInt(e.target.value)) }} value={strength} />
+          </Grid>
+          <Grid item xs={2} md={1}>
+            <TextField label='DEX' type='number' onChange={(e) => { setDexterity(parseInt(e.target.value)) }} value={dexterity} />
+          </Grid>
+          <Grid item xs={2} md={1}>
+            <TextField label='CON' type='number' onChange={(e) => { setConstitution(parseInt(e.target.value)) }} value={constitution} />
+          </Grid>
+          <Grid item xs={2} md={1}>
+            <TextField label='INT' type='number' onChange={(e) => { setIntelligence(parseInt(e.target.value)) }} value={intelligence} />
+          </Grid>
+          <Grid item xs={2} md={1}>
+            <TextField label='WIS' type='number' onChange={(e) => { setWisdom(parseInt(e.target.value)) }} value={wisdom} />
+          </Grid>
+          <Grid item xs={2} md={1}>
+            <TextField label='CHA' type='number' onChange={(e) => { setCharisma(parseInt(e.target.value)) }} value={charisma} />
+          </Grid>
+        </Grid>
       <Box>
-      <TextField label='strength' type='number' onChange={(e) => { setStrength(parseInt(e.target.value)) }} value={strength} />
-        <TextField label='dexterity' type='number' onChange={(e) => { setDexterity(parseInt(e.target.value)) }} value={dexterity} />
-        <TextField label='constitution' type='number' onChange={(e) => { setConstitution(parseInt(e.target.value)) }} value={constitution} />
-        <TextField label='intelligence' type='number' onChange={(e) => { setIntelligence(parseInt(e.target.value)) }} value={intelligence} />
-        <TextField label='wisdom' type='number' onChange={(e) => { setWisdom(parseInt(e.target.value)) }} value={wisdom} />
-        <TextField label='charisma' type='number' onChange={(e) => { setCharisma(parseInt(e.target.value)) }} value={charisma} />
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'center', margin: 5 }} >
-        <Button variant="outlined" sx={{ width: 220 }} onClick={saveNpc} >Save</Button>
+      <Box sx={style.centred}>
+        <Button variant="outlined" sx={style.saveButton} onClick={saveNpc} >Save</Button>
       </Box>
-    </>
+    </Box>
   )
 }

@@ -4,17 +4,18 @@ import React from "react"
 import { v4 as uuidv4 } from 'uuid'
 
 export default function CreateNpc() {
-  const [race, setRace] = React.useState('human')
-  const [name, setName] = React.useState('')
-  const [gender, setGender] = React.useState('male')
-  const [notes, setNotes] = React.useState('')
+  const [race, setRace] = React.useState<string>('human')
+  const [name, setName] = React.useState<string>('')
+  const [gender, setGender] = React.useState<string>('male')
+  const [notes, setNotes] = React.useState<string>('')
   const [strength, setStrength] = React.useState<number | null>(10)
   const [dexterity, setDexterity] = React.useState<number | null>(10)
   const [constitution, setConstitution] = React.useState<number | null>(10)
   const [intelligence, setIntelligence] = React.useState<number | null>(10)
   const [wisdom, setWisdom] = React.useState<number | null>(10)
   const [charisma, setCharisma] = React.useState<number | null>(10)
-
+  const id = uuidv4()
+  
   function getAbilities() {
     return {
       strength,
@@ -37,7 +38,6 @@ export default function CreateNpc() {
   }
 
   const saveNpc = async (): Promise<void> => {
-    const id = uuidv4()
     const npc = {
       name,
       race,

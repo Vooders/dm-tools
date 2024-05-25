@@ -116,6 +116,7 @@ export default function Npc(npc: Npc) {
               race={npc.race}
               gender={npc.gender}
               notes={npc.notes}
+              abilities={npc.abilities}
               id={npc.id}
             />
           </Box>
