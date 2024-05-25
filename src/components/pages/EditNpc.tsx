@@ -1,7 +1,7 @@
-import React from "react";
-import { Npc } from "../../../src/lib/saveNpc";
+import React from "react"
+import { Npc } from "../../../src/lib/saveNpc"
 import { nameByRace } from "fantasy-name-generator"
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
 
 export default function editNpc(npc: Npc) {
   const [race, setRace] = React.useState(npc.race)

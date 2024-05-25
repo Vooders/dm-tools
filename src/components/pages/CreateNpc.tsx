@@ -1,6 +1,7 @@
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
 import { nameByRace } from "fantasy-name-generator"
 import React from "react"
+import { v4 as uuidv4 } from 'uuid'
 
 export default function CreateNpc() {
   const [race, setRace] = React.useState('human')
@@ -36,12 +37,14 @@ export default function CreateNpc() {
   }
 
   const saveNpc = async (): Promise<void> => {
+    const id = uuidv4()
     const npc = {
       name,
       race,
       gender,
       notes,
-      abilities: getAbilities()
+      abilities: getAbilities(),
+      id
     }
     await window.electron.saveNpc(npc)
   }
@@ -73,11 +76,16 @@ export default function CreateNpc() {
       justifyContent: 'center',
       flexDirection: 'row',
       margin: 2
+    },
+    outer: {
+      display: 'flex',
+      justifyContent: 'center',
+      flexDirection: 'column'
     }
   }
 
   return (
-    <>
+    <Box sx={style.outer} >
       <Box sx={style.centred}>
         <Box>
           <Box sx={style.centred}>
@@ -164,6 +172,6 @@ export default function CreateNpc() {
       <Box sx={style.centred}>
         <Button variant="outlined" sx={style.saveButton} onClick={saveNpc} >Save</Button>
       </Box>
-    </>
+    </Box>
   )
 }
