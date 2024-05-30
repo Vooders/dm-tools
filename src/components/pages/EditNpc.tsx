@@ -46,7 +46,7 @@ export default function editNpc(npc: Npc) {
       abilities: getAbilities(),
       id
     }
-    await window.electron.saveEditedNpc(npc)
+    await window.electron.saveNpc(npc)
   }
 
   const style = {

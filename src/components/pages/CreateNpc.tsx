@@ -8,14 +8,14 @@ export default function CreateNpc() {
   const [name, setName] = React.useState<string>('')
   const [gender, setGender] = React.useState<string>('male')
   const [notes, setNotes] = React.useState<string>('')
-  const [strength, setStrength] = React.useState<number | null>(10)
-  const [dexterity, setDexterity] = React.useState<number | null>(10)
-  const [constitution, setConstitution] = React.useState<number | null>(10)
-  const [intelligence, setIntelligence] = React.useState<number | null>(10)
-  const [wisdom, setWisdom] = React.useState<number | null>(10)
-  const [charisma, setCharisma] = React.useState<number | null>(10)
+  const [strength, setStrength] = React.useState<number>(10)
+  const [dexterity, setDexterity] = React.useState<number>(10)
+  const [constitution, setConstitution] = React.useState<number>(10)
+  const [intelligence, setIntelligence] = React.useState<number>(10)
+  const [wisdom, setWisdom] = React.useState<number>(10)
+  const [charisma, setCharisma] = React.useState<number>(10)
   const id = uuidv4()
-  
+
   function getAbilities() {
     return {
       strength,
@@ -27,6 +27,11 @@ export default function CreateNpc() {
     }
   }
 
+  const handleAbilityChange = (hook: Function) => {
+    return (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      hook(parseInt(event.target.value))
+    }
+  }
   const handleRaceChange = (event: SelectChangeEvent) => {
     setRace(event.target.value)
   }
@@ -147,26 +152,26 @@ export default function CreateNpc() {
           <Button variant="outlined" onClick={generateName}>Generate Name</Button>
         </Box>
       </Box>
-        <Grid container sx={style.abilities}>
-          <Grid item xs={2} md={1}>
-            <TextField label='STR' type='number' onChange={(e) => { setStrength(parseInt(e.target.value)) }} value={strength} />
-          </Grid>
-          <Grid item xs={2} md={1}>
-            <TextField label='DEX' type='number' onChange={(e) => { setDexterity(parseInt(e.target.value)) }} value={dexterity} />
-          </Grid>
-          <Grid item xs={2} md={1}>
-            <TextField label='CON' type='number' onChange={(e) => { setConstitution(parseInt(e.target.value)) }} value={constitution} />
-          </Grid>
-          <Grid item xs={2} md={1}>
-            <TextField label='INT' type='number' onChange={(e) => { setIntelligence(parseInt(e.target.value)) }} value={intelligence} />
-          </Grid>
-          <Grid item xs={2} md={1}>
-            <TextField label='WIS' type='number' onChange={(e) => { setWisdom(parseInt(e.target.value)) }} value={wisdom} />
-          </Grid>
-          <Grid item xs={2} md={1}>
-            <TextField label='CHA' type='number' onChange={(e) => { setCharisma(parseInt(e.target.value)) }} value={charisma} />
-          </Grid>
+      <Grid container sx={style.abilities}>
+        <Grid item xs={2} md={1}>
+          <TextField label='STR' type='number' onChange={(e) => { handleAbilityChange(setStrength) }} value={strength} />
         </Grid>
+        <Grid item xs={2} md={1}>
+          <TextField label='DEX' type='number' onChange={(e) => { handleAbilityChange(setDexterity) }} value={dexterity} />
+        </Grid>
+        <Grid item xs={2} md={1}>
+          <TextField label='CON' type='number' onChange={(e) => { handleAbilityChange(setConstitution) }} value={constitution} />
+        </Grid>
+        <Grid item xs={2} md={1}>
+          <TextField label='INT' type='number' onChange={(e) => { handleAbilityChange(setIntelligence) }} value={intelligence} />
+        </Grid>
+        <Grid item xs={2} md={1}>
+          <TextField label='WIS' type='number' onChange={(e) => { handleAbilityChange(setWisdom) }} value={wisdom} />
+        </Grid>
+        <Grid item xs={2} md={1}>
+          <TextField label='CHA' type='number' onChange={(e) => { handleAbilityChange(setCharisma) }} value={charisma} />
+        </Grid>
+      </Grid>
       <Box>
       </Box>
       <Box sx={style.centred}>
