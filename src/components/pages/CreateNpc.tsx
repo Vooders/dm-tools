@@ -154,22 +154,22 @@ export default function CreateNpc() {
       </Box>
       <Grid container sx={style.abilities}>
         <Grid item xs={2} md={1}>
-          <TextField label='STR' type='number' onChange={(e) => { handleAbilityChange(setStrength) }} value={strength} />
+          <TextField label='STR' type='number' onChange={handleAbilityChange(setStrength)} value={strength} />
         </Grid>
         <Grid item xs={2} md={1}>
-          <TextField label='DEX' type='number' onChange={(e) => { handleAbilityChange(setDexterity) }} value={dexterity} />
+          <TextField label='DEX' type='number' onChange={handleAbilityChange(setDexterity)} value={dexterity} />
         </Grid>
         <Grid item xs={2} md={1}>
-          <TextField label='CON' type='number' onChange={(e) => { handleAbilityChange(setConstitution) }} value={constitution} />
+          <TextField label='CON' type='number' onChange={handleAbilityChange(setConstitution)} value={constitution} />
         </Grid>
         <Grid item xs={2} md={1}>
-          <TextField label='INT' type='number' onChange={(e) => { handleAbilityChange(setIntelligence) }} value={intelligence} />
+          <TextField label='INT' type='number' onChange={handleAbilityChange(setIntelligence)} value={intelligence} />
         </Grid>
         <Grid item xs={2} md={1}>
-          <TextField label='WIS' type='number' onChange={(e) => { handleAbilityChange(setWisdom) }} value={wisdom} />
+          <TextField label='WIS' type='number' onChange={handleAbilityChange(setWisdom)} value={wisdom} />
         </Grid>
         <Grid item xs={2} md={1}>
-          <TextField label='CHA' type='number' onChange={(e) => { handleAbilityChange(setCharisma) }} value={charisma} />
+          <TextField label='CHA' type='number' onChange={handleAbilityChange(setCharisma)} value={charisma} />
         </Grid>
       </Grid>
       <Box>
