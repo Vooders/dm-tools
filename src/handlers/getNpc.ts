@@ -1,12 +1,12 @@
 import { app } from 'electron';
 import { readFile } from 'fs/promises';
 import path from 'path'
-import { Npc } from '../../src/lib/saveNpc';
+import { DmToolsData } from '../../src/lib/CharacterSheetProcessor';
 
 const directory = 'npcs'
 const userDataPath = app.getPath('userData');
 
-export default async (_: Electron.IpcMainInvokeEvent, id: string): Promise<Npc> => {
+export default async (_: Electron.IpcMainInvokeEvent, id: string): Promise<DmToolsData> => {
     console.log(`Loading npc file ${id}`)
     const npcPath = path.join(userDataPath, directory, id + '.json');
     try {

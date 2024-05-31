@@ -2,6 +2,7 @@ import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectCha
 import { nameByRace } from "fantasy-name-generator"
 import React, { useEffect } from "react"
 import { useParams } from "react-router-dom"
+import { DmToolsData } from "../../lib/CharacterSheetProcessor"
 import { v4 as uuidv4 } from 'uuid'
 
 export default function CreateNpc() {
@@ -22,17 +23,17 @@ export default function CreateNpc() {
 
   useEffect(() => {
     const loadNpc = async () => {
-      const npc = await window.electron.getNpc(npcId)
-      setRace(npc.race)
-      setName(npc.name)
-      setGender(npc.gender)
-      setNotes(npc.notes)
-      setStrength(npc.abilities.strength)
-      setDexterity(npc.abilities.dexterity)
-      setConstitution(npc.abilities.constitution)
-      setIntelligence(npc.abilities.intelligence)
-      setWisdom(npc.abilities.wisdom)
-      setCharisma(npc.abilities.charisma)
+      const npc = await window.electron.getNpc(npcId) as DmToolsData
+      setRace(npc.profile.race)
+      setName(npc.profile.name)
+      setGender(npc.profile.appearance.gender)
+      // setNotes(npc.notes)
+      setStrength(npc.abilities[0].value)
+      setDexterity(npc.abilities[1].value)
+      setConstitution(npc.abilities[2].value)
+      setIntelligence(npc.abilities[3].value)
+      setWisdom(npc.abilities[4].value)
+      setCharisma(npc.abilities[5].value)
       setId(npc.id)
     }
 
