@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import React from 'react';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -46,27 +45,14 @@ function TabPanel(props: TabPanelProps) {
     );
 }
 
-export default function CharacterSheet() {
-    let { characterId } = useParams()
-    const [character, setCharacter] = useState<DmToolsData>(null)
+export default function CharacterSheet(props: CharacterSheetProps) {
     const [value, setValue] = React.useState(0);
+
+    const character = props.character
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
-
-    useEffect(() => {
-        const getCharacter = async () => {
-            console.log('getting Character')
-            const char = await window.electron.getCharacter(characterId)
-            setCharacter(char)
-        }
-
-        if (!character || characterId !== character.id.toString()) {
-            getCharacter()
-                .catch(console.error)
-        }
-    })
 
     function a11yProps(index: number) {
         return {
@@ -137,6 +123,10 @@ export default function CharacterSheet() {
             }
         </React.Fragment>
     )
+}
+
+interface CharacterSheetProps {
+    character: DmToolsData
 }
 
 interface HpProps {

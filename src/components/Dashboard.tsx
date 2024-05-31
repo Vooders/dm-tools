@@ -18,7 +18,6 @@ import Inventory from './pages/Inventory';
 import { HashRouter, Route, Routes } from "react-router-dom";
 
 import Characters from './pages/Characters';
-import CharacterSheet from './pages/CharacterSheet'
 import Languages from './pages/Languages';
 import Senses from './pages/Senses';
 import Skills from './pages/Skills';
@@ -30,6 +29,7 @@ import Theme from './Theme';
 import Metrics from './pages/Metrics';
 import CreateNpc from './pages/CreateNpc';
 import Npcs from './pages/Npcs';
+import PlayerCharacter from './pages/PlayerCharacter';
 
 function Copyright(props: any) {
   return (
@@ -180,7 +180,7 @@ function DashboardContent() {
                         <Route path="/createNpc" element={<CreateNpc />} />
                         <Route path="/createNpc/:npcId" element={<CreateNpc />} />
                         <Route path="/npcs" element={<Npcs />} />
-                        <Route path="/characterSheet/:characterId" element={<CharacterSheet />} />
+                        <Route path="/characterSheet/:characterId" element={<PlayerCharacter />} />
                       </Routes>
                     </Paper>
                   </Grid>
