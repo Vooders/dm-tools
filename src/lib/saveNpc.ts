@@ -9,23 +9,28 @@ const summaryPath = path.join(npcsDirectory, 'summary.json')
 
 export default async function saveNpc(npc: Npc) {
     const filename = `${npc.id}.json`
-    const summary = await getSummary()
+    const npcPath = path.join(npcsDirectory, filename)
     try {
-        if (!summary.some((npcSummary: NpcSummary) => npcSummary.id === npc.id)) {
-            summary.push({
-                name: npc.name,
-                id: npc.id,
-                filename
-            })
-            await writeFile(summaryPath, JSON.stringify(summary))
-        }
-
-        const npcPath = path.join(npcsDirectory, filename)
+        await updateSummary(npc)
         await writeFile(npcPath, JSON.stringify(npc))
         return true
     } catch (error) {
         console.log(error)
         return false
+    }
+}
+
+async function updateSummary(npc: Npc) {
+    const summary = await getSummary()
+    const filename = `${npc.id}.json`
+
+    if (!summary.some((npcSummary: NpcSummary) => npcSummary.id === npc.id)) {
+        summary.push({
+            name: npc.name,
+            id: npc.id,
+            filename
+        })
+        await writeFile(summaryPath, JSON.stringify(summary))
     }
 }
 
