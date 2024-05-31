@@ -1,4 +1,4 @@
-import { Ability, CharacterProfile, DmToolsData, Stat } from "./CharacterSheetProcessor";
+import { Ability, CharacterProfile, CharacterProfileHp, DmToolsData, Stat } from "./CharacterSheetProcessor";
 import { Npc } from "./saveNpc";
 import abilities from './character-sheet-processor/abilities'
 
@@ -16,31 +16,41 @@ export default class NpcProcessor {
             avatarPath: null,
             abilities: this.buildAbilities(),
             profile: this.buildProfile(),
-            hp: null,
+            hp: this.buildHp(),
             proficiency: null,
-            saves: null,
-            skills: null,
-            passiveSkills: null,
-            proficiencyView: null,
-            spellSlots: null,
-            actions: null,
-            spells: null,
+            saves: [],
+            skills: [],
+            passiveSkills: [],
+            proficiencyView: [],
+            spellSlots: [],
+            actions: [],
+            spells: [],
             currencies: null,
-            inventory: null,
+            inventory: [],
             weightData: null,
             deathSaves: null,
             ac: null,
             wealth: null,
-            hitDice: null,
+            hitDice: [],
             healthPotions: null,
-            creatures: null,
+            creatures: [],
             inspiration: null,
             milestoneProgression: null,
         }
     }
 
-    private buildProfile(): CharacterProfile {
+    private buildHp(): CharacterProfileHp {
+        return {
+            constitutionBonus: 0,
+            base: 10,
+            bonus: 0,
+            override: 0,
+            removed: 0,
+            temporary: 0,
+        }
+    }
 
+    private buildProfile(): CharacterProfile {
         return {
             name: this.npcData.name,
             race: this.npcData.race,

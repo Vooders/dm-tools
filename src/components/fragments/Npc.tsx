@@ -4,6 +4,7 @@ import { Card, CardContent, Typography, IconButton, Tooltip } from "@mui/materia
 import { Box } from "@mui/system";
 import { EditOutlined, Delete } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 export default function Npc(npc: Npc) {
 
@@ -46,6 +47,13 @@ export default function Npc(npc: Npc) {
                 <Tooltip title="Edit">
                   <IconButton aria-label="edit" >
                     <EditOutlined />
+                  </IconButton>
+                </Tooltip>
+              </Link>
+              <Link to={`/npcSheet/${npc.id}`}>
+                <Tooltip title="Edit">
+                  <IconButton aria-label="edit" >
+                    <RemoveRedEyeIcon />
                   </IconButton>
                 </Tooltip>
               </Link>

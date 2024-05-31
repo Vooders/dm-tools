@@ -30,6 +30,7 @@ import Metrics from './pages/Metrics';
 import CreateNpc from './pages/CreateNpc';
 import Npcs from './pages/Npcs';
 import PlayerCharacter from './pages/PlayerCharacter';
+import NpcCharacter from './pages/NpcCharacter';
 
 function Copyright(props: any) {
   return (
@@ -181,6 +182,7 @@ function DashboardContent() {
                         <Route path="/createNpc/:npcId" element={<CreateNpc />} />
                         <Route path="/npcs" element={<Npcs />} />
                         <Route path="/characterSheet/:characterId" element={<PlayerCharacter />} />
+                        <Route path="/npcSheet/:characterId" element={<NpcCharacter />} />
                       </Routes>
                     </Paper>
                   </Grid>
