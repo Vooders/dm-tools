@@ -55,14 +55,14 @@ contextBridge.exposeInMainWorld('electron', {
   saveNpc: async (npc) => {
     return await ipcRenderer.invoke('npc:save', npc)
   },
+  getNpc: async (npcId) => {
+    return await ipcRenderer.invoke('npc:get', npcId)
+  },
   getNpcs: async () => {
     return await ipcRenderer.invoke('npcs:get')
   },
   deleteNpc: async (id) => {
     return await ipcRenderer.invoke('npc:delete', id)
-  },
-  saveEditedNpc: async (npc) => {
-    return await ipcRenderer.invoke('npc:edit', npc)
   },
   npcUpdated: async (callback) => {
     return await ipcRenderer.on('npc:updated', callback)

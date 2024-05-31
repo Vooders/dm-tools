@@ -19,7 +19,7 @@ import { autoUpdater } from 'electron-updater'
 import handleNpcSave from './handlers/saveNpc'
 import getNpcs from './handlers/getNpcs'
 import deleteNpc from './handlers/deleteNpc';
-import handleNpcEdit from './handlers/saveEditedNpc'
+import getNpc from './handlers/getNpc';
 
 app.on("ready", () => {
 	autoUpdater.checkForUpdatesAndNotify();
@@ -69,7 +69,6 @@ const createWindow = (): void => {
     ipcMain.handle('character:import', handleImport)
     ipcMain.handle('character:save', handleSave(mainWindow))
     ipcMain.handle('npc:save', handleNpcSave(mainWindow))
-    ipcMain.handle('npc:edit', handleNpcEdit(mainWindow))
 
     ipcMain.handle('character:updateAll', handleImportAll(mainWindow))
 
@@ -84,6 +83,7 @@ const createWindow = (): void => {
     ipcMain.handle('wealth:get', getWealth)
     ipcMain.handle('metrics:get', getMetrics)
     ipcMain.handle('npcs:get', getNpcs)
+    ipcMain.handle('npc:get', getNpc)
     ipcMain.handle('npc:delete', deleteNpc(mainWindow))
   })
 };

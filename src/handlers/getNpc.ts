@@ -6,7 +6,7 @@ import { Npc } from '../../src/lib/saveNpc';
 const directory = 'npcs'
 const userDataPath = app.getPath('userData');
 
-export default async (id: string): Promise<Npc> => {
+export default async (_: Electron.IpcMainInvokeEvent, id: string): Promise<Npc> => {
     console.log(`Loading npc file ${id}`)
     const npcPath = path.join(userDataPath, directory, id + '.json');
     try {

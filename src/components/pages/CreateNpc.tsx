@@ -1,6 +1,7 @@
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
 import { nameByRace } from "fantasy-name-generator"
-import React from "react"
+import React, { useEffect } from "react"
+import { useParams } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid'
 
 export default function CreateNpc() {
@@ -14,7 +15,33 @@ export default function CreateNpc() {
   const [intelligence, setIntelligence] = React.useState<number>(10)
   const [wisdom, setWisdom] = React.useState<number>(10)
   const [charisma, setCharisma] = React.useState<number>(10)
-  const id = uuidv4()
+  const [id, setId] = React.useState<string>(uuidv4())
+
+  const { npcId } = useParams()
+  console.log(npcId)
+
+  useEffect(() => {
+    const loadNpc = async () => {
+      const npc = await window.electron.getNpc(npcId)
+      setRace(npc.race)
+      setName(npc.name)
+      setGender(npc.gender)
+      setNotes(npc.notes)
+      setStrength(npc.abilities.strength)
+      setDexterity(npc.abilities.dexterity)
+      setConstitution(npc.abilities.constitution)
+      setIntelligence(npc.abilities.intelligence)
+      setWisdom(npc.abilities.wisdom)
+      setCharisma(npc.abilities.charisma)
+      setId(npc.id)
+    }
+
+    if (npcId && npcId !== id) {
+        loadNpc()
+            .catch(console.error)
+    }
+})
+
 
   function getAbilities() {
     return {

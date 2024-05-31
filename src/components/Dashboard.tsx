@@ -178,6 +178,7 @@ function DashboardContent() {
                         <Route path="/wealth" element={<Wealth />} />
                         <Route path="/metrics" element={<Metrics />} />
                         <Route path="/createNpc" element={<CreateNpc />} />
+                        <Route path="/createNpc/:npcId" element={<CreateNpc />} />
                         <Route path="/npcs" element={<Npcs />} />
                         <Route path="/characterSheet/:characterId" element={<CharacterSheet />} />
                       </Routes>

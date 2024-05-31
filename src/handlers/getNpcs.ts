@@ -9,6 +9,6 @@ export default async (_: Electron.IpcMainInvokeEvent): Promise<Npc[]> => {
   })
 
   return await Promise.all(npcIds.map(async (id: string) => {
-    return await getNpc(id)
+    return await getNpc(null, id)
   }))
 }

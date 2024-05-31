@@ -1,21 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Npc } from '../../lib/saveNpc'
 import { Card, CardContent, Typography, IconButton, Tooltip } from "@mui/material";
 import { Box } from "@mui/system";
-import EditNpc from "../pages/EditNpc";
-import { EditOutlined, Delete, CancelOutlined } from '@mui/icons-material';
-
+import { EditOutlined, Delete } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 export default function Npc(npc: Npc) {
-  const [showEditor, setShowEditor] = useState(false)
 
   const handleDelete = async (id: string) => {
     const result = await window.electron.deleteNpc(id)
     console.log(`Delete ${id} - ${result}`)
-  }
-
-  function toggleEditor() {
-    setShowEditor((showEditor) => !showEditor)
   }
 
   const style = {
@@ -28,7 +22,7 @@ export default function Npc(npc: Npc) {
   return (
     <React.Fragment>
       <Card variant='outlined'>
-        {!showEditor &&
+        
           <Box>
             <Box display='flex' flexDirection='row'>
               <CardContent>
@@ -48,11 +42,13 @@ export default function Npc(npc: Npc) {
                 </Typography>
               </CardContent>
               <Box sx={style.buttons}>
+              <Link to={`/createNpc/${npc.id}`}>
                 <Tooltip title="Edit">
-                  <IconButton aria-label="edit" onClick={() => toggleEditor()}>
+                  <IconButton aria-label="edit" >
                     <EditOutlined />
                   </IconButton>
                 </Tooltip>
+              </Link>
                 <Tooltip title="Delete">
                   <IconButton aria-label="delete" onClick={() => handleDelete(npc.id)}>
                     <Delete />
@@ -99,28 +95,6 @@ export default function Npc(npc: Npc) {
               </Card>
             </Box>
           </Box>
-        }
-        {showEditor &&
-          <Box>
-            <Box display='flex' flexDirection='row'>
-              <Box sx={style.buttons}>
-                <Tooltip title="Cancel">
-                  <IconButton aria-label="cancel" onClick={() => toggleEditor()}>
-                    <CancelOutlined />
-                  </IconButton>
-                </Tooltip>
-              </Box>
-            </Box>
-            <EditNpc
-              name={npc.name}
-              race={npc.race}
-              gender={npc.gender}
-              notes={npc.notes}
-              abilities={npc.abilities}
-              id={npc.id}
-            />
-          </Box>
-        }
       </Card >
     </React.Fragment >
   )
