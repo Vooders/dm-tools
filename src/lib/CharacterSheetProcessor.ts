@@ -291,7 +291,7 @@ export default class CharacterSheetProcessor {
 }
 
 export type DmToolsData = {
-    id: number
+    id: string
     avatarPath?: string
     profile: CharacterProfile
     abilities: Ability[]

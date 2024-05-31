@@ -2,6 +2,7 @@ import { app } from 'electron'
 import path from 'path'
 import { writeFile } from 'fs/promises';
 import getFile from './getFile';
+import NpcProcessor from './npcProcessor';
 
 const userDataPath = app.getPath('userData');
 const npcsDirectory = path.join(userDataPath, 'npcs');
@@ -12,7 +13,8 @@ export default async function saveNpc(npc: Npc) {
     const npcPath = path.join(npcsDirectory, filename)
     try {
         await updateSummary(npc)
-        await writeFile(npcPath, JSON.stringify(npc))
+        const npcProcessor = new NpcProcessor(npc)
+        await writeFile(npcPath, JSON.stringify(npcProcessor.toDmToolsData()))
         return true
     } catch (error) {
         console.log(error)
