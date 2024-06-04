@@ -17,32 +17,29 @@ import PassiveSkills from '../fragments/character-sheet/PassiveSkills';
 import { ProficienciesLanguages } from '../fragments/character-sheet/ProficienciesLanguages';
 import Saves from '../fragments/character-sheet/Saves';
 
-interface TabPanelProps {
-    children?: React.ReactNode;
-    index: number;
-    value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Grid item sm={12} sx={{ padding: '25px'}}>
-                    <Grid container spacing={2} flexDirection={'column'} flexWrap={'wrap'} justifyContent={'space-evenly'} sx={{ maxHeight: '900px' }}>
-                        {children}
-                    </Grid>
-                </Grid>
-            )}
-        </div>
-    );
+const style = {
+    topBox: {
+        display: 'flex',
+        justifyContent: 'space-between'
+    },
+    infoCard: {
+        display: 'flex',
+        paddingBottom: '10px'
+    },
+    infoBox: {
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '5px'
+    },
+    hpBox: {
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '5px'
+    },
+    tabBox: {
+        borderBottom: 1,
+        borderColor: 'divider'
+    }
 }
 
 export default function CharacterSheet(props: CharacterSheetProps) {
@@ -67,16 +64,16 @@ export default function CharacterSheet(props: CharacterSheetProps) {
                 <React.Fragment>
                     <Grid container spacing={2} sx={{ paddingBottom: '27px' }}>
                         <Grid item sm={12}>
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <Card sx={{ display: 'flex', paddingBottom: '10px' }}>
+                            <Box sx={style.topBox}>
+                                <Card sx={style.infoCard}>
                                     <CardMedia
                                         component="img"
                                         sx={{ width: 151 }}
                                         image={character.avatarPath}
                                         alt={character.profile.name}
                                     />
-                                    <Box sx={{ display: 'flex', flexDirection: 'column', padding: '5px' }}>
-                                        <Typography component="div" variant="h5">
+                                    <Box sx={style.infoBox}>
+                                        <Typography variant="h5" component="div">
                                             {character.profile.name}
                                         </Typography>
                                         <Typography variant="subtitle1" color="text.primary" component="div">
@@ -87,7 +84,7 @@ export default function CharacterSheet(props: CharacterSheetProps) {
                                         </Typography>
                                     </Box>
                                 </Card>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', padding: '5px' }}>
+                                <Box sx={style.hpBox}>
                                     <Hp hp={character.hp}></Hp>
                                 </Box>
                             </Box>
@@ -96,7 +93,7 @@ export default function CharacterSheet(props: CharacterSheetProps) {
                     </Grid>
                     <Grid container spacing={2} >
                         <Grid item sm={12} spacing={2}>
-                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                            <Box sx={style.tabBox}>
                                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs">
                                     <Tab label="skills & saves" {...a11yProps(0)} />
                                     <Tab label="Spells" {...a11yProps(1)} />
@@ -125,14 +122,6 @@ export default function CharacterSheet(props: CharacterSheetProps) {
     )
 }
 
-interface CharacterSheetProps {
-    character: DmToolsData
-}
-
-interface HpProps {
-    hp: CharacterProfileHp
-}
-
 function Hp({ hp }: HpProps) {
     const max = hp.base + hp.bonus + hp.constitutionBonus
     const currentHp = hp.override ? hp.override : hp.base + hp.bonus + hp.constitutionBonus - hp.removed
@@ -149,4 +138,40 @@ function Hp({ hp }: HpProps) {
             </Typography>
         </Paper>
     )
+}
+
+function TabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Grid item sm={12} sx={{ padding: '25px'}}>
+                    <Grid container spacing={2} flexDirection={'column'} flexWrap={'wrap'} justifyContent={'space-evenly'} sx={{ maxHeight: '900px' }}>
+                        {children}
+                    </Grid>
+                </Grid>
+            )}
+        </div>
+    );
+}
+
+interface CharacterSheetProps {
+    character: DmToolsData
+}
+
+interface HpProps {
+    hp: CharacterProfileHp
+}
+
+interface TabPanelProps {
+    children?: React.ReactNode;
+    index: number;
+    value: number;
 }
