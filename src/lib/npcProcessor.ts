@@ -1,6 +1,7 @@
-import { Ability, CharacterProfile, CharacterProfileHp, DmToolsData, Stat } from "./CharacterSheetProcessor";
+import { Ability, CharacterProfile, CharacterProfileHp, DmToolsData, Modifier, Skill, Stat } from "./CharacterSheetProcessor";
 import { Npc } from "./saveNpc";
 import abilities from './character-sheet-processor/abilities'
+import skills from './character-sheet-processor/skills'
 
 export default class NpcProcessor {
 
@@ -17,9 +18,9 @@ export default class NpcProcessor {
             abilities: this.buildAbilities(),
             profile: this.buildProfile(),
             hp: this.buildHp(),
-            proficiency: null,
+            proficiency: this.npcData.proficiencyBonus,
             saves: [],
-            skills: [],
+            skills: this.buildSkills(),
             passiveSkills: [],
             proficiencyView: [],
             spellSlots: [],
@@ -36,6 +37,49 @@ export default class NpcProcessor {
             creatures: [],
             inspiration: null,
             milestoneProgression: null,
+        }
+    }
+
+    
+    private buildSkills(): Skill[] {
+        const abilities = this.buildAbilities()
+        const profArray: string[] = this.npcData.proficiencies
+        const expArray: string[] = this.npcData.expertise
+        const proficiencyBonus = this.npcData.proficiencyBonus
+
+        const proficiencies = profArray.map((prof) => {
+            return this.buildModifier(prof)
+        })
+        const expertise = expArray.map((prof) => {
+            return this.buildModifier(prof)
+        })
+
+        return skills(abilities, [], proficiencies, expertise, proficiencyBonus)
+    }
+
+    private buildModifier(friendlySubtypeName: string): Modifier {
+        return {
+            fixedValue: null,
+            id: null,
+            entityId: null,
+            entityTypeId: null,
+            type: null,
+            subType: null,
+            dice: null,
+            restriction: null,
+            statId: null,
+            requiresAttunement: null,
+            duration: null,
+            friendlyTypeName: null,
+            friendlySubtypeName,
+            isGranted: null,
+            bonusTypes: [],
+            value: null,
+            availableToMulticlass: null,
+            modifierTypeId: null,
+            modifierSubTypeId: null,
+            componentId: null,
+            componentTypeId: null
         }
     }
 
