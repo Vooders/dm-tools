@@ -63,8 +63,14 @@ export default function CreateNpc() {
     ]
   }
 
-  function getProficiencies(type: string) {
-    return getSkills().filter((skill: any) => skill.proficiency === type)
+  function getProficiencies(): string[] {
+    return getSkills().filter((skill: any) => skill.proficiency === 'proficiency')
+      .map((skill: any) => skill.name)
+      .concat(getExpertise())
+  }
+
+  function getExpertise(): string[] {
+    return getSkills().filter((skill: any) => skill.proficiency === 'expertise')
       .map((skill: any) => skill.name)
   }
 
@@ -181,8 +187,8 @@ export default function CreateNpc() {
       abilities: getAbilities(),
       proficiencyBonus,
       ac,
-      proficiencies: getProficiencies('proficiency'),
-      expertise: getProficiencies('expertise')
+      proficiencies: getProficiencies(),
+      expertise: getExpertise()
     }
     await window.electron.saveNpc(npc)
   }
