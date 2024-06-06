@@ -30,7 +30,7 @@ export default class NpcProcessor {
             inventory: [],
             weightData: null,
             deathSaves: null,
-            ac: null,
+            ac: this.npcData.ac,
             wealth: null,
             hitDice: [],
             healthPotions: null,

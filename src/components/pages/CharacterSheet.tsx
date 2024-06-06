@@ -16,11 +16,13 @@ import Spells from '../fragments/character-sheet/Spells';
 import PassiveSkills from '../fragments/character-sheet/PassiveSkills';
 import { ProficienciesLanguages } from '../fragments/character-sheet/ProficienciesLanguages';
 import Saves from '../fragments/character-sheet/Saves';
+import Ac from '../fragments/Ac';
 
 const style = {
     topBox: {
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        verticalAlign: 'middle'
     },
     infoCard: {
         display: 'flex',
@@ -84,8 +86,13 @@ export default function CharacterSheet(props: CharacterSheetProps) {
                                         </Typography>
                                     </Box>
                                 </Card>
-                                <Box sx={style.hpBox}>
-                                    <Hp hp={character.hp}></Hp>
+                                <Box sx={{ display: 'flex', flexDirection: 'row'}}>
+                                    <Box sx={{ mt: 5, mr: 2}}>
+                                        <Ac ac={character.ac} />
+                                    </Box>
+                                    <Box sx={style.hpBox}>
+                                        <Hp hp={character.hp}></Hp>
+                                    </Box>
                                 </Box>
                             </Box>
                         </Grid>
@@ -107,7 +114,7 @@ export default function CharacterSheet(props: CharacterSheetProps) {
                                 <ProficienciesLanguages proficiencyView={character.proficiencyView} />
                             </TabPanel>
                             <TabPanel value={value} index={1}>
-                               <Spells theSpells={character.spells} />
+                                <Spells theSpells={character.spells} />
                             </TabPanel>
                             <TabPanel value={value} index={2}>
                                 Item Three
@@ -152,7 +159,7 @@ function TabPanel(props: TabPanelProps) {
             {...other}
         >
             {value === index && (
-                <Grid item sm={12} sx={{ padding: '25px'}}>
+                <Grid item sm={12} sx={{ padding: '25px' }}>
                     <Grid container spacing={2} flexDirection={'column'} flexWrap={'wrap'} justifyContent={'space-evenly'} sx={{ maxHeight: '900px' }}>
                         {children}
                     </Grid>

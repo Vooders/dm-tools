@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormControlLabel, FormLabel, Grid, InputLabel, MenuItem, Radio, RadioGroup, Select, SelectChangeEvent, TextField } from "@mui/material"
+import { Box, Button, FormControl, FormControlLabel, FormLabel, Grid, InputLabel, MenuItem, Radio, RadioGroup, Select, SelectChangeEvent, TextField, Typography } from "@mui/material"
 import { nameByRace } from "fantasy-name-generator"
 import React, { useEffect } from "react"
 import { useParams } from "react-router-dom"
@@ -18,6 +18,7 @@ export default function CreateNpc() {
   const [wisdom, setWisdom] = React.useState<number>(10)
   const [charisma, setCharisma] = React.useState<number>(10)
   const [proficiencyBonus, setProficiencyBonus] = React.useState<number>(0)
+  const [ac, setAc] = React.useState<number>(10)
   const { npcId } = useParams()
 
   const [acrobatics, setAcrobatics] = React.useState<string>('none')
@@ -62,17 +63,8 @@ export default function CreateNpc() {
     ]
   }
 
-  function getProficiencies() {
-    const skills = getSkills()
-
-    return skills.filter((skill: any) => skill.proficiency === 'proficiency')
-      .map((skill: any) => skill.name)
-  }
-
-  function getExpertise() {
-    const skills = getSkills()
-
-    return skills.filter((skill: any) => skill.proficiency === 'expertise')
+  function getProficiencies(type: string) {
+    return getSkills().filter((skill: any) => skill.proficiency === type)
       .map((skill: any) => skill.name)
   }
 
@@ -91,6 +83,7 @@ export default function CreateNpc() {
       setWisdom(npc.abilities[4].value)
       setCharisma(npc.abilities[5].value)
       setProficiencyBonus(npc.proficiency)
+      setAc(npc.ac)
       setAcrobatics(getInitialProficiency(npc.skills, 'Acrobatics'))
       setAnimalHandling(getInitialProficiency(npc.skills, 'Animal Handling'))
       setArcana(getInitialProficiency(npc.skills, 'Arcana'))
@@ -139,18 +132,20 @@ export default function CreateNpc() {
     return (
       <React.Fragment>
         <FormControl>
-          <FormLabel id="proficiency-radio-buttons-group-label">{props.name}</FormLabel>
-          <RadioGroup
-            row
-            aria-labelledby="proficiency-radio-buttons-group-label"
-            name="proficiency-radio-buttons-group"
-            value={props.value}
-            onChange={props.onChange}
-          >
-            <FormControlLabel value="none" control={<Radio size="small" />} label="None" />
-            <FormControlLabel value="proficiency" control={<Radio size="small" />} label="Proficiency" />
-            <FormControlLabel value="expertise" control={<Radio size="small" />} label="Expertise" />
-          </RadioGroup>
+          <Box sx={style.radioBox}>
+            <FormLabel id="proficiency-radio-buttons-group-label">{props.name}</FormLabel>
+            <RadioGroup
+              row
+              aria-labelledby="proficiency-radio-buttons-group-label"
+              name="proficiency-radio-buttons-group"
+              value={props.value}
+              onChange={props.onChange}
+            >
+              <FormControlLabel value="none" control={<Radio size="small" />} label="None" />
+              <FormControlLabel value="proficiency" control={<Radio size="small" />} label="Proficiency" />
+              <FormControlLabel value="expertise" control={<Radio size="small" />} label="Expertise" />
+            </RadioGroup>
+          </Box>
         </FormControl>
       </React.Fragment>
     )
@@ -185,8 +180,9 @@ export default function CreateNpc() {
       notes,
       abilities: getAbilities(),
       proficiencyBonus,
-      proficiencies: getProficiencies(),
-      expertise: getExpertise()
+      ac,
+      proficiencies: getProficiencies('proficiency'),
+      expertise: getProficiencies('expertise')
     }
     await window.electron.saveNpc(npc)
   }
@@ -223,6 +219,9 @@ export default function CreateNpc() {
       display: 'flex',
       justifyContent: 'center',
       flexDirection: 'column'
+    },
+    radioBox: {
+      display: 'flex'
     }
   }
 
@@ -281,11 +280,14 @@ export default function CreateNpc() {
               <TextField value={name} label="Name" variant="outlined" onChange={(e) => setName(e.target.value)} />
             </Box>
           </Box>
-          <Box>
+          <Box sx={{ mt: 1}}>
             <TextField sx={style.notes} onChange={(e) => { setNotes(e.target.value) }} label='notes' variant='outlined' multiline />
           </Box>
-          <Box>
+          <Box sx={{ mt: 1}}>
             <TextField label='Proficiency Bonus' type='number' value={proficiencyBonus} onChange={handleIntegerChange(setProficiencyBonus)} />
+          <TextField label='AC' type='number' onChange={handleIntegerChange(setAc)} value={ac} />
+          </Box>
+          <Box>
           </Box>
         </Box>
         <Box sx={style.nameButton}>

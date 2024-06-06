@@ -53,6 +53,7 @@ export type Npc = {
     notes?: string
     abilities?: NpcAbilities
     proficiencyBonus: number
+    ac: number
     proficiencies: string[]
     expertise: string[]
 }
