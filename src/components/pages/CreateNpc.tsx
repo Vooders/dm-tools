@@ -280,14 +280,12 @@ export default function CreateNpc() {
               <TextField value={name} label="Name" variant="outlined" onChange={(e) => setName(e.target.value)} />
             </Box>
           </Box>
-          <Box sx={{ mt: 1}}>
+          <Box sx={{ mt: 1 }}>
             <TextField sx={style.notes} onChange={(e) => { setNotes(e.target.value) }} label='notes' variant='outlined' multiline />
           </Box>
-          <Box sx={{ mt: 1}}>
+          <Box sx={{ mt: 1 }}>
             <TextField label='Proficiency Bonus' type='number' value={proficiencyBonus} onChange={handleIntegerChange(setProficiencyBonus)} />
-          <TextField label='AC' type='number' onChange={handleIntegerChange(setAc)} value={ac} />
-          </Box>
-          <Box>
+            <TextField label='AC' type='number' onChange={handleIntegerChange(setAc)} value={ac} />
           </Box>
         </Box>
         <Box sx={style.nameButton}>
