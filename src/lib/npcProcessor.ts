@@ -86,7 +86,7 @@ export default class NpcProcessor {
     private buildHp(): CharacterProfileHp {
         return {
             constitutionBonus: 0,
-            base: 10,
+            base: this.npcData.hp,
             bonus: 0,
             override: 0,
             removed: 0,

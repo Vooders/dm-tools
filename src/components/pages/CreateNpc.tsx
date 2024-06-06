@@ -19,6 +19,7 @@ export default function CreateNpc() {
   const [charisma, setCharisma] = React.useState<number>(10)
   const [proficiencyBonus, setProficiencyBonus] = React.useState<number>(0)
   const [ac, setAc] = React.useState<number>(10)
+  const [hp, setHp] = React.useState<number>(10)
   const { npcId } = useParams()
 
   const [acrobatics, setAcrobatics] = React.useState<string>('none')
@@ -90,6 +91,7 @@ export default function CreateNpc() {
       setCharisma(npc.abilities[5].value)
       setProficiencyBonus(npc.proficiency)
       setAc(npc.ac)
+      setHp(npc.hp.base)
       setAcrobatics(getInitialProficiency(npc.skills, 'Acrobatics'))
       setAnimalHandling(getInitialProficiency(npc.skills, 'Animal Handling'))
       setArcana(getInitialProficiency(npc.skills, 'Arcana'))
@@ -187,6 +189,7 @@ export default function CreateNpc() {
       abilities: getAbilities(),
       proficiencyBonus,
       ac,
+      hp,
       proficiencies: getProficiencies(),
       expertise: getExpertise()
     }
@@ -287,11 +290,12 @@ export default function CreateNpc() {
             </Box>
           </Box>
           <Box sx={{ mt: 1 }}>
-            <TextField sx={style.notes} onChange={(e) => { setNotes(e.target.value) }} label='notes' variant='outlined' multiline />
-          </Box>
-          <Box sx={{ mt: 1 }}>
             <TextField label='Proficiency Bonus' type='number' value={proficiencyBonus} onChange={handleIntegerChange(setProficiencyBonus)} />
             <TextField label='AC' type='number' onChange={handleIntegerChange(setAc)} value={ac} />
+            <TextField label='HP' type='number' onChange={handleIntegerChange(setHp)} value={hp} />
+          </Box>
+          <Box sx={{ mt: 1 }}>
+            <TextField sx={style.notes} onChange={(e) => { setNotes(e.target.value) }} label='notes' variant='outlined' multiline />
           </Box>
         </Box>
         <Box sx={style.nameButton}>
