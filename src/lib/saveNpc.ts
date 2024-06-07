@@ -57,6 +57,7 @@ export type Npc = {
     hp: number
     proficiencies: string[]
     expertise: string[]
+    saveProficiencies: string[]
 }
 
 export type NpcAbilities = {

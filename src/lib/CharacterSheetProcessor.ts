@@ -473,6 +473,7 @@ export type Save = {
     name: string
     modifier: number
     shortName: string
+    proficient: boolean
 }
 
 export type Saves = {

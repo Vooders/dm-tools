@@ -2,7 +2,7 @@ import { Box, Button, FormControl, FormControlLabel, FormLabel, Grid, InputLabel
 import { nameByRace } from "fantasy-name-generator"
 import React, { useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { DmToolsData, Skill } from "../../lib/CharacterSheetProcessor"
+import { DmToolsData, Save, Skill } from "../../lib/CharacterSheetProcessor"
 import { v4 as uuidv4 } from 'uuid'
 
 export default function CreateNpc() {
@@ -17,7 +17,7 @@ export default function CreateNpc() {
   const [intelligence, setIntelligence] = React.useState<number>(10)
   const [wisdom, setWisdom] = React.useState<number>(10)
   const [charisma, setCharisma] = React.useState<number>(10)
-  const [proficiencyBonus, setProficiencyBonus] = React.useState<number>(0)
+  const [proficiencyBonus, setProficiencyBonus] = React.useState<number>(1)
   const [ac, setAc] = React.useState<number>(10)
   const [hp, setHp] = React.useState<number>(10)
   const { npcId } = useParams()
@@ -41,6 +41,13 @@ export default function CreateNpc() {
   const [stealth, setStealth] = React.useState<string>('none')
   const [survival, setSurvival] = React.useState<string>('none')
 
+  const [strengthProficiency, setStrengthProficiency] = React.useState<string>('none')
+  const [dexterityProficiency, setDexterityProficiency] = React.useState<string>('none')
+  const [constitutionProficiency, setConstitutionProficiency] = React.useState<string>('none')
+  const [intelligenceProficiency, setIntelligenceProficiency] = React.useState<string>('none')
+  const [wisdomProficiency, setWisdomProficiency] = React.useState<string>('none')
+  const [charismaProficiency, setCharismaProficiency] = React.useState<string>('none')
+
   function getSkills(): any {
     return [
       { name: 'Acrobatics', proficiency: acrobatics },
@@ -62,6 +69,22 @@ export default function CreateNpc() {
       { name: 'Stealth', proficiency: stealth },
       { name: 'Survival', proficiency: survival },
     ]
+  }
+
+  function getSaves(): any {
+    return [
+      { name: 'Strength', proficiency: strengthProficiency },
+      { name: 'Dexterity', proficiency: dexterityProficiency },
+      { name: 'Constitution', proficiency: constitutionProficiency },
+      { name: 'Intelligence', proficiency: intelligenceProficiency },
+      { name: 'Wisdom', proficiency: wisdomProficiency },
+      { name: 'Charisma', proficiency: charismaProficiency },
+    ]
+  }
+
+  function getSaveProficiencies(): string[] {
+    return getSaves().filter((save: any) => save.proficiency === 'proficiency')
+      .map((save: any) => save.name)
   }
 
   function getProficiencies(): string[] {
@@ -110,6 +133,12 @@ export default function CreateNpc() {
       setSleightOfHand(getInitialProficiency(npc.skills, 'Sleight of Hand'))
       setStealth(getInitialProficiency(npc.skills, 'Stealth'))
       setSurvival(getInitialProficiency(npc.skills, 'Survival'))
+      setStrengthProficiency(getInitialSaveProficiency(npc.saves, 'Strength'))
+      setDexterityProficiency(getInitialSaveProficiency(npc.saves, 'Dexterity'))
+      setConstitutionProficiency(getInitialSaveProficiency(npc.saves, 'Constitution'))
+      setIntelligenceProficiency(getInitialSaveProficiency(npc.saves, 'Intelligence'))
+      setWisdomProficiency(getInitialSaveProficiency(npc.saves, 'Wisdom'))
+      setCharismaProficiency(getInitialSaveProficiency(npc.saves, 'Charisma'))
     }
 
     if (npcId && npcId !== id) {
@@ -125,6 +154,12 @@ export default function CreateNpc() {
     else return 'none'
   }
 
+  function getInitialSaveProficiency(saves: Save[], name: string) {
+    const save = saves.filter(save => save.name === name)[0]
+    if (save.proficient) return 'proficiency'
+    else return 'none'
+  }
+
   function getAbilities() {
     return {
       strength,
@@ -136,7 +171,7 @@ export default function CreateNpc() {
     }
   }
 
-  function Skill(props: any) {
+  function RadioButtons(props: any) {
     return (
       <React.Fragment>
         <FormControl>
@@ -151,7 +186,9 @@ export default function CreateNpc() {
             >
               <FormControlLabel value="none" control={<Radio size="small" />} label="None" />
               <FormControlLabel value="proficiency" control={<Radio size="small" />} label="Proficiency" />
-              <FormControlLabel value="expertise" control={<Radio size="small" />} label="Expertise" />
+              {props.variant === 'skill' &&
+                <FormControlLabel value="expertise" control={<Radio size="small" />} label="Expertise" />
+              }
             </RadioGroup>
           </Box>
         </FormControl>
@@ -191,7 +228,8 @@ export default function CreateNpc() {
       ac,
       hp,
       proficiencies: getProficiencies(),
-      expertise: getExpertise()
+      expertise: getExpertise(),
+      saveProficiencies: getSaveProficiencies()
     }
     await window.electron.saveNpc(npc)
   }
@@ -322,26 +360,36 @@ export default function CreateNpc() {
           <TextField label='CHA' type='number' onChange={handleIntegerChange(setCharisma)} value={charisma} />
         </Grid>
       </Grid>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Skill name='Acrobatics' onChange={handleStringChange(setAcrobatics)} value={acrobatics} />
-        <Skill name='Animal Handling' onChange={handleStringChange(setAnimalHandling)} value={animalHandling} />
-        <Skill name='Arcana' onChange={handleStringChange(setArcana)} value={arcana} />
-        <Skill name='Athletics' onChange={handleStringChange(setAthletics)} value={athletics} />
-        <Skill name='Deception' onChange={handleStringChange(setDeception)} value={deception} />
-        <Skill name='History' onChange={handleStringChange(setHistory)} value={history} />
-        <Skill name='Insight' onChange={handleStringChange(setInsight)} value={insight} />
-        <Skill name='Intimidation' onChange={handleStringChange(setIntimidation)} value={intimidation} />
-        <Skill name='Investigation' onChange={handleStringChange(setInvestigation)} value={investigation} />
-        <Skill name='Medicine' onChange={handleStringChange(setMedicine)} value={medicine} />
-        <Skill name='Nature' onChange={handleStringChange(setNature)} value={nature} />
-        <Skill name='Perception' onChange={handleStringChange(setPerception)} value={perception} />
-        <Skill name='Performance' onChange={handleStringChange(setPerformance)} value={performance} />
-        <Skill name='Persuasion' onChange={handleStringChange(setPersuasion)} value={Persuasion} />
-        <Skill name='Religion' onChange={handleStringChange(setReligion)} value={religion} />
-        <Skill name='Sleight of Hand' onChange={handleStringChange(setSleightOfHand)} value={sleightOfHand} />
-        <Skill name='Stealth' onChange={handleStringChange(setStealth)} value={stealth} />
-        <Skill name='Survival' onChange={handleStringChange(setSurvival)} value={survival} />
-      </Box>
+      <Grid container>
+        <Grid item xs={7} sx={{ display: 'flex', flexDirection: 'column' }}>
+          <RadioButtons variant='skill' name='Acrobatics' onChange={handleStringChange(setAcrobatics)} value={acrobatics} />
+          <RadioButtons variant='skill' name='Animal Handling' onChange={handleStringChange(setAnimalHandling)} value={animalHandling} />
+          <RadioButtons variant='skill' name='Arcana' onChange={handleStringChange(setArcana)} value={arcana} />
+          <RadioButtons variant='skill' name='Athletics' onChange={handleStringChange(setAthletics)} value={athletics} />
+          <RadioButtons variant='skill' name='Deception' onChange={handleStringChange(setDeception)} value={deception} />
+          <RadioButtons variant='skill' name='History' onChange={handleStringChange(setHistory)} value={history} />
+          <RadioButtons variant='skill' name='Insight' onChange={handleStringChange(setInsight)} value={insight} />
+          <RadioButtons variant='skill' name='Intimidation' onChange={handleStringChange(setIntimidation)} value={intimidation} />
+          <RadioButtons variant='skill' name='Investigation' onChange={handleStringChange(setInvestigation)} value={investigation} />
+          <RadioButtons variant='skill' name='Medicine' onChange={handleStringChange(setMedicine)} value={medicine} />
+          <RadioButtons variant='skill' name='Nature' onChange={handleStringChange(setNature)} value={nature} />
+          <RadioButtons variant='skill' name='Perception' onChange={handleStringChange(setPerception)} value={perception} />
+          <RadioButtons variant='skill' name='Performance' onChange={handleStringChange(setPerformance)} value={performance} />
+          <RadioButtons variant='skill' name='Persuasion' onChange={handleStringChange(setPersuasion)} value={Persuasion} />
+          <RadioButtons variant='skill' name='Religion' onChange={handleStringChange(setReligion)} value={religion} />
+          <RadioButtons variant='skill' name='Sleight of Hand' onChange={handleStringChange(setSleightOfHand)} value={sleightOfHand} />
+          <RadioButtons variant='skill' name='Stealth' onChange={handleStringChange(setStealth)} value={stealth} />
+          <RadioButtons variant='skill' name='Survival' onChange={handleStringChange(setSurvival)} value={survival} />
+        </Grid>
+        <Grid item xs={5} sx={{ display: 'flex', flexDirection: 'column' }}>
+          <RadioButtons variant='ability' name='Strength' onChange={handleStringChange(setStrengthProficiency)} value={strengthProficiency} />
+          <RadioButtons variant='ability' name='Dexterity' onChange={handleStringChange(setDexterityProficiency)} value={dexterityProficiency} />
+          <RadioButtons variant='ability' name='Constitution' onChange={handleStringChange(setConstitutionProficiency)} value={constitutionProficiency} />
+          <RadioButtons variant='ability' name='Intelligence' onChange={handleStringChange(setIntelligenceProficiency)} value={intelligenceProficiency} />
+          <RadioButtons variant='ability' name='Wisdom' onChange={handleStringChange(setWisdomProficiency)} value={wisdomProficiency} />
+          <RadioButtons variant='ability' name='Charisma' onChange={handleStringChange(setCharismaProficiency)} value={charismaProficiency} />
+        </Grid>
+      </Grid>
       <Box sx={style.centred}>
         <Button variant="outlined" sx={style.saveButton} onClick={saveNpc} >Save</Button>
       </Box>
