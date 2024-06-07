@@ -4,6 +4,7 @@ import React, { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { DmToolsData, Save, Skill } from "../../lib/CharacterSheetProcessor"
 import { v4 as uuidv4 } from 'uuid'
+import ProficienciesSelector from "../fragments/ProficienciesSelector"
 
 export default function CreateNpc() {
   const [id, setId] = React.useState<string>(uuidv4())
@@ -22,24 +23,24 @@ export default function CreateNpc() {
   const [hp, setHp] = React.useState<number>(10)
   const { npcId } = useParams()
 
-  const [acrobatics, setAcrobatics] = React.useState<string>('none')
-  const [animalHandling, setAnimalHandling] = React.useState<string>('none')
-  const [arcana, setArcana] = React.useState<string>('none')
-  const [athletics, setAthletics] = React.useState<string>('none')
-  const [deception, setDeception] = React.useState<string>('none')
-  const [history, setHistory] = React.useState<string>('none')
-  const [insight, setInsight] = React.useState<string>('none')
-  const [intimidation, setIntimidation] = React.useState<string>('none')
-  const [investigation, setInvestigation] = React.useState<string>('none')
-  const [medicine, setMedicine] = React.useState<string>('none')
-  const [nature, setNature] = React.useState<string>('none')
-  const [perception, setPerception] = React.useState<string>('none')
-  const [performance, setPerformance] = React.useState<string>('none')
-  const [Persuasion, setPersuasion] = React.useState<string>('none')
-  const [religion, setReligion] = React.useState<string>('none')
-  const [sleightOfHand, setSleightOfHand] = React.useState<string>('none')
-  const [stealth, setStealth] = React.useState<string>('none')
-  const [survival, setSurvival] = React.useState<string>('none')
+  const [acrobatics, setAcrobatics] = React.useState<Skill>(newSkill('Acrobatics', 'DEX'))
+  const [animalHandling, setAnimalHandling] = React.useState<Skill>(newSkill('Animal Handling', 'WIS'))
+  const [arcana, setArcana] = React.useState<Skill>(newSkill('Arcana', 'INT'))
+  const [athletics, setAthletics] = React.useState<Skill>(newSkill('Athletics', 'STR'))
+  const [deception, setDeception] = React.useState<Skill>(newSkill('Deception', 'CHA'))
+  const [history, setHistory] = React.useState<Skill>(newSkill('History', 'INT'))
+  const [insight, setInsight] = React.useState<Skill>(newSkill('Insight', 'WIS'))
+  const [intimidation, setIntimidation] = React.useState<Skill>(newSkill('Intimidation', 'CHA'))
+  const [investigation, setInvestigation] = React.useState<Skill>(newSkill('Investigation', 'INT'))
+  const [medicine, setMedicine] = React.useState<Skill>(newSkill('Medicine', 'WIS'))
+  const [nature, setNature] = React.useState<Skill>(newSkill('Nature', 'INT'))
+  const [perception, setPerception] = React.useState<Skill>(newSkill('Perception', 'WIS'))
+  const [performance, setPerformance] = React.useState<Skill>(newSkill('Performance', 'CHA'))
+  const [Persuasion, setPersuasion] = React.useState<Skill>(newSkill('Persuasion', 'CHA'))
+  const [religion, setReligion] = React.useState<Skill>(newSkill('Religion', 'INT'))
+  const [sleightOfHand, setSleightOfHand] = React.useState<Skill>(newSkill('Sleight of Hand', 'DEX'))
+  const [stealth, setStealth] = React.useState<Skill>(newSkill('Stealth', 'DEX'))
+  const [survival, setSurvival] = React.useState<Skill>(newSkill('Survival', 'WIS'))
 
   const [strengthProficiency, setStrengthProficiency] = React.useState<string>('none')
   const [dexterityProficiency, setDexterityProficiency] = React.useState<string>('none')
@@ -48,27 +49,14 @@ export default function CreateNpc() {
   const [wisdomProficiency, setWisdomProficiency] = React.useState<string>('none')
   const [charismaProficiency, setCharismaProficiency] = React.useState<string>('none')
 
-  function getSkills(): any {
-    return [
-      { name: 'Acrobatics', proficiency: acrobatics },
-      { name: 'Animal Handling', proficiency: animalHandling },
-      { name: 'Arcana', proficiency: arcana },
-      { name: 'Athletics', proficiency: athletics },
-      { name: 'Deception', proficiency: deception },
-      { name: 'History', proficiency: history },
-      { name: 'Insight', proficiency: insight },
-      { name: 'Intimidation', proficiency: intimidation },
-      { name: 'Investigation', proficiency: investigation },
-      { name: 'Medicine', proficiency: medicine },
-      { name: 'Nature', proficiency: nature },
-      { name: 'Perception', proficiency: perception },
-      { name: 'Performance', proficiency: performance },
-      { name: 'Persuasion', proficiency: Persuasion },
-      { name: 'Religion', proficiency: religion },
-      { name: 'Sleight of Hand', proficiency: sleightOfHand },
-      { name: 'Stealth', proficiency: stealth },
-      { name: 'Survival', proficiency: survival },
-    ]
+  function newSkill(name: string,mod: string): Skill {
+    return {
+      name,
+      mod,
+      bonus: null,
+      proficient: false,
+      expertise: false
+    }
   }
 
   function getSaves(): any {
@@ -80,22 +68,6 @@ export default function CreateNpc() {
       { name: 'Wisdom', proficiency: wisdomProficiency },
       { name: 'Charisma', proficiency: charismaProficiency },
     ]
-  }
-
-  function getSaveProficiencies(): string[] {
-    return getSaves().filter((save: any) => save.proficiency === 'proficiency')
-      .map((save: any) => save.name)
-  }
-
-  function getProficiencies(): string[] {
-    return getSkills().filter((skill: any) => skill.proficiency === 'proficiency')
-      .map((skill: any) => skill.name)
-      .concat(getExpertise())
-  }
-
-  function getExpertise(): string[] {
-    return getSkills().filter((skill: any) => skill.proficiency === 'expertise')
-      .map((skill: any) => skill.name)
   }
 
   useEffect(() => {
@@ -115,24 +87,24 @@ export default function CreateNpc() {
       setProficiencyBonus(npc.proficiency)
       setAc(npc.ac)
       setHp(npc.hp.base)
-      setAcrobatics(getInitialProficiency(npc.skills, 'Acrobatics'))
-      setAnimalHandling(getInitialProficiency(npc.skills, 'Animal Handling'))
-      setArcana(getInitialProficiency(npc.skills, 'Arcana'))
-      setAthletics(getInitialProficiency(npc.skills, 'Athletics'))
-      setDeception(getInitialProficiency(npc.skills, 'Deception'))
-      setHistory(getInitialProficiency(npc.skills, 'History'))
-      setInsight(getInitialProficiency(npc.skills, 'Insight'))
-      setIntimidation(getInitialProficiency(npc.skills, 'Intimidation'))
-      setInvestigation(getInitialProficiency(npc.skills, 'Investigation'))
-      setMedicine(getInitialProficiency(npc.skills, 'Medicine'))
-      setNature(getInitialProficiency(npc.skills, 'Nature'))
-      setPerception(getInitialProficiency(npc.skills, 'Perception'))
-      setPerformance(getInitialProficiency(npc.skills, 'Performance'))
-      setPersuasion(getInitialProficiency(npc.skills, 'Persuasion'))
-      setReligion(getInitialProficiency(npc.skills, 'Religion'))
-      setSleightOfHand(getInitialProficiency(npc.skills, 'Sleight of Hand'))
-      setStealth(getInitialProficiency(npc.skills, 'Stealth'))
-      setSurvival(getInitialProficiency(npc.skills, 'Survival'))
+      setAcrobatics(npc.skills[0])
+      setAnimalHandling(npc.skills[1])
+      setArcana(npc.skills[2])
+      setAthletics(npc.skills[3])
+      setDeception(npc.skills[4])
+      setHistory(npc.skills[5])
+      setInsight(npc.skills[6])
+      setIntimidation(npc.skills[7])
+      setInvestigation(npc.skills[8])
+      setMedicine(npc.skills[9])
+      setNature(npc.skills[10])
+      setPerception(npc.skills[11])
+      setPerformance(npc.skills[12])
+      setPersuasion(npc.skills[13])
+      setReligion(npc.skills[14])
+      setSleightOfHand(npc.skills[15])
+      setStealth(npc.skills[16])
+      setSurvival(npc.skills[17])
       setStrengthProficiency(getInitialSaveProficiency(npc.saves, 'Strength'))
       setDexterityProficiency(getInitialSaveProficiency(npc.saves, 'Dexterity'))
       setConstitutionProficiency(getInitialSaveProficiency(npc.saves, 'Constitution'))
@@ -147,53 +119,10 @@ export default function CreateNpc() {
     }
   })
 
-  function getInitialProficiency(skills: Skill[], name: string) {
-    const prof = skills.filter(skill => skill.name === name)[0]
-    if (prof.proficient) return 'proficiency'
-    else if (prof.expertise) return 'expertise'
-    else return 'none'
-  }
-
   function getInitialSaveProficiency(saves: Save[], name: string) {
     const save = saves.filter(save => save.name === name)[0]
     if (save.proficient) return 'proficiency'
     else return 'none'
-  }
-
-  function getAbilities() {
-    return {
-      strength,
-      dexterity,
-      constitution,
-      intelligence,
-      wisdom,
-      charisma
-    }
-  }
-
-  function RadioButtons(props: any) {
-    return (
-      <React.Fragment>
-        <FormControl>
-          <Box sx={style.radioBox}>
-            <FormLabel id="proficiency-radio-buttons-group-label">{props.name}</FormLabel>
-            <RadioGroup
-              row
-              aria-labelledby="proficiency-radio-buttons-group-label"
-              name="proficiency-radio-buttons-group"
-              value={props.value}
-              onChange={props.onChange}
-            >
-              <FormControlLabel value="none" control={<Radio size="small" />} label="None" />
-              <FormControlLabel value="proficiency" control={<Radio size="small" />} label="Proficiency" />
-              {props.variant === 'skill' &&
-                <FormControlLabel value="expertise" control={<Radio size="small" />} label="Expertise" />
-              }
-            </RadioGroup>
-          </Box>
-        </FormControl>
-      </React.Fragment>
-    )
   }
 
   const handleIntegerChange = (hook: Function) => {
@@ -201,11 +130,7 @@ export default function CreateNpc() {
       hook(parseInt(event.target.value))
     }
   }
-  const handleStringChange = (hook: Function) => {
-    return (event: SelectChangeEvent) => {
-      hook(event.target.value)
-    }
-  }
+
   const handleRaceChange = (event: SelectChangeEvent) => {
     setRace(event.target.value)
   }
@@ -223,13 +148,37 @@ export default function CreateNpc() {
       race,
       gender,
       notes,
-      abilities: getAbilities(),
+      abilities: {
+        strength,
+        dexterity,
+        constitution,
+        intelligence,
+        wisdom,
+        charisma
+      },
       proficiencyBonus,
       ac,
       hp,
-      proficiencies: getProficiencies(),
-      expertise: getExpertise(),
-      saveProficiencies: getSaveProficiencies()
+      skills: [
+        acrobatics,
+        animalHandling,
+        arcana,
+        athletics,
+        deception,
+        history,
+        insight,
+        intimidation,
+        investigation,
+        medicine,
+        nature,
+        perception,
+        performance,
+        Persuasion,
+        religion,
+        sleightOfHand,
+        stealth,
+        survival
+      ]
     }
     await window.electron.saveNpc(npc)
   }
@@ -267,9 +216,6 @@ export default function CreateNpc() {
       justifyContent: 'center',
       flexDirection: 'column'
     },
-    radioBox: {
-      display: 'flex'
-    }
   }
 
   return (
@@ -362,32 +308,32 @@ export default function CreateNpc() {
       </Grid>
       <Grid container>
         <Grid item xs={7} sx={{ display: 'flex', flexDirection: 'column' }}>
-          <RadioButtons variant='skill' name='Acrobatics' onChange={handleStringChange(setAcrobatics)} value={acrobatics} />
-          <RadioButtons variant='skill' name='Animal Handling' onChange={handleStringChange(setAnimalHandling)} value={animalHandling} />
-          <RadioButtons variant='skill' name='Arcana' onChange={handleStringChange(setArcana)} value={arcana} />
-          <RadioButtons variant='skill' name='Athletics' onChange={handleStringChange(setAthletics)} value={athletics} />
-          <RadioButtons variant='skill' name='Deception' onChange={handleStringChange(setDeception)} value={deception} />
-          <RadioButtons variant='skill' name='History' onChange={handleStringChange(setHistory)} value={history} />
-          <RadioButtons variant='skill' name='Insight' onChange={handleStringChange(setInsight)} value={insight} />
-          <RadioButtons variant='skill' name='Intimidation' onChange={handleStringChange(setIntimidation)} value={intimidation} />
-          <RadioButtons variant='skill' name='Investigation' onChange={handleStringChange(setInvestigation)} value={investigation} />
-          <RadioButtons variant='skill' name='Medicine' onChange={handleStringChange(setMedicine)} value={medicine} />
-          <RadioButtons variant='skill' name='Nature' onChange={handleStringChange(setNature)} value={nature} />
-          <RadioButtons variant='skill' name='Perception' onChange={handleStringChange(setPerception)} value={perception} />
-          <RadioButtons variant='skill' name='Performance' onChange={handleStringChange(setPerformance)} value={performance} />
-          <RadioButtons variant='skill' name='Persuasion' onChange={handleStringChange(setPersuasion)} value={Persuasion} />
-          <RadioButtons variant='skill' name='Religion' onChange={handleStringChange(setReligion)} value={religion} />
-          <RadioButtons variant='skill' name='Sleight of Hand' onChange={handleStringChange(setSleightOfHand)} value={sleightOfHand} />
-          <RadioButtons variant='skill' name='Stealth' onChange={handleStringChange(setStealth)} value={stealth} />
-          <RadioButtons variant='skill' name='Survival' onChange={handleStringChange(setSurvival)} value={survival} />
+          <ProficienciesSelector skill={acrobatics} hook={setAcrobatics} />
+          <ProficienciesSelector skill={animalHandling} hook={setAnimalHandling} />
+          <ProficienciesSelector skill={arcana} hook={setArcana} />
+          <ProficienciesSelector skill={athletics} hook={setAthletics} />
+          <ProficienciesSelector skill={deception} hook={setDeception} />
+          <ProficienciesSelector skill={history} hook={setHistory} />
+          <ProficienciesSelector skill={insight} hook={setInsight} />
+          <ProficienciesSelector skill={intimidation} hook={setIntimidation} />
+          <ProficienciesSelector skill={investigation} hook={setInvestigation} />
+          <ProficienciesSelector skill={medicine} hook={setMedicine} />
+          <ProficienciesSelector skill={nature} hook={setNature} />
+          <ProficienciesSelector skill={perception} hook={setPerception} />
+          <ProficienciesSelector skill={performance} hook={setPerformance} />
+          <ProficienciesSelector skill={Persuasion} hook={setPersuasion} />
+          <ProficienciesSelector skill={religion} hook={setReligion} />
+          <ProficienciesSelector skill={sleightOfHand} hook={setSleightOfHand} />
+          <ProficienciesSelector skill={stealth} hook={setStealth} />
+          <ProficienciesSelector skill={survival} hook={setSurvival} />
         </Grid>
         <Grid item xs={5} sx={{ display: 'flex', flexDirection: 'column' }}>
-          <RadioButtons variant='ability' name='Strength' onChange={handleStringChange(setStrengthProficiency)} value={strengthProficiency} />
+          {/* <RadioButtons variant='ability' name='Strength' onChange={handleStringChange(setStrengthProficiency)} value={strengthProficiency} />
           <RadioButtons variant='ability' name='Dexterity' onChange={handleStringChange(setDexterityProficiency)} value={dexterityProficiency} />
           <RadioButtons variant='ability' name='Constitution' onChange={handleStringChange(setConstitutionProficiency)} value={constitutionProficiency} />
           <RadioButtons variant='ability' name='Intelligence' onChange={handleStringChange(setIntelligenceProficiency)} value={intelligenceProficiency} />
           <RadioButtons variant='ability' name='Wisdom' onChange={handleStringChange(setWisdomProficiency)} value={wisdomProficiency} />
-          <RadioButtons variant='ability' name='Charisma' onChange={handleStringChange(setCharismaProficiency)} value={charismaProficiency} />
+          <RadioButtons variant='ability' name='Charisma' onChange={handleStringChange(setCharismaProficiency)} value={charismaProficiency} /> */}
         </Grid>
       </Grid>
       <Box sx={style.centred}>

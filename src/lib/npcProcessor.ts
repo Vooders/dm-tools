@@ -1,27 +1,29 @@
 import { Ability, CharacterProfile, CharacterProfileHp, DmToolsData, Modifier, Save, Skill, Stat } from "./CharacterSheetProcessor";
 import { Npc } from "./saveNpc";
 import abilities from './character-sheet-processor/abilities'
-import skills from './character-sheet-processor/skills'
 import saves from "./character-sheet-processor/saves";
 import ModifierBuilder from "../../test/builders/ModifierBuilder";
 
 export default class NpcProcessor {
 
     private npcData: Npc
+    private abilities: Ability[]
 
     constructor(npcData: Npc) {
         this.npcData = npcData
     }
 
     public toDmToolsData(): DmToolsData {
+        this.abilities = this.buildAbilities()
+
         return {
             id: this.npcData.id,
             avatarPath: null,
-            abilities: this.buildAbilities(),
+            abilities: this.abilities,
             profile: this.buildProfile(),
             hp: this.buildHp(),
             proficiency: this.npcData.proficiencyBonus,
-            saves: this.buildSaves(),
+            saves: [],
             skills: this.buildSkills(),
             passiveSkills: [],
             proficiencyView: [],
@@ -42,40 +44,39 @@ export default class NpcProcessor {
         }
     }
 
+    private abilityModifierByShortName(shortName: string): number {
+        return this.abilities.find(ability => ability.shortName === shortName).modifier
+    }
 
     private buildSkills(): Skill[] {
-        const abilities = this.buildAbilities()
-        const proficiencyArray: string[] = this.npcData.proficiencies
-        const expertiseArray: string[] = this.npcData.expertise
-        const proficiencyBonus = this.npcData.proficiencyBonus
-
-        const proficiencies = proficiencyArray.map((name) => {
-            return new ModifierBuilder()
-                .withFriendlySubTypeName(name)
-                .build()
+        return this.npcData.skills.map((skill) => {
+            const baseModifier = this.abilityModifierByShortName(skill.mod)
+            let abilityModifier = baseModifier
+            if (skill.expertise) {
+                abilityModifier += (this.npcData.proficiencyBonus * 2)
+            } else if (skill.proficient) {
+                abilityModifier += this.npcData.proficiencyBonus
+            }
+            return {
+                ...skill,
+                bonus: abilityModifier
+            }
         })
-        const expertise = expertiseArray.map((name) => {
-            return new ModifierBuilder()
-                .withFriendlySubTypeName(name)
-                .build()
-        })
-
-        return skills(abilities, [], proficiencies, expertise, proficiencyBonus)
     }
 
-    private buildSaves(): Save[] {
-        const abilities = this.buildAbilities()
-        const proficiencyArray: string[] = this.npcData.saveProficiencies
+    // private buildSaves(): Save[] {
+    //     const abilities = this.buildAbilities()
+    //     const proficiencyArray: string[] = this.npcData.saveProficiencies
 
-        const proficiencies = proficiencyArray.map((name) => {
-            return new ModifierBuilder()
-                .withFriendlySubTypeName(name)
-                .withSubType('saving-throws')
-                .build()
-        })
+    //     const proficiencies = proficiencyArray.map((name) => {
+    //         return new ModifierBuilder()
+    //             .withFriendlySubTypeName(name)
+    //             .withSubType('saving-throws')
+    //             .build()
+    //     })
 
-        return saves(0, proficiencies, abilities, false, this.npcData.proficiencyBonus)
-    }
+    //     return saves(0, proficiencies, abilities, false, this.npcData.proficiencyBonus)
+    // }
 
     private buildHp(): CharacterProfileHp {
         return {
