@@ -104,7 +104,7 @@ function thisMinute(): Date {
 }
 
 export type Metric = {
-    id: number
+    id: string
     label: string
     data: number[]
 }
