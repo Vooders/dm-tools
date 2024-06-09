@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import React from "react";
-import { HitDice } from "../../../src/lib/character-sheet-processor/hitDice";
+import { HitDice } from "../lib/character-sheet-processor/hitDice";
 import Icon from '@mdi/react';
 import { mdiDice6, mdiDiceD8, mdiDiceD10, mdiDiceD12 } from '@mdi/js';
 

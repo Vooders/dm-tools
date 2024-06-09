@@ -5,7 +5,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import React from "react";
-import { Skill } from "../../../lib/CharacterSheetProcessor";
+import { Skill } from "../lib/CharacterSheetProcessor";
 
 export default function Skills({ skills }: SkillsProds) {
     return (

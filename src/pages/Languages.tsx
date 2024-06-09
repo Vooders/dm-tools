@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import Title from '../Title';
+import Title from '../components/Title';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,7 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { LanguagesData } from '../../handlers/getLanguages';
+import { LanguagesData } from '../handlers/getLanguages';
 
 export default function Languages() {
     const [languages, setLanguages] = useState<LanguagesData>({

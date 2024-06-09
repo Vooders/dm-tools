@@ -1,10 +1,10 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
 import Currencies from './Currencies'
-import { CharacterProfileHp, CurrenciesType } from '../../lib/CharacterSheetProcessor'
+import { CharacterProfileHp, CurrenciesType } from '../lib/CharacterSheetProcessor'
 import Ac from './Ac'
 import HealthPotions from './HealthPotions'
-import { HealthPotionsType } from '../../lib/character-sheet-processor/healthPotions'
+import { HealthPotionsType } from '../lib/character-sheet-processor/healthPotions'
 import Inspiration from './Inspiration'
 import Hp from './Hp'
 

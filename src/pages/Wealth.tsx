@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Title from '../Title'
+import Title from '../components/Title'
 import { Typography, Card, CardContent, Grid, Divider } from '@mui/material'
-import { WealthData } from '../../handlers/getWealth'
-import Currencies from '../fragments/Currencies'
-import Currency from '../fragments/Currency'
+import { WealthData } from '../handlers/getWealth'
+import Currencies from '../components/Currencies'
+import Currency from '../components/Currency'
 
 export default function Wealth() {
     const [wealth, setWealth] = useState<WealthData[]>([])

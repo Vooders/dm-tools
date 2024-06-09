@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SpellType } from '../../../lib/CharacterSheetProcessor';
+import { SpellType } from '../lib/CharacterSheetProcessor';
 
 import { Avatar, Divider, Grid, ListItem, ListItemAvatar, ListItemText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, Typography } from "@mui/material";
 

@@ -2,9 +2,9 @@ import { Box, Button, FormControl, FormControlLabel, FormLabel, Grid, InputLabel
 import { nameByRace } from "fantasy-name-generator"
 import React, { useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { DmToolsData, Save, Skill } from "../../lib/CharacterSheetProcessor"
+import { DmToolsData, Save, Skill } from "../lib/CharacterSheetProcessor"
 import { v4 as uuidv4 } from 'uuid'
-import ProficienciesSelector from "../fragments/ProficienciesSelector"
+import ProficienciesSelector from "../components/ProficienciesSelector"
 
 export default function CreateNpc() {
   const [id, setId] = React.useState<string>(uuidv4())

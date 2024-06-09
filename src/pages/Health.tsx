@@ -3,17 +3,17 @@ import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 
-import { HealthData } from '../../handlers/getHealth'
-import { CharacterProfileHp } from '../../lib/CharacterSheetProcessor'
-import DeathSaves from '../fragments/DeathSaves'
-import Experience from '../fragments/Experience'
-import Actions from '../fragments/Actions'
-import CharacterDetails from '../fragments/CharacterDetails'
-import Avatar from '../fragments/Avatar'
+import { HealthData } from '../handlers/getHealth'
+import { CharacterProfileHp } from '../lib/CharacterSheetProcessor'
+import DeathSaves from '../components/DeathSaves'
+import Experience from '../components/Experience'
+import Actions from '../components/Actions'
+import CharacterDetails from '../components/CharacterDetails'
+import Avatar from '../components/Avatar'
 
-import Creature from '../Creature'
-import HitDice from '../fragments/HitDice'
-import HpBar from '../fragments/HpBar'
+import Creature from '../components/Creature'
+import HitDice from '../components/HitDice'
+import HpBar from '../components/HpBar'
 
 const style = {
     outer: {

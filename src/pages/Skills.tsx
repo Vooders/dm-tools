@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Title from '../Title'
+import Title from '../components/Title'
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';

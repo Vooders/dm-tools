@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import { Divider, FormControl, List, ListSubheader, Stack, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
 
-import { Spells } from '../../../lib/CharacterSheetProcessor';
+import { Spells } from '../lib/CharacterSheetProcessor';
 import Spell from './Spell';
 
 export default function Spells({ theSpells }: SpellsProps) {

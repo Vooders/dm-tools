@@ -1,6 +1,6 @@
 import { Box, Grid } from '@mui/material'
 import React from 'react'
-import { CurrenciesType } from '../../lib/CharacterSheetProcessor'
+import { CurrenciesType } from '../lib/CharacterSheetProcessor'
 import Currency from './Currency'
 
 const style = {

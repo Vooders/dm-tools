@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import Title from "../Title"
-import { DmToolsData } from "../../lib/CharacterSheetProcessor"
+import Title from "../components/Title"
+import { DmToolsData } from "../lib/CharacterSheetProcessor"
 import { Card, CardContent, Typography, IconButton, Tooltip } from "@mui/material"
 import { Box } from "@mui/system"
 import { Link } from "react-router-dom"

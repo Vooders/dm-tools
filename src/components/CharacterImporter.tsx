@@ -9,8 +9,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import { ImportResponse } from '../../lib/importCharacter';
-import Title from '../Title';
+import { ImportResponse } from '../lib/importCharacter';
+import Title from './Title';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 

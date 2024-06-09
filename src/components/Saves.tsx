@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Divider, Tooltip, Typography } from '@mui/material';
-import { Save } from '../../../lib/CharacterSheetProcessor';
+import { Save } from '../lib/CharacterSheetProcessor';
 
 
 export default function Saves({ saves }: SavesProps) {

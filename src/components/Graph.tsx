@@ -1,5 +1,5 @@
 import React from 'react'
-import { Metric } from "../../lib/saveMetrics"
+import { Metric } from "../lib/saveMetrics"
 import { Card, Typography } from '@mui/material'
 import { LineChart } from '@mui/x-charts/LineChart'
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import List from '@mui/material/List';
-import CharactersMenu from './menuItems/CharactersMenu'
+import CharactersMenu from './CharactersMenu'
 import Divider from '@mui/material/Divider';
 import { mainListItems, secondaryListItems } from './listItems';
 

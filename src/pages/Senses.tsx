@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import Title from '../Title';
+import Title from '../components/Title';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,7 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { SensesData } from '../../handlers/getSenses';
+import { SensesData } from '../handlers/getSenses';
 
 export default function Senses() {
     const [senses, setSenses] = useState<SensesData[]>([])

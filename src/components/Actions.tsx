@@ -1,5 +1,5 @@
 import React from 'react'
-import { Action, SpellSlot } from '../../lib/CharacterSheetProcessor'
+import { Action, SpellSlot } from '../lib/CharacterSheetProcessor'
 import Slots from './Slots'
 import { Box } from '@mui/material'
 

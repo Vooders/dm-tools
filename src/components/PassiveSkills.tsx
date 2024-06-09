@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 
 
-import { PassiveSkill } from "../../../lib/CharacterSheetProcessor";
+import { PassiveSkill } from "../lib/CharacterSheetProcessor";
 
 export default function PassiveSkills({passiveSkills}: PassiveSkillsProps) {
     return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Metrics } from '../../lib/saveMetrics'
-import Graph from '../fragments/Graph'
+import { Metrics } from '../lib/saveMetrics'
+import Graph from '../components/Graph'
 import { Box } from '@mui/system'
 import { Button, ButtonGroup } from '@mui/material'
 

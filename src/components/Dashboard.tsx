@@ -13,24 +13,24 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import UpdateAllButton from './fragments/UpdateAllButton'
-import Inventory from './pages/Inventory';
+import UpdateAllButton from './UpdateAllButton'
+import Inventory from '../pages/Inventory';
 import { HashRouter, Route, Routes } from "react-router-dom";
 
-import Characters from './pages/Characters';
-import Languages from './pages/Languages';
-import Senses from './pages/Senses';
-import Skills from './pages/Skills';
-import Health from './pages/Health';
-import Wealth from './pages/Wealth';
+import Characters from '../pages/Characters';
+import Languages from '../pages/Languages';
+import Senses from '../pages/Senses';
+import Skills from '../pages/Skills';
+import Health from '../pages/Health';
+import Wealth from '../pages/Wealth';
 import MainMenu from './MainMenu';
 import ErrorBoundary from './ErrorBoundry';
 import Theme from './Theme';
-import Metrics from './pages/Metrics';
-import CreateNpc from './pages/CreateNpc';
-import Npcs from './pages/Npcs';
-import PlayerCharacter from './pages/PlayerCharacter';
-import NpcCharacter from './pages/NpcCharacter';
+import Metrics from '../pages/Metrics';
+import CreateNpc from '../pages/CreateNpc';
+import Npcs from '../pages/Npcs';
+import PlayerCharacter from '../pages/PlayerCharacter';
+import NpcCharacter from '../pages/NpcCharacter';
 
 function Copyright(props: any) {
   return (

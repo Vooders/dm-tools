@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import CharacterImporter from '../fragments/CharacterImporter';
-import Title from '../Title';
+import CharacterImporter from '../components/CharacterImporter';
+import Title from '../components/Title';
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import { Summary } from '../../lib/saveCharacter';
+import { Summary } from '../lib/saveCharacter';
 
 export default function Characters() {
     const [characters, setCharacters] = useState<Summary>({})

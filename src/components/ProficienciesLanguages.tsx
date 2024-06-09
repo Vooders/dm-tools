@@ -1,7 +1,7 @@
 import React from "react";
 import List from "@mui/material/List";
 
-import { ProficiencyView } from "../../../lib/CharacterSheetProcessor";
+import { ProficiencyView } from "../lib/CharacterSheetProcessor";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";

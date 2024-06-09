@@ -9,8 +9,8 @@ import FormGroup from '@mui/material/FormGroup';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import Title from '../Title';
-import { ItemContainer } from '../../lib/CharacterSheetProcessor';
+import Title from '../components/Title';
+import { ItemContainer } from '../lib/CharacterSheetProcessor';
 import { Card, CardContent, Grid } from '@mui/material';
 
 const Item = styled(Paper)(({ theme }) => ({

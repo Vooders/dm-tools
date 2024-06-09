@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import { HealthPotionsType } from '../../lib/character-sheet-processor/healthPotions'
+import { HealthPotionsType } from '../lib/character-sheet-processor/healthPotions'
 import { GiStandingPotion } from "react-icons/gi"
 
 export default function HealthPotions(props: HealthPotionsProps) {
