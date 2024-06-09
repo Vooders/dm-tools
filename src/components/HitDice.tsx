@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
 import React from "react";
-import { HitDice } from "../lib/character-sheet-processor/hitDice";
 import Icon from '@mdi/react';
 import { mdiDice6, mdiDiceD8, mdiDiceD10, mdiDiceD12 } from '@mdi/js';
+import { HitDice } from "../dm-tools-data.types";
 
 export default function hitDice(props: HitDiceProps) {
     const icons: any = {

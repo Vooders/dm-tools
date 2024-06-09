@@ -1,6 +1,6 @@
+import { Skill } from '../dm-tools-data.types'
 import getSummaryData from '../lib/getSummary'
 import getCharacter from './getCharacter'
-import { Skill } from '../lib/CharacterSheetProcessor'
 
 export default async (): Promise<SkillsData> => {
     const summary = await getSummaryData()

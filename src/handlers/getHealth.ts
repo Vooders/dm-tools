@@ -1,9 +1,15 @@
 import getSummaryData from '../lib/getSummary'
 import getCharacter from './getCharacter'
-import { CharacterProfileHp, SpellSlot, Action, CurrenciesType, DeathSaves} from '../../src/lib/CharacterSheetProcessor'
-import { HealthPotionsType } from '../lib/character-sheet-processor/healthPotions'
-import { HitDice } from '../../src/lib/character-sheet-processor/hitDice'
-import { Creature } from '../../src/lib/character-sheet-processor/creatures'
+import {
+    CharacterProfileHp,
+    SpellSlot,
+    Action,
+    CurrenciesType,
+    DeathSaves,
+    HitDice,
+    HealthPotionsType,
+    CreatureType
+} from '../dm-tools-data.types'
 
 export default async (): Promise<HealthData[]> => {
     const summary = await getSummaryData()
@@ -53,7 +59,7 @@ export type HealthData = {
     ac: number
     hitDice: HitDice[]
     healthPotions: HealthPotionsType
-    creatures: Creature[]
+    creatures: CreatureType[]
     inspiration: boolean
     milestoneProgression: boolean
 }

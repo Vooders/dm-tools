@@ -1,4 +1,4 @@
-import { Modifier } from "../../src/lib/CharacterSheetProcessor"
+import { Modifier } from "../../src/ddb-data.types"
 
 export default class ModifierBuilder {
     constructor(

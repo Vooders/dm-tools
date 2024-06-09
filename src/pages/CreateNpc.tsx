@@ -1,10 +1,10 @@
-import { Box, Button, FormControl, FormControlLabel, FormLabel, Grid, InputLabel, MenuItem, Radio, RadioGroup, Select, SelectChangeEvent, TextField, Typography } from "@mui/material"
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
 import { nameByRace } from "fantasy-name-generator"
 import React, { useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { DmToolsData, Save, Skill } from "../lib/CharacterSheetProcessor"
 import { v4 as uuidv4 } from 'uuid'
 import ProficienciesSelector from "../components/ProficienciesSelector"
+import { Skill, Save, DmToolsData } from "../dm-tools-data.types"
 
 export default function CreateNpc() {
   const [id, setId] = React.useState<string>(uuidv4())

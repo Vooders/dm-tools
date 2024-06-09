@@ -6,7 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import ListSubheader from '@mui/material/ListSubheader';
 
 import { Link } from 'react-router-dom';
-import { Summary } from '../../lib/saveCharacter';
+import { Summary } from '../lib/saveCharacter';
 
 export default function CharactersMenu() {
     const [open, setOpen] = React.useState(true);

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
 import Title from "../components/Title"
-import { DmToolsData } from "../lib/CharacterSheetProcessor"
 import { Card, CardContent, Typography, IconButton, Tooltip } from "@mui/material"
 import { Box } from "@mui/system"
 import { Link } from "react-router-dom"
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { DmToolsData } from "../dm-tools-data.types"
 
 export default function Npcs() {
     const [npcs, setNpcs] = useState<DmToolsData[]>([])

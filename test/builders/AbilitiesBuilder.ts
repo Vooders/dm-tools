@@ -1,4 +1,4 @@
-import { Ability } from "../../src/lib/CharacterSheetProcessor"
+import { Ability } from "../../src/dm-tools-data.types"
 
 export default class AbilitiesBuilder {
     constructor (

@@ -1,6 +1,6 @@
+import { ItemContainer } from '../dm-tools-data.types';
 import getSummaryData from '../lib/getSummary';
 import getCharacter from './getCharacter'
-import { ItemContainer } from '../lib/CharacterSheetProcessor';
 
 export default async (): Promise<InventoryData[]> => {
     const summary = await getSummaryData()

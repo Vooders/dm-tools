@@ -3,8 +3,8 @@ import path from 'path'
 import getFile from './getFile'
 import getSummaryData from '../lib/getSummary'
 import getCharacter from '../handlers/getCharacter'
-import { DmToolsData } from './CharacterSheetProcessor'
 import { writeFile } from 'fs/promises'
+import { DmToolsData } from '../dm-tools-data.types'
 
 const userDataPath = app.getPath('userData');
 const metricsPath = path.join(userDataPath, 'metrics.json');

@@ -1,4 +1,5 @@
-import { CharacterClass } from "../CharacterSheetProcessor"
+import { CharacterClass } from "../../ddb-data.types"
+import { HitDice } from "../../dm-tools-data.types"
 
 export function calculate(classes: CharacterClass[]): HitDice[] {
     const combined = classes.reduce((obj: combined, clazz) => {
@@ -24,12 +25,6 @@ export function calculate(classes: CharacterClass[]): HitDice[] {
             used: combined[dice].used
         }
     })
-}
-
-export type HitDice = {
-    dice: string
-    max: number
-    used: number
 }
 
 type combined = {

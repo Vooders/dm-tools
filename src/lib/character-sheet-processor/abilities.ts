@@ -1,4 +1,5 @@
-import { Ability, Modifier, Stat } from "../CharacterSheetProcessor";
+import { Stat, Modifier } from "../../ddb-data.types"
+import { Ability } from "../../dm-tools-data.types"
 
 const abilityNames = [
     'Strength',

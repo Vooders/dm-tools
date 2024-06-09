@@ -1,6 +1,6 @@
-import { CastingTime, SpellType, Spells } from "../CharacterSheetProcessor"
+import { SpellsType, CastingTime, SpellType } from "../../dm-tools-data.types"
 
-export default function spells(spellsArray: Spells[]): Spells[] {
+export default function spells(spellsArray: SpellsType[]): SpellsType[] {
     function getActionType(spell: any): CastingTime {
         switch (spell.activation.activationType) {
             case 1:

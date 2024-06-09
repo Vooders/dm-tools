@@ -1,8 +1,13 @@
-import { Ability, CharacterProfile, CharacterProfileHp, DmToolsData, Modifier, Save, Skill, Stat } from "./CharacterSheetProcessor";
 import { Npc } from "./saveNpc";
 import abilities from './character-sheet-processor/abilities'
-import saves from "./character-sheet-processor/saves";
-import ModifierBuilder from "../../test/builders/ModifierBuilder";
+import {
+    Ability,
+    DmToolsData,
+    Skill,
+    Save,
+    CharacterProfileHp,
+    CharacterProfile
+} from "../dm-tools-data.types";
 
 export default class NpcProcessor {
 

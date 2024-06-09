@@ -1,3 +1,5 @@
+import { HealthPotionsType } from "../../dm-tools-data.types"
+
 export default function healthPotions(inventory: any): HealthPotionsType {
 
     const calculateAmount = (potionName: string) => {
@@ -13,9 +15,4 @@ export default function healthPotions(inventory: any): HealthPotionsType {
     }
 }
 
-export type HealthPotionsType = {
-    normal: number
-    greater: number
-    superior: number
-    supreme: number
-}
+

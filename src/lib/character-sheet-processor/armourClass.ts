@@ -1,4 +1,5 @@
-import { Ability, ItemContainer, Item, Modifier } from "../CharacterSheetProcessor"
+import { Modifier } from "../../ddb-data.types"
+import { Ability, ItemContainer, Item } from "../../dm-tools-data.types"
 
 const baseAC = 10
 

@@ -1,4 +1,4 @@
-import { Item, ItemContainer } from '../../../src/lib/CharacterSheetProcessor'
+import { ItemContainer, Item } from '../../../src/dm-tools-data.types'
 import armourClass from '../../../src/lib/character-sheet-processor/armourClass'
 import AbilitiesBuilder from '../../builders/AbilitiesBuilder'
 import ItemBuilder from '../../builders/ItemBuilder'

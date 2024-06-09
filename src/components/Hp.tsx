@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
-import { CharacterProfileHp } from '../lib/CharacterSheetProcessor'
+import { CharacterProfileHp } from '../dm-tools-data.types'
 
 const style = {
     display: 'flex',

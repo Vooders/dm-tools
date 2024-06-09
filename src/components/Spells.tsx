@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import { Divider, FormControl, List, ListSubheader, Stack, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
 
-import { Spells } from '../lib/CharacterSheetProcessor';
 import Spell from './Spell';
+import { SpellsType } from '../dm-tools-data.types';
 
 export default function Spells({ theSpells }: SpellsProps) {
     const castingTimes = ['action', 'bonus', 'reaction', 'minutes']
@@ -16,7 +16,7 @@ export default function Spells({ theSpells }: SpellsProps) {
     const [searchString, setSearchString] = useState('')
 
     useEffect(() => {
-        setSpells(theSpells.map((level: Spells) => {
+        setSpells(theSpells.map((level: SpellsType) => {
             return {
                 ...level,
                 spells: level.spells
@@ -101,5 +101,5 @@ export default function Spells({ theSpells }: SpellsProps) {
 }
 
 interface SpellsProps {
-    theSpells: Spells[]
+    theSpells: SpellsType[]
 }

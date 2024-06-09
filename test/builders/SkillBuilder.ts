@@ -1,4 +1,4 @@
-import { Skill } from "../../src/lib/CharacterSheetProcessor"
+import { Skill } from "../../src/dm-tools-data.types"
 
 export default class SkillBuilder {
     constructor(

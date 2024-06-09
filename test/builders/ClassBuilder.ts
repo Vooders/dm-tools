@@ -1,4 +1,4 @@
-import { CharacterClass } from "../../src/lib/CharacterSheetProcessor"
+import { CharacterClass } from "../../src/ddb-data.types"
 
 export default class ClassBuilder {
     constructor(

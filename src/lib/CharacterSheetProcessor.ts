@@ -12,8 +12,27 @@ import saves from './character-sheet-processor/saves'
 import wealth from './character-sheet-processor/wealth'
 import * as hitDice from './character-sheet-processor/hitDice'
 import action from './character-sheet-processor/actions'
-import healthPotions, { HealthPotionsType } from './character-sheet-processor/healthPotions'
-import creatures, { Creature } from './character-sheet-processor/creatures'
+import healthPotions from './character-sheet-processor/healthPotions'
+import creatures from './character-sheet-processor/creatures'
+import { 
+    Ability,
+    Action,
+    CharacterProfile,
+    CharacterProfileHp,
+    CreatureType,
+    CurrenciesType,
+    DmToolsData,
+    ItemContainer,
+    PassiveSkill,
+    ProficiencyView,
+    Save,
+    Skill,
+    SpellSlot,
+    SpellsType,
+    Wealth,
+    WeightData 
+} from '../dm-tools-data.types'
+import { Modifier, ModifierKeys, Modifiers, Stat } from '../ddb-data.types'
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -73,7 +92,7 @@ export default class CharacterSheetProcessor {
     }
 
     private buildCreatures() {
-        return creatures(this.dndBeyondJson.data.creatures).map((playerCreature: Creature) => {
+        return creatures(this.dndBeyondJson.data.creatures).map((playerCreature: CreatureType) => {
             if (playerCreature.name === 'Homunculus Servant') {
                 playerCreature.hp.max = 1 + this.getModifier('INT') + this.level
             }
@@ -126,7 +145,7 @@ export default class CharacterSheetProcessor {
         return weight(inventory, currencies, ignoreCoinWeight)
     }
 
-    private buildSpells(): Spells[] {
+    private buildSpells(): SpellsType[] {
         return spells(this.dndBeyondJson.data.classSpells)
     }
 
@@ -290,299 +309,4 @@ export default class CharacterSheetProcessor {
     }
 }
 
-export type DmToolsData = {
-    id: string
-    avatarPath?: string
-    profile: CharacterProfile
-    abilities: Ability[]
-    hp: CharacterProfileHp
-    proficiency: number
-    saves: Save[]
-    skills: Skill[]
-    passiveSkills: PassiveSkill[]
-    proficiencyView: ProficiencyView[]
-    spellSlots: SpellSlot[]
-    actions: Action[]
-    spells: Spells[]
-    currencies: CurrenciesType
-    inventory: ItemContainer[]
-    weightData: WeightData
-    deathSaves: DeathSaves
-    ac: number
-    wealth: Wealth
-    hitDice: hitDice.HitDice[]
-    healthPotions: HealthPotionsType
-    creatures: Creature[]
-    inspiration: boolean
-    milestoneProgression: boolean
-}
-
-export type ItemContainer = {
-    name: string
-    equipped: boolean
-    weight: number
-    capacity: number
-    contents: Item[]
-    contentsWeight: number
-}
-
-export type WeightData = {
-    carriedItemsWeight: number
-    coinWeight: number
-    totalCarriedWeight: number
-}
-
-export type Item = {
-    id: number
-    definition: {
-        id: string
-        avatarUrl: string
-        name: string
-        weight: number
-        rarity: string
-        filterType: string
-        isContainer: boolean
-        cost: number
-        bundleSize: number
-        description?: string
-        notes: string
-        capacity: number
-        armorClass: number
-        armorTypeId: number
-        snippet?: string
-        canEquip?: boolean
-    },
-    containerId: number
-    equipped: boolean
-    quantity: number
-    limitedUse: {
-        maxUses?: number
-        numberUsed?: number
-        useProficiencyBonus?: boolean
-    }
-}
-
-export type CustomItem = {
-    id: number
-    name: string
-    description: string
-    weight: number
-    cost: number
-    quantity: number
-    notes: string
-}
-
-export type DeathSaves = {
-    failCount: number
-    successCount: number
-    isStabilized: boolean
-}
-
-export type CurrenciesType = {
-    cp: number
-    sp: number
-    gp: number
-    pp: number
-    ep: number
-    total: number
-}
-
-export type Spells = {
-    level: number
-    spells: SpellType[]
-}
-
-export type SpellType = {
-    name: string
-    level: number
-    school: string
-    duration: {
-        durationInterval: number
-        durationUnit: string
-        durationType: string
-    }
-    range: {
-        origin: string
-        rangeValue: number
-        aoeType: string
-        aoeValue: number
-    }
-    description: string
-    components: string
-    tags: string[]
-    prepared: boolean
-    alwaysPrepared: boolean
-    castingTime: CastingTime
-}
-
-export type CastingTime = 'action' | 'bonus' | 'reaction' | 'minutes'
-
-export type Action = {
-    name: string
-    description: string
-    snippet: string
-    limitedUse: {
-        maxUses: number
-        numberUsed: number
-    }
-}
-
-export type ProficiencyView = {
-    type: string
-    value: string
-}
-
-export type PassiveSkill = {
-    mod: string
-    name: string
-    score: number
-}
-
-export type Skill = {
-    name: string
-    mod: string
-    bonus: number
-    proficient: boolean
-    expertise: boolean
-}
-
 type ModifierFilterFunction = (arg0: Modifier) => boolean
-
-export type CharacterProfile = {
-    name: string
-    race: string
-    level: number
-    classes: string
-    background: string
-    alignment: string
-    appearance: {
-        size: string
-        gender: string
-        faith: string
-        age: number
-        hair: string
-        eyes: string
-        skin: string
-        height: string
-        weight: number
-    }
-    xp: number
-}
-
-export type Save = {
-    name: string
-    modifier: number
-    shortName: string
-    proficient: boolean
-    expertise: boolean
-}
-
-export type Saves = {
-    str: number
-    int: number
-    dex: number
-    wis: number
-    con: number
-    cha: number
-}
-
-export type CharacterProfileHp = {
-    constitutionBonus: number
-    base: number
-    bonus: number
-    override: number
-    removed: number
-    temporary: number
-}
-
-export type Ability = {
-    name: string
-    modifier: number
-    value: number
-    shortName: string
-}
-
-export type SpellSlot = {
-    level: number
-    max: number
-    used: number
-}
-
-export type Stat = {
-    id: number
-    name: string
-    value: number
-}
-
-export type Modifiers = {
-    race: Modifier[]
-    class: Modifier[]
-    background: Modifier[]
-    item: Modifier[]
-    feat: Modifier[]
-    condition: Modifier[]
-}
-
-type ModifierKeys = keyof Modifiers
-
-export type Modifier = {
-    fixedValue: number
-    id: number
-    entityId: number
-    entityTypeId: number
-    type: string
-    subType: string
-    dice: null
-    restriction: string
-    statId: number
-    requiresAttunement: boolean
-    duration: null
-    friendlyTypeName: string
-    friendlySubtypeName: string
-    isGranted: boolean
-    bonusTypes: []
-    value: number
-    availableToMulticlass: boolean
-    modifierTypeId: number
-    modifierSubTypeId: number
-    componentId: number
-    componentTypeId: number
-}
-
-export type CharacterValues = {
-    typeId: number
-    value: string
-    valueId: string
-}
-
-export type Wealth = {
-    containers: ContainerWealth[]
-    totalContainerWealth: number
-    totalWealth: number
-}
-
-export type ContainerWealth = {
-    name: string
-    value: number
-}
-
-export type CustomProficiency = {
-    id: number
-    name: string
-    type: number
-    statId: number
-    proficiencyLevel: number
-    notes: string
-    description: string
-    override: number
-    magicBonus: number
-    miscBonus: number
-}
-
-export type CharacterClass = {
-    level: number
-    definition: {
-        hitDice: number
-    }
-    hitDiceUsed: number
-}

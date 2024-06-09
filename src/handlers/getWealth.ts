@@ -1,6 +1,6 @@
+import { CurrenciesType, ContainerWealth } from '../dm-tools-data.types'
 import getSummaryData from '../lib/getSummary'
 import getCharacter from './getCharacter'
-import { ContainerWealth, CurrenciesType } from '../lib/CharacterSheetProcessor'
 
 export default async (): Promise<WealthData[]> => {
     const summary = await getSummaryData()

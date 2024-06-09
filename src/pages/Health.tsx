@@ -4,7 +4,6 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 
 import { HealthData } from '../handlers/getHealth'
-import { CharacterProfileHp } from '../lib/CharacterSheetProcessor'
 import DeathSaves from '../components/DeathSaves'
 import Experience from '../components/Experience'
 import Actions from '../components/Actions'
@@ -14,6 +13,7 @@ import Avatar from '../components/Avatar'
 import Creature from '../components/Creature'
 import HitDice from '../components/HitDice'
 import HpBar from '../components/HpBar'
+import { CharacterProfileHp } from '../dm-tools-data.types'
 
 const style = {
     outer: {

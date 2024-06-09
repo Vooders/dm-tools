@@ -1,5 +1,6 @@
 import ClassBuilder from "../../builders/ClassBuilder"
 import * as hitDice from "../../../src/lib/character-sheet-processor/hitDice"
+import { HitDice } from "../../../src/dm-tools-data.types"
 
 describe('hitDice', () => {
     describe('max dice', () => {
@@ -11,7 +12,7 @@ describe('hitDice', () => {
 
                 const characterHitDice = hitDice.calculate([characterClass])
 
-                const numberOfHitDice = characterHitDice.reduce((total: number, hitDice: hitDice.HitDice) => {
+                const numberOfHitDice = characterHitDice.reduce((total: number, hitDice: HitDice) => {
                     return total += hitDice.max
                 }, 0)
 

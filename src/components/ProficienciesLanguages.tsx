@@ -1,13 +1,13 @@
 import React from "react";
 import List from "@mui/material/List";
 
-import { ProficiencyView } from "../lib/CharacterSheetProcessor";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
+import { ProficiencyView } from "../dm-tools-data.types";
 
 export function ProficienciesLanguages({ proficiencyView }: ProficienciesLanguagesProps) {
     return (

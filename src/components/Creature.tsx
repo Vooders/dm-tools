@@ -3,9 +3,9 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
-import { Creature } from '../lib/character-sheet-processor/creatures'
 import HpBar from './HpBar'
 import Ac from './Ac'
+import { CreatureType } from '../dm-tools-data.types'
 
 const style = {
     container: {
@@ -28,7 +28,6 @@ const style = {
 }
 
 export default function Creature(props: CreatureProps) {
-
     return (
         <Card sx={style.container}>
             <CardContent sx={style.content}>
@@ -45,5 +44,5 @@ export default function Creature(props: CreatureProps) {
 }
 
 interface CreatureProps {
-    creature: Creature
+    creature: CreatureType
 }

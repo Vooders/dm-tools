@@ -1,4 +1,5 @@
-import { Modifier, PassiveSkill, Skill } from "../CharacterSheetProcessor"
+import { Modifier } from "../../ddb-data.types"
+import { Skill, PassiveSkill } from "../../dm-tools-data.types"
 
 export default function passiveSkills(skills: Skill[], bonuses: Modifier[]): PassiveSkill[] {
     const passiveBonuses = bonuses

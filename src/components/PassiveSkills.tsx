@@ -5,9 +5,9 @@ import Paper from "@mui/material/Paper";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import React from "react";
+import { PassiveSkill } from "../dm-tools-data.types";
 
 
-import { PassiveSkill } from "../lib/CharacterSheetProcessor";
 
 export default function PassiveSkills({passiveSkills}: PassiveSkillsProps) {
     return (

@@ -1,7 +1,7 @@
 import React from 'react'
-import { Action, SpellSlot } from '../lib/CharacterSheetProcessor'
 import Slots from './Slots'
 import { Box } from '@mui/material'
+import { SpellSlot, Action } from '../dm-tools-data.types'
 
 const styling = {
     display: 'flex',

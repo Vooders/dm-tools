@@ -1,8 +1,23 @@
 import React from "react";
 
-import { SpellType } from '../lib/CharacterSheetProcessor';
-
-import { Avatar, Divider, Grid, ListItem, ListItemAvatar, ListItemText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, Typography } from "@mui/material";
+import { SpellType } from "../dm-tools-data.types";
+import { 
+    Avatar,
+    Divider,
+    Grid,
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Tooltip,
+    Typography
+} from "@mui/material";
 
 const buildDuration = (spell: SpellType) => {
     const duration = []

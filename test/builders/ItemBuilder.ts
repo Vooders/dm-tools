@@ -1,4 +1,4 @@
-import { Item } from "../../src/lib/CharacterSheetProcessor"
+import { Item } from "../../src/dm-tools-data.types"
 
 export default class ItemBuilder {
     constructor(

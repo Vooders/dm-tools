@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { DmToolsData } from '../lib/CharacterSheetProcessor'
 import CharacterSheet from './CharacterSheet'
+import { DmToolsData } from '../dm-tools-data.types'
 
 export default function PlayerCharacter() {
     let { characterId } = useParams()

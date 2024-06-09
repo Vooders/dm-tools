@@ -1,4 +1,4 @@
-import { Item, ItemContainer } from '../../../src/lib/CharacterSheetProcessor'
+import { ItemContainer, Item } from '../../../src/dm-tools-data.types'
 import wealth from '../../../src/lib/character-sheet-processor/wealth'
 import ItemBuilder from '../../builders/ItemBuilder'
 

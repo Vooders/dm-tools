@@ -1,4 +1,5 @@
-import { Ability, CustomProficiency, Modifier, Skill } from "../CharacterSheetProcessor"
+import { CustomProficiency, Modifier } from "../../ddb-data.types"
+import { Ability, Skill } from "../../dm-tools-data.types"
 
 export default function skills(abilities: Ability[], customProfs: CustomProficiency[], proficiencies: Modifier[], expertise: Modifier[], proficiency: number): Skill[] {
     const abilityNames = abilities.map(ability => ability.name)

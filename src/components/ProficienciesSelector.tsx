@@ -1,7 +1,7 @@
 import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect } from "react";
-import { Skill, Save } from "../lib/CharacterSheetProcessor";
+import { Skill, Save } from "../dm-tools-data.types";
 
 const style = {
     radioBox: {

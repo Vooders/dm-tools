@@ -1,4 +1,5 @@
-import { Ability, Modifier, Save } from "../CharacterSheetProcessor"
+import { Modifier } from "../../ddb-data.types"
+import { Ability, Save } from "../../dm-tools-data.types"
 
 export default function saves(classes: any, proficiencies: Modifier[], abilities: Ability[], isMultiClass: boolean, proficiency: number): Save[] {
     let bannedIds: number[] = []

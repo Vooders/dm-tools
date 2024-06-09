@@ -1,7 +1,7 @@
 import { app } from 'electron';
 import { readFile } from 'fs/promises';
 import path from 'path'
-import { DmToolsData } from '../../src/lib/CharacterSheetProcessor';
+import { DmToolsData } from '../dm-tools-data.types';
 
 const directory = 'npcs'
 const userDataPath = app.getPath('userData');

@@ -1,4 +1,4 @@
-import { CurrenciesType } from "../../src/lib/CharacterSheetProcessor";
+import { CurrenciesType } from "../../src/dm-tools-data.types"
 
 export default class CurrenciesBuilder {
     constructor(

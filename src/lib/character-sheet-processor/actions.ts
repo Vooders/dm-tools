@@ -1,4 +1,4 @@
-import { Action } from "../CharacterSheetProcessor"
+import { Action } from "../../dm-tools-data.types"
 
 export default function action(actions: any, feats: any, inventory: any, proficiency: number): Action[] {
 

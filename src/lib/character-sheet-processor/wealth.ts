@@ -1,4 +1,4 @@
-import { ContainerWealth, Item, ItemContainer } from "../CharacterSheetProcessor"
+import { ItemContainer, ContainerWealth, Item } from "../../dm-tools-data.types"
 
 export default function wealth(inventory: ItemContainer[], totalCurrency: number): Wealth {
 

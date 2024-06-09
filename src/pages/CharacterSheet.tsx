@@ -9,7 +9,6 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Tab from '@mui/material/Tab';
 
-import { CharacterProfileHp, DmToolsData } from '../lib/CharacterSheetProcessor';
 import Abilities from '../components/Abilities';
 import Skills from '../components/Skills';
 import Spells from '../components/Spells';
@@ -17,6 +16,7 @@ import PassiveSkills from '../components/PassiveSkills';
 import { ProficienciesLanguages } from '../components/ProficienciesLanguages';
 import Saves from '../components/Saves';
 import Ac from '../components/Ac';
+import { DmToolsData, CharacterProfileHp } from '../dm-tools-data.types';
 
 const style = {
     topBox: {

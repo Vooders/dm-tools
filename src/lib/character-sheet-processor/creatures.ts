@@ -1,5 +1,6 @@
+import { CreatureType } from "../../dm-tools-data.types"
 
-export default function creatures(ddbCreatures: any[]): Creature[] {
+export default function creatures(ddbCreatures: any[]): CreatureType[] {
     return ddbCreatures.map((creature) => {
         return {
             customName: creature.name,
@@ -13,12 +14,4 @@ export default function creatures(ddbCreatures: any[]): Creature[] {
     })
 }
 
-export type Creature = {
-    customName: string
-    name: string
-    ac: number
-    hp: {
-        max: number
-        removed: number
-    }
-}
+

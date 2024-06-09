@@ -1,4 +1,4 @@
-import { Action } from '../../src/lib/CharacterSheetProcessor'
+import { Action } from "../../src/dm-tools-data.types"
 
 export default class ActionsBuilder {
     constructor(

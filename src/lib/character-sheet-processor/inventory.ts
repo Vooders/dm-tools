@@ -1,4 +1,5 @@
-import { CharacterValues, Item, ItemContainer } from "../CharacterSheetProcessor"
+import { CharacterValues } from "../../ddb-data.types"
+import { ItemContainer, Item } from "../../dm-tools-data.types"
 
 export default function inventory(inventory: any, customItemInventory: any, carryCapacity: number, characterValues: CharacterValues[], id: number): ItemContainer[] {
     const items = inventory.map((item: any): Item => {

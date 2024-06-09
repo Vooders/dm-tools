@@ -1,4 +1,5 @@
-import { Modifier, ProficiencyView, Skill } from "../CharacterSheetProcessor"
+import { Modifier } from "../../ddb-data.types"
+import { Skill, ProficiencyView } from "../../dm-tools-data.types"
 
 export default function proficienciesView(customProfs: any, skills: Skill[],  profs: Modifier[], langs: Modifier[]): ProficiencyView[] {
     const entityId = {

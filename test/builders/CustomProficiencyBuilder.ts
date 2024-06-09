@@ -1,4 +1,4 @@
-import { CustomProficiency } from "../../src/lib/CharacterSheetProcessor";
+import { CustomProficiency } from "../../src/ddb-data.types"
 
 export default class CustomProficiencyBuilder {
     constructor(

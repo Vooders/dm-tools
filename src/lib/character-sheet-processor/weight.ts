@@ -1,4 +1,4 @@
-import { CurrenciesType, ItemContainer, WeightData } from "../CharacterSheetProcessor"
+import { ItemContainer, CurrenciesType, WeightData } from "../../dm-tools-data.types"
 
 export default function weight(inventory: ItemContainer[], currencies: CurrenciesType, ignoreCoinWeight: boolean): WeightData {
     const carriedItemsWeight = totalCarriedItemsWeight()
