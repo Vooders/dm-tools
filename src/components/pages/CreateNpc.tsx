@@ -42,14 +42,14 @@ export default function CreateNpc() {
   const [stealth, setStealth] = React.useState<Skill>(newSkill('Stealth', 'DEX'))
   const [survival, setSurvival] = React.useState<Skill>(newSkill('Survival', 'WIS'))
 
-  const [strengthProficiency, setStrengthProficiency] = React.useState<string>('none')
-  const [dexterityProficiency, setDexterityProficiency] = React.useState<string>('none')
-  const [constitutionProficiency, setConstitutionProficiency] = React.useState<string>('none')
-  const [intelligenceProficiency, setIntelligenceProficiency] = React.useState<string>('none')
-  const [wisdomProficiency, setWisdomProficiency] = React.useState<string>('none')
-  const [charismaProficiency, setCharismaProficiency] = React.useState<string>('none')
+  const [strengthSave, setStrengthSave] = React.useState<Save>(newSave('Strength'))
+  const [dexteritySave, setDexteritySave] = React.useState<Save>(newSave('Dexterity'))
+  const [constitutionSave, setConstitutionSave] = React.useState<Save>(newSave('Constitution'))
+  const [intelligenceSave, setIntelligenceSave] = React.useState<Save>(newSave('Intelligence'))
+  const [wisdomSave, setWisdomSave] = React.useState<Save>(newSave('Wisdom'))
+  const [charismaSave, setCharismaSave] = React.useState<Save>(newSave('Charisma'))
 
-  function newSkill(name: string,mod: string): Skill {
+  function newSkill(name: string, mod: string): Skill {
     return {
       name,
       mod,
@@ -59,15 +59,14 @@ export default function CreateNpc() {
     }
   }
 
-  function getSaves(): any {
-    return [
-      { name: 'Strength', proficiency: strengthProficiency },
-      { name: 'Dexterity', proficiency: dexterityProficiency },
-      { name: 'Constitution', proficiency: constitutionProficiency },
-      { name: 'Intelligence', proficiency: intelligenceProficiency },
-      { name: 'Wisdom', proficiency: wisdomProficiency },
-      { name: 'Charisma', proficiency: charismaProficiency },
-    ]
+  function newSave(name: string): Save {
+    return {
+      name,
+      modifier: null,
+      shortName: '',
+      proficient: false,
+      expertise: false
+    }
   }
 
   useEffect(() => {
@@ -105,12 +104,12 @@ export default function CreateNpc() {
       setSleightOfHand(npc.skills[15])
       setStealth(npc.skills[16])
       setSurvival(npc.skills[17])
-      setStrengthProficiency(getInitialSaveProficiency(npc.saves, 'Strength'))
-      setDexterityProficiency(getInitialSaveProficiency(npc.saves, 'Dexterity'))
-      setConstitutionProficiency(getInitialSaveProficiency(npc.saves, 'Constitution'))
-      setIntelligenceProficiency(getInitialSaveProficiency(npc.saves, 'Intelligence'))
-      setWisdomProficiency(getInitialSaveProficiency(npc.saves, 'Wisdom'))
-      setCharismaProficiency(getInitialSaveProficiency(npc.saves, 'Charisma'))
+      setStrengthSave(npc.saves[0])
+      setDexteritySave(npc.saves[1])
+      setConstitutionSave(npc.saves[2])
+      setIntelligenceSave(npc.saves[3])
+      setWisdomSave(npc.saves[4])
+      setCharismaSave(npc.saves[5])
     }
 
     if (npcId && npcId !== id) {
@@ -118,12 +117,6 @@ export default function CreateNpc() {
         .catch(console.error)
     }
   })
-
-  function getInitialSaveProficiency(saves: Save[], name: string) {
-    const save = saves.filter(save => save.name === name)[0]
-    if (save.proficient) return 'proficiency'
-    else return 'none'
-  }
 
   const handleIntegerChange = (hook: Function) => {
     return (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -178,6 +171,14 @@ export default function CreateNpc() {
         sleightOfHand,
         stealth,
         survival
+      ],
+      saves: [
+        strength,
+        dexterity,
+        constitution,
+        intelligence,
+        wisdom,
+        charisma
       ]
     }
     await window.electron.saveNpc(npc)
@@ -328,12 +329,12 @@ export default function CreateNpc() {
           <ProficienciesSelector skill={survival} hook={setSurvival} />
         </Grid>
         <Grid item xs={5} sx={{ display: 'flex', flexDirection: 'column' }}>
-          {/* <RadioButtons variant='ability' name='Strength' onChange={handleStringChange(setStrengthProficiency)} value={strengthProficiency} />
-          <RadioButtons variant='ability' name='Dexterity' onChange={handleStringChange(setDexterityProficiency)} value={dexterityProficiency} />
-          <RadioButtons variant='ability' name='Constitution' onChange={handleStringChange(setConstitutionProficiency)} value={constitutionProficiency} />
-          <RadioButtons variant='ability' name='Intelligence' onChange={handleStringChange(setIntelligenceProficiency)} value={intelligenceProficiency} />
-          <RadioButtons variant='ability' name='Wisdom' onChange={handleStringChange(setWisdomProficiency)} value={wisdomProficiency} />
-          <RadioButtons variant='ability' name='Charisma' onChange={handleStringChange(setCharismaProficiency)} value={charismaProficiency} /> */}
+          <ProficienciesSelector skill={strengthSave} hook={setStrengthSave} />
+          <ProficienciesSelector skill={dexteritySave} hook={setDexteritySave} />
+          <ProficienciesSelector skill={constitutionSave} hook={setConstitutionSave} />
+          <ProficienciesSelector skill={intelligenceSave} hook={setIntelligenceSave} />
+          <ProficienciesSelector skill={wisdomSave} hook={setWisdomSave} />
+          <ProficienciesSelector skill={charismaSave} hook={setCharismaSave} />
         </Grid>
       </Grid>
       <Box sx={style.centred}>

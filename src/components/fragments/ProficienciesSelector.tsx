@@ -1,7 +1,7 @@
 import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect } from "react";
-import { Skill } from "../../lib/CharacterSheetProcessor";
+import { Skill, Save } from "../../lib/CharacterSheetProcessor";
 
 const style = {
     radioBox: {
@@ -61,6 +61,6 @@ export default function ProficienciesSelector(props: ProficienciesSelectorProps)
 }
 
 interface ProficienciesSelectorProps {
-    skill: Skill
+    skill: Skill | Save
     hook: Function
 }

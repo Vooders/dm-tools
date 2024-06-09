@@ -22,7 +22,8 @@ export default function saves(classes: any, proficiencies: Modifier[], abilities
             name: ability.name,
             modifier: saveProficiencies.includes(ability.name) ? ability.modifier + proficiency : ability.modifier,
             shortName: ability.name.slice(0, 3).toUpperCase(),
-            proficient: saveProficiencies.includes(ability.name)
+            proficient: saveProficiencies.includes(ability.name),
+            expertise: false
         }
     })
 }

@@ -3,7 +3,7 @@ import path from 'path'
 import { writeFile } from 'fs/promises';
 import getFile from './getFile';
 import NpcProcessor from './npcProcessor';
-import { Skill } from './CharacterSheetProcessor';
+import { Save, Skill } from './CharacterSheetProcessor';
 
 const userDataPath = app.getPath('userData');
 const npcsDirectory = path.join(userDataPath, 'npcs');
@@ -57,6 +57,7 @@ export type Npc = {
     ac: number
     hp: number
     skills: Skill[]
+    saves: Save[]
 }
 
 export type NpcAbilities = {

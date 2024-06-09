@@ -64,6 +64,10 @@ export default class NpcProcessor {
         })
     }
 
+    private buildSaves(): Save[] {
+        return []
+    }
+
     // private buildSaves(): Save[] {
     //     const abilities = this.buildAbilities()
     //     const proficiencyArray: string[] = this.npcData.saveProficiencies
