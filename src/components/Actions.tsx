@@ -12,19 +12,20 @@ export default function Actions(props: ActionsProps) {
     return (
         <React.Fragment>
             <Box sx={styling}>
-                {props.spellSlots.map(spellSlot => {
+                {props.spellSlots.map((spellSlot, index) => {
                     return (
                         <Slots
                             title={`Level ${spellSlot.level}`}
                             max={spellSlot.max} used={spellSlot.used}
                             description=''
                             highlight={!props.isUnconscious}
+                            key={`spellSlot${index}`}
                         />
                     )
                 })}
             </Box>
             <Box sx={styling}>
-                {props.limitedUseActions.map(limitedUseAction => {
+                {props.limitedUseActions.map((limitedUseAction, index) => {
                     return (
                         <Slots
                             title={`${limitedUseAction.name}`}
@@ -32,6 +33,7 @@ export default function Actions(props: ActionsProps) {
                             used={limitedUseAction.limitedUse.numberUsed}
                             description={limitedUseAction.snippet}
                             highlight={!props.isUnconscious}
+                            key={`limitedUseAction${index}`}
                         />
                     )
                 })}

@@ -30,24 +30,24 @@ export default function HealthPotions(props: HealthPotionsProps) {
 
     return (
         <Box sx={style.container}>
-            {new Array(props.healthPotions.normal).fill(0).map((thing: any) => {
+            {new Array(props.healthPotions.normal).fill(0).map((thing: any, index) => {
                 return(
-                    <GiStandingPotion style={{ ...style.potion, ...style.normal }} />
+                    <GiStandingPotion style={{ ...style.potion, ...style.normal }} key={`normalPotion${index}`}/>
                 )
             })}
-            {new Array(props.healthPotions.greater).fill(0).map((thing: any) => {
+            {new Array(props.healthPotions.greater).fill(0).map((thing: any, index) => {
                 return(
-                    <GiStandingPotion style={{ ...style.potion, ...style.greater }} />
+                    <GiStandingPotion style={{ ...style.potion, ...style.greater }}  key={`greaterPotion${index}`}/>
                 )
             })}
-            {new Array(props.healthPotions.superior).fill(0).map((thing: any) => {
+            {new Array(props.healthPotions.superior).fill(0).map((thing: any, index) => {
                 return(
-                    <GiStandingPotion style={{ ...style.potion, ...style.superior }} />
+                    <GiStandingPotion style={{ ...style.potion, ...style.superior }}  key={`superiorPotion${index}`}/>
                 )
             })}
-            {new Array(props.healthPotions.supreme).fill(0).map((thing: any) => {
+            {new Array(props.healthPotions.supreme).fill(0).map((thing: any, index) => {
                 return(
-                    <GiStandingPotion style={{ ...style.potion, ...style.supreme }} />
+                    <GiStandingPotion style={{ ...style.potion, ...style.supreme }}  key={`supremePotion${index}`}/>
                 )
             })}
         </Box>

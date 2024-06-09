@@ -67,11 +67,11 @@ export default function Inventory() {
       <Stack spacing={2} mt={2}>
         {inventory.map(character => {
           return (
-            <>
+            <React.Fragment key={character.id}>
               <Title>{character.name}</Title>
-              {character.inventory.map((container: ItemContainer) => {
+              {character.inventory.map((container: ItemContainer, index: number) => {
                 return (
-                  <Card variant="outlined">
+                  <Card variant="outlined" key={`characterInventory${index}`}>
                     <CardContent>
                       <Grid container direction="row" spacing={2}>
                         <Grid item>{container.equipped ? '✔️ ' : '❌ '}{container.name}</Grid>
@@ -109,8 +109,7 @@ export default function Inventory() {
                   </Card>
                 )
               })}
-
-            </>
+            </React.Fragment>
           )
         })}
       </Stack>

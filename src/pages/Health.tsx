@@ -60,52 +60,50 @@ export default function Health() {
 
     return (
         <React.Fragment>
-            {health.map(character => {
+            {health.map((character, index) => {
                 return (
-                    <>
-                        <Card sx={style.outer}>
-                            <Box sx={style.left}>
-                                <Avatar name={character.name} avatarPath={character.avatarPath} />
-                                {character.creatures.map(creature => {
-                                    return (
-                                        <Creature creature={creature} />
-                                    )
-                                })}
-                            </Box>
-                            <Box sx={style.right}>
-                                <CharacterDetails
-                                    name={character.name}
-                                    currencies={character.currencies}
-                                    ac={character.ac}
-                                    healthPotions={character.healthPotions}
-                                    inspiration={character.inspiration}
-                                    hp={character.hp}
-                                />
-                                <DeathSaves
-                                    display={isUnconscious(character.hp)}
-                                    failCount={character.deathSaves.failCount}
-                                    successCount={character.deathSaves.successCount}
-                                    isStabilized={character.deathSaves.isStabilized}
-                                />
-                                <Experience
-                                    level={character.level}
-                                    experience={character.experience}
-                                    isMilestone={character.milestoneProgression}
-                                />
-                                <HpBar
-                                    hpMax={maxHp(character.hp)}
-                                    hpRemoved={character.hp.removed}
-                                    hpTemp={character.hp.temporary}
-                                />
-                                <HitDice hitDice={character.hitDice} />
-                                <Actions
-                                    spellSlots={character.spellSlots}
-                                    limitedUseActions={character.limitedUseActions}
-                                    isUnconscious={isUnconscious(character.hp)}
-                                />
-                            </Box>
-                        </Card>
-                    </>
+                    <Card sx={style.outer} key={`characterHealth${index}`}>
+                        <Box sx={style.left}>
+                            <Avatar name={character.name} avatarPath={character.avatarPath} />
+                            {character.creatures.map(creature => {
+                                return (
+                                    <Creature creature={creature} />
+                                )
+                            })}
+                        </Box>
+                        <Box sx={style.right}>
+                            <CharacterDetails
+                                name={character.name}
+                                currencies={character.currencies}
+                                ac={character.ac}
+                                healthPotions={character.healthPotions}
+                                inspiration={character.inspiration}
+                                hp={character.hp}
+                            />
+                            <DeathSaves
+                                display={isUnconscious(character.hp)}
+                                failCount={character.deathSaves.failCount}
+                                successCount={character.deathSaves.successCount}
+                                isStabilized={character.deathSaves.isStabilized}
+                            />
+                            <Experience
+                                level={character.level}
+                                experience={character.experience}
+                                isMilestone={character.milestoneProgression}
+                            />
+                            <HpBar
+                                hpMax={maxHp(character.hp)}
+                                hpRemoved={character.hp.removed}
+                                hpTemp={character.hp.temporary}
+                            />
+                            <HitDice hitDice={character.hitDice} />
+                            <Actions
+                                spellSlots={character.spellSlots}
+                                limitedUseActions={character.limitedUseActions}
+                                isUnconscious={isUnconscious(character.hp)}
+                            />
+                        </Box>
+                    </Card>
                 )
             })}
         </React.Fragment>

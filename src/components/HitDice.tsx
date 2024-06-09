@@ -14,12 +14,12 @@ export default function hitDice(props: HitDiceProps) {
 
     return (
         <Box sx={{ display: 'flex' }}>
-            {props.hitDice.map((dice) => {
+            {props.hitDice.map((dice, index) => {
                 return (
-                    <Box sx={{ display: 'flex', mx: 1 }}>
-                        {new Array(dice.max - dice.used).fill(0).map((thing: any) => {
+                    <Box sx={{ display: 'flex', mx: 1 }} key={`hitDice${index}`}>
+                        {new Array(dice.max - dice.used).fill(0).map((_, index) => {
                             return (
-                               <Box>
+                               <Box key={`die${index}`}>
                                    {icons[dice.dice]}
                                </Box>
                             )

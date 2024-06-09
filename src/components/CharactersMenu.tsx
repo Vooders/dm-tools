@@ -32,11 +32,11 @@ export default function CharactersMenu() {
                 Party
             </ListSubheader>
             {open &&
-                Object.keys(characters).map((characterKey) => {
+                Object.keys(characters).map((characterKey, index) => {
                     const character = characters[characterKey]
                     const shortName = character.name.split(' ')[0]
                     return (
-                        <Link to={`/characterSheet/${character.id}`}>
+                        <Link to={`/characterSheet/${character.id}`}  key={`character${index}`}>
                             <ListItemButton
                                 key={character.name}
                             // sx={{ color: 'rgba(255,255,255,.8)' }}
