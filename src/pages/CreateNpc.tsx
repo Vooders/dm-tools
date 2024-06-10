@@ -1,10 +1,11 @@
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material"
 import { nameByRace } from "fantasy-name-generator"
 import React, { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid'
 import ProficienciesSelector from "../components/ProficienciesSelector"
 import { Skill, Save, DmToolsData } from "../dm-tools-data.types"
+import Title from '../components/Title';
 
 export default function CreateNpc() {
   const [id, setId] = React.useState<string>(uuidv4())
@@ -173,12 +174,12 @@ export default function CreateNpc() {
         survival
       ],
       saves: [
-        strength,
-        dexterity,
-        constitution,
-        intelligence,
-        wisdom,
-        charisma
+        strengthSave,
+        dexteritySave,
+        constitutionSave,
+        intelligenceSave,
+        wisdomSave,
+        charismaSave
       ]
     }
     await window.electron.saveNpc(npc)
@@ -309,6 +310,7 @@ export default function CreateNpc() {
       </Grid>
       <Grid container>
         <Grid item xs={7} sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Typography component="h2" variant="h6" color="primary" gutterBottom>Skills</Typography>
           <ProficienciesSelector skill={acrobatics} hook={setAcrobatics} />
           <ProficienciesSelector skill={animalHandling} hook={setAnimalHandling} />
           <ProficienciesSelector skill={arcana} hook={setArcana} />
@@ -329,12 +331,13 @@ export default function CreateNpc() {
           <ProficienciesSelector skill={survival} hook={setSurvival} />
         </Grid>
         <Grid item xs={5} sx={{ display: 'flex', flexDirection: 'column' }}>
-          <ProficienciesSelector skill={strengthSave} hook={setStrengthSave} />
-          <ProficienciesSelector skill={dexteritySave} hook={setDexteritySave} />
-          <ProficienciesSelector skill={constitutionSave} hook={setConstitutionSave} />
-          <ProficienciesSelector skill={intelligenceSave} hook={setIntelligenceSave} />
-          <ProficienciesSelector skill={wisdomSave} hook={setWisdomSave} />
-          <ProficienciesSelector skill={charismaSave} hook={setCharismaSave} />
+        <Typography component="h2" variant="h6" color="primary" gutterBottom>Saves</Typography>
+          <ProficienciesSelector skill={strengthSave} hook={setStrengthSave} variant='save' />
+          <ProficienciesSelector skill={dexteritySave} hook={setDexteritySave} variant='save' />
+          <ProficienciesSelector skill={constitutionSave} hook={setConstitutionSave} variant='save' />
+          <ProficienciesSelector skill={intelligenceSave} hook={setIntelligenceSave} variant='save' />
+          <ProficienciesSelector skill={wisdomSave} hook={setWisdomSave} variant='save' />
+          <ProficienciesSelector skill={charismaSave} hook={setCharismaSave} variant='save' />
         </Grid>
       </Grid>
       <Box sx={style.centred}>

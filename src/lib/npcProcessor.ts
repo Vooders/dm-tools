@@ -28,7 +28,7 @@ export default class NpcProcessor {
             profile: this.buildProfile(),
             hp: this.buildHp(),
             proficiency: this.npcData.proficiencyBonus,
-            saves: [],
+            saves: this.buildSaves(),
             skills: this.buildSkills(),
             passiveSkills: [],
             proficiencyView: [],
@@ -70,22 +70,20 @@ export default class NpcProcessor {
     }
 
     private buildSaves(): Save[] {
-        return []
+        return this.npcData.saves.map((save) => {
+            const shortName = save.name.slice(0, 3).toUpperCase()
+            const baseModifier = this.abilityModifierByShortName(shortName)
+            let modifier = baseModifier
+            if (save.proficient) {
+                modifier += this.npcData.proficiencyBonus
+            }
+            return {
+                ...save,
+                modifier,
+                shortName,
+            }
+        })
     }
-
-    // private buildSaves(): Save[] {
-    //     const abilities = this.buildAbilities()
-    //     const proficiencyArray: string[] = this.npcData.saveProficiencies
-
-    //     const proficiencies = proficiencyArray.map((name) => {
-    //         return new ModifierBuilder()
-    //             .withFriendlySubTypeName(name)
-    //             .withSubType('saving-throws')
-    //             .build()
-    //     })
-
-    //     return saves(0, proficiencies, abilities, false, this.npcData.proficiencyBonus)
-    // }
 
     private buildHp(): CharacterProfileHp {
         return {

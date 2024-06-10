@@ -31,7 +31,7 @@ export default function ProficienciesSelector(props: ProficienciesSelectorProps)
             skill.expertise = false
         } else if (e.target.value === 'expertise') {
             skill.proficient = true
-            skill.expertise = true  
+            skill.expertise = true
         }
         setSelected(e.target.value)
         props.hook(skill)
@@ -51,8 +51,9 @@ export default function ProficienciesSelector(props: ProficienciesSelectorProps)
                     >
                         <FormControlLabel value="none" control={<Radio size="small" />} label="None" />
                         <FormControlLabel value="proficiency" control={<Radio size="small" />} label="Proficiency" />
-                        <FormControlLabel value="expertise" control={<Radio size="small" />} label="Expertise" />
-                        
+                        {props.variant !== 'save' &&
+                            <FormControlLabel value="expertise" control={<Radio size="small" />} label="Expertise" />
+                        }
                     </RadioGroup>
                 </Box>
             </FormControl>
@@ -63,4 +64,5 @@ export default function ProficienciesSelector(props: ProficienciesSelectorProps)
 interface ProficienciesSelectorProps {
     skill: Skill | Save
     hook: Function
+    variant?: string
 }
