@@ -6,7 +6,8 @@ import {
     Skill,
     Save,
     CharacterProfileHp,
-    CharacterProfile
+    CharacterProfile,
+    PassiveSkill
 } from "../dm-tools-data.types";
 
 export default class NpcProcessor {
@@ -30,7 +31,7 @@ export default class NpcProcessor {
             proficiency: this.npcData.proficiencyBonus,
             saves: this.buildSaves(),
             skills: this.buildSkills(),
-            passiveSkills: [],
+            passiveSkills: this.buildPassiveSkills(),
             proficiencyView: [],
             spellSlots: [],
             actions: [],
@@ -65,6 +66,21 @@ export default class NpcProcessor {
             return {
                 ...skill,
                 bonus: abilityModifier
+            }
+        })
+    }
+
+    private buildPassiveSkills(): PassiveSkill[] {
+        return [
+            { mod: 'WIS', name: 'Perception', score: 10 },
+            { mod: 'INT', name: 'Investigation', score: 10 },
+            { mod: 'WIS', name: 'Insight', score: 10 }
+        ].map((passiveSkill) => {
+            const modifier = this.abilityModifierByShortName(passiveSkill.mod)
+
+            return {
+                ...passiveSkill,
+                score: passiveSkill.score + modifier
             }
         })
     }
