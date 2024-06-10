@@ -51,7 +51,7 @@ export default function ProficienciesSelector(props: ProficienciesSelectorProps)
                     >
                         <FormControlLabel value="none" control={<Radio size="small" />} label="None" />
                         <FormControlLabel value="proficiency" control={<Radio size="small" />} label="Proficiency" />
-                        {props.variant !== 'save' &&
+                        {props.expertise === true &&
                             <FormControlLabel value="expertise" control={<Radio size="small" />} label="Expertise" />
                         }
                     </RadioGroup>
@@ -64,5 +64,5 @@ export default function ProficienciesSelector(props: ProficienciesSelectorProps)
 interface ProficienciesSelectorProps {
     skill: Skill | Save
     hook: Function
-    variant?: string
+    expertise?: boolean
 }

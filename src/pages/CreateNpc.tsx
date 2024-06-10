@@ -11,7 +11,7 @@ export default function CreateNpc() {
   const [id, setId] = React.useState<string>(uuidv4())
   const [race, setRace] = React.useState<string>('Human')
   const [name, setName] = React.useState<string>('')
-  const [gender, setGender] = React.useState<string>('male')
+  const [gender, setGender] = React.useState<string>('Male')
   const [notes, setNotes] = React.useState<string>('')
   const [strength, setStrength] = React.useState<number>(10)
   const [dexterity, setDexterity] = React.useState<number>(10)
@@ -346,12 +346,12 @@ export default function CreateNpc() {
         </Grid>
         <Grid item xs={5} sx={{ display: 'flex', flexDirection: 'column' }}>
         <Typography component="h2" variant="h6" color="primary" gutterBottom>Saves</Typography>
-          <ProficienciesSelector skill={strengthSave} hook={setStrengthSave} variant='save' />
-          <ProficienciesSelector skill={dexteritySave} hook={setDexteritySave} variant='save' />
-          <ProficienciesSelector skill={constitutionSave} hook={setConstitutionSave} variant='save' />
-          <ProficienciesSelector skill={intelligenceSave} hook={setIntelligenceSave} variant='save' />
-          <ProficienciesSelector skill={wisdomSave} hook={setWisdomSave} variant='save' />
-          <ProficienciesSelector skill={charismaSave} hook={setCharismaSave} variant='save' />
+          <ProficienciesSelector skill={strengthSave} hook={setStrengthSave} expertise={false} />
+          <ProficienciesSelector skill={dexteritySave} hook={setDexteritySave} expertise={false} />
+          <ProficienciesSelector skill={constitutionSave} hook={setConstitutionSave} expertise={false} />
+          <ProficienciesSelector skill={intelligenceSave} hook={setIntelligenceSave} expertise={false} />
+          <ProficienciesSelector skill={wisdomSave} hook={setWisdomSave} expertise={false} />
+          <ProficienciesSelector skill={charismaSave} hook={setCharismaSave} expertise={false} />
         </Grid>
       </Grid>
       <Box sx={style.centred}>
