@@ -14,6 +14,7 @@ export default class NpcProcessor {
 
     private npcData: Npc
     private abilities: Ability[]
+    private skills: Skill[]
 
     constructor(npcData: Npc) {
         this.npcData = npcData
@@ -21,6 +22,7 @@ export default class NpcProcessor {
 
     public toDmToolsData(): DmToolsData {
         this.abilities = this.buildAbilities()
+        this.skills = this.buildSkills()
 
         return {
             id: this.npcData.id,
@@ -30,7 +32,7 @@ export default class NpcProcessor {
             hp: this.buildHp(),
             proficiency: this.npcData.proficiencyBonus,
             saves: this.buildSaves(),
-            skills: this.buildSkills(),
+            skills: this.skills,
             passiveSkills: this.buildPassiveSkills(),
             proficiencyView: [],
             spellSlots: [],
@@ -52,6 +54,10 @@ export default class NpcProcessor {
 
     private abilityModifierByShortName(shortName: string): number {
         return this.abilities.find(ability => ability.shortName === shortName).modifier
+    }
+
+    private skillModifier(name: string): number {
+        return this.skills.find(skill => skill.name === name).bonus
     }
 
     private buildSkills(): Skill[] {
@@ -76,7 +82,7 @@ export default class NpcProcessor {
             { mod: 'INT', name: 'Investigation', score: 10 },
             { mod: 'WIS', name: 'Insight', score: 10 }
         ].map((passiveSkill) => {
-            const modifier = this.abilityModifierByShortName(passiveSkill.mod)
+            const modifier = this.skillModifier(passiveSkill.name)
 
             return {
                 ...passiveSkill,
