@@ -9,7 +9,7 @@ import Title from '../components/Title';
 
 export default function CreateNpc() {
   const [id, setId] = React.useState<string>(uuidv4())
-  const [race, setRace] = React.useState<string>('human')
+  const [race, setRace] = React.useState<string>('Human')
   const [name, setName] = React.useState<string>('')
   const [gender, setGender] = React.useState<string>('male')
   const [notes, setNotes] = React.useState<string>('')
@@ -125,14 +125,24 @@ export default function CreateNpc() {
     }
   }
 
-  const handleRaceChange = (event: SelectChangeEvent) => {
+  const handleRaceChange = (event: any) => {
     setRace(event.target.value)
   }
-  const handleGenderChange = (event: SelectChangeEvent) => {
+  const handleGenderChange = (event: any) => {
     setGender(event.target.value)
   }
   const generateName = () => {
-    setName(nameByRace(`${race}`, { gender: `${gender}` as 'male' || 'female', allowMultipleNames: true }).toString())
+    const convertedRace = convertString(race)
+    const convertedGender = convertString(gender)
+    setName(nameByRace(convertedRace, { gender: convertedGender as 'male' || 'female', allowMultipleNames: true }).toString())
+  }
+
+  function convertString(name: string): string {
+    if (name === 'Cave Person') {
+      return 'cavePerson'
+    } else {
+      return name.toLowerCase().split(' ').join('')
+    }
   }
 
   const saveNpc = async (): Promise<void> => {
@@ -148,7 +158,7 @@ export default function CreateNpc() {
         constitution,
         intelligence,
         wisdom,
-        charisma
+        charisma,
       },
       proficiencyBonus,
       ac,
@@ -171,7 +181,7 @@ export default function CreateNpc() {
         religion,
         sleightOfHand,
         stealth,
-        survival
+        survival,
       ],
       saves: [
         strengthSave,
@@ -179,16 +189,21 @@ export default function CreateNpc() {
         constitutionSave,
         intelligenceSave,
         wisdomSave,
-        charismaSave
+        charismaSave,
       ]
     }
     await window.electron.saveNpc(npc)
   }
 
   const style = {
+    content: {
+      display: 'flex',
+      justifyContent: 'center',
+      mt: 5,
+    },
     centred: {
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
     textInput: {
       width: 0.3
@@ -200,79 +215,81 @@ export default function CreateNpc() {
       width: 1
     },
     nameButton: {
-      width: 0.15,
-      height: 0.7,
-      marginX: 5
+      width: 0.65,
+      height: 0.5
     },
     saveButton: {
-      width: 0.2
+      width: 0.2,
+      m: 2,
     },
     abilities: {
       display: 'flex',
       justifyContent: 'center',
       flexDirection: 'row',
-      margin: 2
+      margin: 2,
     },
     outer: {
       display: 'flex',
       justifyContent: 'center',
-      flexDirection: 'column'
+      flexDirection: 'column',
     },
   }
 
   return (
     <Box sx={style.outer} >
-      <Box sx={style.centred}>
+      <Title>Create NPC</Title>
+      <Box sx={style.content} >
         <Box>
           <Box sx={style.centred}>
             <Box sx={style.textInput}>
               <FormControl fullWidth>
-                <InputLabel id="race-select-label">Race</InputLabel>
+                <InputLabel id="race-select-label"  shrink={true} >Race</InputLabel>
+                <TextField value={race} onChange={handleRaceChange}></TextField>
                 <Select
                   labelId="race-select-label"
                   id="race-select"
-                  value={race}
-                  label="Race"
+                  value=''
                   onChange={handleRaceChange}
                 >
-                  <MenuItem value={'angel'}>Angel</MenuItem>
-                  <MenuItem value={'cavePerson'}>Cave Person</MenuItem>
-                  <MenuItem value={'darkelf'}>Dark Elf</MenuItem>
-                  <MenuItem value={'demon'}>Demon</MenuItem>
-                  <MenuItem value={'dragon'}>Dragon</MenuItem>
-                  <MenuItem value={'drow'}>Drow</MenuItem>
-                  <MenuItem value={'dwarf'}>Dwarf</MenuItem>
-                  <MenuItem value={'elf'}>Elf</MenuItem>
-                  <MenuItem value={'fairy'}>Fairy</MenuItem>
-                  <MenuItem value={'gnome'}>Gnome</MenuItem>
-                  <MenuItem value={'goblin'}>Goblin</MenuItem>
-                  <MenuItem value={'halfdemon'}>Half Demon</MenuItem>
-                  <MenuItem value={'halfling'}>Halfling</MenuItem>
-                  <MenuItem value={'highelf'}>High Elf</MenuItem>
-                  <MenuItem value={'highfairy'}>High Fairy</MenuItem>
-                  <MenuItem value={'human'}>Human</MenuItem>
-                  <MenuItem value={'ogre'}>Ogre</MenuItem>
-                  <MenuItem value={'orc'}>Orc</MenuItem>
+                  <MenuItem value={'Angel'}>Angel</MenuItem>
+                  <MenuItem value={'Cave Person'}>Cave Person</MenuItem>
+                  <MenuItem value={'Darkelf'}>Dark Elf</MenuItem>
+                  <MenuItem value={'Demon'}>Demon</MenuItem>
+                  <MenuItem value={'Dragon'}>Dragon</MenuItem>
+                  <MenuItem value={'Drow'}>Drow</MenuItem>
+                  <MenuItem value={'Dwarf'}>Dwarf</MenuItem>
+                  <MenuItem value={'Elf'}>Elf</MenuItem>
+                  <MenuItem value={'Fairy'}>Fairy</MenuItem>
+                  <MenuItem value={'Gnome'}>Gnome</MenuItem>
+                  <MenuItem value={'Goblin'}>Goblin</MenuItem>
+                  <MenuItem value={'Half Demon'}>Half Demon</MenuItem>
+                  <MenuItem value={'Halfling'}>Halfling</MenuItem>
+                  <MenuItem value={'Highelf'}>High Elf</MenuItem>
+                  <MenuItem value={'High Fairy'}>High Fairy</MenuItem>
+                  <MenuItem value={'Human'}>Human</MenuItem>
+                  <MenuItem value={'Ogre'}>Ogre</MenuItem>
+                  <MenuItem value={'Orc'}>Orc</MenuItem>
                 </Select>
               </FormControl>
             </Box>
             <Box sx={style.textInput}>
               <FormControl fullWidth>
-                <InputLabel id="gender-select-label">Gender</InputLabel>
+                <InputLabel id="gender-select-label" shrink={true}>Gender</InputLabel>
+                <TextField value={gender}  onChange={handleGenderChange}></TextField>
                 <Select
                   labelId="gender-select-label"
                   id="gender-select"
-                  value={gender}
-                  label="Gender"
+                  value=''
                   onChange={handleGenderChange}
                 >
-                  <MenuItem value={'male'}>Male</MenuItem>
-                  <MenuItem value={'female'}>Female</MenuItem>
+                  <MenuItem value={'Male'}>Male</MenuItem>
+                  <MenuItem value={'Female'}>Female</MenuItem>
                 </Select>
               </FormControl>
             </Box>
             <Box sx={style.name}>
               <TextField value={name} label="Name" variant="outlined" onChange={(e) => setName(e.target.value)} />
+          <Button sx={style.nameButton} variant="outlined" onClick={generateName}>Generate Name</Button>
             </Box>
           </Box>
           <Box sx={{ mt: 1 }}>
@@ -283,9 +300,6 @@ export default function CreateNpc() {
           <Box sx={{ mt: 1 }}>
             <TextField sx={style.notes} onChange={(e) => { setNotes(e.target.value) }} label='notes' variant='outlined' multiline />
           </Box>
-        </Box>
-        <Box sx={style.nameButton}>
-          <Button variant="outlined" onClick={generateName}>Generate Name</Button>
         </Box>
       </Box>
       <Grid container sx={style.abilities}>
