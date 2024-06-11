@@ -51,7 +51,7 @@ export default function ProficienciesSelector(props: ProficienciesSelectorProps)
                     >
                         <FormControlLabel value="none" control={<Radio size="small" />} label="None" />
                         <FormControlLabel value="proficiency" control={<Radio size="small" />} label="Proficiency" />
-                        {props.expertise === true &&
+                        {props.expertise !== false &&
                             <FormControlLabel value="expertise" control={<Radio size="small" />} label="Expertise" />
                         }
                     </RadioGroup>
