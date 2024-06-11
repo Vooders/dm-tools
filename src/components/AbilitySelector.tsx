@@ -4,13 +4,11 @@ import { Ability } from "../dm-tools-data.types";
 
 export default function AbilitySelector(props: AbilitySelectorProps) {
 
-  function handleAbilityChange(ability: Ability, hook: Function) {
-    return (event: any) => {
-      hook({
-        ...ability,
+  function handleAbilityChange(event: any) {
+      props.hook({
+        ...props.ability,
         value: parseInt(event.target.value)
       })
-    }
   }
 
   return (
@@ -19,7 +17,7 @@ export default function AbilitySelector(props: AbilitySelectorProps) {
         <TextField
           type='number'
           label={props.ability.shortName}
-          onChange={handleAbilityChange(props.ability, props.hook)}
+          onChange={handleAbilityChange}
           value={props.ability.value}
         />
       </Grid>
