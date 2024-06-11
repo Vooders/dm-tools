@@ -1,10 +1,11 @@
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material"
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
 import { nameByRace } from "fantasy-name-generator"
 import React, { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid'
 import ProficienciesSelector from "../components/ProficienciesSelector"
-import { Skill, Save, DmToolsData } from "../dm-tools-data.types"
+import AbilitySelector from '../components/AbilitySelector'
+import { Skill, Save, DmToolsData, Ability } from "../dm-tools-data.types"
 import Title from '../components/Title';
 
 export default function CreateNpc() {
@@ -13,16 +14,17 @@ export default function CreateNpc() {
   const [name, setName] = React.useState<string>('')
   const [gender, setGender] = React.useState<string>('Male')
   const [notes, setNotes] = React.useState<string>('')
-  const [strength, setStrength] = React.useState<number>(10)
-  const [dexterity, setDexterity] = React.useState<number>(10)
-  const [constitution, setConstitution] = React.useState<number>(10)
-  const [intelligence, setIntelligence] = React.useState<number>(10)
-  const [wisdom, setWisdom] = React.useState<number>(10)
-  const [charisma, setCharisma] = React.useState<number>(10)
   const [proficiencyBonus, setProficiencyBonus] = React.useState<number>(1)
   const [ac, setAc] = React.useState<number>(10)
   const [hp, setHp] = React.useState<number>(10)
   const { npcId } = useParams()
+
+  const [strength, setStrength] = React.useState<Ability>(newAbility('Strength'))
+  const [dexterity, setDexterity] = React.useState<Ability>(newAbility('Dexterity'))
+  const [constitution, setConstitution] = React.useState<Ability>(newAbility('Constitution'))
+  const [intelligence, setIntelligence] = React.useState<Ability>(newAbility('Intelligence'))
+  const [wisdom, setWisdom] = React.useState<Ability>(newAbility('Wisdom'))
+  const [charisma, setCharisma] = React.useState<Ability>(newAbility('Charisma'))
 
   const [acrobatics, setAcrobatics] = React.useState<Skill>(newSkill('Acrobatics', 'DEX'))
   const [animalHandling, setAnimalHandling] = React.useState<Skill>(newSkill('Animal Handling', 'WIS'))
@@ -70,6 +72,15 @@ export default function CreateNpc() {
     }
   }
 
+  function newAbility(name: string): Ability {
+    return {
+      name,
+      modifier: null,
+      value: 10,
+      shortName: name.slice(0, 3).toUpperCase()
+    }
+  }
+
   useEffect(() => {
     const loadNpc = async () => {
       const npc = await window.electron.getNpc(npcId) as DmToolsData
@@ -78,12 +89,12 @@ export default function CreateNpc() {
       setName(npc.profile.name)
       setGender(npc.profile.appearance.gender)
       // setNotes(npc.notes)
-      setStrength(npc.abilities[0].value)
-      setDexterity(npc.abilities[1].value)
-      setConstitution(npc.abilities[2].value)
-      setIntelligence(npc.abilities[3].value)
-      setWisdom(npc.abilities[4].value)
-      setCharisma(npc.abilities[5].value)
+      setStrength(npc.abilities[0])
+      setDexterity(npc.abilities[1])
+      setConstitution(npc.abilities[2])
+      setIntelligence(npc.abilities[3])
+      setWisdom(npc.abilities[4])
+      setCharisma(npc.abilities[5])
       setProficiencyBonus(npc.proficiency)
       setAc(npc.ac)
       setHp(npc.hp.base)
@@ -152,14 +163,14 @@ export default function CreateNpc() {
       race,
       gender,
       notes,
-      abilities: {
+      abilities: [
         strength,
         dexterity,
         constitution,
         intelligence,
         wisdom,
         charisma,
-      },
+      ],
       proficiencyBonus,
       ac,
       hp,
@@ -243,7 +254,7 @@ export default function CreateNpc() {
           <Box sx={style.centred}>
             <Box sx={style.textInput}>
               <FormControl fullWidth>
-                <InputLabel id="race-select-label"  shrink={true} >Race</InputLabel>
+                <InputLabel id="race-select-label" shrink={true} >Race</InputLabel>
                 <TextField value={race} onChange={handleRaceChange}></TextField>
                 <Select
                   labelId="race-select-label"
@@ -275,7 +286,7 @@ export default function CreateNpc() {
             <Box sx={style.textInput}>
               <FormControl fullWidth>
                 <InputLabel id="gender-select-label" shrink={true}>Gender</InputLabel>
-                <TextField value={gender}  onChange={handleGenderChange}></TextField>
+                <TextField value={gender} onChange={handleGenderChange}></TextField>
                 <Select
                   labelId="gender-select-label"
                   id="gender-select"
@@ -289,7 +300,7 @@ export default function CreateNpc() {
             </Box>
             <Box sx={style.name}>
               <TextField value={name} label="Name" variant="outlined" onChange={(e) => setName(e.target.value)} />
-          <Button sx={style.nameButton} variant="outlined" onClick={generateName}>Generate Name</Button>
+              <Button sx={style.nameButton} variant="outlined" onClick={generateName}>Generate Name</Button>
             </Box>
           </Box>
           <Box sx={{ mt: 1 }}>
@@ -303,24 +314,12 @@ export default function CreateNpc() {
         </Box>
       </Box>
       <Grid container sx={style.abilities}>
-        <Grid item xs={2} md={1}>
-          <TextField label='STR' type='number' onChange={handleIntegerChange(setStrength)} value={strength} />
-        </Grid>
-        <Grid item xs={2} md={1}>
-          <TextField label='DEX' type='number' onChange={handleIntegerChange(setDexterity)} value={dexterity} />
-        </Grid>
-        <Grid item xs={2} md={1}>
-          <TextField label='CON' type='number' onChange={handleIntegerChange(setConstitution)} value={constitution} />
-        </Grid>
-        <Grid item xs={2} md={1}>
-          <TextField label='INT' type='number' onChange={handleIntegerChange(setIntelligence)} value={intelligence} />
-        </Grid>
-        <Grid item xs={2} md={1}>
-          <TextField label='WIS' type='number' onChange={handleIntegerChange(setWisdom)} value={wisdom} />
-        </Grid>
-        <Grid item xs={2} md={1}>
-          <TextField label='CHA' type='number' onChange={handleIntegerChange(setCharisma)} value={charisma} />
-        </Grid>
+        <AbilitySelector ability={strength} hook={setStrength} />
+        <AbilitySelector ability={dexterity} hook={setDexterity} />
+        <AbilitySelector ability={constitution} hook={setConstitution} />
+        <AbilitySelector ability={intelligence} hook={setIntelligence} />
+        <AbilitySelector ability={wisdom} hook={setWisdom} />
+        <AbilitySelector ability={charisma} hook={setCharisma} />
       </Grid>
       <Grid container>
         <Grid item xs={7} sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -345,7 +344,7 @@ export default function CreateNpc() {
           <ProficienciesSelector skill={survival} hook={setSurvival} />
         </Grid>
         <Grid item xs={5} sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Typography component="h2" variant="h6" color="primary" gutterBottom>Saves</Typography>
+          <Typography component="h2" variant="h6" color="primary" gutterBottom>Saves</Typography>
           <ProficienciesSelector skill={strengthSave} hook={setStrengthSave} expertise={false} />
           <ProficienciesSelector skill={dexteritySave} hook={setDexteritySave} expertise={false} />
           <ProficienciesSelector skill={constitutionSave} hook={setConstitutionSave} expertise={false} />

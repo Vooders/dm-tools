@@ -3,7 +3,7 @@ import path from 'path'
 import { writeFile } from 'fs/promises';
 import getFile from './getFile';
 import NpcProcessor from './npcProcessor';
-import { Save, Skill } from '../dm-tools-data.types';
+import { Ability, Save, Skill } from '../dm-tools-data.types';
 
 const userDataPath = app.getPath('userData');
 const npcsDirectory = path.join(userDataPath, 'npcs');
@@ -48,25 +48,16 @@ async function getSummary() {
 export type Npc = {
     name: string
     id: string
-    filename?: string
-    race?: string
-    gender?: string
-    notes?: string
-    abilities?: NpcAbilities
+    filename: string
+    race: string
+    gender: string
+    notes: string
+    abilities: Ability[]
     proficiencyBonus: number
     ac: number
     hp: number
     skills: Skill[]
     saves: Save[]
-}
-
-export type NpcAbilities = {
-    strength: number
-    dexterity: number
-    constitution: number
-    intelligence: number
-    wisdom: number
-    charisma: number
 }
 
 export type NpcSummary = {

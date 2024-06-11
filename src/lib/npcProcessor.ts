@@ -1,5 +1,4 @@
 import { Npc } from "./saveNpc";
-import abilities from './character-sheet-processor/abilities'
 import {
     Ability,
     DmToolsData,
@@ -142,37 +141,11 @@ export default class NpcProcessor {
     }
 
     private buildAbilities(): Ability[] {
-        return abilities([
-            {
-                "id": 1,
-                "name": null,
-                "value": this.npcData.abilities.strength
-            },
-            {
-                "id": 2,
-                "name": null,
-                "value": this.npcData.abilities.dexterity
-            },
-            {
-                "id": 3,
-                "name": null,
-                "value": this.npcData.abilities.constitution
-            },
-            {
-                "id": 4,
-                "name": null,
-                "value": this.npcData.abilities.intelligence
-            },
-            {
-                "id": 5,
-                "name": null,
-                "value": this.npcData.abilities.wisdom
-            },
-            {
-                "id": 6,
-                "name": null,
-                "value": this.npcData.abilities.charisma
+        return this.npcData.abilities.map((ability) => {
+            return {
+                ...ability,
+                modifier: Math.floor((ability.value - 10) / 2)
             }
-        ], [])
+        })
     }
 }
