@@ -2,31 +2,27 @@ import React, { useEffect } from 'react'
 import { ProficiencyView } from '../dm-tools-data.types'
 import { FormControl, FormLabel, FormGroup, FormControlLabel, Checkbox } from '@mui/material'
 
-
 export default function LanguagesSelector(props: LanguageSelectorProps) {
-  const [common, setCommon] = React.useState<boolean>(false)
-  const [draconic, setDraconic] = React.useState<boolean>(false)
+  const [languages, setLanguages] = React.useState<string[]>([])
 
-  function handleChange(setter: Function) {
-    return (e: any) => {
-      setter(e.target.checked)
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const checkbox = e.target
+    if (languages.includes(checkbox.name)) {
+      setLanguages(languages.filter(language => language !== checkbox.name))
+      checkbox.checked = false
+    } else {
+      setLanguages([...languages, checkbox.name].sort())
+      checkbox.checked = true
     }
   }
 
   useEffect(() => {
+    console.log(languages)
     props.hook({
       type: 'Languages',
-      value: getLanguagesView()
+      value: languages
     })
-  }, [common, draconic])
-
-  const getLanguagesView = (): string[] => {
-    const languages = [
-      { name: 'common', proficient: common },
-      { name: 'draconic', proficient: draconic}
-    ]
-    return languages.filter((lang) => lang.proficient).map((lang) => lang.name)
-  }
+  }, [languages])
 
   return (
     <React.Fragment>
@@ -35,22 +31,20 @@ export default function LanguagesSelector(props: LanguageSelectorProps) {
         <FormGroup>
           <FormControlLabel
             control={
-              <Checkbox checked={common} onChange={handleChange(setCommon)} name="common" />
+              <Checkbox onChange={handleChange} name="common" />
             }
             label="Common"
           />
           <FormControlLabel
             control={
-              <Checkbox checked={draconic} onChange={handleChange(setDraconic)} name="draconic" />
+              <Checkbox onChange={handleChange} name="draconic" />
             }
             label="Draconic"
           />
-
         </FormGroup>
       </FormControl>
     </React.Fragment>
   )
-
 }
 
 interface LanguageSelectorProps {
