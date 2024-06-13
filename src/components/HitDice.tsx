@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import React from "react";
 import Icon from '@mdi/react';
+import BlockIcon from '@mui/icons-material/Block';
 import { mdiDice6, mdiDiceD8, mdiDiceD10, mdiDiceD12 } from '@mdi/js';
 import { HitDice } from "../dm-tools-data.types";
 
@@ -22,6 +23,11 @@ export default function hitDice(props: HitDiceProps) {
                                <Box key={`die${index}`}>
                                    {icons[dice.dice]}
                                </Box>
+                            )
+                        })}
+                        {new Array(dice.used).fill(0).map((_) => {
+                            return (
+                               <BlockIcon sx={{color: '#ff6d75'}} />
                             )
                         })}
                     </Box>
