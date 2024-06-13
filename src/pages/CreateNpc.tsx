@@ -5,8 +5,9 @@ import { useParams } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid'
 import ProficienciesSelector from "../components/ProficienciesSelector"
 import AbilitySelector from '../components/AbilitySelector'
-import { Skill, Save, DmToolsData, Ability } from "../dm-tools-data.types"
+import { Skill, Save, DmToolsData, Ability, ProficiencyView } from "../dm-tools-data.types"
 import Title from '../components/Title';
+import LanguagesSelector from "../components/LanguagesSelector"
 
 export default function CreateNpc() {
   const [id, setId] = React.useState<string>(uuidv4())
@@ -52,6 +53,11 @@ export default function CreateNpc() {
   const [wisdomSave, setWisdomSave] = React.useState<Save>(newSave('Wisdom'))
   const [charismaSave, setCharismaSave] = React.useState<Save>(newSave('Charisma'))
 
+  const [armour, setArmour] = React.useState<ProficiencyView>(newProficiencyView('Armour'))
+  const [weapons, setWeapons] = React.useState<ProficiencyView>(newProficiencyView('Weapons'))
+  const [tools, setTools] = React.useState<ProficiencyView>(newProficiencyView('Tools'))
+  const [languages, setLanguages] = React.useState<ProficiencyView>(newProficiencyView('Languages'))
+
   function newSkill(name: string, mod: string): Skill {
     return {
       name,
@@ -78,6 +84,13 @@ export default function CreateNpc() {
       modifier: null,
       value: 10,
       shortName: name.slice(0, 3).toUpperCase()
+    }
+  }
+
+  function newProficiencyView(type: string): ProficiencyView {
+    return {
+      type,
+      value: ''
     }
   }
 
@@ -122,6 +135,13 @@ export default function CreateNpc() {
       setIntelligenceSave(npc.saves[3])
       setWisdomSave(npc.saves[4])
       setCharismaSave(npc.saves[5])
+      setArmour(npc.proficiencyView[0])
+      setWeapons(npc.proficiencyView[1])
+      setTools(npc.proficiencyView[2])
+      setArmour(npc.proficiencyView[0])
+      setWeapons(npc.proficiencyView[1])
+      setTools(npc.proficiencyView[2])
+      setLanguages(npc.proficiencyView[3])
     }
 
     if (npcId && npcId !== id) {
@@ -201,6 +221,12 @@ export default function CreateNpc() {
         intelligenceSave,
         wisdomSave,
         charismaSave,
+      ],
+      proficiencyView:[
+        armour,
+        weapons,
+        tools,
+        languages
       ]
     }
     await window.electron.saveNpc(npc)
@@ -353,6 +379,10 @@ export default function CreateNpc() {
           <ProficienciesSelector skill={charismaSave} hook={setCharismaSave} expertise={false} />
         </Grid>
       </Grid>
+      <LanguagesSelector languages={languages} hook={setLanguages}/>
+      {/* <LanguagesSelector languages={} hook={}/>
+      <LanguagesSelector languages={} hook={}/>
+      <LanguagesSelector languages={} hook={}/> */}
       <Box sx={style.centred}>
         <Button variant="outlined" sx={style.saveButton} onClick={saveNpc} >Save</Button>
       </Box>

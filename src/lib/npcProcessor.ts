@@ -33,7 +33,7 @@ export default class NpcProcessor {
             saves: this.buildSaves(),
             skills: this.skills,
             passiveSkills: this.buildPassiveSkills(),
-            proficiencyView: [],
+            proficiencyView: this.npcData.proficiencyView,
             spellSlots: [],
             actions: [],
             spells: [],

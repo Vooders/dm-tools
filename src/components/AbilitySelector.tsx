@@ -25,7 +25,6 @@ export default function AbilitySelector(props: AbilitySelectorProps) {
   )
 }
 
-
 interface AbilitySelectorProps {
   ability: Ability
   hook: Function
