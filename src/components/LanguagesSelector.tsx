@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ProficiencyView } from '../dm-tools-data.types'
 import { FormControl, FormLabel, FormGroup, FormControlLabel, Checkbox } from '@mui/material'
 
@@ -10,12 +10,15 @@ export default function LanguagesSelector(props: LanguageSelectorProps) {
   function handleChange(setter: Function) {
     return (e: any) => {
       setter(e.target.checked)
-      props.hook({
-        type: 'Languages',
-        value: getLanguagesView()
-      })
     }
   }
+
+  useEffect(() => {
+    props.hook({
+      type: 'Languages',
+      value: getLanguagesView()
+    })
+  }, [common, draconic])
 
   const getLanguagesView = (): string => {
     const languages = [
