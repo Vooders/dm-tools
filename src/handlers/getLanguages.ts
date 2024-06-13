@@ -8,7 +8,7 @@ export default async (): Promise<LanguagesData> => {
     const characters = await Promise.all(characterIds.map(async (characterId) => {
         const characterData = await getCharacter(null, characterId)
         const languages = characterData.proficiencyView
-            .filter((prof: { type: any }) => prof.type === 'Languages')[0].value.split(',')
+            .filter((prof: { type: any }) => prof.type === 'Languages')[0].value
             .map((language: string) => language.trim())
 
         return {

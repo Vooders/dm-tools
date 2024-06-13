@@ -86,7 +86,7 @@ export type PassiveSkill = {
 
 export type ProficiencyView = {
     type: string
-    value: string
+    value: string[]
 }
 
 export type SpellSlot = {

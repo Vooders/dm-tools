@@ -14,9 +14,7 @@ export default function proficienciesView(customProfs: any, skills: Skill[],  pr
         .filter(proficiency => !proficiency.subType.includes('saving-throws'))
         .filter(proficiency => !skillNames.includes(proficiency.friendlySubtypeName) || customProficiencies.includes(proficiency.friendlySubtypeName))
 
-    const languages = langs
-        .map(language => language.subType)
-        .join(', ')
+    const languages = langs.map(language => language.subType)
 
     return [
         {
@@ -37,10 +35,10 @@ export default function proficienciesView(customProfs: any, skills: Skill[],  pr
             value: languages
         }
     ]
-    function getSubTypeNamesByEntityId(proficiencies: Modifier[], entityId: number): string {
+    function getSubTypeNamesByEntityId(proficiencies: Modifier[], entityId: number): string[] {
         const names = proficiencies.filter(proficiency => proficiency.entityTypeId === entityId)
             .map(proficiency => proficiency.friendlySubtypeName)
 
-        return [...new Set(names)].join(', ')
+        return [...new Set(names)]
     }
 }

@@ -20,12 +20,12 @@ export default function LanguagesSelector(props: LanguageSelectorProps) {
     })
   }, [common, draconic])
 
-  const getLanguagesView = (): string => {
+  const getLanguagesView = (): string[] => {
     const languages = [
       { name: 'common', proficient: common },
       { name: 'draconic', proficient: draconic}
     ]
-    return languages.filter((lang) => lang.proficient).map((lang) => lang.name).join(', ')
+    return languages.filter((lang) => lang.proficient).map((lang) => lang.name)
   }
 
   return (
@@ -55,5 +55,5 @@ export default function LanguagesSelector(props: LanguageSelectorProps) {
 
 interface LanguageSelectorProps {
   languages: ProficiencyView
-  hook: Function
+  hook: (a: ProficiencyView) => void 
 }

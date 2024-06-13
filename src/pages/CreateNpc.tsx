@@ -90,7 +90,7 @@ export default function CreateNpc() {
   function newProficiencyView(type: string): ProficiencyView {
     return {
       type,
-      value: ''
+      value: []
     }
   }
 
