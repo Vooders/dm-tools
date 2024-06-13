@@ -21,7 +21,7 @@ export function ProficienciesLanguages({ proficiencyView }: ProficienciesLanguag
                         return (
                             <>
                                 <ListItem>
-                                    <ListItemText primary={view.type.toLocaleUpperCase()} secondary={view.value.join(' | ')} />
+                                    <ListItemText primary={view.name.toLocaleUpperCase()} secondary={view.value.join(' | ')} />
                                 </ListItem>
                                 <Divider component="li" />
                             </>

@@ -19,7 +19,7 @@ export default function LanguagesSelector(props: LanguageSelectorProps) {
   useEffect(() => {
     console.log(languages)
     props.hook({
-      type: 'Languages',
+      name: 'Languages',
       value: languages
     })
   }, [languages])

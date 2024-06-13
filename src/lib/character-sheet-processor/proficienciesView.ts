@@ -18,20 +18,20 @@ export default function proficienciesView(customProfs: any, skills: Skill[],  pr
 
     return [
         {
-            type: 'armour',
+            name: 'armour',
             value: getSubTypeNamesByEntityId(proficiencies, entityId.armour)
         },
         {
-            type: 'Weapons',
+            name: 'Weapons',
             value: getSubTypeNamesByEntityId(proficiencies, entityId.martialWeapons)
                 .concat(', ', getSubTypeNamesByEntityId(proficiencies, entityId.simpleWeapons))
         },
         {
-            type: 'tools',
+            name: 'tools',
             value: getSubTypeNamesByEntityId(proficiencies, entityId.tools)
         },
         {
-            type: 'Languages',
+            name: 'Languages',
             value: languages
         }
     ]

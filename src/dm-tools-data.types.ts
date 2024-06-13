@@ -85,7 +85,7 @@ export type PassiveSkill = {
 }
 
 export type ProficiencyView = {
-    type: string
+    name: string
     value: string[]
 }
 

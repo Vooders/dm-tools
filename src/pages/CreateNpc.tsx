@@ -89,7 +89,7 @@ export default function CreateNpc() {
 
   function newProficiencyView(type: string): ProficiencyView {
     return {
-      type,
+      name,
       value: []
     }
   }
