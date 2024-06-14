@@ -180,7 +180,8 @@ export type Item = {
         maxUses?: number
         numberUsed?: number
         useProficiencyBonus?: boolean
-    }
+    },
+    modifiers: any
 }
 
 export type WeightData = {

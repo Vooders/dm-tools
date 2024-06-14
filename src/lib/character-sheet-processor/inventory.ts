@@ -18,12 +18,13 @@ export default function inventory(inventory: any, customItemInventory: any, carr
                 notes: item.definition.notes,
                 capacity: item.definition.capacityWeight,
                 armorClass: item.definition.armorClass,
-                armorTypeId: item.definition.armorTypeId
+                armorTypeId: item.definition.armorTypeId,
             },
             containerId: item.containerEntityId,
             equipped: item.equipped,
             quantity: item.quantity,
-            limitedUse: {}
+            limitedUse: {},
+            modifiers: item.definition.grantedModifiers
         }
         return addCustomValues(newItem)
     })
@@ -50,7 +51,8 @@ export default function inventory(inventory: any, customItemInventory: any, carr
             containerId: null,
             equipped: false,
             quantity: item.quantity,
-            limitedUse: {}
+            limitedUse: {},
+            modifiers: {}
         }
     })
 

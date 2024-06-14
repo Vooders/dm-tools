@@ -24,7 +24,8 @@ export default class ItemBuilder {
         private canEquip: boolean = false,
         private maxUses: number = 0,
         private numberUsed: number = 0,
-        private useProficiencyBonus: boolean = false
+        private useProficiencyBonus: boolean = false,
+        private modifiers: any[] = []
     ) { }
 
     public withId(id: number) {
@@ -154,6 +155,12 @@ export default class ItemBuilder {
         this.useProficiencyBonus = useProficiencyBonus
         return this
     }
+
+    public withModifiers(modifiers: any) {
+        this.modifiers = modifiers
+        return this
+    }
+
     public build(): Item {
         return {
             id: this.id,
@@ -182,7 +189,8 @@ export default class ItemBuilder {
                 maxUses: this.maxUses,
                 numberUsed: this.numberUsed,
                 useProficiencyBonus: this.useProficiencyBonus
-            }
+            },
+            modifiers: this.modifiers
         }
     }
 }
