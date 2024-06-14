@@ -103,10 +103,10 @@ export default function CreateNpc() {
   useEffect(() => {
     const loadNpc = async () => {
       const npc = await window.electron.getNpc(npcId) as DmToolsData
-      const findAbility = makeFinder<Ability>(npc.abilities)
-      const findSkill = makeFinder<Skill>(npc.skills)
-      const findSave = makeFinder<Save>(npc.saves)
-      const findProficiencyView = makeFinder<ProficiencyView>(npc.proficiencyView)
+      const findAbility = makeFinder(npc.abilities)
+      const findSkill = makeFinder(npc.skills)
+      const findSave = makeFinder(npc.saves)
+      const findProficiencyView = makeFinder(npc.proficiencyView)
 
       setId(npc.id)
       setRace(npc.profile.race)
