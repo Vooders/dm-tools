@@ -87,7 +87,7 @@ export default function CreateNpc() {
     }
   }
 
-  function newProficiencyView(type: string): ProficiencyView {
+  function newProficiencyView(name: string): ProficiencyView {
     return {
       name,
       value: []
@@ -112,6 +112,10 @@ export default function CreateNpc() {
       setRace(npc.profile.race)
       setName(npc.profile.name)
       setGender(npc.profile.appearance.gender)
+
+      setProficiencyBonus(npc.proficiency)
+      setAc(npc.ac)
+      setHp(npc.hp.base)
       // setNotes(npc.notes)
       setStrength(findAbility('Strength'))
       setDexterity(findAbility('Dexterity'))
@@ -119,9 +123,7 @@ export default function CreateNpc() {
       setIntelligence(findAbility('Intelligence'))
       setWisdom(findAbility('Wisdom'))
       setCharisma(findAbility('Charisma'))
-      setProficiencyBonus(npc.proficiency)
-      setAc(npc.ac)
-      setHp(npc.hp.base)
+
       setAcrobatics(findSkill('Acrobatics'))
       setAnimalHandling(findSkill('Animal Handling'))
       setArcana(findSkill('Arcana'))
@@ -140,12 +142,14 @@ export default function CreateNpc() {
       setSleightOfHand(findSkill('Sleight of Hand'))
       setStealth(findSkill('Stealth'))
       setSurvival(findSkill('Survival'))
+
       setStrengthSave(findSave('Strength'))
       setDexteritySave(findSave('Dexterity'))
       setConstitutionSave(findSave('Constitution'))
       setIntelligenceSave(findSave('Intelligence'))
       setWisdomSave(findSave('Wisdom'))
       setCharismaSave(findSave('Charisma'))
+
       setArmour(findProficiencyView('armour'))
       setWeapons(findProficiencyView('Weapons'))
       setTools(findProficiencyView('tools'))
