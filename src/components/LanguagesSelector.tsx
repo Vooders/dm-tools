@@ -24,6 +24,10 @@ export default function LanguagesSelector(props: LanguageSelectorProps) {
     })
   }, [languages])
 
+  function checkLanguages(language: string): boolean {
+    return props.languages.value.includes(language)
+  }
+
   return (
     <React.Fragment>
       <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
@@ -31,13 +35,13 @@ export default function LanguagesSelector(props: LanguageSelectorProps) {
         <FormGroup>
           <FormControlLabel
             control={
-              <Checkbox onChange={handleChange} name="common" />
+              <Checkbox checked={checkLanguages('Common')} onChange={handleChange} name="Common" />
             }
             label="Common"
           />
           <FormControlLabel
             control={
-              <Checkbox onChange={handleChange} name="draconic" />
+              <Checkbox checked={checkLanguages('Draconic')} onChange={handleChange} name="Draconic" />
             }
             label="Draconic"
           />
