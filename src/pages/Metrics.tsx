@@ -4,6 +4,8 @@ import Graph from '../components/Graph'
 import { Box } from '@mui/system'
 import { Button, ButtonGroup } from '@mui/material'
 
+import * as characterRepository from '../repositories/characterRepository'
+
 export default function Metrics() {
 
     useEffect(() => {
@@ -12,7 +14,7 @@ export default function Metrics() {
             await getMetrics(timeRange)
         })()
 
-        const removeListener = window.electron.receive('character:updated', async () => {
+        const removeListener = characterRepository.onUpdate(async () => {
             console.log('Characters updated: reloading metric data')
             await getMetrics(timeRange)
         })

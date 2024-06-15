@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import CharacterSheet from './CharacterSheet'
 import { DmToolsData } from '../dm-tools-data.types'
+import * as characterRepository from '../repositories/characterRepository'
 
 export default function PlayerCharacter() {
     let { characterId } = useParams()
@@ -11,12 +12,12 @@ export default function PlayerCharacter() {
     useEffect(() => {
         (async () => {
             console.log('Initial load of health data')
-            setCharacter(await window.electron.invoke('character:get', characterId))
+            setCharacter(await characterRepository.get(characterId))
         })()
 
-        const removeListener = window.electron.receive('character:updated', async () => {
+        const removeListener = characterRepository.onUpdate(async () => {
             console.log('Characters updated: reloading player character')
-            setCharacter(await window.electron.invoke('character:get', characterId))
+            setCharacter(await characterRepository.get(characterId))
         })
 
         return () => {

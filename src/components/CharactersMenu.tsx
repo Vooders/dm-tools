@@ -8,6 +8,8 @@ import ListSubheader from '@mui/material/ListSubheader';
 import { Link } from 'react-router-dom';
 import { Summary } from '../lib/saveCharacter';
 
+import * as characterRepository from '../repositories/characterRepository'
+
 export default function CharactersMenu() {
     const [open, setOpen] = React.useState(true);
     const [characters, setCharacters] = useState<Summary>({})
@@ -15,12 +17,12 @@ export default function CharactersMenu() {
     useEffect(() => {
         (async () => {
             console.log('Initial load of health data')
-            setCharacters(await window.electron.invoke('character:getSummary'))
+            setCharacters(await characterRepository.getSummary())
         })()
 
         const removeListener = window.electron.receive('character:updated', async () => {
             console.log('Characters updated: reloading health data')
-            setCharacters(await window.electron.invoke('character:getSummary'))
+            setCharacters(await characterRepository.getSummary())
         })
 
         return () => {

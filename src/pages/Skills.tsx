@@ -9,6 +9,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TableHead from '@mui/material/TableHead';
 
+import * as characterRepository from '../repositories/characterRepository'
+
 export default function Skills() {
     const [skills, setSkills] = useState<any[]>([[], []])
 
@@ -18,7 +20,7 @@ export default function Skills() {
             setSkills(await window.electron.invoke('skills:get'))
         })()
 
-        const removeListener = window.electron.receive('character:updated', async () => {
+        const removeListener = characterRepository.onUpdate(async () => {
             console.log('Characters updated: reloading skills data')
             setSkills(await window.electron.invoke('skills:get'))
         })

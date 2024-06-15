@@ -11,6 +11,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { SensesData } from '../handlers/getSenses';
 
+import * as characterRepository from '../repositories/characterRepository'
+
 export default function Senses() {
     const [senses, setSenses] = useState<SensesData[]>([])
 
@@ -20,7 +22,7 @@ export default function Senses() {
             setSenses(await window.electron.invoke('senses:get'))
         })()
 
-        const removeListener = window.electron.receive('character:updated', async () => {
+        const removeListener = characterRepository.onUpdate(async () => {
             console.log('Characters updated: reloading senses data')
             setSenses(await window.electron.invoke('senses:get'))
         })

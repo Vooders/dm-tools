@@ -11,6 +11,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { LanguagesData } from '../handlers/getLanguages';
 
+import * as characterRepository from '../repositories/characterRepository'
+
 export default function Languages() {
     const [languages, setLanguages] = useState<LanguagesData>({
         allLanguages: [],
@@ -23,7 +25,7 @@ export default function Languages() {
             setLanguages(await window.electron.invoke('languages:get'))
         })()
 
-        const removeListener = window.electron.receive('character:updated', async () => {
+        const removeListener = characterRepository.onUpdate(async () => {
             console.log('Characters updated: reloading languages')
             await setLanguages(await window.electron.invoke('languages:get'))
         })

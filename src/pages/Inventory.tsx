@@ -13,6 +13,8 @@ import Title from '../components/Title';
 import { Card, CardContent, Grid } from '@mui/material';
 import { Item, ItemContainer } from '../dm-tools-data.types';
 
+import * as characterRepository from '../repositories/characterRepository'
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -30,7 +32,7 @@ export default function Inventory() {
         await getInventory()
       })()
 
-      const removeListener = window.electron.receive('character:updated', async () => {
+      const removeListener = characterRepository.onUpdate(async () => {
         console.log('Characters updated: reloading inventory data')
         await getInventory()
       })

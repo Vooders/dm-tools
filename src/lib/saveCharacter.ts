@@ -66,7 +66,7 @@ export type Summary = {
 }
 
 export type CharacterSummary = {
-    id: number,
+    id: string,
     name: string,
     race: string,
     avatarPath: string,

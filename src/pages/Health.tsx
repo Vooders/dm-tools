@@ -15,6 +15,8 @@ import HitDice from '../components/HitDice'
 import HpBar from '../components/HpBar'
 import { CharacterProfileHp } from '../dm-tools-data.types'
 
+import * as characterRepository from '../repositories/characterRepository'
+
 const style = {
     outer: {
         display: 'flex',
@@ -42,7 +44,7 @@ export default function Health() {
             setHealth(await window.electron.invoke('health:get'))
         })()
 
-        const removeListener = window.electron.receive('character:updated', async () => {
+        const removeListener = characterRepository.onUpdate(async () => {
             console.log('Characters updated: reloading health data')
             setHealth(await window.electron.invoke('health:get'))
         })

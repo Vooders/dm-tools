@@ -14,14 +14,16 @@ import Title from './Title';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
+import * as characterRepository from '../repositories/characterRepository'
+
 export default function CharacterImporter() {
     const [characterId, setCharacterId] = useState('')
     const [characterName, setCharacterName] = useState('')
-    const [saveResponse, setSaveResponse] = useState('')
+    const [saveResponse, setSaveResponse] = useState<boolean>(null)
     const [processing, setProcessing] = useState(false)
-    const [openSnackBar, setOpenSnackBar] = React.useState(false);
+    const [openSnackBar, setOpenSnackBar] = useState(false);
     const [importResponse, setImportResponse] = useState<ImportResponse>({ status: '', value: {} })
-    const [openDialog, setOpenDialog] = React.useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
@@ -29,7 +31,7 @@ export default function CharacterImporter() {
 
     const importChar = async (): Promise<void> => {
         console.log(`Characters: getting ${characterId}`)
-        const response = await window.electron.invoke('character:import', characterId) as ImportResponse
+        const response = await characterRepository.importCharacter(characterId)
         setImportResponse(response)
         if (response.status === 'success') {
             setCharacterName(response.value.data.name)
@@ -41,7 +43,7 @@ export default function CharacterImporter() {
         setProcessing(true)
         setOpenDialog(false)
         setCharacterId('')
-        const response = await window.electron.invoke('character:save', importResponse.value)
+        const response = await characterRepository.save(importResponse.value)
         setSaveResponse(response)
         setOpenSnackBar(true)
         setProcessing(false)
@@ -49,7 +51,7 @@ export default function CharacterImporter() {
 
     const reset = () => {
         setCharacterName('')
-        setSaveResponse('')
+        setSaveResponse(null)
         setOpenDialog(false)
     }
 

@@ -5,13 +5,16 @@ const { contextBridge, ipcRenderer } = require('electron')
 
 contextBridge.exposeInMainWorld('electron', {
   send: (channel, data) => {
-    console.log(`[contextBridge] sending channel: "${channel}" data: ${data}`)
+    console.log(`[contextBridge] sending channel: "${channel}" data in next line`)
+    console.log(data)
     ipcRenderer.send(channel, data)
   },
   invoke: async (channel, data) => {
-    console.log(`[contextBridge] invoking channel: "${channel}" data: ${data}`)
+    console.log(`[contextBridge] invoking channel: "${channel}" data in next line`)
+    console.log(data)
     const response = await ipcRenderer.invoke(channel, data)
-    console.log(`[contextBridge] response for channel: "${channel}" response: ${response}`)
+    console.log(`[contextBridge] response for channel: "${channel}" response in next line`)
+    console.log(response)
     return response
   },
   receive: (channel, func) => {

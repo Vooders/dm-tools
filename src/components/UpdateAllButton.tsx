@@ -5,6 +5,8 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import { Typography } from '@mui/material';
 
+import * as characterRepository from '../repositories/characterRepository'
+
 const refreshTime = 60
 
 export default function UpdateAllButton() {
@@ -14,7 +16,7 @@ export default function UpdateAllButton() {
     async function useInterval(callback: Function, delay: number) {
         if (count < 1) {
             setCounter(refreshTime)
-            await window.electron.invoke('character:updateAll')
+            await characterRepository.updateAll()
         }
         const savedCallback: any = useRef();
 
@@ -38,7 +40,7 @@ export default function UpdateAllButton() {
 
     const updateAll = async () => {
         setLoading(true)
-        await window.electron.invoke('character:updateAll')
+        await characterRepository.updateAll()
         setCounter(refreshTime)
         setLoading(false);
     }

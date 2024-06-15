@@ -5,6 +5,8 @@ import { WealthData } from '../handlers/getWealth'
 import Currencies from '../components/Currencies'
 import Currency from '../components/Currency'
 
+import * as characterRepository from '../repositories/characterRepository'
+
 export default function Wealth() {
     const [wealth, setWealth] = useState<WealthData[]>([])
 
@@ -14,7 +16,7 @@ export default function Wealth() {
             setWealth(await window.electron.invoke('wealth:get'))
         })()
 
-        const removeListener = window.electron.receive('character:updated', async () => {
+        const removeListener = characterRepository.onUpdate(async () => {
             console.log('Characters updated: reloading wealth data')
             setWealth(await window.electron.invoke('wealth:get'))
         })

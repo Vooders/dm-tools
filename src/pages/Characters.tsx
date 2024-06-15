@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { Summary } from '../lib/saveCharacter';
+import * as characterRepository from '../repositories/characterRepository'
 
 export default function Characters() {
     const [characters, setCharacters] = useState<Summary>({})
@@ -21,12 +22,12 @@ export default function Characters() {
     useEffect(() => {
         (async () => {
             console.log('Initial load of characters')
-            setCharacters(await window.electron.invoke('character:getSummary'))
+            setCharacters(await characterRepository.getSummary())
         })()
 
-        const removeListener = window.electron.receive('character:updated', async () => {
+        const removeListener = characterRepository.onUpdate(async () => {
             console.log('Characters updated: reloading character data')
-            setCharacters(await window.electron.invoke('character:getSummary'))
+            setCharacters(await characterRepository.getSummary())
         })
 
         return () => {
@@ -34,8 +35,8 @@ export default function Characters() {
         }
     }, [])
 
-    const handleDelete = async (characterId: number) => {
-        const result = await window.electron.invoke('character:delete', characterId)
+    const handleDelete = async (characterId: string) => {
+        const result = await characterRepository.deleteCharacter(characterId)
         console.log(`Delete ${characterId} - ${result}`)
     }
 
