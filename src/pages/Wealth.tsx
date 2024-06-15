@@ -11,12 +11,12 @@ export default function Wealth() {
     useEffect(() => {
         (async () => {
             console.log('Initial load of wealth data')
-            setWealth(await window.electron.getWealth())
+            setWealth(await window.electron.invoke('wealth:get'))
         })()
 
         const removeListener = window.electron.receive('character:updated', async () => {
             console.log('Characters updated: reloading wealth data')
-            setWealth(await window.electron.getWealth())
+            setWealth(await window.electron.invoke('wealth:get'))
         })
 
         return () => {

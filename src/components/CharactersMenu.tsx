@@ -15,12 +15,12 @@ export default function CharactersMenu() {
     useEffect(() => {
         (async () => {
             console.log('Initial load of health data')
-            setCharacters(await window.electron.getSummary())
+            setCharacters(await window.electron.invoke('character:getSummary'))
         })()
 
         const removeListener = window.electron.receive('character:updated', async () => {
             console.log('Characters updated: reloading health data')
-            setCharacters(await window.electron.getSummary())
+            setCharacters(await window.electron.invoke('character:getSummary'))
         })
 
         return () => {

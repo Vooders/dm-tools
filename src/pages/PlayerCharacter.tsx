@@ -11,12 +11,12 @@ export default function PlayerCharacter() {
     useEffect(() => {
         (async () => {
             console.log('Initial load of health data')
-            setCharacter(await window.electron.getCharacter(characterId))
+            setCharacter(await window.electron.invoke('character:get', characterId))
         })()
 
         const removeListener = window.electron.receive('character:updated', async () => {
             console.log('Characters updated: reloading player character')
-            setCharacter(await window.electron.getCharacter(characterId))
+            setCharacter(await window.electron.invoke('character:get', characterId))
         })
 
         return () => {

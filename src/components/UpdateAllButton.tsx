@@ -14,7 +14,7 @@ export default function UpdateAllButton() {
     async function useInterval(callback: Function, delay: number) {
         if (count < 1) {
             setCounter(refreshTime)
-            await window.electron.importAllCharacters()
+            await window.electron.invoke('character:updateAll')
         }
         const savedCallback: any = useRef();
 
@@ -32,13 +32,13 @@ export default function UpdateAllButton() {
         }, [delay]);
     }
 
-    useInterval(() => {
-        setCounter(count - 1);
-    }, 1000);
+    // useInterval(() => {
+    //     setCounter(count - 1);
+    // }, 1000);
 
     const updateAll = async () => {
         setLoading(true)
-        await window.electron.importAllCharacters()
+        await window.electron.invoke('character:updateAll')
         setCounter(refreshTime)
         setLoading(false);
     }

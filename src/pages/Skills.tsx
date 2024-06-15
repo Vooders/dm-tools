@@ -15,12 +15,12 @@ export default function Skills() {
     useEffect(() => {
         (async () => {
             console.log('Initial load of skills data')
-            setSkills(await window.electron.getSkills())
+            setSkills(await window.electron.invoke('skills:get'))
         })()
 
         const removeListener = window.electron.receive('character:updated', async () => {
             console.log('Characters updated: reloading skills data')
-            setSkills(await window.electron.getSkills())
+            setSkills(await window.electron.invoke('skills:get'))
         })
 
         return () => {

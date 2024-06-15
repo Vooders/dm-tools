@@ -21,12 +21,12 @@ export default function Characters() {
     useEffect(() => {
         (async () => {
             console.log('Initial load of characters')
-            setCharacters(await window.electron.getSummary())
+            setCharacters(await window.electron.invoke('character:getSummary'))
         })()
 
         const removeListener = window.electron.receive('character:updated', async () => {
             console.log('Characters updated: reloading character data')
-            setCharacters(await window.electron.getSummary())
+            setCharacters(await window.electron.invoke('character:getSummary'))
         })
 
         return () => {
@@ -35,7 +35,7 @@ export default function Characters() {
     }, [])
 
     const handleDelete = async (characterId: number) => {
-        const result = await window.electron.deleteCharacter(characterId)
+        const result = await window.electron.invoke('character:delete', characterId)
         console.log(`Delete ${characterId} - ${result}`)
     }
 

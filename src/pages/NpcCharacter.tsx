@@ -11,7 +11,7 @@ export default function NpcCharacter() {
     useEffect(() => {
         const getCharacter = async () => {
             console.log('getting NPC')
-            const char = await window.electron.getNpc(characterId)
+            const char = await window.electron.invoke('npc:get', characterId)
             setCharacter(char)
         }
 

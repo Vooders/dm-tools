@@ -13,21 +13,25 @@ export default function Npcs() {
 
     const setNpcData = async () => {
         console.log('getting Npcs')
-        setNpcs(await window.electron.getNpcs())
+        setNpcs(await window.electron.invoke('npcs:get'))
     }
 
     useEffect(() => {
         setNpcData()
             .catch(console.error)
 
-        window.electron.npcUpdated(async () => {
+        const deleteListener = window.electron.receive('npc:updated', async () => {
             console.log('npc updated')
             await setNpcData()
         })
+
+        return ()  => {
+            if (deleteListener) deleteListener()
+        }
     }, [])
 
     const handleDelete = async (id: string) => {
-        const result = await window.electron.deleteNpc(id)
+        const result = await window.electron.invoke('npc:delete', id)
         console.log(`Delete ${id} - ${result}`)
     }
 

@@ -108,7 +108,7 @@ export default function CreateNpc() {
 
   useEffect(() => {
     const loadNpc = async () => {
-      const npc = await window.electron.getNpc(npcId) as DmToolsData
+      const npc = await window.electron.invoke('npc:get', npcId) as DmToolsData
       const findAbility = getFinder(npc.abilities)
       const findSkill = getFinder(npc.skills)
       const findSave = getFinder(npc.saves)
@@ -227,7 +227,7 @@ export default function CreateNpc() {
         languages
       ]
     }
-    await window.electron.saveNpc(npc)
+    await window.electron.invoke('npc:save', npc)
   }
 
   const style = {

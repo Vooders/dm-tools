@@ -39,12 +39,12 @@ export default function Health() {
     useEffect(() => {
         (async () => {
             console.log('Initial load of health data')
-            setHealth(await window.electron.getHealth())
+            setHealth(await window.electron.invoke('health:get'))
         })()
 
         const removeListener = window.electron.receive('character:updated', async () => {
             console.log('Characters updated: reloading health data')
-            setHealth(await window.electron.getHealth())
+            setHealth(await window.electron.invoke('health:get'))
         })
 
         return () => {

@@ -42,7 +42,7 @@ export default function Metrics() {
 
     const getMetrics = async (range: number) => {
         await setTimeRange((r) => range)
-        setMetrics(await window.electron.getMetrics(range))
+        setMetrics(await window.electron.invoke('metrics:get', range))
     }
 
     return (

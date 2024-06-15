@@ -29,7 +29,7 @@ export default function CharacterImporter() {
 
     const importChar = async (): Promise<void> => {
         console.log(`Characters: getting ${characterId}`)
-        const response = await window.electron.importCharacter(characterId) as ImportResponse
+        const response = await window.electron.invoke('character:import', characterId) as ImportResponse
         setImportResponse(response)
         if (response.status === 'success') {
             setCharacterName(response.value.data.name)
@@ -41,7 +41,7 @@ export default function CharacterImporter() {
         setProcessing(true)
         setOpenDialog(false)
         setCharacterId('')
-        const response = await window.electron.saveCharacter(importResponse.value)
+        const response = await window.electron.invoke('character:save', importResponse.value)
         setSaveResponse(response)
         setOpenSnackBar(true)
         setProcessing(false)

@@ -17,12 +17,12 @@ export default function Senses() {
     useEffect(() => {
         (async () => {
             console.log('Initial load of senses data')
-            setSenses(await window.electron.getSenses())
+            setSenses(await window.electron.invoke('senses:get'))
         })()
 
         const removeListener = window.electron.receive('character:updated', async () => {
             console.log('Characters updated: reloading senses data')
-            setSenses(await window.electron.getSenses())
+            setSenses(await window.electron.invoke('senses:get'))
         })
 
         return () => {

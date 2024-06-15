@@ -42,7 +42,7 @@ export default function Inventory() {
 
   const getInventory = async () => {
     console.log('getting inventory')
-    const inv = await window.electron.getInventories()
+    const inv = await window.electron.invoke('inventory:get')
     setInventory(inv)
     setFullInventory(inv)
   }
