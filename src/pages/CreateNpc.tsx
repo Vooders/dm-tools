@@ -1,13 +1,15 @@
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
-import { nameByRace } from "fantasy-name-generator"
+import { Box, Button, Grid, TextField, Typography } from "@mui/material"
 import React, { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid'
+import { Skill, Save, DmToolsData, Ability, ProficiencyView } from "../dm-tools-data.types"
 import ProficienciesSelector from "../components/ProficienciesSelector"
 import AbilitySelector from '../components/AbilitySelector'
-import { Skill, Save, DmToolsData, Ability, ProficiencyView } from "../dm-tools-data.types"
 import Title from '../components/Title';
 import LanguagesSelector from "../components/LanguagesSelector"
+import RaceSelector from "../components/RaceSelector"
+import NameSelector from "../components/NameSelector"
+import GenderSelector from "../components/GenderSelector"
 
 export default function CreateNpc() {
   const [id, setId] = React.useState<string>(uuidv4())
@@ -172,26 +174,6 @@ export default function CreateNpc() {
     }
   }
 
-  const handleRaceChange = (event: any) => {
-    setRace(event.target.value)
-  }
-  const handleGenderChange = (event: any) => {
-    setGender(event.target.value)
-  }
-  const generateName = () => {
-    const convertedRace = convertString(race)
-    const convertedGender = convertString(gender)
-    setName(nameByRace(convertedRace, { gender: convertedGender as 'male' || 'female', allowMultipleNames: true }).toString())
-  }
-
-  function convertString(name: string): string {
-    if (name === 'Cave Person') {
-      return 'cavePerson'
-    } else {
-      return name.toLowerCase().split(' ').join('')
-    }
-  }
-
   const saveNpc = async (): Promise<void> => {
     const npc = {
       id,
@@ -294,56 +276,9 @@ export default function CreateNpc() {
       <Box sx={style.content} >
         <Box>
           <Box sx={style.centred}>
-            <Box sx={style.textInput}>
-              <FormControl fullWidth>
-                <InputLabel id="race-select-label" shrink={true} >Race</InputLabel>
-                <TextField value={race} onChange={handleRaceChange}></TextField>
-                <Select
-                  labelId="race-select-label"
-                  id="race-select"
-                  value=''
-                  onChange={handleRaceChange}
-                >
-                  <MenuItem value={'Angel'}>Angel</MenuItem>
-                  <MenuItem value={'Cave Person'}>Cave Person</MenuItem>
-                  <MenuItem value={'Darkelf'}>Dark Elf</MenuItem>
-                  <MenuItem value={'Demon'}>Demon</MenuItem>
-                  <MenuItem value={'Dragon'}>Dragon</MenuItem>
-                  <MenuItem value={'Drow'}>Drow</MenuItem>
-                  <MenuItem value={'Dwarf'}>Dwarf</MenuItem>
-                  <MenuItem value={'Elf'}>Elf</MenuItem>
-                  <MenuItem value={'Fairy'}>Fairy</MenuItem>
-                  <MenuItem value={'Gnome'}>Gnome</MenuItem>
-                  <MenuItem value={'Goblin'}>Goblin</MenuItem>
-                  <MenuItem value={'Half Demon'}>Half Demon</MenuItem>
-                  <MenuItem value={'Halfling'}>Halfling</MenuItem>
-                  <MenuItem value={'Highelf'}>High Elf</MenuItem>
-                  <MenuItem value={'High Fairy'}>High Fairy</MenuItem>
-                  <MenuItem value={'Human'}>Human</MenuItem>
-                  <MenuItem value={'Ogre'}>Ogre</MenuItem>
-                  <MenuItem value={'Orc'}>Orc</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-            <Box sx={style.textInput}>
-              <FormControl fullWidth>
-                <InputLabel id="gender-select-label" shrink={true}>Gender</InputLabel>
-                <TextField value={gender} onChange={handleGenderChange}></TextField>
-                <Select
-                  labelId="gender-select-label"
-                  id="gender-select"
-                  value=''
-                  onChange={handleGenderChange}
-                >
-                  <MenuItem value={'Male'}>Male</MenuItem>
-                  <MenuItem value={'Female'}>Female</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-            <Box sx={style.name}>
-              <TextField value={name} label="Name" variant="outlined" onChange={(e) => setName(e.target.value)} />
-              <Button sx={style.nameButton} variant="outlined" onClick={generateName}>Generate Name</Button>
-            </Box>
+            <RaceSelector race={race} setRace={setRace} />
+            <GenderSelector gender={gender} setGender={setGender} />
+            <NameSelector name={name} race={race} gender={gender} setName={setName} />
           </Box>
           <Box sx={{ mt: 1 }}>
             <TextField label='Proficiency Bonus' type='number' value={proficiencyBonus} onChange={handleIntegerChange(setProficiencyBonus)} />
@@ -396,9 +331,6 @@ export default function CreateNpc() {
         </Grid>
       </Grid>
       <LanguagesSelector languages={languages} setLanguages={setLanguages}/>
-      {/* <LanguagesSelector languages={} hook={}/>
-      <LanguagesSelector languages={} hook={}/>
-      <LanguagesSelector languages={} hook={}/> */}
       <Box sx={style.centred}>
         <Button variant="outlined" sx={style.saveButton} onClick={saveNpc} >Save</Button>
       </Box>
