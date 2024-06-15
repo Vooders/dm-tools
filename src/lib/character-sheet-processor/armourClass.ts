@@ -22,10 +22,8 @@ export default function armourClass(abilities: Ability[], inventory: ItemContain
 
 function getItemModifier(inventory: ItemContainer[]): number {
     return inventory.map((container) => container.contents).flat()
-        .filter((item) => item.equipped)
-        .filter((item) => item.modifiers)
-        .map((item) => item.modifiers.filter((mod: any) => mod.modifierTypeId === 1 && mod.modifierSubTypeId === 1))
-        .flat()
+        .filter((item) => item.equipped && item.modifiers)
+        .map((item) => item.modifiers.filter((mod: any) => mod.modifierTypeId === 1 && mod.modifierSubTypeId === 1)).flat()
         .reduce((accumulator, mod) => accumulator + mod.value, 0)
 }
 
