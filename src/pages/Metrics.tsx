@@ -20,7 +20,7 @@ export default function Metrics() {
         return () => {
             if(removeListener) removeListener()
         }
-    })
+    }, [])
 
     const emptyMetrics: any = {
         xAxis: {

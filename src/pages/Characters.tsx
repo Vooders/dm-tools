@@ -32,7 +32,7 @@ export default function Characters() {
         return () => {
             if(removeListener) removeListener()
         }
-    })
+    }, [])
 
     const handleDelete = async (characterId: number) => {
         const result = await window.electron.deleteCharacter(characterId)
