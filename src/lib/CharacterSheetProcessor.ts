@@ -126,8 +126,9 @@ export default class CharacterSheetProcessor {
 
     private buildAbilities(): Ability[] {
         const stats = this.stats
+        const inventory = this.buildInventory()
         const modifiers = this.filterModifiersByType('bonus')
-        return abilities(stats, modifiers)
+        return abilities(stats, modifiers, inventory)
     }
 
     private buildArmour(): number {

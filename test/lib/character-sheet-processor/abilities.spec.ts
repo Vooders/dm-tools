@@ -16,7 +16,7 @@ describe('abilities', () => {
             it(`Ability ${test.args + 1}'s name should be ${test.expected}`, function() {
                 const stats = buildStats(10, 10, 10, 10, 10, 10)
 
-                const theAbilities = abilities(stats, [])
+                const theAbilities = abilities(stats, [], [])
 
                 const name = theAbilities[test.args].name
                 name.should.equal(test.expected)
@@ -38,7 +38,7 @@ describe('abilities', () => {
             it(`Ability ${test.args + 1}'s short name should be ${test.expected}`, function() {
                 const stats = buildStats(10, 10, 10, 10, 10, 10)
 
-                const theAbilities = abilities(stats, [])
+                const theAbilities = abilities(stats, [], [])
 
                 const shortName = theAbilities[test.args].shortName
                 shortName.should.equal(test.expected)
@@ -84,7 +84,7 @@ describe('abilities', () => {
             it(`a stat of ${test.args} should have a modifier of ${test.expected}`, function() {
                 const stats = buildStats(test.args, 10, 10, 10, 10, 10)
 
-                const theAbilities = abilities(stats, [])
+                const theAbilities = abilities(stats, [], [])
 
                 theAbilities[0].modifier.should.equal(test.expected)
             })
@@ -99,7 +99,7 @@ describe('abilities', () => {
                 .withFixedValue(2)
                 .build()
 
-            const theAbilities = abilities(stats, [plusTwoDex])
+            const theAbilities = abilities(stats, [plusTwoDex], [])
 
             theAbilities[1].value.should.equal(12)
         })
@@ -111,7 +111,7 @@ describe('abilities', () => {
                 .withFixedValue(2)
                 .build()
 
-            const theAbilities = abilities(stats, [plusTwoDex])
+            const theAbilities = abilities(stats, [plusTwoDex], [])
 
             theAbilities[1].modifier.should.equal(1)
         })
