@@ -391,7 +391,7 @@ export default function CreateNpc() {
           <ProficienciesSelector skill={charismaSave} hook={setCharismaSave} expertise={false} />
         </Grid>
       </Grid>
-      <LanguagesSelector languages={languages} hook={setLanguages}/>
+      <LanguagesSelector languages={languages} setLanguages={setLanguages}/>
       {/* <LanguagesSelector languages={} hook={}/>
       <LanguagesSelector languages={} hook={}/>
       <LanguagesSelector languages={} hook={}/> */}
