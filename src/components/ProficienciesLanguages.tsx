@@ -19,12 +19,12 @@ export function ProficienciesLanguages({ proficiencyView }: ProficienciesLanguag
                 <List>
                     {proficiencyView.map(view => {
                         return (
-                            <>
+                            <React.Fragment key={view.name}>
                                 <ListItem>
                                     <ListItemText primary={view.name.toLocaleUpperCase()} secondary={view.value.join(' | ')} />
                                 </ListItem>
                                 <Divider component="li" />
-                            </>
+                            </React.Fragment>
                         )
                     })}
                 </List>

@@ -19,7 +19,7 @@ export default function PassiveSkills({passiveSkills}: PassiveSkillsProps) {
                     <Grid container spacing={2} justifyContent={'space-evenly'}>
                         {passiveSkills.map(passiveSkill => {
                             return (
-                                <Grid item sx={{ textAlign: 'center' }}>
+                                <Grid item sx={{ textAlign: 'center' }} key={passiveSkill.name}>
                                     <Tooltip title={passiveSkill.mod}>
                                         <Typography variant='overline'>{passiveSkill.name}</Typography>
                                     </Tooltip>

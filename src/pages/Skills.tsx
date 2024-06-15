@@ -35,18 +35,18 @@ export default function Skills() {
                     <TableHead>
                         <TableRow>
                             {skills[0].map((name: string) => (
-                                <TableCell>
+                                <TableCell key={name}>
                                     {name}
                                 </TableCell>
                             ))}
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {skills[1].map((skill: any[]) => {
+                        {skills[1].map((skill: any[], index: number) => {
                             return (
-                                <TableRow>
-                                    {skill.map((bonus: any) => (
-                                        <TableCell> {bonus} </TableCell>
+                                <TableRow key={index}>
+                                    {skill.map((bonus: any, index: number) => (
+                                        <TableCell key={`${index}-${bonus}`}> {bonus} </TableCell>
                                     ))}
                                 </TableRow>
                             )

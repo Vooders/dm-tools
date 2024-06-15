@@ -17,11 +17,12 @@ export default function Skills({ skills }: SkillsProds) {
                 <List sx={{ bgcolor: 'background.paper'}}>
                     {skills.map(skill => {
                         return (
-                            <ListItem sx={{paddingBottom: '0'}}
+                            <ListItem 
+                                sx={{paddingBottom: '0'}}
+                                key={skill.name}
                                 secondaryAction={
                                     <Paper
                                         sx={{
-                                            
                                             minHeight: '35px',
                                             minWidth: '35px',
                                             textAlign: 'center'
@@ -39,9 +40,7 @@ export default function Skills({ skills }: SkillsProds) {
                                 </ListItemIcon>
                                 <ListItemText>
                                     <Badge variant="dot" color={skill.expertise ? "secondary" : "success"} invisible={!skill.proficient}>
-                                        {/* <Typography variant='overline'> */}
                                         {skill.name}
-                                        {/* </Typography> */}
                                     </Badge>
                                     <Divider />
                                 </ListItemText>

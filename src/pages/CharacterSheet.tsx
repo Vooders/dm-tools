@@ -99,7 +99,7 @@ export default function CharacterSheet(props: CharacterSheetProps) {
                         <Abilities abilities={character.abilities} />
                     </Grid>
                     <Grid container spacing={2} >
-                        <Grid item sm={12} spacing={2}>
+                        <Grid item sm={12}>
                             <Box sx={style.tabBox}>
                                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs">
                                     <Tab label="skills & saves" {...a11yProps(0)} />

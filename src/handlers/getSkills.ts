@@ -14,7 +14,6 @@ export default async (): Promise<SkillsData> => {
         }
     })) as CharacterSkills[]
 
-
     const characterNames = ['', ...characters.map(character => character.name)]
     const skillNames = characters[0].skills.map(skill => skill.name)
     const allSkills = characters.map(character => character.skills).flat()

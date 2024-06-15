@@ -65,9 +65,9 @@ export default function Health() {
                     <Card sx={style.outer} key={`characterHealth${index}`}>
                         <Box sx={style.left}>
                             <Avatar name={character.name} avatarPath={character.avatarPath} />
-                            {character.creatures.map(creature => {
+                            {character.creatures.map((creature, index) => {
                                 return (
-                                    <Creature creature={creature} />
+                                    <Creature creature={creature} key={`${creature.name}-${index}`}/>
                                 )
                             })}
                         </Box>

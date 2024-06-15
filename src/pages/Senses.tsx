@@ -36,21 +36,25 @@ export default function Senses() {
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
-                        <TableCell>Name</TableCell>
-                        <TableCell>PERCEPTION</TableCell>
-                        <TableCell>INVESTIGATION</TableCell>
-                        <TableCell>INSIGHT</TableCell>
+                        <TableRow>
+                            <TableCell>Name</TableCell>
+                            <TableCell>PERCEPTION</TableCell>
+                            <TableCell>INVESTIGATION</TableCell>
+                            <TableCell>INSIGHT</TableCell>
+                        </TableRow>
                     </TableHead>
                     <TableBody>
-                        { senses.map(character => {
+                        {senses.map(character => {
                             return (
-                                <TableRow>
-                                    <TableCell>{ character.name }</TableCell>
-                                    { character.senses.map(sense => {
+                                <TableRow key={`${character.name}`}>
+                                    <TableCell>{character.name}</TableCell>
+                                    {character.senses.map(sense => {
                                         return (
-                                            <TableCell>{ sense.score }</TableCell>
+                                            <TableCell key={`${character.name}-${sense.name}`}>
+                                                {sense.score}
+                                            </TableCell>
                                         )
-                                    }) }
+                                    })}
                                 </TableRow>
                             )
                         })}

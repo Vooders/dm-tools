@@ -16,7 +16,7 @@ export default function Saves({ saves }: SavesProps) {
                     <Grid container spacing={2}>
                         {saves.map(save => {
                             return (
-                                <Grid item xs={4} md={2} sx={{ textAlign: 'center' }}>
+                                <Grid item xs={4} md={2} sx={{ textAlign: 'center' }} key={save.shortName}>
                                     <Tooltip title={save.name}>
                                         <Typography variant='overline'>{save.shortName}</Typography>
                                     </Tooltip>

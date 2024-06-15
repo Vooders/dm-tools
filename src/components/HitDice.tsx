@@ -25,9 +25,9 @@ export default function hitDice(props: HitDiceProps) {
                                </Box>
                             )
                         })}
-                        {new Array(dice.used).fill(0).map((_) => {
+                        {new Array(dice.used).fill(0).map((_, index) => {
                             return (
-                               <BlockIcon sx={{color: '#ff6d75'}} />
+                               <BlockIcon sx={{color: '#ff6d75'}} key={`usedDie${index}`} />
                             )
                         })}
                     </Box>

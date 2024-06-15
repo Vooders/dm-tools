@@ -46,23 +46,24 @@ export default function Characters() {
                     const details = `${character.race} ${character.classes.join(' ')}`
                     console.log(character.avatarPath)
                     return (
-                        <>
-                            <ListItem secondaryAction={
-                                <>
-                                    <Tooltip title="Delete">
-                                        <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(character.id)}>
-                                            <DeleteIcon />
-                                        </IconButton>
-                                    </Tooltip>
-                                </>
-                            }>
+                        <React.Fragment key={characterKey}>
+                            <ListItem
+                                secondaryAction={
+                                    <>
+                                        <Tooltip title="Delete">
+                                            <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(character.id)}>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </Tooltip>
+                                    </>
+                                }>
                                 <ListItemAvatar>
                                     <Avatar src={character.avatarPath} />
                                 </ListItemAvatar>
                                 <ListItemText primary={name} secondary={details} />
                             </ListItem>
                             <Divider variant="inset" component="li" />
-                        </>
+                        </React.Fragment>
                     )
                 })}
             </List>

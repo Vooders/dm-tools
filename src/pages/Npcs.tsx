@@ -43,7 +43,7 @@ export default function Npcs() {
             <Title>Npcs</Title>
             {npcs.map(npc => {
                 return (
-                    <Card variant='outlined'>
+                    <Card variant='outlined' key={npc.id}>
                         <Box display='flex' flexDirection='row'>
                             <CardContent>
                                 <Typography variant="h5" component="div">

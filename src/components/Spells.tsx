@@ -25,7 +25,6 @@ export default function Spells({ theSpells }: SpellsProps) {
                 .filter((spell) => spell.name.toLowerCase().includes(searchString.toLowerCase()))
             }
         }))
-        
     }, [ theSpells, castingTimeFilters, hideUnprepared, searchString ])
 
     const handleCastingTime = (event: React.MouseEvent<HTMLElement>, newFormats: string[]) => {
@@ -87,12 +86,12 @@ export default function Spells({ theSpells }: SpellsProps) {
                 }}
             >
                 {
-                    spells.map((spellLevel) => (
-                        <>
+                    spells.map((spellLevel, index) => (
+                        <React.Fragment key={`${spellLevel.level}-${index}`}>
                             <ListSubheader color="primary" key={`section-${spellLevel.level}`}>Level {spellLevel.level}</ListSubheader>
                             <Divider component="li" />
-                            { spellLevel.spells.map(spell => (<Spell spell={spell} />)) }
-                        </>
+                            { spellLevel.spells.map(spell => (<Spell spell={spell} key={spell.name.replace(' ', '-')}/>)) }
+                        </React.Fragment>
                     ))
                 }
             </List>

@@ -39,13 +39,15 @@ export default function Languages() {
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
-                        <TableCell>Language</TableCell>
-                        <TableCell>Characters</TableCell>
+                        <TableRow>
+                            <TableCell>Language</TableCell>
+                            <TableCell>Characters</TableCell>
+                        </TableRow>
                     </TableHead>
                     <TableBody>
                         {languages.allLanguages.map((language) => {
                             return (
-                                <TableRow>
+                                <TableRow key={language}>
                                     <TableCell>{language}</TableCell>
                                     <TableCell>
                                         {languages.characters.map(character => {
@@ -56,6 +58,7 @@ export default function Languages() {
                             )
                         })}
                     </TableBody>
+
                 </Table>
             </TableContainer>
         </React.Fragment>

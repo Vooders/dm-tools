@@ -10,10 +10,10 @@ export default function Abilities({ abilities }: AbilitiesProps) {
     return (
         <Grid item sm={12}>
             <Box sx={{ flexGrow: 1, 'paddingTop': '10px' }}>
-                <Grid container sm={12}>
+                <Grid container>
                     {abilities.map(ability => {
                         return (
-                            <Grid item xs={4} md={2} sx={{ textAlign: 'center' }}>
+                            <Grid item xs={4} md={2} sx={{ textAlign: 'center' }} key={ability.name}>
                                 <Paper variant="outlined" >
                                     <Typography variant='overline'>{ability.name}</Typography>
                                     <Divider />

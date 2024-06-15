@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Title from '../components/Title';
 import { Card, CardContent, Grid } from '@mui/material';
-import { ItemContainer } from '../dm-tools-data.types';
+import { Item, ItemContainer } from '../dm-tools-data.types';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -67,16 +67,17 @@ export default function Inventory() {
       <Stack spacing={2} mt={2}>
         {inventory.map(character => {
           return (
-            <React.Fragment key={character.id}>
+            <React.Fragment key={`${character.name}`}>
               <Title>{character.name}</Title>
               {character.inventory.map((container: ItemContainer, index: number) => {
                 return (
+                  
                   <Card variant="outlined" key={`characterInventory${index}`}>
                     <CardContent>
                       <Grid container direction="row" spacing={2}>
                         <Grid item>{container.equipped ? '✔️ ' : '❌ '}{container.name}</Grid>
                         <Grid item>{container.capacity}{container.capacity ? 'lb capacity' : ''}</Grid>
-                      </Grid>              
+                      </Grid>
                       <Table size="small">
                         <TableHead>
                           <TableRow>
@@ -91,8 +92,8 @@ export default function Inventory() {
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          {container.contents.map((item: any) => (
-                            <TableRow key={item.id}>
+                          {container.contents.map((item: Item, index: number) => (
+                            <TableRow key={`${item.id}-${index}`}>
                               <TableCell>{item.equipped ? '✔️' : '❌'}</TableCell>
                               <TableCell>{item.definition.name}</TableCell>
                               <TableCell>{item.quantity}</TableCell>

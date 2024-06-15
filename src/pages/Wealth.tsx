@@ -72,7 +72,7 @@ export default function Wealth() {
             >
                 {wealth.map(character => {
                     return (
-                        <Grid item >
+                        <Grid item key={character.name}>
                             <Card sx={cardStyling}>
                                 <CardContent>
                                     <Typography variant="h5" m='.2rem'>
@@ -83,34 +83,36 @@ export default function Wealth() {
                                         <Typography variant="h6" mr='.2rem'>
                                             Total Wealth:
                                         </Typography >
-                                        <Currency size="large" amount={character.totalWealth} icon='gold'/>
+                                        <Currency size="large" amount={character.totalWealth} icon='gold' />
                                     </Grid>
                                     <Divider />
                                     <Grid item mx='.2rem'>
-                                        <Currencies showZeroes={true} align='left' currencies={character.currencies}/>
+                                        <Currencies showZeroes={true} align='left' currencies={character.currencies} />
                                         <Grid item display="flex" >
                                             <Typography variant="h6" mr='.2rem'>
                                                 Currency:
                                             </Typography>
-                                            <Currency size='large' amount={character.currencies.total} icon='gold'/>
+                                            <Currency size='large' amount={character.currencies.total} icon='gold' />
                                         </Grid>
                                     </Grid>
                                     <Divider />
                                     <Grid container m='.2rem'></Grid>
                                     {character.containers.map(container => {
-                                        return <>
-                                            <Grid item display="flex">
-                                                <Typography mx='.2rem' fontSize='0.9rem'>
-                                                    {container.name}: {container.value}
-                                                </Typography>
-                                            </Grid>
-                                        </>
+                                        return (
+                                            <React.Fragment key={`${character.name}-${container.name}`}>
+                                                <Grid item display="flex">
+                                                    <Typography mx='.2rem' fontSize='0.9rem'>
+                                                        {container.name}: {container.value}
+                                                    </Typography>
+                                                </Grid>
+                                            </React.Fragment>
+                                        )
                                     })}
                                     <Grid item display="flex">
-                                        <Typography variant="h6" mx= '.2rem'>
+                                        <Typography variant="h6" mx='.2rem'>
                                             Items:
                                         </Typography>
-                                        <Currency size="large" amount={character.totalContainerWealth} icon='gold'/>
+                                        <Currency size="large" amount={character.totalContainerWealth} icon='gold' />
                                     </Grid>
                                 </CardContent>
                             </Card>
