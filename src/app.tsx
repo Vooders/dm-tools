@@ -1,10 +1,8 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import Dashboard from './components/Dashboard';
+import * as React from 'react'
+import { createRoot } from 'react-dom/client'
+import Dashboard from './components/Dashboard'
 
+const container = document.getElementById('app')
+const root = createRoot(container!);
 
-async function render() {
-  ReactDOM.render(<Dashboard />, document.body);
-}
-
-render();
+root.render(<Dashboard />)
