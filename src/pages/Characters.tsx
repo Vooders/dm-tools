@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import CharacterImporter from '../components/CharacterImporter';
 import Title from '../components/Title';
 
@@ -16,20 +16,23 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Summary } from '../lib/saveCharacter';
 
 export default function Characters() {
+    const pageRendered = useRef(false)
     const [characters, setCharacters] = useState<Summary>({})
 
-    const getSummary = async () => {
-        setCharacters(await window.electron.getSummary())
-    }
-
     useEffect(() => {
-        getSummary()
-            .catch(console.error)
+        if (!pageRendered.current) {
+            (async () => {
+                console.log('Initial load of characters')
+                setCharacters(await window.electron.getSummary())
+            })()
+        }
+        pageRendered.current = true
+    })
 
-        window.electron.characterUpdated(async () => {
-            await getSummary()
-        })
-    }, [])
+    window.electron.characterUpdated(async () => {
+        console.log('Characters updated: reloading character data')
+        setCharacters(await window.electron.getSummary())
+    })
 
     const handleDelete = async (characterId: number) => {
         const result = await window.electron.deleteCharacter(characterId)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -21,8 +21,31 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Inventory() {
+  const pageRendered = useRef(false)
   const [fullInventory, setFullInventory] = useState([])
   const [inventory, setInventory] = useState([])
+
+  useEffect(() => {
+    if (!pageRendered.current) {
+        (async () => {
+          console.log('Initial load of inventory data')
+          await getInventory()
+        })()
+    }
+    pageRendered.current = true
+})
+
+  window.electron.characterUpdated(async () => {
+    console.log('Characters updated: reloading inventory data')
+    await getInventory()
+  })
+
+  const getInventory = async () => {
+    console.log('getting inventory')
+    const inv = await window.electron.getInventories()
+    setInventory(inv)
+    setFullInventory(inv)
+  }
 
   function search(name: string) {
     console.log('searching', fullInventory)
@@ -41,23 +64,6 @@ export default function Inventory() {
     setInventory(results)
   }
 
-  const getInventory = async () => {
-    console.log('getting inventory')
-    const inv = await window.electron.getInventories()
-    setInventory(inv)
-    setFullInventory(inv)
-  }
-
-  useEffect(() => {
-    getInventory()
-      .catch(console.error)
-
-    window.electron.characterUpdated(async () => {
-      console.log('character updated')
-      await getInventory()
-    })
-  }, [])
-
   return (
     <React.Fragment>
       <Title>Inventory</Title>
@@ -71,7 +77,7 @@ export default function Inventory() {
               <Title>{character.name}</Title>
               {character.inventory.map((container: ItemContainer, index: number) => {
                 return (
-                  
+
                   <Card variant="outlined" key={`characterInventory${index}`}>
                     <CardContent>
                       <Grid container direction="row" spacing={2}>

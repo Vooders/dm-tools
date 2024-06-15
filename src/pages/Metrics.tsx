@@ -1,10 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Metrics } from '../lib/saveMetrics'
 import Graph from '../components/Graph'
 import { Box } from '@mui/system'
 import { Button, ButtonGroup } from '@mui/material'
 
 export default function Metrics() {
+    const pageRendered = useRef(false)
+
+    useEffect(() => {
+        if (!pageRendered.current) {
+            (async () => {
+                console.log('Initial load of metric data')
+                await getMetrics(timeRange)
+            })()
+        }
+        pageRendered.current = true
+    })
+
+    window.electron.characterUpdated(async () => {
+        console.log('Characters updated: reloading metric data')
+        await getMetrics(timeRange)
+    })
+
     const emptyMetrics: any = {
         xAxis: {
             data: []
@@ -24,21 +41,9 @@ export default function Metrics() {
     const [timeRange, setTimeRange] = useState<number>(HOUR * 4)
 
     const getMetrics = async (range: number) => {
-        console.log('getting Metrics')
         await setTimeRange((r) => range)
-        console.log('getMetrics - range', timeRange)
         setMetrics(await window.electron.getMetrics(range))
     }
-
-    useEffect(() => {
-        getMetrics(timeRange)
-            .catch(console.error)
-
-        window.electron.characterUpdated(async () => {
-            console.log('useEffect - range', timeRange)
-            await getMetrics(timeRange)
-        })
-    }, [])
 
     return (
         <>

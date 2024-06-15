@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Title from '../components/Title'
 
 import Table from '@mui/material/Table';
@@ -10,22 +10,23 @@ import Paper from '@mui/material/Paper';
 import TableHead from '@mui/material/TableHead';
 
 export default function Skills() {
+    const pageRendered = useRef(false)
     const [skills, setSkills] = useState<any[]>([[], []])
 
-    const getSkills = async () => {
-        console.log('getting Skills')
-        const inv = await window.electron.getSkills()
-        setSkills(inv)
-    }
-
     useEffect(() => {
-        getSkills()
-            .catch(console.error)
+        if (!pageRendered.current) {
+            (async () => {
+                console.log('Initial load of skills data')
+                setSkills(await window.electron.getSkills())
+            })()
+        }
+        pageRendered.current = true
+    })
 
-        window.electron.characterUpdated(async () => {
-            await getSkills()
-        })
-    }, [])
+    window.electron.characterUpdated(async () => {
+        console.log('Characters updated: reloading skills data')
+        setSkills(await window.electron.getSkills())
+    })
 
     return (
         <React.Fragment>
