@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Title from '../components/Title'
 import { Typography, Card, CardContent, Grid, Divider } from '@mui/material'
 import { WealthData } from '../handlers/getWealth'
@@ -6,23 +6,23 @@ import Currencies from '../components/Currencies'
 import Currency from '../components/Currency'
 
 export default function Wealth() {
-    const pageRendered = useRef(false)
     const [wealth, setWealth] = useState<WealthData[]>([])
 
     useEffect(() => {
-        if (!pageRendered.current) {
-            (async () => {
-                console.log('Initial load of wealth data')
-                setWealth(await window.electron.getWealth())
-            })()
-        }
-        pageRendered.current = true
-    })
+        (async () => {
+            console.log('Initial load of wealth data')
+            setWealth(await window.electron.getWealth())
+        })()
 
-    window.electron.characterUpdated(async () => {
-        console.log('Characters updated: reloading wealth data')
-        setWealth(await window.electron.getWealth())
-    })
+        const removeListener = window.electron.receive('character:updated', async () => {
+            console.log('Characters updated: reloading wealth data')
+            setWealth(await window.electron.getWealth())
+        })
+
+        return () => {
+            if(removeListener) removeListener()
+        }
+    }, [])
 
     function reduceAndRound<T>(someArray: T[], reduceFunc: (acc: number, item: T) => number): number {
         const result = someArray.reduce(reduceFunc, 0)

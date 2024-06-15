@@ -1,25 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Metrics } from '../lib/saveMetrics'
 import Graph from '../components/Graph'
 import { Box } from '@mui/system'
 import { Button, ButtonGroup } from '@mui/material'
 
 export default function Metrics() {
-    const pageRendered = useRef(false)
 
     useEffect(() => {
-        if (!pageRendered.current) {
-            (async () => {
-                console.log('Initial load of metric data')
-                await getMetrics(timeRange)
-            })()
-        }
-        pageRendered.current = true
-    })
+        (async () => {
+            console.log('Initial load of metric data')
+            await getMetrics(timeRange)
+        })()
 
-    window.electron.characterUpdated(async () => {
-        console.log('Characters updated: reloading metric data')
-        await getMetrics(timeRange)
+        const removeListener = window.electron.receive('character:updated', async () => {
+            console.log('Characters updated: reloading metric data')
+            await getMetrics(timeRange)
+        })
+
+        return () => {
+            if(removeListener) removeListener()
+        }
     })
 
     const emptyMetrics: any = {

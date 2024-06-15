@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -21,24 +21,24 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Inventory() {
-  const pageRendered = useRef(false)
   const [fullInventory, setFullInventory] = useState([])
   const [inventory, setInventory] = useState([])
 
   useEffect(() => {
-    if (!pageRendered.current) {
-        (async () => {
-          console.log('Initial load of inventory data')
-          await getInventory()
-        })()
-    }
-    pageRendered.current = true
-})
+      (async () => {
+        console.log('Initial load of inventory data')
+        await getInventory()
+      })()
 
-  window.electron.characterUpdated(async () => {
-    console.log('Characters updated: reloading inventory data')
-    await getInventory()
-  })
+      const removeListener = window.electron.receive('character:updated', async () => {
+        console.log('Characters updated: reloading inventory data')
+        await getInventory()
+      })
+
+      return () => {
+        if(removeListener) removeListener()
+    }
+  }, [])
 
   const getInventory = async () => {
     console.log('getting inventory')

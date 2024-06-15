@@ -64,6 +64,8 @@ const createWindow = (): void => {
   if (devMode) {
     mainWindow.webContents.openDevTools();
   }
+
+
   
   app.whenReady().then(() => {
     ipcMain.handle('character:import', handleImport)

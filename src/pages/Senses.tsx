@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Title from '../components/Title';
 
@@ -12,23 +12,23 @@ import Paper from '@mui/material/Paper';
 import { SensesData } from '../handlers/getSenses';
 
 export default function Senses() {
-    const pageRendered = useRef(false)
     const [senses, setSenses] = useState<SensesData[]>([])
 
     useEffect(() => {
-        if (!pageRendered.current) {
-            (async () => {
-                console.log('Initial load of senses data')
-                setSenses(await window.electron.getSenses())
-            })()
-        }
-        pageRendered.current = true
-    })
+        (async () => {
+            console.log('Initial load of senses data')
+            setSenses(await window.electron.getSenses())
+        })()
 
-    window.electron.characterUpdated(async () => {
-        console.log('Characters updated: reloading senses data')
-        setSenses(await window.electron.getSenses())
-    })
+        const removeListener = window.electron.receive('character:updated', async () => {
+            console.log('Characters updated: reloading senses data')
+            setSenses(await window.electron.getSenses())
+        })
+
+        return () => {
+            if(removeListener) removeListener()
+        }
+    }, [])
 
     return (
         <React.Fragment>

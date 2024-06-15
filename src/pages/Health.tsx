@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -34,23 +34,23 @@ const style = {
 }
 
 export default function Health() {
-    const pageRendered = useRef(false)
     const [health, setHealth] = useState<HealthData[]>([])
 
     useEffect(() => {
-        if (!pageRendered.current) {
-            (async () => {
-                console.log('Initial load of health data')
-                setHealth(await window.electron.getHealth())
-            })()
-        }
-        pageRendered.current = true
-    })
+        (async () => {
+            console.log('Initial load of health data')
+            setHealth(await window.electron.getHealth())
+        })()
 
-    window.electron.characterUpdated(async () => {
-        console.log('Characters updated: reloading health data')
-        setHealth(await window.electron.getHealth())
-    })
+        const removeListener = window.electron.receive('character:updated', async () => {
+            console.log('Characters updated: reloading health data')
+            setHealth(await window.electron.getHealth())
+        })
+
+        return () => {
+            if(removeListener) removeListener()
+        }
+    }, [])
 
     const maxHp = (hp: CharacterProfileHp) => {
         return (hp.override) ? hp.override : hp.constitutionBonus + hp.base + hp.bonus

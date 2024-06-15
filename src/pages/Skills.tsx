@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import Title from '../components/Title'
 
 import Table from '@mui/material/Table';
@@ -10,23 +10,23 @@ import Paper from '@mui/material/Paper';
 import TableHead from '@mui/material/TableHead';
 
 export default function Skills() {
-    const pageRendered = useRef(false)
     const [skills, setSkills] = useState<any[]>([[], []])
 
     useEffect(() => {
-        if (!pageRendered.current) {
-            (async () => {
-                console.log('Initial load of skills data')
-                setSkills(await window.electron.getSkills())
-            })()
-        }
-        pageRendered.current = true
-    })
+        (async () => {
+            console.log('Initial load of skills data')
+            setSkills(await window.electron.getSkills())
+        })()
 
-    window.electron.characterUpdated(async () => {
-        console.log('Characters updated: reloading skills data')
-        setSkills(await window.electron.getSkills())
-    })
+        const removeListener = window.electron.receive('character:updated', async () => {
+            console.log('Characters updated: reloading skills data')
+            setSkills(await window.electron.getSkills())
+        })
+
+        return () => {
+            if(removeListener) removeListener()
+        }
+    }, [])
 
     return (
         <React.Fragment>

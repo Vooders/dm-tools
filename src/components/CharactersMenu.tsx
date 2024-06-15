@@ -12,18 +12,20 @@ export default function CharactersMenu() {
     const [open, setOpen] = React.useState(true);
     const [characters, setCharacters] = useState<Summary>({})
 
-    const getSummary = async () => {
-        setCharacters(await window.electron.getSummary())
-    }
-
     useEffect(() => {
-        getSummary()
-            .catch(console.error)
+        (async () => {
+            console.log('Initial load of health data')
+            setCharacters(await window.electron.getSummary())
+        })()
 
-        window.electron.characterUpdated(async () => {
-            console.log('character updated')
-            await setCharacters(await window.electron.getSummary())
+        const removeListener = window.electron.receive('character:updated', async () => {
+            console.log('Characters updated: reloading health data')
+            setCharacters(await window.electron.getSummary())
         })
+
+        return () => {
+            if(removeListener) removeListener()
+        }
     }, [])
 
     return (

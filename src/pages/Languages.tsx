@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Title from '../components/Title';
 
@@ -12,26 +12,26 @@ import Paper from '@mui/material/Paper';
 import { LanguagesData } from '../handlers/getLanguages';
 
 export default function Languages() {
-    const pageRendered = useRef(false)
     const [languages, setLanguages] = useState<LanguagesData>({
         allLanguages: [],
         characters: []
     })
 
     useEffect(() => {
-        if (!pageRendered.current) {
-            (async () => {
-                console.log('Initial load of languages')
-                setLanguages(await window.electron.getLanguages())
-            })()
-        }
-        pageRendered.current = true
-    })
+        (async () => {
+            console.log('Initial load of languages')
+            setLanguages(await window.electron.getLanguages())
+        })()
 
-    window.electron.characterUpdated(async () => {
-        console.log('Characters updated: reloading languages')
-        await setLanguages(await window.electron.getLanguages())
-    })
+        const removeListener = window.electron.receive('character:updated', async () => {
+            console.log('Characters updated: reloading languages')
+            await setLanguages(await window.electron.getLanguages())
+        })
+
+        return () => {
+            if(removeListener) removeListener()
+        }
+    }, [])
 
     return (
         <React.Fragment>

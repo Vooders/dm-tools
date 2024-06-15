@@ -7,6 +7,7 @@ import saveMetrics from '../lib/saveMetrics';
 
 export default (mainWindow: BrowserWindow) => {
     return async (): Promise<void> => {
+        console.log('Importing all characters')
         const summary = await getSummary()
         const characterIds = Object.keys(summary)
         console.log(`Got ids - ${characterIds}`)
