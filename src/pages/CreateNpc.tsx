@@ -94,19 +94,23 @@ export default function CreateNpc() {
     }
   }
 
-  function makeFinder<T extends { name: string }>(collection: T[]): (name: string) => T {
+  function getFinder<T extends { name: string }>(collection: T[]): (name: string) => T {
     return (name: string): T => {
-      return collection.find((e) => e.name === name)
+      const entity = collection.find((e) => e.name.toLocaleLowerCase() === name.toLocaleLowerCase())
+      if (!entity) {
+        throw new Error(`Can't find entity with name ${name} in collection ${collection.map(e => JSON.stringify(e))}`)
+      }
+      return entity
     }
   }
 
   useEffect(() => {
     const loadNpc = async () => {
       const npc = await window.electron.getNpc(npcId) as DmToolsData
-      const findAbility = makeFinder(npc.abilities)
-      const findSkill = makeFinder(npc.skills)
-      const findSave = makeFinder(npc.saves)
-      const findProficiencyView = makeFinder(npc.proficiencyView)
+      const findAbility = getFinder(npc.abilities)
+      const findSkill = getFinder(npc.skills)
+      const findSave = getFinder(npc.saves)
+      const findProficiencyView = getFinder(npc.proficiencyView)
 
       setId(npc.id)
       setRace(npc.profile.race)
