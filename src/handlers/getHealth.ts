@@ -1,5 +1,3 @@
-import getSummaryData from '../lib/getSummary'
-import getCharacter from './getCharacter'
 import {
     CharacterProfileHp,
     SpellSlot,
@@ -10,14 +8,13 @@ import {
     HealthPotionsType,
     CreatureType
 } from '../dm-tools-data.types'
+import getParty from './getParty'
 
 export default async (): Promise<HealthData[]> => {
-    const summary = await getSummaryData()
-    const characterIds = Object.keys(summary)
+    const party = await getParty()
 
-    return await Promise.all(characterIds.map(async (characterId) => {
-        const characterData = await getCharacter(null, characterId)
-        const limitedUseActions = characterData.actions
+    return party.map((character) => {
+        const limitedUseActions = character.actions
             .map(action => {
                 if (action.name === 'Bardic Inspiration') {
                     action.limitedUse.maxUses = 5
@@ -27,23 +24,23 @@ export default async (): Promise<HealthData[]> => {
             .filter(action => action.limitedUse.maxUses > 0)
         
         return {
-            name: characterData.profile.name,
-            hp: characterData.hp,
-            avatarPath: characterData.avatarPath,
-            spellSlots: characterData.spellSlots,
+            name: character.profile.name,
+            hp: character.hp,
+            avatarPath: character.avatarPath,
+            spellSlots: character.spellSlots,
             limitedUseActions,
-            currencies: characterData.currencies,
-            deathSaves: characterData.deathSaves,
-            experience: characterData.profile.xp,
-            level: characterData.profile.level,
-            ac: characterData.ac,
-            hitDice: characterData.hitDice,
-            healthPotions: characterData.healthPotions,
-            creatures: characterData.creatures,
-            inspiration: characterData.inspiration,
-            milestoneProgression: characterData.milestoneProgression
+            currencies: character.currencies,
+            deathSaves: character.deathSaves,
+            experience: character.profile.xp,
+            level: character.profile.level,
+            ac: character.ac,
+            hitDice: character.hitDice,
+            healthPotions: character.healthPotions,
+            creatures: character.creatures,
+            inspiration: character.inspiration,
+            milestoneProgression: character.milestoneProgression
         }
-    }))
+    })
 }
 
 export type HealthData = {

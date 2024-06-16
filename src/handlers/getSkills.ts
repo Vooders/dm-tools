@@ -1,18 +1,15 @@
 import { Skill } from '../dm-tools-data.types'
-import getSummaryData from '../lib/getSummary'
-import getCharacter from './getCharacter'
+import getParty from './getParty'
 
 export default async (): Promise<SkillsData> => {
-    const summary = await getSummaryData()
-    const characterIds = Object.keys(summary)
+    const party = await getParty()
 
-    const characters = await Promise.all(characterIds.map(async (characterId) => {
-        const characterData = await getCharacter(null, characterId)
+    const characters = party.map((character) => {
         return {
-            name: characterData.profile.name,
-            skills: characterData.skills
+            name: character.profile.name,
+            skills: character.skills
         }
-    })) as CharacterSkills[]
+    }) as CharacterSkills[]
 
     const characterNames = ['', ...characters.map(character => character.name)]
     const skillNames = characters[0].skills.map(skill => skill.name)

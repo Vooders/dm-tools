@@ -1,22 +1,18 @@
 import { CurrenciesType, ContainerWealth } from '../dm-tools-data.types'
-import getSummaryData from '../lib/getSummary'
-import getCharacter from './getCharacter'
+import getParty from './getParty'
 
 export default async (): Promise<WealthData[]> => {
-    const summary = await getSummaryData()
-    const characterIds = Object.keys(summary)
+    const party = await getParty()
 
-    return await Promise.all(characterIds.map(async (characterId) => {
-        const characterData = await getCharacter(null, characterId)
-        
+    return party.map((character) => {       
         return {
-            name: characterData.profile.name,
-            currencies: characterData.currencies,
-            containers: characterData.wealth.containers,
-            totalContainerWealth: characterData.wealth.totalContainerWealth,
-            totalWealth: characterData.wealth.totalWealth
+            name: character.profile.name,
+            currencies: character.currencies,
+            containers: character.wealth.containers,
+            totalContainerWealth: character.wealth.totalContainerWealth,
+            totalWealth: character.wealth.totalWealth
         }
-    }))
+    })
 }
 
 export type WealthData = {

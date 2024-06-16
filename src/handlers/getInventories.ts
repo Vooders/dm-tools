@@ -1,19 +1,16 @@
-import { ItemContainer } from '../dm-tools-data.types';
-import getSummaryData from '../lib/getSummary';
-import getCharacter from './getCharacter'
+import { ItemContainer } from '../dm-tools-data.types'
+import getParty from './getParty'
 
 export default async (): Promise<InventoryData[]> => {
-    const summary = await getSummaryData()
-    const characterIds = Object.keys(summary)
+    const party = await getParty()
 
-    return await Promise.all(characterIds.map(async characterId => {
-        const character = await getCharacter(null, characterId)
+    return party.map(character => {
         const inventory = character.inventory
         return {
             name: character.profile.name,
             inventory
         }
-    }))
+    })
 }
 
 export type InventoryData = {

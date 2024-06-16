@@ -1,18 +1,15 @@
 import { PassiveSkill } from '../dm-tools-data.types'
-import getSummaryData from '../lib/getSummary'
-import getCharacter from './getCharacter'
+import getParty from './getParty'
 
 export default async (): Promise<SensesData[]> => {
-    const summary = await getSummaryData()
-    const characterIds = Object.keys(summary)
+    const party = await getParty()
 
-    return await Promise.all(characterIds.map(async (characterId) => {
-        const characterData = await getCharacter(null, characterId)
+    return party.map((character) => {
         return {
-            name: characterData.profile.name,
-            senses: characterData.passiveSkills
+            name: character.profile.name,
+            senses: character.passiveSkills
         }
-    }))
+    })
 }
 
 export type SensesData = {
