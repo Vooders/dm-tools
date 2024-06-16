@@ -21,7 +21,7 @@ export default function NpcCharacter() {
             getCharacter()
                 .catch(console.error)
         }
-    })
+    }, [characterId])
 
     return (
         <CharacterSheet character={character} />
