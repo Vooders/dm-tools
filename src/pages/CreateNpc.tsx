@@ -11,6 +11,8 @@ import RaceSelector from "../components/RaceSelector"
 import NameSelector from "../components/NameSelector"
 import GenderSelector from "../components/GenderSelector"
 
+import * as npcRepository from '../repositories/npcRepository'
+
 export default function CreateNpc() {
   const [id, setId] = React.useState<string>(uuidv4())
   const [race, setRace] = React.useState<string>('Human')
@@ -108,7 +110,7 @@ export default function CreateNpc() {
 
   useEffect(() => {
     const loadNpc = async () => {
-      const npc = await window.electron.invoke('npc:get', npcId) as DmToolsData
+      const npc = await npcRepository.get(npcId)
       const findAbility = getFinder(npc.abilities)
       const findSkill = getFinder(npc.skills)
       const findSave = getFinder(npc.saves)
@@ -225,9 +227,10 @@ export default function CreateNpc() {
         weapons,
         tools,
         languages
-      ]
+      ],
+      filename: ''
     }
-    await window.electron.invoke('npc:save', npc)
+    await npcRepository.save(npc)
   }
 
   const style = {

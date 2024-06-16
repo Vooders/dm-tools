@@ -66,7 +66,6 @@ const createWindow = (): void => {
   }
 
 
-  
   app.whenReady().then(() => {
     ipcMain.handle('character:import', handleImport)
     ipcMain.handle('character:save', handleSave(mainWindow))

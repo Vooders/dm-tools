@@ -8,19 +8,21 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { DmToolsData } from "../dm-tools-data.types"
 
+import * as npcRepository from '../repositories/npcRepository'
+
 export default function Npcs() {
     const [npcs, setNpcs] = useState<DmToolsData[]>([])
 
     const setNpcData = async () => {
         console.log('getting Npcs')
-        setNpcs(await window.electron.invoke('npcs:get'))
+        setNpcs(await npcRepository.getAll())
     }
 
     useEffect(() => {
         setNpcData()
             .catch(console.error)
 
-        const deleteListener = window.electron.receive('npc:updated', async () => {
+        const deleteListener = npcRepository.onUpdate(async () => {
             console.log('npc updated')
             await setNpcData()
         })
@@ -31,7 +33,7 @@ export default function Npcs() {
     }, [])
 
     const handleDelete = async (id: string) => {
-        const result = await window.electron.invoke('npc:delete', id)
+        const result = await npcRepository.deleteNpc(id)
         console.log(`Delete ${id} - ${result}`)
     }
 
