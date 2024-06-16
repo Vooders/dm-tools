@@ -7,7 +7,7 @@ const directory = 'characters'
 const userDataPath = app.getPath('userData');
 
 export default async (_: Electron.IpcMainInvokeEvent, characterId: string): Promise<DmToolsData> => {
-    console.log(`Loading character file ${characterId}`)
+    console.log(`[handler][getCharacter] Loading character file ${characterId}`)
     const characterPath = path.join(userDataPath, directory, characterId + '.json');
     try {
         const fileBuffer = await readFile(characterPath)
@@ -16,6 +16,6 @@ export default async (_: Electron.IpcMainInvokeEvent, characterId: string): Prom
         characterJson.dmTools.avatarPath = path.join(userDataPath, 'avatars', characterId + '.jpeg')
         return characterJson.dmTools
     } catch (error) {
-        console.error(error)
+        console.error(`[handler][getCharacter] ${error}`)
     }
 }

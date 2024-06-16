@@ -10,7 +10,7 @@ const summaryPath = path.join(npcsPath, 'summary.json')
 
 export default (mainWindow: BrowserWindow) => {
   return async (_: Electron.IpcMainInvokeEvent, id: any): Promise<boolean> => {
-    console.log('deleteNpc', id)
+    console.log('[handler][deleteNpc] deleting NPC ', id)
     try {
       await unlink(path.join(npcsPath, id + '.json'))
   
@@ -23,7 +23,7 @@ export default (mainWindow: BrowserWindow) => {
       mainWindow.webContents.send('npc:updated')
       return true
     } catch (error) {
-      console.log(error)
+      console.log(`[handler][deleteNpc] ${error}`)
       return false
     }
   }

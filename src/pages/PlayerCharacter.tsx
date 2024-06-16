@@ -11,12 +11,12 @@ export default function PlayerCharacter() {
 
     useEffect(() => {
         (async () => {
-            console.log('Initial load of health data')
+            console.log('[page][PlayerCharacter] Initial load of health data')
             setCharacter(await characterRepository.get(characterId))
         })()
 
         const removeListener = characterRepository.onUpdate(async () => {
-            console.log('Characters updated: reloading player character')
+            console.log('[page][PlayerCharacter] Characters updated: reloading player character')
             setCharacter(await characterRepository.get(characterId))
         })
 

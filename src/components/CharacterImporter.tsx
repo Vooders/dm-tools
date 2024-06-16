@@ -30,7 +30,7 @@ export default function CharacterImporter() {
     };
 
     const importChar = async (): Promise<void> => {
-        console.log(`Characters: getting ${characterId}`)
+        console.log(`[component][CharacterImporter] Characters: getting ${characterId}`)
         const response = await characterRepository.importCharacter(characterId)
         setImportResponse(response)
         if (response.status === 'success') {

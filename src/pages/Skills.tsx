@@ -16,12 +16,12 @@ export default function Skills() {
 
     useEffect(() => {
         (async () => {
-            console.log('Initial load of skills data')
+            console.log('[page][Skills] Initial load of skills data')
             setSkills(await window.electron.invoke('skills:get'))
         })()
 
         const removeListener = characterRepository.onUpdate(async () => {
-            console.log('Characters updated: reloading skills data')
+            console.log('[page][Skills] Characters updated: reloading skills data')
             setSkills(await window.electron.invoke('skills:get'))
         })
 

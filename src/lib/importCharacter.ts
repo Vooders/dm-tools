@@ -2,7 +2,7 @@ import fetch from 'electron-fetch'
 import { decode } from 'js-base64'
 
 export default async (id: string): Promise<ImportResponse> => {
-    console.log(`importing ${id}`)
+    console.log(`[lib][importCharacter] importing ${id}`)
     const response: any = await fetch(`${decode('aHR0cHM6Ly9jaGFyYWN0ZXItc2VydmljZS5kbmRiZXlvbmQuY29tL2NoYXJhY3Rlci92My9jaGFyYWN0ZXIv')}${id}`);
     if (response.ok) {
         const character = await response.json()

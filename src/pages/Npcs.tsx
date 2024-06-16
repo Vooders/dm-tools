@@ -14,7 +14,7 @@ export default function Npcs() {
     const [npcs, setNpcs] = useState<DmToolsData[]>([])
 
     const setNpcData = async () => {
-        console.log('getting Npcs')
+        console.log('[page][Npcs] getting Npcs')
         setNpcs(await npcRepository.getAll())
     }
 
@@ -23,7 +23,7 @@ export default function Npcs() {
             .catch(console.error)
 
         const deleteListener = npcRepository.onUpdate(async () => {
-            console.log('npc updated')
+            console.log('[page][Npcs] npc updated')
             await setNpcData()
         })
 
@@ -34,7 +34,7 @@ export default function Npcs() {
 
     const handleDelete = async (id: string) => {
         const result = await npcRepository.deleteNpc(id)
-        console.log(`Delete ${id} - ${result}`)
+        console.log(`[page][Npcs] Delete ${id} - ${result}`)
     }
 
     const style = {

@@ -19,7 +19,7 @@ export default (mainWindow: BrowserWindow) => {
             mainWindow.webContents.send('character:updated')
             return true
         } catch (error) {
-            console.log(error)
+            console.log(`[handler][deleteCharacter] ${error}`)
             return false
         }
     }

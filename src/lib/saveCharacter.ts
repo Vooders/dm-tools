@@ -11,7 +11,7 @@ const avatarPath = path.join(userDataPath, 'avatars')
 const summaryPath = path.join(userDataPath, directory, 'summary.json');
 
 export default async (character: any) => {
-    console.log(`saving character ${character.data.id}`)
+    console.log(`[lib][saveCharacter] saving character ${character.data.id}`)
     const filename = character.data.id
     const filePath = path.join(userDataPath, directory, filename + '.json');
     console.log(filePath)
@@ -19,12 +19,12 @@ export default async (character: any) => {
         const characterSheetProcessor = new CharacterSheetProcessor(character)
         const processedCharacter = characterSheetProcessor.process()
         await writeFile(filePath, JSON.stringify(processedCharacter));
-        console.log(`saved ${filename}`)
+        console.log(`[lib][saveCharacter] saved ${filename}`)
         await updateSummary(character.data)
         await downloadAvatar(character.data)
         return true
     } catch (error) {
-        console.log(error)
+        console.log(`[lib][saveCharacter] ${error}`)
         return false
     }
 }
@@ -41,7 +41,7 @@ const downloadAvatar = async (characterData: any) => {
 }
 
 const updateSummary = async (characterData: any) => {
-    console.log('updating summary')
+    console.log('[lib][saveCharacter] updating summary')
     const characterSummary = buildCharacterSummary(characterData)
     const summaryData = await getSummaryData()
 

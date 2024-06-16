@@ -28,12 +28,12 @@ export default function Inventory() {
 
   useEffect(() => {
       (async () => {
-        console.log('Initial load of inventory data')
+        console.log('[page][Inventory] Initial load of inventory data')
         await getInventory()
       })()
 
       const removeListener = characterRepository.onUpdate(async () => {
-        console.log('Characters updated: reloading inventory data')
+        console.log('[page][Inventory] Characters updated: reloading inventory data')
         await getInventory()
       })
 
@@ -43,14 +43,14 @@ export default function Inventory() {
   }, [])
 
   const getInventory = async () => {
-    console.log('getting inventory')
+    console.log('[page][Inventory] getting inventory')
     const inv = await window.electron.invoke('inventory:get')
     setInventory(inv)
     setFullInventory(inv)
   }
 
   function search(name: string) {
-    console.log('searching', fullInventory)
+    console.log('[page][Inventory] searching', fullInventory)
     const results = fullInventory
       .map((character: any) => {
         return {

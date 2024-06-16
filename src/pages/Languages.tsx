@@ -21,12 +21,12 @@ export default function Languages() {
 
     useEffect(() => {
         (async () => {
-            console.log('Initial load of languages')
+            console.log('[page][Languages] Initial load of languages')
             setLanguages(await window.electron.invoke('languages:get'))
         })()
 
         const removeListener = characterRepository.onUpdate(async () => {
-            console.log('Characters updated: reloading languages')
+            console.log('[page][Languages] Characters updated: reloading languages')
             await setLanguages(await window.electron.invoke('languages:get'))
         })
 

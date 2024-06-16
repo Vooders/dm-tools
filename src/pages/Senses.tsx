@@ -18,12 +18,12 @@ export default function Senses() {
 
     useEffect(() => {
         (async () => {
-            console.log('Initial load of senses data')
+            console.log('[page][Senses] Initial load of senses data')
             setSenses(await window.electron.invoke('senses:get'))
         })()
 
         const removeListener = characterRepository.onUpdate(async () => {
-            console.log('Characters updated: reloading senses data')
+            console.log('[page][Senses]Characters updated: reloading senses data')
             setSenses(await window.electron.invoke('senses:get'))
         })
 

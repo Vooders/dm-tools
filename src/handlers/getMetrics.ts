@@ -7,7 +7,7 @@ const userDataPath = app.getPath('userData');
 const metricsPath = path.join(userDataPath, 'metrics.json');
 
 export default async (_: Electron.IpcMainInvokeEvent, timeRange: number): Promise<Metrics> => {
-    console.log('Getting metrics with time range', timeRange)
+    console.log('[handler][getMetrics] Getting metrics with time range', timeRange)
 
     const metrics = await getFile(metricsPath)
     const stringData = metrics.xAxis.data

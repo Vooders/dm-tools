@@ -12,7 +12,7 @@ export default function NpcCharacter() {
 
     useEffect(() => {
         const getCharacter = async () => {
-            console.log('getting NPC')
+            console.log('[page][NpcCharacter] getting NPC')
             const char = await npcRepository.get(characterId)
             setCharacter(char)
         }

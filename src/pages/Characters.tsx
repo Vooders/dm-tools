@@ -21,12 +21,12 @@ export default function Characters() {
 
     useEffect(() => {
         (async () => {
-            console.log('Initial load of characters')
+            console.log('[page][Characters] Initial load of characters')
             setCharacters(await characterRepository.getSummary())
         })()
 
         const removeListener = characterRepository.onUpdate(async () => {
-            console.log('Characters updated: reloading character data')
+            console.log('[page][Characters] Characters updated: reloading character data')
             setCharacters(await characterRepository.getSummary())
         })
 
@@ -37,7 +37,7 @@ export default function Characters() {
 
     const handleDelete = async (characterId: string) => {
         const result = await characterRepository.deleteCharacter(characterId)
-        console.log(`Delete ${characterId} - ${result}`)
+        console.log(`[page][Characters] Delete ${characterId} - ${result}`)
     }
 
     return (
@@ -48,7 +48,7 @@ export default function Characters() {
                     const character = characters[characterKey]
                     const name = character.name
                     const details = `${character.race} ${character.classes.join(' ')}`
-                    console.log(character.avatarPath)
+                    console.log(`[page][Characters] ${character.avatarPath}`)
                     return (
                         <React.Fragment key={characterKey}>
                             <ListItem

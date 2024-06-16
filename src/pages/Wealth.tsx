@@ -12,12 +12,12 @@ export default function Wealth() {
 
     useEffect(() => {
         (async () => {
-            console.log('Initial load of wealth data')
+            console.log('[page][Wealth] Initial load of wealth data')
             setWealth(await window.electron.invoke('wealth:get'))
         })()
 
         const removeListener = characterRepository.onUpdate(async () => {
-            console.log('Characters updated: reloading wealth data')
+            console.log('[page][Wealth] Characters updated: reloading wealth data')
             setWealth(await window.electron.invoke('wealth:get'))
         })
 

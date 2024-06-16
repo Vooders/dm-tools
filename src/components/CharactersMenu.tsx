@@ -16,12 +16,12 @@ export default function CharactersMenu() {
 
     useEffect(() => {
         (async () => {
-            console.log('[CharacterMenu] Initial load of health data')
+            console.log('[component][CharacterMenu] Initial load of health data')
             setCharacters(await characterRepository.getSummary())
         })()
 
         const removeListener = characterRepository.onUpdate(async () => {
-            console.log('[CharacterMenu] Characters updated: reloading health data')
+            console.log('[component][CharacterMenu] Characters updated: reloading health data')
             setCharacters(await characterRepository.getSummary())
         })
 

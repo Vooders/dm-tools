@@ -18,7 +18,7 @@ export default async function saveNpc(npc: Npc) {
         await writeFile(npcPath, JSON.stringify(npcProcessor.toDmToolsData()))
         return true
     } catch (error) {
-        console.log(error)
+        console.log(`[lib][saveNpc] ${error}`)
         return false
     }
 }

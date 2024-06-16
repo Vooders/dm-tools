@@ -10,12 +10,12 @@ export default function Metrics() {
 
     useEffect(() => {
         (async () => {
-            console.log('Initial load of metric data')
+            console.log('[page][Metrics] Initial load of metric data')
             await getMetrics(timeRange)
         })()
 
         const removeListener = characterRepository.onUpdate(async () => {
-            console.log('Characters updated: reloading metric data')
+            console.log('[page][Metrics] Characters updated: reloading metric data')
             await getMetrics(timeRange)
         })
 
