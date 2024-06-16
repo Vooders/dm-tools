@@ -11,17 +11,17 @@ import { Summary } from '../lib/saveCharacter';
 import * as characterRepository from '../repositories/characterRepository'
 
 export default function CharactersMenu() {
-    const [open, setOpen] = React.useState(true);
+
     const [characters, setCharacters] = useState<Summary>({})
 
     useEffect(() => {
         (async () => {
-            console.log('Initial load of health data')
+            console.log('[CharacterMenu] Initial load of health data')
             setCharacters(await characterRepository.getSummary())
         })()
 
-        const removeListener = window.electron.receive('character:updated', async () => {
-            console.log('Characters updated: reloading health data')
+        const removeListener = characterRepository.onUpdate(async () => {
+            console.log('[CharacterMenu] Characters updated: reloading health data')
             setCharacters(await characterRepository.getSummary())
         })
 
@@ -43,7 +43,6 @@ export default function CharactersMenu() {
                         <Link to={`/characterSheet/${character.id}`}  key={`character${index}`}>
                             <ListItemButton
                                 key={character.name}
-                            // sx={{ color: 'rgba(255,255,255,.8)' }}
                             >
                                 <ListItemAvatar sx={{ width: '35px', height: '35px' }}>
                                     <Avatar src={character.avatarPath} variant="rounded" />
