@@ -23,7 +23,7 @@ export default function PlayerCharacter() {
         return () => {
             if(removeListener) removeListener()
         }
-    }, [])
+    }, [characterId])
 
     return (
         <CharacterSheet character={character} />
