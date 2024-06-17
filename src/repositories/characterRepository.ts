@@ -19,7 +19,7 @@ export async function get(id: string): Promise<DmToolsData> {
 }
 
 export async function getSummary(): Promise<Summary> {
-    return await window.electron.invoke('character:getSummary') as Summary
+    return await window.electron.invoke('summary:get') as Summary
 }
 
 export async function deleteCharacter(id: string): Promise<boolean> {

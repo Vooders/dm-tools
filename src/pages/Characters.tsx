@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import CharacterImporter from '../components/CharacterImporter';
 import Title from '../components/Title';
 
@@ -15,25 +15,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import { Summary } from '../lib/saveCharacter';
 import * as characterRepository from '../repositories/characterRepository'
+import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
 
 export default function Characters() {
-    const [characters, setCharacters] = useState<Summary>({})
-
-    useEffect(() => {
-        (async () => {
-            console.log('[page][Characters] Initial load of characters')
-            setCharacters(await characterRepository.getSummary())
-        })()
-
-        const removeListener = characterRepository.onUpdate(async () => {
-            console.log('[page][Characters] Characters updated: reloading character data')
-            setCharacters(await characterRepository.getSummary())
-        })
-
-        return () => {
-            if(removeListener) removeListener()
-        }
-    }, [])
+    const characters = useUpdateWithCharacters<Summary>('summary', '[page][Characters]', {})
 
     const handleDelete = async (characterId: string) => {
         const result = await characterRepository.deleteCharacter(characterId)

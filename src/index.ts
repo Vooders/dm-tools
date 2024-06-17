@@ -73,7 +73,7 @@ const createWindow = (): void => {
 
     ipcMain.handle('character:updateAll', handleImportAll(mainWindow))
 
-    ipcMain.handle('character:getSummary', getSummary)
+    ipcMain.handle('summary:get', getSummary)
     ipcMain.handle('character:get', getCharacter)
     ipcMain.handle('character:delete', deleteCharacter(mainWindow))
     ipcMain.handle('inventory:get', getInventories)

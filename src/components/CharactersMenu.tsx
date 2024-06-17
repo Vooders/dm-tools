@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -8,27 +8,10 @@ import ListSubheader from '@mui/material/ListSubheader';
 import { Link } from 'react-router-dom';
 import { Summary } from '../lib/saveCharacter';
 
-import * as characterRepository from '../repositories/characterRepository'
+import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
 
 export default function CharactersMenu() {
-
-    const [characters, setCharacters] = useState<Summary>({})
-
-    useEffect(() => {
-        (async () => {
-            console.log('[component][CharacterMenu] Initial load of health data')
-            setCharacters(await characterRepository.getSummary())
-        })()
-
-        const removeListener = characterRepository.onUpdate(async () => {
-            console.log('[component][CharacterMenu] Characters updated: reloading health data')
-            setCharacters(await characterRepository.getSummary())
-        })
-
-        return () => {
-            if(removeListener) removeListener()
-        }
-    }, [])
+    const characters = useUpdateWithCharacters<Summary>('summary', '[page][CharactersMenu]', {})
 
     return (
         <>
@@ -54,5 +37,5 @@ export default function CharactersMenu() {
 
                 })}
         </>
-    );
+    )
 }
