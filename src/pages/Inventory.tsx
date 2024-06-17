@@ -13,7 +13,8 @@ import Title from '../components/Title';
 import { Card, CardContent, Grid } from '@mui/material';
 import { Item, ItemContainer } from '../dm-tools-data.types';
 
-import * as characterRepository from '../repositories/characterRepository'
+import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
+import { InventoryData } from '../handlers/getInventories'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -23,34 +24,12 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Inventory() {
-  const [fullInventory, setFullInventory] = useState([])
+  const fullInventory = useUpdateWithCharacters<InventoryData[]>('inventory', '[page][Inventory]', [])
   const [inventory, setInventory] = useState([])
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
-      (async () => {
-        console.log('[page][Inventory] Initial load of inventory data')
-        await getInventory()
-      })()
-
-      const removeListener = characterRepository.onUpdate(async () => {
-        console.log('[page][Inventory] Characters updated: reloading inventory data')
-        await getInventory()
-      })
-
-      return () => {
-        if(removeListener) removeListener()
-    }
-  }, [])
-
-  const getInventory = async () => {
-    console.log('[page][Inventory] getting inventory')
-    const inv = await window.electron.invoke('inventory:get')
-    setInventory(inv)
-    setFullInventory(inv)
-  }
-
-  function search(name: string) {
-    console.log('[page][Inventory] searching', fullInventory)
+    console.log('[page][Inventory] searching', searchQuery)
     const results = fullInventory
       .map((character: any) => {
         return {
@@ -58,19 +37,19 @@ export default function Inventory() {
           inventory: character.inventory.map((container: ItemContainer) => {
             return {
               name: container.name,
-              contents: container.contents.filter((item: any) => item.definition.name.toLowerCase().includes(name.toLowerCase()))
+              contents: container.contents.filter((item: any) => item.definition.name.toLowerCase().includes(searchQuery.toLowerCase()))
             }
           })
         }
       })
     setInventory(results)
-  }
+  }, [searchQuery, fullInventory])
 
   return (
     <React.Fragment>
       <Title>Inventory</Title>
       <FormGroup>
-        <TextField id="standard-basic" label="Search" variant="standard" onChange={(e) => search(e.target.value)} />
+        <TextField id="standard-basic" label="Search" variant="standard" onChange={(e) => setSearchQuery(e.target.value)} />
       </FormGroup>
       <Stack spacing={2} mt={2}>
         {inventory.map(character => {
