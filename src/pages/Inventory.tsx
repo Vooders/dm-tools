@@ -45,6 +45,50 @@ export default function Inventory() {
     setInventory(results)
   }, [searchQuery, fullInventory])
 
+  function Container({container}: {container: ItemContainer}) {
+    if (container.contents.length === 0) {
+      return null
+    }
+    return (
+      <Card variant="outlined">
+        <CardContent>
+          <Grid container direction="row" spacing={2}>
+            <Grid item>{container.equipped ? '✔️ ' : '❌ '}{container.name}</Grid>
+            <Grid item>{container.capacity}{container.capacity ? 'lb capacity' : ''}</Grid>
+          </Grid>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell>Equipped</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Quantity</TableCell>
+                <TableCell>Weight</TableCell>
+                <TableCell>Rarity</TableCell>
+                <TableCell>Type</TableCell>
+                <TableCell>Description</TableCell>
+                <TableCell>Notes</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {container.contents.map((item: Item, index: number) => (
+                <TableRow key={`${item.id}-${index}`}>
+                  <TableCell>{item.equipped ? '✔️' : '❌'}</TableCell>
+                  <TableCell>{item.definition.name}</TableCell>
+                  <TableCell>{item.quantity}</TableCell>
+                  <TableCell>{item.definition.weight} lbs</TableCell>
+                  <TableCell>{item.definition.rarity}</TableCell>
+                  <TableCell>{item.definition.filterType}</TableCell>
+                  <TableCell>{item.definition.description}</TableCell>
+                  <TableCell>{item.definition.notes}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+    )
+  }
+
   return (
     <React.Fragment>
       <Title>Inventory</Title>
@@ -58,43 +102,7 @@ export default function Inventory() {
               <Title>{character.name}</Title>
               {character.inventory.map((container: ItemContainer, index: number) => {
                 return (
-
-                  <Card variant="outlined" key={`characterInventory${index}`}>
-                    <CardContent>
-                      <Grid container direction="row" spacing={2}>
-                        <Grid item>{container.equipped ? '✔️ ' : '❌ '}{container.name}</Grid>
-                        <Grid item>{container.capacity}{container.capacity ? 'lb capacity' : ''}</Grid>
-                      </Grid>
-                      <Table size="small">
-                        <TableHead>
-                          <TableRow>
-                            <TableCell>Equipped</TableCell>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Quantity</TableCell>
-                            <TableCell>Weight</TableCell>
-                            <TableCell>Rarity</TableCell>
-                            <TableCell>Type</TableCell>
-                            <TableCell>Description</TableCell>
-                            <TableCell>Notes</TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {container.contents.map((item: Item, index: number) => (
-                            <TableRow key={`${item.id}-${index}`}>
-                              <TableCell>{item.equipped ? '✔️' : '❌'}</TableCell>
-                              <TableCell>{item.definition.name}</TableCell>
-                              <TableCell>{item.quantity}</TableCell>
-                              <TableCell>{item.definition.weight} lbs</TableCell>
-                              <TableCell>{item.definition.rarity}</TableCell>
-                              <TableCell>{item.definition.filterType}</TableCell>
-                              <TableCell>{item.definition.description}</TableCell>
-                              <TableCell>{item.definition.notes}</TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </CardContent>
-                  </Card>
+                  <Container container={container} key={`characterInventory${index}`}/>
                 )
               })}
             </React.Fragment>
