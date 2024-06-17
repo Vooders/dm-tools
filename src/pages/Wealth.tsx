@@ -1,30 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Title from '../components/Title'
 import { Typography, Card, CardContent, Grid, Divider } from '@mui/material'
 import { WealthData } from '../handlers/getWealth'
 import Currencies from '../components/Currencies'
 import Currency from '../components/Currency'
 
-import * as characterRepository from '../repositories/characterRepository'
+import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
 
 export default function Wealth() {
-    const [wealth, setWealth] = useState<WealthData[]>([])
-
-    useEffect(() => {
-        (async () => {
-            console.log('[page][Wealth] Initial load of wealth data')
-            setWealth(await window.electron.invoke('wealth:get'))
-        })()
-
-        const removeListener = characterRepository.onUpdate(async () => {
-            console.log('[page][Wealth] Characters updated: reloading wealth data')
-            setWealth(await window.electron.invoke('wealth:get'))
-        })
-
-        return () => {
-            if(removeListener) removeListener()
-        }
-    }, [])
+    const wealth = useUpdateWithCharacters<WealthData[]>('wealth', '[page][Wealth]', [])
 
     function reduceAndRound<T>(someArray: T[], reduceFunc: (acc: number, item: T) => number): number {
         const result = someArray.reduce(reduceFunc, 0)

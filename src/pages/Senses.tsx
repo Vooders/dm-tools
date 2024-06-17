@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import Title from '../components/Title';
 
@@ -11,26 +11,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { SensesData } from '../handlers/getSenses';
 
-import * as characterRepository from '../repositories/characterRepository'
+import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters';
 
 export default function Senses() {
-    const [senses, setSenses] = useState<SensesData[]>([])
-
-    useEffect(() => {
-        (async () => {
-            console.log('[page][Senses] Initial load of senses data')
-            setSenses(await window.electron.invoke('senses:get'))
-        })()
-
-        const removeListener = characterRepository.onUpdate(async () => {
-            console.log('[page][Senses]Characters updated: reloading senses data')
-            setSenses(await window.electron.invoke('senses:get'))
-        })
-
-        return () => {
-            if(removeListener) removeListener()
-        }
-    }, [])
+    const senses = useUpdateWithCharacters<SensesData[]>('senses', '[page][Senses]', [])
 
     return (
         <React.Fragment>

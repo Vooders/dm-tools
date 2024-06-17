@@ -1,29 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useRef } from 'react'
 import { Metrics } from '../lib/saveMetrics'
 import Graph from '../components/Graph'
-import { Box } from '@mui/system'
-import { Button, ButtonGroup } from '@mui/material'
 
-import * as characterRepository from '../repositories/characterRepository'
+import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
 
 export default function Metrics() {
-
-    useEffect(() => {
-        (async () => {
-            console.log('[page][Metrics] Initial load of metric data')
-            await getMetrics(timeRange)
-        })()
-
-        const removeListener = characterRepository.onUpdate(async () => {
-            console.log('[page][Metrics] Characters updated: reloading metric data')
-            await getMetrics(timeRange)
-        })
-
-        return () => {
-            if(removeListener) removeListener()
-        }
-    }, [])
-
+    const HOUR = 1000 * 60 * 60
     const emptyMetrics: any = {
         xAxis: {
             data: []
@@ -38,26 +20,11 @@ export default function Metrics() {
             series: []
         }
     }
-    const HOUR = 1000 * 60 * 60
-    const [metrics, setMetrics] = useState<any>(emptyMetrics)
-    const [timeRange, setTimeRange] = useState<number>(HOUR * 4)
-
-    const getMetrics = async (range: number) => {
-        await setTimeRange((r) => range)
-        setMetrics(await window.electron.invoke('metrics:get', range))
-    }
+    const timeRange = useRef<number>(HOUR * 4)
+    const metrics = useUpdateWithCharacters<any>('metrics', '[page][Metrics]', emptyMetrics, timeRange)
 
     return (
         <>
-            {timeRange}
-            <Box>
-                <ButtonGroup variant="text" aria-label="Basic button group">
-                    <Button onClick={() => getMetrics(HOUR)}>One</Button>
-                    <Button onClick={() => getMetrics(HOUR * 2)}>Two</Button>
-                    <Button onClick={() => getMetrics(HOUR * 3)}>Three</Button>
-                    <Button onClick={() => getMetrics(HOUR * 4)}>Three</Button>
-                </ButtonGroup>
-            </Box>
             <Graph
                 title='HP'
                 series={metrics.hp.series}

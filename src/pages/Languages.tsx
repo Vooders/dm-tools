@@ -11,29 +11,14 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { LanguagesData } from '../handlers/getLanguages';
 
-import * as characterRepository from '../repositories/characterRepository'
+import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
 
 export default function Languages() {
-    const [languages, setLanguages] = useState<LanguagesData>({
+    const initialValue: LanguagesData = {
         allLanguages: [],
         characters: []
-    })
-
-    useEffect(() => {
-        (async () => {
-            console.log('[page][Languages] Initial load of languages')
-            setLanguages(await window.electron.invoke('languages:get'))
-        })()
-
-        const removeListener = characterRepository.onUpdate(async () => {
-            console.log('[page][Languages] Characters updated: reloading languages')
-            await setLanguages(await window.electron.invoke('languages:get'))
-        })
-
-        return () => {
-            if(removeListener) removeListener()
-        }
-    }, [])
+    }
+    const languages = useUpdateWithCharacters<LanguagesData>('languages', '[page][Languages]', initialValue)
 
     return (
         <React.Fragment>

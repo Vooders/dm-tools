@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import Title from "../components/Title"
 import { Card, CardContent, Typography, IconButton, Tooltip } from "@mui/material"
 import { Box } from "@mui/system"
@@ -9,28 +9,10 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { DmToolsData } from "../dm-tools-data.types"
 
 import * as npcRepository from '../repositories/npcRepository'
+import useUpdateWithNpcs from "../hooks/useUpdateWithNpcs"
 
 export default function Npcs() {
-    const [npcs, setNpcs] = useState<DmToolsData[]>([])
-
-    const setNpcData = async () => {
-        console.log('[page][Npcs] getting Npcs')
-        setNpcs(await npcRepository.getAll())
-    }
-
-    useEffect(() => {
-        setNpcData()
-            .catch(console.error)
-
-        const deleteListener = npcRepository.onUpdate(async () => {
-            console.log('[page][Npcs] npc updated')
-            await setNpcData()
-        })
-
-        return ()  => {
-            if (deleteListener) deleteListener()
-        }
-    }, [])
+    const npcs = useUpdateWithNpcs<DmToolsData[]>('npcs', '[page][Npcs]', [])
 
     const handleDelete = async (id: string) => {
         const result = await npcRepository.deleteNpc(id)

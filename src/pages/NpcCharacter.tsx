@@ -1,27 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 
 import CharacterSheet from './CharacterSheet'
 import { DmToolsData } from '../dm-tools-data.types'
 
-import * as npcRepository from '../repositories/npcRepository'
+import useUpdateWithNpcs from '../hooks/useUpdateWithNpcs'
 
 export default function NpcCharacter() {
     let { characterId } = useParams()
-    const [character, setCharacter] = useState<DmToolsData>(null)
-
-    useEffect(() => {
-        const getCharacter = async () => {
-            console.log('[page][NpcCharacter] getting NPC')
-            const char = await npcRepository.get(characterId)
-            setCharacter(char)
-        }
-
-        if (!character) {
-            getCharacter()
-                .catch(console.error)
-        }
-    }, [characterId])
+    const character = useUpdateWithNpcs<DmToolsData>('npc', '[page][NpcCharacter]', null, characterId)
 
     return (
         <CharacterSheet character={character} />

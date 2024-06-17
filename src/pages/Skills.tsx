@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Title from '../components/Title'
 
 import Table from '@mui/material/Table';
@@ -9,26 +9,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TableHead from '@mui/material/TableHead';
 
-import * as characterRepository from '../repositories/characterRepository'
+import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters';
 
 export default function Skills() {
-    const [skills, setSkills] = useState<any[]>([[], []])
-
-    useEffect(() => {
-        (async () => {
-            console.log('[page][Skills] Initial load of skills data')
-            setSkills(await window.electron.invoke('skills:get'))
-        })()
-
-        const removeListener = characterRepository.onUpdate(async () => {
-            console.log('[page][Skills] Characters updated: reloading skills data')
-            setSkills(await window.electron.invoke('skills:get'))
-        })
-
-        return () => {
-            if(removeListener) removeListener()
-        }
-    }, [])
+    const skills = useUpdateWithCharacters<any[]>('skills', '[page][Skills]', [[], []])
 
     return (
         <React.Fragment>

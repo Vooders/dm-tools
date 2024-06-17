@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -15,7 +15,7 @@ import HitDice from '../components/HitDice'
 import HpBar from '../components/HpBar'
 import { CharacterProfileHp } from '../dm-tools-data.types'
 
-import * as characterRepository from '../repositories/characterRepository'
+import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
 
 const style = {
     outer: {
@@ -36,23 +36,7 @@ const style = {
 }
 
 export default function Health() {
-    const [health, setHealth] = useState<HealthData[]>([])
-
-    useEffect(() => {
-        (async () => {
-            console.log('[page][Health] Initial load of health data')
-            setHealth(await window.electron.invoke('health:get'))
-        })()
-
-        const removeListener = characterRepository.onUpdate(async () => {
-            console.log('[page][Health] Characters updated: reloading health data')
-            setHealth(await window.electron.invoke('health:get'))
-        })
-
-        return () => {
-            if(removeListener) removeListener()
-        }
-    }, [])
+    const health = useUpdateWithCharacters<HealthData[]>('health', '[page][Health]', [])
 
     const maxHp = (hp: CharacterProfileHp) => {
         return (hp.override) ? hp.override : hp.constitutionBonus + hp.base + hp.bonus
