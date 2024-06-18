@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
-import CharacterSheet from './CharacterSheet'
+import CharacterSheet from '../components/CharacterSheet'
 import { DmToolsData } from '../dm-tools-data.types'
 
 import useUpdateWithNpcs from '../hooks/useUpdateWithNpcs'
