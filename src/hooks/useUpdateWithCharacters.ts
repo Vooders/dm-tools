@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export default function useUpdateWithCharacters<T>(handler: string, logId: string, initialState: any, data?: any): T {
+export default function useUpdateWithCharacters<T>(handler: string, logId: string, initialState: T, data?: any): T {
     const [characters, setCharacters] = useState<T>(initialState)
 
     useEffect(() => {
