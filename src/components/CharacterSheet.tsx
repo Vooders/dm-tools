@@ -9,13 +9,13 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Tab from '@mui/material/Tab';
 
-import Abilities from '../components/Abilities';
-import Skills from '../components/Skills';
-import Spells from '../components/Spells';
-import PassiveSkills from '../components/PassiveSkills';
-import { ProficienciesLanguages } from '../components/ProficienciesLanguages';
-import Saves from '../components/Saves';
-import Ac from '../components/Ac';
+import Abilities from './Abilities';
+import Skills from './Skills';
+import Spells from './Spells';
+import PassiveSkills from './PassiveSkills';
+import { ProficienciesLanguages } from './ProficienciesLanguages';
+import Saves from './Saves';
+import Ac from './Ac';
 import { DmToolsData, CharacterProfileHp } from '../dm-tools-data.types';
 
 const style = {
