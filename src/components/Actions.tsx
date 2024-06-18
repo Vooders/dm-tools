@@ -2,6 +2,7 @@ import React from 'react'
 import Slots from './Slots'
 import { Box } from '@mui/material'
 import { SpellSlot, Action } from '../dm-tools-data.types'
+import KiPoints from './KiPoints'
 
 const styling = {
     display: 'flex',
@@ -9,8 +10,12 @@ const styling = {
 }
 
 export default function Actions(props: ActionsProps) {
+    const ki = props.limitedUseActions.filter(action => action.name === 'Ki Points')[0]
+    const limitedUseActions = props.limitedUseActions.filter(action => action.name != 'Ki Points')
+
     return (
         <React.Fragment>
+            {ki && <KiPoints max={ki.limitedUse.maxUses} used={ki.limitedUse.numberUsed} />}
             <Box sx={styling}>
                 {props.spellSlots.map((spellSlot, index) => {
                     return (
@@ -25,7 +30,7 @@ export default function Actions(props: ActionsProps) {
                 })}
             </Box>
             <Box sx={styling}>
-                {props.limitedUseActions.map((limitedUseAction, index) => {
+                {limitedUseActions.map((limitedUseAction, index) => {
                     return (
                         <Slots
                             title={`${limitedUseAction.name}`}
