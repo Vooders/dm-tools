@@ -24,7 +24,6 @@ export default function inventory(inventory: any, customItemInventory: any, carr
             equipped: item.equipped,
             quantity: item.quantity,
             limitedUse: {},
-            modifiers: item.definition.grantedModifiers
         }
         return addCustomValues(newItem)
     })
@@ -52,7 +51,6 @@ export default function inventory(inventory: any, customItemInventory: any, carr
             equipped: false,
             quantity: item.quantity,
             limitedUse: {},
-            modifiers: {}
         }
     })
 

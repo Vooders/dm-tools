@@ -11,20 +11,18 @@ export default function armourClass(abilities: Ability[], inventory: ItemContain
     const unarmoredModifier = getUnarmoredModifier(modifiers, abilities)
     const armoredModifier = getArmoredModifier(modifiers)
     const armorIsEquipped = isWearingArmor(equippedArmorItems)
-    const itemModifier = getItemModifier(inventory)
+    const bonusModifier = getBonusModifier(modifiers)
 
     if (armorIsEquipped) {
-        return equippedArmorItemsAc + armorTypeModifier + armoredModifier + itemModifier
+        return equippedArmorItemsAc + armorTypeModifier + armoredModifier + bonusModifier
     } else {
-        return baseAC + dexModifier + unarmoredModifier + equippedArmorItemsAc + itemModifier
+        return baseAC + dexModifier + unarmoredModifier + equippedArmorItemsAc + bonusModifier
     }
 }
 
-function getItemModifier(inventory: ItemContainer[]): number {
-    return inventory.map((container) => container.contents).flat()
-        .filter((item) => item.equipped && item.modifiers)
-        .map((item) => item.modifiers.filter((mod: any) => mod.modifierTypeId === 1 && mod.modifierSubTypeId === 1)).flat()
-        .reduce((accumulator, mod) => accumulator + mod.value, 0)
+function getBonusModifier(modifiers: Modifier[]): number {
+    return modifiers.filter((modifier) => modifier.subType === 'armor-class' && modifier.type === 'bonus')
+        .reduce((total: number, mod: Modifier) => total + mod.fixedValue, 0)
 }
 
 function getArmorTypeModifier(items: Item[], dexModifier: number): number {

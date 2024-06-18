@@ -25,7 +25,6 @@ export default class ItemBuilder {
         private maxUses: number = 0,
         private numberUsed: number = 0,
         private useProficiencyBonus: boolean = false,
-        private modifiers: any[] = []
     ) { }
 
     public withId(id: number) {
@@ -156,11 +155,6 @@ export default class ItemBuilder {
         return this
     }
 
-    public withModifiers(modifiers: any) {
-        this.modifiers = modifiers
-        return this
-    }
-
     public build(): Item {
         return {
             id: this.id,
@@ -190,7 +184,6 @@ export default class ItemBuilder {
                 numberUsed: this.numberUsed,
                 useProficiencyBonus: this.useProficiencyBonus
             },
-            modifiers: this.modifiers
         }
     }
 }

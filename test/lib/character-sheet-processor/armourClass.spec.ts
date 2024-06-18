@@ -266,6 +266,21 @@ describe('Armour Class', () => {
             ac.should.equal(19)
         })
     })
+
+    describe('With modifiers', () => {
+        it('should add a bonus modifier to ac', () => {
+            const abilities = new AbilitiesBuilder().build()
+            const plusFiveAc = new ModifierBuilder()
+                .withType('bonus')
+                .withSubType('armor-class')
+                .withFixedValue(5)
+                .build()
+
+            const ac = armourClass(abilities, [], [plusFiveAc])
+
+            ac.should.equal(15)
+        })
+    })
 })
 
 function buildItemContainer(items: Item[]): ItemContainer {

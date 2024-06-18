@@ -14,7 +14,7 @@ import * as hitDice from './character-sheet-processor/hitDice'
 import action from './character-sheet-processor/actions'
 import healthPotions from './character-sheet-processor/healthPotions'
 import creatures from './character-sheet-processor/creatures'
-import { 
+import {
     Ability,
     Action,
     CharacterProfile,
@@ -30,7 +30,7 @@ import {
     SpellSlot,
     SpellsType,
     Wealth,
-    WeightData 
+    WeightData
 } from '../dm-tools-data.types'
 import { Modifier, ModifierKeys, Modifiers, Stat } from '../ddb-data.types'
 
@@ -128,7 +128,8 @@ export default class CharacterSheetProcessor {
         const stats = this.stats
         const inventory = this.buildInventory()
         const modifiers = this.filterModifiersByType('bonus')
-        return abilities(stats, modifiers, inventory)
+            .concat(this.filterModifiersByType('set'))
+        return abilities(stats, modifiers)
     }
 
     private buildArmour(): number {
@@ -136,6 +137,7 @@ export default class CharacterSheetProcessor {
         const inventory = this.buildInventory()
         const modifiers = this.filterModifiersBySubType('armored-armor-class')
             .concat(this.filterModifiersBySubType('unarmored-armor-class'))
+            .concat(this.filterModifiersBySubType('armor-class'))
         return armourClass(abilities, inventory, modifiers)
     }
 
@@ -205,7 +207,7 @@ export default class CharacterSheetProcessor {
         return 6
     }
 
-    private getModifier(shortName:'CON'|'STR'|'DEX'|'INT'|'CHA'|'WIS' ): number {
+    private getModifier(shortName: 'CON' | 'STR' | 'DEX' | 'INT' | 'CHA' | 'WIS'): number {
         return this.abilities.filter(ability => ability.shortName === shortName)[0].modifier
     }
 
@@ -281,7 +283,7 @@ export default class CharacterSheetProcessor {
             gp: currencies.gp,
             ep: currencies.ep,
             pp: currencies.pp,
-            total: Math.round(this.totalGold(currencies) * 100)/100
+            total: Math.round(this.totalGold(currencies) * 100) / 100
         }
     }
 
