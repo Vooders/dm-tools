@@ -2,14 +2,14 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material"
 import React, { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid'
-import { Skill, Save, DmToolsData, Ability, ProficiencyView } from "../dm-tools-data.types"
+import { Skill, Save, Ability, ProficiencyView } from "../dm-tools-data.types"
+import Title from '../components/Title';
 import ProficienciesSelector from "../components/ProficienciesSelector"
 import AbilitySelector from '../components/AbilitySelector'
-import Title from '../components/Title';
-import LanguagesSelector from "../components/LanguagesSelector"
 import RaceSelector from "../components/RaceSelector"
 import NameSelector from "../components/NameSelector"
 import GenderSelector from "../components/GenderSelector"
+import ProficienciesViewSelector from "../components/ProficienciesViewSelector"
 
 import * as npcRepository from '../repositories/npcRepository'
 
@@ -158,9 +158,9 @@ export default function CreateNpc() {
       setWisdomSave(findSave('Wisdom'))
       setCharismaSave(findSave('Charisma'))
 
-      setArmour(findProficiencyView('armour'))
+      setArmour(findProficiencyView('Armour'))
       setWeapons(findProficiencyView('Weapons'))
-      setTools(findProficiencyView('tools'))
+      setTools(findProficiencyView('Tools'))
       setLanguages(findProficiencyView('Languages'))
     }
 
@@ -222,7 +222,7 @@ export default function CreateNpc() {
         wisdomSave,
         charismaSave,
       ],
-      proficiencyView:[
+      proficiencyView: [
         armour,
         weapons,
         tools,
@@ -271,6 +271,10 @@ export default function CreateNpc() {
       justifyContent: 'center',
       flexDirection: 'column',
     },
+    gridItem: {
+      display: 'flex',
+      flexDirection: 'column',
+    }
   }
 
   return (
@@ -302,7 +306,7 @@ export default function CreateNpc() {
         <AbilitySelector ability={charisma} hook={setCharisma} />
       </Grid>
       <Grid container>
-        <Grid item xs={7} sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Grid item xs={7} sx={style.gridItem}>
           <Typography component="h2" variant="h6" color="primary" gutterBottom>Skills</Typography>
           <ProficienciesSelector skill={acrobatics} hook={setAcrobatics} />
           <ProficienciesSelector skill={animalHandling} hook={setAnimalHandling} />
@@ -323,7 +327,7 @@ export default function CreateNpc() {
           <ProficienciesSelector skill={stealth} hook={setStealth} />
           <ProficienciesSelector skill={survival} hook={setSurvival} />
         </Grid>
-        <Grid item xs={5} sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Grid item xs={5} sx={style.gridItem}>
           <Typography component="h2" variant="h6" color="primary" gutterBottom>Saves</Typography>
           <ProficienciesSelector skill={strengthSave} hook={setStrengthSave} expertise={false} />
           <ProficienciesSelector skill={dexteritySave} hook={setDexteritySave} expertise={false} />
@@ -333,7 +337,13 @@ export default function CreateNpc() {
           <ProficienciesSelector skill={charismaSave} hook={setCharismaSave} expertise={false} />
         </Grid>
       </Grid>
-      <LanguagesSelector languages={languages} setLanguages={setLanguages}/>
+      <Typography component="h2" variant="h6" color="primary" gutterBottom>Proficiencies</Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+        <ProficienciesViewSelector proficiencyView={languages} setProficiency={setLanguages} />
+        <ProficienciesViewSelector proficiencyView={tools} setProficiency={setTools} />
+        <ProficienciesViewSelector proficiencyView={armour} setProficiency={setArmour} />
+        <ProficienciesViewSelector proficiencyView={weapons} setProficiency={setWeapons} />
+      </Box>
       <Box sx={style.centred}>
         <Button variant="outlined" sx={style.saveButton} onClick={saveNpc} >Save</Button>
       </Box>
