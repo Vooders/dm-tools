@@ -5,16 +5,26 @@ const { contextBridge, ipcRenderer } = require('electron')
 
 contextBridge.exposeInMainWorld('electron', {
   send: (channel, data) => {
-    console.log(`[contextBridge] sending channel: "${channel}" data in next line`)
-    console.log(data)
+    if (data) {
+      console.log(`[contextBridge] sending channel: "${channel}" data on next line`)
+      console.log(data)
+    } else {
+      console.log(`[contextBridge] sending channel: "${channel}" (no data)`)
+    }
     ipcRenderer.send(channel, data)
   },
   invoke: async (channel, data) => {
-    console.log(`[contextBridge] invoking channel: "${channel}" data in next line`)
-    console.log(data)
+    if (data) {
+      console.log(`[contextBridge] invoking channel: "${channel}" data on next line`)
+      console.log(data)
+    } else {
+      console.log(`[contextBridge] invoking channel: "${channel}" (no data)`)
+    }
     const response = await ipcRenderer.invoke(channel, data)
-    console.log(`[contextBridge] response for channel: "${channel}" response in next line`)
-    console.log(response)
+    if (response) {
+      console.log(`[contextBridge] got response from channel: "${channel}" response on next line`)
+      console.log(response)
+    }
     return response
   },
   receive: (channel, func) => {
@@ -35,5 +45,5 @@ contextBridge.exposeInMainWorld('electron', {
   },
 })
 
-console.log('preload ran')
+console.log('[preload] loaded')
 
