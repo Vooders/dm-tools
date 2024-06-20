@@ -26,7 +26,9 @@ function findEarliestIndex(startTime: Date, metrics: Metrics): number {
 }
 
 function setRange(time: number, metrics: Metrics) {
-    const index = findEarliestIndex(new Date(Date.now() - time), metrics)
+    const startDate = new Date(Date.now() - time)
+    console.log(`[handler][getMetrics] Getting metrics from ${startDate.toISOString()}`)
+    const index = findEarliestIndex(startDate, metrics)
     const m = metrics
     m.xAxis.data = metrics.xAxis.data.slice(index)
     m.xp.series = metrics.xp.series.map(sliceData(index))

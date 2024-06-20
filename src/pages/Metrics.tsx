@@ -1,8 +1,10 @@
-import React, { useRef } from 'react'
+import React, { useState } from 'react'
 import { Metrics } from '../lib/saveMetrics'
 import Graph from '../components/Graph'
 
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
+import { Box } from '@mui/system'
+import { FormControlLabel, Radio, RadioGroup } from '@mui/material'
 
 export default function Metrics() {
     const HOUR = 1000 * 60 * 60
@@ -20,26 +22,40 @@ export default function Metrics() {
             series: []
         }
     }
-    const timeRange = useRef<number>(HOUR * 4)
-    const metrics = useUpdateWithCharacters<any>('metrics', '[page][Metrics]', emptyMetrics, timeRange)
+    const [numberOfHours, setNumberOfHours] = useState<number>(4 * HOUR)
+    const metrics = useUpdateWithCharacters<any>('metrics', '[page][Metrics]', emptyMetrics, numberOfHours)
 
     return (
-        <>
-            <Graph
-                title='HP'
-                series={metrics.hp.series}
-                xAxis={metrics.xAxis.data}
-            />
-            <Graph
-                title='Gold'
-                series={metrics.gold.series}
-                xAxis={metrics.xAxis.data}
-            />
-            <Graph
-                title='XP'
-                series={metrics.xp.series}
-                xAxis={metrics.xAxis.data}
-            />
-        </>
+        <React.Fragment>
+            <Box>
+                <RadioGroup
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                    onChange={(e: any) => setNumberOfHours(e.target.value * HOUR)}
+                >
+                    <FormControlLabel value={2} control={<Radio />} label="2" />
+                    <FormControlLabel value={4} control={<Radio />} label="4" />
+                    <FormControlLabel value={6} control={<Radio />} label="6" />
+                </RadioGroup>
+            </Box>
+            <Box>
+                <Graph
+                    title='HP'
+                    series={metrics.hp.series}
+                    xAxis={metrics.xAxis.data}
+                />
+                <Graph
+                    title='Gold'
+                    series={metrics.gold.series}
+                    xAxis={metrics.xAxis.data}
+                />
+                <Graph
+                    title='XP'
+                    series={metrics.xp.series}
+                    xAxis={metrics.xAxis.data}
+                />
+            </Box>
+        </React.Fragment>
     )
 }
