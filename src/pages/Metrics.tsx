@@ -5,6 +5,9 @@ import Graph from '../components/Graph'
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
 import { Box } from '@mui/system'
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material'
+import { RendererLogger } from '../logger/RendererLogger';
+
+const logger = new RendererLogger('[page][Metrics]', window)
 
 export default function Metrics() {
     const HOUR = 1000 * 60 * 60
@@ -23,7 +26,7 @@ export default function Metrics() {
         }
     }
     const [numberOfHours, setNumberOfHours] = useState<number>(4 * HOUR)
-    const metrics = useUpdateWithCharacters<any>('metrics', '[page][Metrics]', emptyMetrics, numberOfHours)
+    const metrics = useUpdateWithCharacters<any>('metrics', logger, emptyMetrics, numberOfHours)
 
     return (
         <React.Fragment>

@@ -2,12 +2,15 @@ import { app } from "electron"
 import getFile from "../lib/getFile"
 import { Metric, Metrics } from "../lib/saveMetrics"
 import path from 'path'
+import { Logger } from '../logger/Logger';
+
+const logger = new Logger('[handler][getMetrics]')
 
 const userDataPath = app.getPath('userData');
 const metricsPath = path.join(userDataPath, 'metrics.json');
 
 export default async (_: Electron.IpcMainInvokeEvent, timeRange: number): Promise<Metrics> => {
-    console.log('[handler][getMetrics] Getting metrics with time range', timeRange)
+    logger.info(`Getting metrics with time range ${timeRange}`)
 
     const metrics = await getFile(metricsPath)
     const stringData = metrics.xAxis.data
@@ -27,7 +30,7 @@ function findEarliestIndex(startTime: Date, metrics: Metrics): number {
 
 function setRange(time: number, metrics: Metrics) {
     const startDate = new Date(Date.now() - time)
-    console.log(`[handler][getMetrics] Getting metrics from ${startDate.toISOString()}`)
+    logger.info(`Getting metrics from ${startDate.toISOString()}`)
     const index = findEarliestIndex(startDate, metrics)
     const m = metrics
     m.xAxis.data = metrics.xAxis.data.slice(index)

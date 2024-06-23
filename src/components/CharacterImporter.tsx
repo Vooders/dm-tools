@@ -15,6 +15,9 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import * as characterRepository from '../repositories/characterRepository'
+import { RendererLogger } from '../logger/RendererLogger';
+
+const logger = new RendererLogger('[component][CharacterImporter]', window)
 
 export default function CharacterImporter() {
     const [characterId, setCharacterId] = useState('')
@@ -30,7 +33,7 @@ export default function CharacterImporter() {
     };
 
     const importChar = async (): Promise<void> => {
-        console.log(`[component][CharacterImporter] Characters: getting ${characterId}`)
+        logger.info(`Characters: getting ${characterId}`)
         const response = await characterRepository.importCharacter(characterId)
         setImportResponse(response)
         if (response.status === 'success') {

@@ -6,9 +6,12 @@ import Currencies from '../components/Currencies'
 import Currency from '../components/Currency'
 
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
+import { RendererLogger } from '../logger/RendererLogger';
+
+const logger = new RendererLogger('[page][Wealth]', window)
 
 export default function Wealth() {
-    const wealth = useUpdateWithCharacters<WealthData[]>('wealth', '[page][Wealth]', [])
+    const wealth = useUpdateWithCharacters<WealthData[]>('wealth', logger, [])
 
     function reduceAndRound<T>(someArray: T[], reduceFunc: (acc: number, item: T) => number): number {
         const result = someArray.reduce(reduceFunc, 0)

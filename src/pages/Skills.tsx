@@ -10,9 +10,12 @@ import Paper from '@mui/material/Paper';
 import TableHead from '@mui/material/TableHead';
 
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters';
+import { RendererLogger } from '../logger/RendererLogger';
+
+const logger = new RendererLogger('[page][Skills]', window)
 
 export default function Skills() {
-    const skills = useUpdateWithCharacters<any[]>('skills', '[page][Skills]', [[], []])
+    const skills = useUpdateWithCharacters<any[]>('skills', logger, [[], []])
 
     return (
         <React.Fragment>

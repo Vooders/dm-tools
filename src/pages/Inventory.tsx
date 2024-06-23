@@ -15,6 +15,9 @@ import { Item, ItemContainer } from '../dm-tools-data.types';
 
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
 import { InventoryData } from '../handlers/getInventories'
+import { RendererLogger } from '../logger/RendererLogger';
+
+const logger = new RendererLogger('[page][Inventory]', window)
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -24,7 +27,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Inventory() {
-  const fullInventory = useUpdateWithCharacters<InventoryData[]>('inventory', '[page][Inventory]', [])
+  const fullInventory = useUpdateWithCharacters<InventoryData[]>('inventory', logger, [])
   const [inventory, setInventory] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
 

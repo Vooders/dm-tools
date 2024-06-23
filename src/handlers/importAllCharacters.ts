@@ -4,13 +4,16 @@ import importCharacter from "../lib/importCharacter"
 import getSummary from "../lib/getSummary"
 import saveCharacter from "../lib/saveCharacter"
 import saveMetrics from '../lib/saveMetrics';
+import { Logger } from '../logger/Logger';
+
+const logger = new Logger('[handler][importAllCharacters]')
 
 export default (mainWindow: BrowserWindow) => {
     return async (): Promise<void> => {
-        console.log('[handler][importAllCharacters] Importing all characters')
+        logger.info('Importing all characters')
         const summary = await getSummary()
         const characterIds = Object.keys(summary)
-        console.log(`[handler][importAllCharacters] Got ids - ${characterIds}`)
+        logger.info(`Got ids - ${characterIds}`)
         for (const id of characterIds) {
             const importResponse = await importCharacter(id)
 

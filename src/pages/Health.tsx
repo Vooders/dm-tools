@@ -16,6 +16,9 @@ import HpBar from '../components/HpBar'
 import { CharacterProfileHp } from '../dm-tools-data.types'
 
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
+import { RendererLogger } from '../logger/RendererLogger';
+
+const logger = new RendererLogger('[page][Health]', window)
 
 const style = {
     outer: {
@@ -36,7 +39,7 @@ const style = {
 }
 
 export default function Health() {
-    const health = useUpdateWithCharacters<HealthData[]>('health', '[page][Health]', [])
+    const health = useUpdateWithCharacters<HealthData[]>('health', logger, [])
 
     const maxHp = (hp: CharacterProfileHp) => {
         return (hp.override) ? hp.override : hp.constitutionBonus + hp.base + hp.bonus

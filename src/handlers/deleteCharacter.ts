@@ -2,6 +2,9 @@ import { app, BrowserWindow } from 'electron';
 import path from 'path'
 import { unlink, writeFile } from 'fs/promises'
 import getSummaryData from '../lib/getSummary';
+import { Logger } from '../logger/Logger';
+
+const logger = new Logger()
 
 const userDataPath = app.getPath('userData');
 const avatarPath = path.join(userDataPath, 'avatars')
@@ -19,7 +22,7 @@ export default (mainWindow: BrowserWindow) => {
             mainWindow.webContents.send('character:updated')
             return true
         } catch (error) {
-            console.log(`[handler][deleteCharacter] ${error}`)
+            logger.info(`[handler][deleteCharacter] ${error}`)
             return false
         }
     }

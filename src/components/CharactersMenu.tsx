@@ -9,9 +9,12 @@ import { Link } from 'react-router-dom';
 import { Summary } from '../lib/saveCharacter';
 
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
+import { RendererLogger } from '../logger/RendererLogger';
+
+const logger = new RendererLogger('[page][CharactersMenu]', window)
 
 export default function CharactersMenu() {
-    const characters = useUpdateWithCharacters<Summary>('summary', '[page][CharactersMenu]', {})
+    const characters = useUpdateWithCharacters<Summary>('summary', logger, {})
 
     return (
         <>

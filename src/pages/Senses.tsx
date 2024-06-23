@@ -12,9 +12,12 @@ import Paper from '@mui/material/Paper';
 import { SensesData } from '../handlers/getSenses';
 
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters';
+import { RendererLogger } from '../logger/RendererLogger';
+
+const logger = new RendererLogger('[page][Senses]', window)
 
 export default function Senses() {
-    const senses = useUpdateWithCharacters<SensesData[]>('senses', '[page][Senses]', [])
+    const senses = useUpdateWithCharacters<SensesData[]>('senses', logger, [])
 
     return (
         <React.Fragment>

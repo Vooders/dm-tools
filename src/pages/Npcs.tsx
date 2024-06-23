@@ -10,9 +10,12 @@ import { DmToolsData } from "../dm-tools-data.types"
 
 import * as npcRepository from '../repositories/npcRepository'
 import useUpdateWithNpcs from "../hooks/useUpdateWithNpcs"
+import { RendererLogger } from '../logger/RendererLogger';
+
+const logger = new RendererLogger('[page][Npcs]', window)
 
 export default function Npcs() {
-    const npcs = useUpdateWithNpcs<DmToolsData[]>('npcs', '[page][Npcs]', [])
+    const npcs = useUpdateWithNpcs<DmToolsData[]>('npcs', logger, [])
 
     const handleDelete = async (id: string) => {
         const result = await npcRepository.deleteNpc(id)

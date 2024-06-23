@@ -20,6 +20,7 @@ import handleNpcSave from './handlers/saveNpc'
 import getNpcs from './handlers/getNpcs'
 import deleteNpc from './handlers/deleteNpc'
 import getNpc from './handlers/getNpc'
+import { EventLogger } from './logger/EventLogger';
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
@@ -28,6 +29,8 @@ const devMode = process.env.NODE_ENV === 'development'
 fs.mkdir(path.join(app.getPath('userData'), 'characters'))
 fs.mkdir(path.join(app.getPath('userData'), 'avatars'))
 fs.mkdir(path.join(app.getPath('userData'), 'npcs'))
+
+console.log('INDEX +++++++++++++++++')
 
 const createWindow = (): void => {
   const mainWindow = new BrowserWindow({
@@ -40,6 +43,7 @@ const createWindow = (): void => {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
     },
   });
+  const logger = new EventLogger()
 
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
@@ -65,8 +69,12 @@ const createWindow = (): void => {
     ipcMain.handle('npc:get', getNpc)
     ipcMain.handle('character:delete', deleteCharacter(mainWindow))
     ipcMain.handle('npc:delete', deleteNpc(mainWindow))
+    ipcMain.on('log:info', (event, log) => logger.info(event, log))
+    ipcMain.on('log:warn', (event, log) => logger.warn(event, log))
+    ipcMain.on('log:error', (event, log) => logger.error(event, log))
   })
 };
+
 
 app.on("ready", async () => {
   createWindow()

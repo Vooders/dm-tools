@@ -4,6 +4,9 @@ import path from 'path'
 import getSummaryData from './getSummary';
 import fetch from 'electron-fetch'
 import CharacterSheetProcessor from '../lib/CharacterSheetProcessor';
+import { Logger } from '../logger/Logger'
+
+const logger = new Logger('[lib][saveCharacter]')
 
 const directory = 'characters'
 const userDataPath = app.getPath('userData');
@@ -11,20 +14,20 @@ const avatarPath = path.join(userDataPath, 'avatars')
 const summaryPath = path.join(userDataPath, directory, 'summary.json');
 
 export default async (character: any) => {
-    console.log(`[lib][saveCharacter] saving character ${character.data.id}`)
+    logger.info(`saving character ${character.data.id}`)
     const filename = character.data.id
     const filePath = path.join(userDataPath, directory, filename + '.json');
-    console.log(filePath)
+    logger.info(filePath)
     try {
         const characterSheetProcessor = new CharacterSheetProcessor(character)
         const processedCharacter = characterSheetProcessor.process()
         await writeFile(filePath, JSON.stringify(processedCharacter));
-        console.log(`[lib][saveCharacter] saved ${filename}`)
+        logger.info(`saved ${filename}`)
         await updateSummary(character.data)
         await downloadAvatar(character.data)
         return true
     } catch (error) {
-        console.log(`[lib][saveCharacter] ${error}`)
+        logger.info(`${error}`)
         return false
     }
 }
@@ -41,7 +44,7 @@ const downloadAvatar = async (characterData: any) => {
 }
 
 const updateSummary = async (characterData: any) => {
-    console.log('[lib][saveCharacter] updating summary')
+    logger.info('updating summary')
     const characterSummary = buildCharacterSummary(characterData)
     const summaryData = await getSummaryData()
 

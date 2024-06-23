@@ -17,12 +17,16 @@ import { Summary } from '../lib/saveCharacter';
 import * as characterRepository from '../repositories/characterRepository'
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
 
+import { RendererLogger } from '../logger/RendererLogger';
+
+const logger = new RendererLogger('[component][CharacterImporter]', window)
+
 export default function Characters() {
-    const characters = useUpdateWithCharacters<Summary>('summary', '[page][Characters]', {})
+    const characters = useUpdateWithCharacters<Summary>('summary', logger, {})
 
     const handleDelete = async (characterId: string) => {
         const result = await characterRepository.deleteCharacter(characterId)
-        console.log(`[page][Characters] Delete ${characterId} - ${result}`)
+        logger.info(`Delete ${characterId} - ${result}`)
     }
 
     return (
@@ -33,7 +37,7 @@ export default function Characters() {
                     const character = characters[characterKey]
                     const name = character.name
                     const details = `${character.race} ${character.classes.join(' ')}`
-                    console.log(`[page][Characters] ${character.avatarPath}`)
+                    logger.info(`${character.avatarPath}`)
                     return (
                         <React.Fragment key={characterKey}>
                             <ListItem

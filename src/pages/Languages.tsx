@@ -12,13 +12,16 @@ import Paper from '@mui/material/Paper';
 import { LanguagesData } from '../handlers/getLanguages';
 
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
+import { RendererLogger } from '../logger/RendererLogger';
+
+const logger = new RendererLogger('[page][Languages]', window)
 
 export default function Languages() {
     const initialValue: LanguagesData = {
         allLanguages: [],
         characters: []
     }
-    const languages = useUpdateWithCharacters<LanguagesData>('languages', '[page][Languages]', initialValue)
+    const languages = useUpdateWithCharacters<LanguagesData>('languages', logger, initialValue)
 
     return (
         <React.Fragment>

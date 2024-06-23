@@ -4,6 +4,9 @@ import { writeFile } from 'fs/promises';
 import getFile from './getFile';
 import NpcProcessor from './npcProcessor';
 import { Ability, ProficiencyView, Save, Skill } from '../dm-tools-data.types';
+import { Logger } from '../logger/Logger'
+
+const logger = new Logger('[lib][saveNpc]')
 
 const userDataPath = app.getPath('userData');
 const npcsDirectory = path.join(userDataPath, 'npcs');
@@ -18,7 +21,7 @@ export default async function saveNpc(npc: Npc) {
         await writeFile(npcPath, JSON.stringify(npcProcessor.toDmToolsData()))
         return true
     } catch (error) {
-        console.log(`[lib][saveNpc] ${error}`)
+        logger.info(`${error}`)
         return false
     }
 }

@@ -1,8 +1,11 @@
 import fetch from 'electron-fetch'
 import { decode } from 'js-base64'
+import { Logger } from '../logger/Logger'
+
+const logger = new Logger('[lib][importCharacter]')
 
 export default async (id: string): Promise<ImportResponse> => {
-    console.log(`[lib][importCharacter] importing ${id}`)
+    logger.info(`importing ${id}`)
     const response: any = await fetch(`${decode('aHR0cHM6Ly9jaGFyYWN0ZXItc2VydmljZS5kbmRiZXlvbmQuY29tL2NoYXJhY3Rlci92My9jaGFyYWN0ZXIv')}${id}`);
     if (response.ok) {
         const character = await response.json()
