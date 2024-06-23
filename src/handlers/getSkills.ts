@@ -1,10 +1,15 @@
 import { Skill } from '../dm-tools-data.types'
 import getParty from './getParty'
+import { Logger } from '../logger/Logger'
+
+const logger = new Logger('[handler][getSkills]')
 
 export default async (): Promise<SkillsData> => {
+    logger.info('Getting skills data')
     const party = await getParty()
 
     const characters = party.map((character) => {
+        logger.debug(`Extracting skills from ${character.profile.name}`)
         return {
             name: character.profile.name,
             skills: character.skills

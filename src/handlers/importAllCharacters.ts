@@ -13,12 +13,13 @@ export default (mainWindow: BrowserWindow) => {
         logger.info('Importing all characters')
         const summary = await getSummary()
         const characterIds = Object.keys(summary)
-        logger.info(`Got ids - ${characterIds}`)
         for (const id of characterIds) {
+            logger.debug(`importing ${id}`)
             const importResponse = await importCharacter(id)
 
             if (importResponse.status === 'success') {
                 await saveCharacter(importResponse.value)
+                logger.debug(`saved ${id}`)
             }
         }
 

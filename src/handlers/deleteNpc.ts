@@ -15,18 +15,19 @@ export default (mainWindow: BrowserWindow) => {
   return async (_: Electron.IpcMainInvokeEvent, id: any): Promise<boolean> => {
     logger.info(`deleting NPC ${id}`)
     try {
-      await unlink(path.join(npcsPath, id + '.json'))
-  
+      const npcPath = path.join(npcsPath, id + '.json')
+      await unlink(npcPath)
+      logger.debug(`Deleted NPC file ${npcPath}`)
       const summary = await getNpcSummaryData()
       const newSummary = summary.filter((sum: Npc) => {
         return sum.id != id
       })
-  
       await writeFile(summaryPath, JSON.stringify(newSummary))
+      logger.debug('Updated summary')
       mainWindow.webContents.send('npc:updated')
       return true
     } catch (error) {
-      logger.info(`${error}`)
+      logger.error(`${error}`)
       return false
     }
   }

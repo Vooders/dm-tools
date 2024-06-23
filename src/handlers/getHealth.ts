@@ -9,8 +9,12 @@ import {
     CreatureType
 } from '../dm-tools-data.types'
 import getParty from './getParty'
+import { Logger } from '../logger/Logger'
+
+const logger = new Logger('[handler][getHealth]')
 
 export default async (): Promise<HealthData[]> => {
+    logger.info('Getting health data')
     const party = await getParty()
 
     return party.map((character) => {
@@ -22,7 +26,7 @@ export default async (): Promise<HealthData[]> => {
                 return action
             })
             .filter(action => action.limitedUse.maxUses > 0)
-        
+        logger.debug(`Built health data for ${character.profile.name}`)
         return {
             name: character.profile.name,
             hp: character.hp,

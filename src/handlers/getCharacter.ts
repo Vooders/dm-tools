@@ -2,7 +2,7 @@ import { app } from 'electron';
 import { readFile } from 'fs/promises';
 import path from 'path'
 import { DmToolsData } from '../dm-tools-data.types';
-import { Logger } from '../logger/Logger';
+import { Logger } from '../logger/Logger'
 
 const logger = new Logger('[handler][getCharacter]')
 
@@ -17,6 +17,7 @@ export default async (_: Electron.IpcMainInvokeEvent, characterId: string): Prom
         const file = fileBuffer.toString()
         const characterJson = JSON.parse(file)
         characterJson.dmTools.avatarPath = path.join(userDataPath, 'avatars', characterId + '.jpeg')
+        logger.debug(`loaded character data for ${characterJson.dmTools.profile.name}`)
         return characterJson.dmTools
     } catch (error) {
         logger.error(`${error}`)

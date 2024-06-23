@@ -1,6 +1,10 @@
 import getParty from './getParty'
+import { Logger } from '../logger/Logger'
+
+const logger = new Logger('[handler][getLanguages]')
 
 export default async (): Promise<LanguagesData> => {
+    logger.info('Getting language data')
     const party = await getParty()
 
     const characters = party.map((character) => {
@@ -8,6 +12,7 @@ export default async (): Promise<LanguagesData> => {
             .filter((prof: { name: any }) => prof.name === 'Languages')[0].value
             .map((language: string) => language.trim())
 
+        logger.debug(`Build language data for ${character.profile.name}`)
         return {
             name: character.profile.name,
             languages
