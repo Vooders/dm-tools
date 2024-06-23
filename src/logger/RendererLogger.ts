@@ -15,8 +15,10 @@ export class RendererLogger {
         this.window = window
     }
 
-    debug(log: string): void {
-        console.debug(`${this.prefix} ${log}`)
+    async debug(log: string): Promise<void> {
+        const logLine = `${this.prefix} ${log}`
+        console.log(logLine)
+        await this.window.electron.log('debug', logLine)
     }
 
     async info(log: string): Promise<void> {

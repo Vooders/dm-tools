@@ -14,6 +14,10 @@ export class EventLogger {
         private logger = new Logger()
     ){}
 
+    public debug(_: Electron.IpcMainInvokeEvent, log: string): void {
+        this.logger.debug(log)
+    }
+
     public info(_: Electron.IpcMainInvokeEvent, log: string): void {
         this.logger.info(log)
     }

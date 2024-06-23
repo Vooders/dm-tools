@@ -12,6 +12,11 @@ export class Logger {
     constructor (
         private prefix: string = ''
     ){}
+
+    public debug(log: string): void {
+        console.log(`${new Date(Date.now()).toISOString()} DEBUG ${this.prefix} ${log}`.replace('  ', ' '))
+    }
+
     public info(log: string): void {
         console.log(`${new Date(Date.now()).toISOString()} INFO ${this.prefix} ${log}`.replace('  ', ' '))
     }
