@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import React, { useState } from 'react'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import Snackbar from '@mui/material/Snackbar'
+import MuiAlert, { AlertProps } from '@mui/material/Alert'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
 
-import { ImportResponse } from '../lib/importCharacter';
-import Title from './Title';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+import { ImportResponse } from '../lib/importCharacter'
+import Title from './Title'
+import Backdrop from '@mui/material/Backdrop'
+import CircularProgress from '@mui/material/CircularProgress'
 
 import * as characterRepository from '../repositories/characterRepository'
-import { RendererLogger } from '../logger/RendererLogger';
+import { RendererLogger } from '../logger/RendererLogger'
 
 const logger = new RendererLogger('[component][CharacterImporter]', window)
 
@@ -24,13 +24,13 @@ export default function CharacterImporter() {
     const [characterName, setCharacterName] = useState('')
     const [saveResponse, setSaveResponse] = useState<boolean>(null)
     const [processing, setProcessing] = useState(false)
-    const [openSnackBar, setOpenSnackBar] = useState(false);
+    const [openSnackBar, setOpenSnackBar] = useState(false)
     const [importResponse, setImportResponse] = useState<ImportResponse>({ status: '', value: {} })
-    const [openDialog, setOpenDialog] = useState(false);
+    const [openDialog, setOpenDialog] = useState(false)
 
     const handleCloseDialog = () => {
-        setOpenDialog(false);
-    };
+        setOpenDialog(false)
+    }
 
     const importChar = async (): Promise<void> => {
         logger.info(`Characters: getting ${characterId}`)
@@ -64,16 +64,16 @@ export default function CharacterImporter() {
     }
 
     const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref,) {
-        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-    });
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
+    })
 
     const handleCloseSnackBar = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
-            return;
+            return
         }
-        setOpenSnackBar(false);
+        setOpenSnackBar(false)
         reset()
-    };
+    }
 
     const importHelperTest = "The numbers at the end of your dndbeyond link"
 

@@ -5,7 +5,7 @@ import Graph from '../components/Graph'
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
 import { Box } from '@mui/system'
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material'
-import { RendererLogger } from '../logger/RendererLogger';
+import { RendererLogger } from '../logger/RendererLogger'
 
 const logger = new RendererLogger('[page][Metrics]', window)
 

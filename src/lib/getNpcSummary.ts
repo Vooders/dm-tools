@@ -9,6 +9,6 @@ const userDataPath = app.getPath('userData');
 const summaryPath = path.join(userDataPath, 'npcs', 'summary.json')
 
 export default async () => {
-  logger.info('Getting NPC Summary')
-  return await getFile(summaryPath)
+    logger.info('Getting NPC Summary')
+    return await getFile(summaryPath)
 }

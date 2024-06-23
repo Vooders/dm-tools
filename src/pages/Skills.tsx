@@ -1,16 +1,16 @@
 import React from 'react'
 import Title from '../components/Title'
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import TableHead from '@mui/material/TableHead';
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
+import TableHead from '@mui/material/TableHead'
 
-import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters';
-import { RendererLogger } from '../logger/RendererLogger';
+import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
+import { RendererLogger } from '../logger/RendererLogger'
 
 const logger = new RendererLogger('[page][Skills]', window)
 

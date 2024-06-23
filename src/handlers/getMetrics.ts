@@ -2,12 +2,12 @@ import { app } from "electron"
 import getFile from "../lib/getFile"
 import { Metric, Metrics } from "../lib/saveMetrics"
 import path from 'path'
-import { Logger } from '../logger/Logger';
+import { Logger } from '../logger/Logger'
 
 const logger = new Logger('[handler][getMetrics]')
 
-const userDataPath = app.getPath('userData');
-const metricsPath = path.join(userDataPath, 'metrics.json');
+const userDataPath = app.getPath('userData')
+const metricsPath = path.join(userDataPath, 'metrics.json')
 
 export default async (_: Electron.IpcMainInvokeEvent, timeRange: number): Promise<Metrics> => {
     logger.info(`Getting metrics with time range ${timeRange}`)

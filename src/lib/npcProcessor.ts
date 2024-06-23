@@ -1,4 +1,4 @@
-import { Npc } from "./saveNpc";
+import { Npc } from "./saveNpc"
 import {
     Ability,
     DmToolsData,
@@ -7,7 +7,7 @@ import {
     CharacterProfileHp,
     CharacterProfile,
     PassiveSkill
-} from "../dm-tools-data.types";
+} from "../dm-tools-data.types"
 
 export default class NpcProcessor {
 

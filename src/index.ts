@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron'
 import path from 'path'
 import * as fs from 'node:fs/promises'
 
@@ -20,10 +20,10 @@ import handleNpcSave from './handlers/saveNpc'
 import getNpcs from './handlers/getNpcs'
 import deleteNpc from './handlers/deleteNpc'
 import getNpc from './handlers/getNpc'
-import { EventLogger } from './logger/EventLogger';
+import { EventLogger } from './logger/EventLogger'
 
-declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
-declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+declare const MAIN_WINDOW_WEBPACK_ENTRY: string
+declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string
 const devMode = process.env.NODE_ENV === 'development'
 
 fs.mkdir(path.join(app.getPath('userData'), 'characters'))
@@ -31,74 +31,74 @@ fs.mkdir(path.join(app.getPath('userData'), 'avatars'))
 fs.mkdir(path.join(app.getPath('userData'), 'npcs'))
 
 const createWindow = (): void => {
-  const mainWindow = new BrowserWindow({
-    height: 600,
-    width: 800,
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: true,
-      webSecurity: !devMode,
-      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
-    },
-  });
-  const logger = new EventLogger()
+    const mainWindow = new BrowserWindow({
+        height: 600,
+        width: 800,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: true,
+            webSecurity: !devMode,
+            preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
+        },
+    })
+    const logger = new EventLogger()
 
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+    mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
 
-  if (devMode) {
-    mainWindow.webContents.openDevTools();
-  }
+    if (devMode) {
+        mainWindow.webContents.openDevTools()
+    }
 
-  app.whenReady().then(() => {
-    ipcMain.handle('character:import', handleImport)
-    ipcMain.handle('character:save', handleSave(mainWindow))
-    ipcMain.handle('npc:save', handleNpcSave(mainWindow))
-    ipcMain.handle('character:updateAll', handleImportAll(mainWindow))
-    ipcMain.handle('summary:get', getSummary)
-    ipcMain.handle('character:get', getCharacter)
-    ipcMain.handle('inventory:get', getInventories)
-    ipcMain.handle('languages:get', getLanguages)
-    ipcMain.handle('senses:get', getSenses)
-    ipcMain.handle('skills:get', getSkills)
-    ipcMain.handle('health:get', getHealth)
-    ipcMain.handle('wealth:get', getWealth)
-    ipcMain.handle('metrics:get', getMetrics)
-    ipcMain.handle('npcs:get', getNpcs)
-    ipcMain.handle('npc:get', getNpc)
-    ipcMain.handle('character:delete', deleteCharacter(mainWindow))
-    ipcMain.handle('npc:delete', deleteNpc(mainWindow))
-    ipcMain.on('log:debug', (event, log) => logger.info(event, log))
-    ipcMain.on('log:info', (event, log) => logger.info(event, log))
-    ipcMain.on('log:warn', (event, log) => logger.warn(event, log))
-    ipcMain.on('log:error', (event, log) => logger.error(event, log))
-  })
-};
+    app.whenReady().then(() => {
+        ipcMain.handle('character:import', handleImport)
+        ipcMain.handle('character:save', handleSave(mainWindow))
+        ipcMain.handle('npc:save', handleNpcSave(mainWindow))
+        ipcMain.handle('character:updateAll', handleImportAll(mainWindow))
+        ipcMain.handle('summary:get', getSummary)
+        ipcMain.handle('character:get', getCharacter)
+        ipcMain.handle('inventory:get', getInventories)
+        ipcMain.handle('languages:get', getLanguages)
+        ipcMain.handle('senses:get', getSenses)
+        ipcMain.handle('skills:get', getSkills)
+        ipcMain.handle('health:get', getHealth)
+        ipcMain.handle('wealth:get', getWealth)
+        ipcMain.handle('metrics:get', getMetrics)
+        ipcMain.handle('npcs:get', getNpcs)
+        ipcMain.handle('npc:get', getNpc)
+        ipcMain.handle('character:delete', deleteCharacter(mainWindow))
+        ipcMain.handle('npc:delete', deleteNpc(mainWindow))
+        ipcMain.on('log:debug', (event, log) => logger.info(event, log))
+        ipcMain.on('log:info', (event, log) => logger.info(event, log))
+        ipcMain.on('log:warn', (event, log) => logger.warn(event, log))
+        ipcMain.on('log:error', (event, log) => logger.error(event, log))
+    })
+}
 
 
 app.on("ready", async () => {
-  createWindow()
-	await autoUpdater.checkForUpdatesAndNotify()
-});
+    createWindow()
+    await autoUpdater.checkForUpdatesAndNotify()
+})
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
-  app.quit();
+    app.quit()
 }
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
-  ipcMain.removeAllListeners()
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
+    ipcMain.removeAllListeners()
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
+})
 
 app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
-});
+    // On OS X it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow()
+    }
+})

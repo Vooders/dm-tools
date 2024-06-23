@@ -1,6 +1,6 @@
 import { Box } from "@mui/system"
 import React from "react"
-import MeditateIcon from '@mui/icons-material/SelfImprovement';
+import MeditateIcon from '@mui/icons-material/SelfImprovement'
 
 export default function kiPoints(props: KiPointsProps) {
 

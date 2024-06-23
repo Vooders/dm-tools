@@ -1,4 +1,4 @@
-import { BrowserWindow } from 'electron';
+import { BrowserWindow } from 'electron'
 import saveNpc from "../lib/saveNpc"
 
 export default (mainWindow: BrowserWindow) => {

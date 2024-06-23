@@ -1,26 +1,26 @@
-import { app } from 'electron';
-import { writeFile } from 'fs/promises';
+import { app } from 'electron'
+import { writeFile } from 'fs/promises'
 import path from 'path'
-import getSummaryData from './getSummary';
+import getSummaryData from './getSummary'
 import fetch from 'electron-fetch'
-import CharacterSheetProcessor from '../lib/CharacterSheetProcessor';
+import CharacterSheetProcessor from '../lib/CharacterSheetProcessor'
 import { Logger } from '../logger/Logger'
 
 const logger = new Logger('[lib][saveCharacter]')
 
 const directory = 'characters'
-const userDataPath = app.getPath('userData');
+const userDataPath = app.getPath('userData')
 const avatarPath = path.join(userDataPath, 'avatars')
-const summaryPath = path.join(userDataPath, directory, 'summary.json');
+const summaryPath = path.join(userDataPath, directory, 'summary.json')
 
 export default async (character: any) => {
     const filename = character.data.id
-    const filePath = path.join(userDataPath, directory, filename + '.json');
+    const filePath = path.join(userDataPath, directory, filename + '.json')
     logger.info(filePath)
     try {
         const characterSheetProcessor = new CharacterSheetProcessor(character)
         const processedCharacter = characterSheetProcessor.process()
-        await writeFile(filePath, JSON.stringify(processedCharacter));
+        await writeFile(filePath, JSON.stringify(processedCharacter))
         logger.info(`saved ${filename}`)
         await updateSummary(character.data)
         await downloadAvatar(character.data)

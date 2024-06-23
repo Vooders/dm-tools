@@ -1,14 +1,14 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow } from 'electron'
 import path from 'path'
 import { unlink, writeFile } from 'fs/promises'
-import getSummaryData from '../lib/getSummary';
-import { Logger } from '../logger/Logger';
+import getSummaryData from '../lib/getSummary'
+import { Logger } from '../logger/Logger'
 
 const logger = new Logger('[handler][deleteCharacter]')
 
-const userDataPath = app.getPath('userData');
+const userDataPath = app.getPath('userData')
 const avatarDir = path.join(userDataPath, 'avatars')
-const charactersDir = path.join(userDataPath, 'characters');
+const charactersDir = path.join(userDataPath, 'characters')
 const summaryPath = path.join(charactersDir, 'summary.json')
 
 export default (mainWindow: BrowserWindow) => {

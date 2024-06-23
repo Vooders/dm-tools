@@ -1,4 +1,4 @@
-import { BrowserWindow } from 'electron';
+import { BrowserWindow } from 'electron'
 import saveCharacter from "../lib/saveCharacter"
 
 export default (mainWindow: BrowserWindow) => {

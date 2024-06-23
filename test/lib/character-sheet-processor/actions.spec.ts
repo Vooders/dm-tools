@@ -1,8 +1,8 @@
-import ActionBuilder from "../../../test/builders/ActionBuilder";
-import ActionsBuilder from "../../../test/builders/ActionsBuilder";
+import ActionBuilder from "../../../test/builders/ActionBuilder"
+import ActionsBuilder from "../../../test/builders/ActionsBuilder"
 import actions from '../../../src/lib/character-sheet-processor/actions'
-import SpellFeatBuilder from "../../../test/builders/SpellFeatBuilder";
-import ItemBuilder from "../../../test/builders/ItemBuilder";
+import SpellFeatBuilder from "../../../test/builders/SpellFeatBuilder"
+import ItemBuilder from "../../../test/builders/ItemBuilder"
 
 describe('Actions', () => {
     describe('with an actions array', () => {

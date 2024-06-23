@@ -1,4 +1,4 @@
-import ModifierBuilder from '../../../test/builders/ModifierBuilder';
+import ModifierBuilder from '../../../test/builders/ModifierBuilder'
 import abilities from '../../../src/lib/character-sheet-processor/abilities'
 
 describe('abilities', () => {
@@ -10,7 +10,7 @@ describe('abilities', () => {
             { args: 3, expected: 'Intelligence' },
             { args: 4, expected: 'Wisdom' },
             { args: 5, expected: 'Charisma' }
-        ];
+        ]
 
         nameTests.forEach((test) => {
             it(`Ability ${test.args + 1}'s name should be ${test.expected}`, function () {
@@ -32,7 +32,7 @@ describe('abilities', () => {
             { args: 3, expected: 'INT' },
             { args: 4, expected: 'WIS' },
             { args: 5, expected: 'CHA' }
-        ];
+        ]
 
         shortNameTests.forEach((test) => {
             it(`Ability ${test.args + 1}'s short name should be ${test.expected}`, function () {
@@ -78,7 +78,7 @@ describe('abilities', () => {
             { args: 28, expected: 9 },
             { args: 29, expected: 9 },
             { args: 30, expected: 10 }
-        ];
+        ]
 
         modifiersTests.forEach((test) => {
             it(`a stat of ${test.args} should have a modifier of ${test.expected}`, function () {

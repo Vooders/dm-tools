@@ -1,6 +1,6 @@
-import { Grid, TextField } from "@mui/material";
-import React from "react";
-import { Ability } from "../dm-tools-data.types";
+import { Grid, TextField } from "@mui/material"
+import React from "react"
+import { Ability } from "../dm-tools-data.types"
 
 export default function AbilitySelector(props: AbilitySelectorProps) {
 

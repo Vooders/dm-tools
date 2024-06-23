@@ -1,7 +1,6 @@
 import { PassiveSkill } from '../dm-tools-data.types'
 import getParty from './getParty'
 
-
 export default async (): Promise<SensesData[]> => {
     const party = await getParty()
 

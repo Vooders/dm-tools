@@ -1,22 +1,22 @@
-import React from 'react';
+import React from 'react'
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import Tabs from '@mui/material/Tabs';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box'
+import Card from '@mui/material/Card'
+import CardMedia from '@mui/material/CardMedia'
+import Typography from '@mui/material/Typography'
+import Tabs from '@mui/material/Tabs'
+import Grid from '@mui/material/Grid'
+import Paper from '@mui/material/Paper'
+import Tab from '@mui/material/Tab'
 
-import Abilities from './Abilities';
-import Skills from './Skills';
-import Spells from './Spells';
-import PassiveSkills from './PassiveSkills';
-import { ProficienciesLanguages } from './ProficienciesLanguages';
-import Saves from './Saves';
-import Ac from './Ac';
-import { DmToolsData, CharacterProfileHp } from '../dm-tools-data.types';
+import Abilities from './Abilities'
+import Skills from './Skills'
+import Spells from './Spells'
+import PassiveSkills from './PassiveSkills'
+import { ProficienciesLanguages } from './ProficienciesLanguages'
+import Saves from './Saves'
+import Ac from './Ac'
+import { DmToolsData, CharacterProfileHp } from '../dm-tools-data.types'
 
 const style = {
     topBox: {
@@ -45,19 +45,19 @@ const style = {
 }
 
 export default function CharacterSheet(props: CharacterSheetProps) {
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(0)
 
     const character = props.character
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
-    };
+        setValue(newValue)
+    }
 
     function a11yProps(index: number) {
         return {
             id: `simple-tab-${index}`,
             'aria-controls': `simple-tabpanel-${index}`,
-        };
+        }
     }
 
     return (
@@ -148,7 +148,7 @@ function Hp({ hp }: HpProps) {
 }
 
 function TabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
+    const { children, value, index, ...other } = props
 
     return (
         <div
@@ -166,7 +166,7 @@ function TabPanel(props: TabPanelProps) {
                 </Grid>
             )}
         </div>
-    );
+    )
 }
 
 interface CharacterSheetProps {
@@ -178,7 +178,7 @@ interface HpProps {
 }
 
 interface TabPanelProps {
-    children?: React.ReactNode;
-    index: number;
-    value: number;
+    children?: React.ReactNode
+    index: number
+    value: number
 }

@@ -1,15 +1,15 @@
 import { app } from 'electron'
 import path from 'path'
-import { writeFile } from 'fs/promises';
-import getFile from './getFile';
-import NpcProcessor from './npcProcessor';
-import { Ability, ProficiencyView, Save, Skill } from '../dm-tools-data.types';
+import { writeFile } from 'fs/promises'
+import getFile from './getFile'
+import NpcProcessor from './npcProcessor'
+import { Ability, ProficiencyView, Save, Skill } from '../dm-tools-data.types'
 import { Logger } from '../logger/Logger'
 
 const logger = new Logger('[lib][saveNpc]')
 
-const userDataPath = app.getPath('userData');
-const npcsDirectory = path.join(userDataPath, 'npcs');
+const userDataPath = app.getPath('userData')
+const npcsDirectory = path.join(userDataPath, 'npcs')
 const summaryPath = path.join(npcsDirectory, 'summary.json')
 
 export default async function saveNpc(npc: Npc) {

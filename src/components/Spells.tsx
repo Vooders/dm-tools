@@ -1,18 +1,18 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
-import Grid from '@mui/material/Grid';
-import { Divider, FormControl, List, ListSubheader, Stack, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import Grid from '@mui/material/Grid'
+import { Divider, FormControl, List, ListSubheader, Stack, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material'
 
-import Spell from './Spell';
-import { SpellsType } from '../dm-tools-data.types';
+import Spell from './Spell'
+import { SpellsType } from '../dm-tools-data.types'
 
 export default function Spells({ theSpells }: SpellsProps) {
     const castingTimes = ['action', 'bonus', 'reaction', 'minutes']
 
     const [spells, setSpells] = useState(theSpells)
     const [hideUnprepared, setHideUnprepared] = useState(true)
-    const [castingTimeFilters, setCastingTimeFilters] = React.useState(() => castingTimes);
+    const [castingTimeFilters, setCastingTimeFilters] = React.useState(() => castingTimes)
     const [searchString, setSearchString] = useState('')
 
     useEffect(() => {
@@ -28,8 +28,8 @@ export default function Spells({ theSpells }: SpellsProps) {
     }, [ theSpells, castingTimeFilters, hideUnprepared, searchString ])
 
     const handleCastingTime = (event: React.MouseEvent<HTMLElement>, newFormats: string[]) => {
-        setCastingTimeFilters(newFormats);
-    };
+        setCastingTimeFilters(newFormats)
+    }
 
     const handleShowPrepared = () => {
         setHideUnprepared(!hideUnprepared)

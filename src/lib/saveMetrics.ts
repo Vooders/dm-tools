@@ -6,8 +6,8 @@ import getCharacter from '../handlers/getCharacter'
 import { writeFile } from 'fs/promises'
 import { DmToolsData } from '../dm-tools-data.types'
 
-const userDataPath = app.getPath('userData');
-const metricsPath = path.join(userDataPath, 'metrics.json');
+const userDataPath = app.getPath('userData')
+const metricsPath = path.join(userDataPath, 'metrics.json')
 
 export default async function saveMetrics(): Promise<void> {
     const summary = await getSummaryData()

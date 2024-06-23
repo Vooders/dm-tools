@@ -1,11 +1,11 @@
-import { Badge, Divider, Paper, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import React from "react";
-import { Skill } from "../dm-tools-data.types";
+import { Badge, Divider, Paper, Typography } from "@mui/material"
+import Grid from "@mui/material/Grid"
+import List from "@mui/material/List"
+import ListItem from "@mui/material/ListItem"
+import ListItemIcon from "@mui/material/ListItemIcon"
+import ListItemText from "@mui/material/ListItemText"
+import React from "react"
+import { Skill } from "../dm-tools-data.types"
 
 export default function Skills({ skills }: SkillsProds) {
     return (

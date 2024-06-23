@@ -1,23 +1,23 @@
-import React from 'react';
-import CharacterImporter from '../components/CharacterImporter';
-import Title from '../components/Title';
+import React from 'react'
+import CharacterImporter from '../components/CharacterImporter'
+import Title from '../components/Title'
 
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Divider from '@mui/material/Divider';
-import Tooltip from '@mui/material/Tooltip';
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import Avatar from '@mui/material/Avatar'
+import Divider from '@mui/material/Divider'
+import Tooltip from '@mui/material/Tooltip'
 
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton'
+import DeleteIcon from '@mui/icons-material/Delete'
 
-import { Summary } from '../lib/saveCharacter';
+import { Summary } from '../lib/saveCharacter'
 import * as characterRepository from '../repositories/characterRepository'
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
 
-import { RendererLogger } from '../logger/RendererLogger';
+import { RendererLogger } from '../logger/RendererLogger'
 
 const logger = new RendererLogger('[component][CharacterImporter]', window)
 

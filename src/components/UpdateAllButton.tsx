@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-import Box from '@mui/material/Box';
-import LoadingButton from '@mui/lab/LoadingButton';
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import Box from '@mui/material/Box'
+import LoadingButton from '@mui/lab/LoadingButton'
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload'
 
 import * as characterRepository from '../repositories/characterRepository'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
@@ -10,12 +10,12 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 const refreshTimeSeconds = 60
 
 export default function UpdateAllButton() {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false)
 
     const updateAll = async () => {
         setLoading(true)
         await characterRepository.updateAll()
-        setLoading(false);
+        setLoading(false)
     }
 
     return (

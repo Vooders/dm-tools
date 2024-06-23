@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 
-import { SpellType } from "../dm-tools-data.types";
+import { SpellType } from "../dm-tools-data.types"
 import {
     Avatar,
     Divider,
@@ -17,7 +17,7 @@ import {
     TableRow,
     Tooltip,
     Typography
-} from "@mui/material";
+} from "@mui/material"
 
 const buildDuration = (spell: SpellType) => {
     const duration = []

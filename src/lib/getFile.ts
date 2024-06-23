@@ -1,4 +1,4 @@
-import { readFile, open } from 'fs/promises';
+import { readFile, open } from 'fs/promises'
 
 export default async (path: string) => {
     // Create file if it does not exist

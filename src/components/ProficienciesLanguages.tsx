@@ -12,7 +12,6 @@ import { ProficiencyView } from "../dm-tools-data.types";
 export function ProficienciesLanguages({ proficiencyView }: ProficienciesLanguagesProps) {
     return (
         <Grid item sm={6}>
-
             <Paper variant="outlined" sx={{ textAlign: 'center' }}>
                 <Typography variant='overline' >Proficiencies & Languages</Typography>
                 <Divider />

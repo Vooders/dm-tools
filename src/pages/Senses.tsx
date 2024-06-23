@@ -1,18 +1,18 @@
-import React from 'react';
+import React from 'react'
 
-import Title from '../components/Title';
+import Title from '../components/Title'
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { SensesData } from '../handlers/getSenses';
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
+import { SensesData } from '../handlers/getSenses'
 
-import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters';
-import { RendererLogger } from '../logger/RendererLogger';
+import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
+import { RendererLogger } from '../logger/RendererLogger'
 
 const logger = new RendererLogger('[page][Senses]', window)
 

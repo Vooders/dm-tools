@@ -1,6 +1,6 @@
 import React from 'react'
-import ShieldIcon from '@mui/icons-material/Shield';
-import { Box } from '@mui/material';
+import ShieldIcon from '@mui/icons-material/Shield'
+import { Box } from '@mui/material'
 
 const style = {
     container: {

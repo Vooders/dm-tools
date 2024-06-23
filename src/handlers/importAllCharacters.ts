@@ -1,10 +1,10 @@
-import { BrowserWindow } from 'electron';
+import { BrowserWindow } from 'electron'
 
 import importCharacter from "../lib/importCharacter"
 import getSummary from "../lib/getSummary"
 import saveCharacter from "../lib/saveCharacter"
-import saveMetrics from '../lib/saveMetrics';
-import { Logger } from '../logger/Logger';
+import saveMetrics from '../lib/saveMetrics'
+import { Logger } from '../logger/Logger'
 
 const logger = new Logger('[handler][importAllCharacters]')
 

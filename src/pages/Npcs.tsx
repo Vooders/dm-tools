@@ -10,7 +10,7 @@ import { DmToolsData } from "../dm-tools-data.types"
 
 import * as npcRepository from '../repositories/npcRepository'
 import useUpdateWithNpcs from "../hooks/useUpdateWithNpcs"
-import { RendererLogger } from '../logger/RendererLogger';
+import { RendererLogger } from '../logger/RendererLogger'
 
 const logger = new RendererLogger('[page][Npcs]', window)
 

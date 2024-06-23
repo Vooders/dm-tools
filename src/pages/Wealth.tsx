@@ -6,7 +6,7 @@ import Currencies from '../components/Currencies'
 import Currency from '../components/Currency'
 
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
-import { RendererLogger } from '../logger/RendererLogger';
+import { RendererLogger } from '../logger/RendererLogger'
 
 const logger = new RendererLogger('[page][Wealth]', window)
 

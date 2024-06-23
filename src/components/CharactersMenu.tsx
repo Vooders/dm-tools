@@ -1,15 +1,15 @@
-import React from 'react';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import ListSubheader from '@mui/material/ListSubheader';
+import React from 'react'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemText from '@mui/material/ListItemText'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import Avatar from '@mui/material/Avatar'
+import ListSubheader from '@mui/material/ListSubheader'
 
-import { Link } from 'react-router-dom';
-import { Summary } from '../lib/saveCharacter';
+import { Link } from 'react-router-dom'
+import { Summary } from '../lib/saveCharacter'
 
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
-import { RendererLogger } from '../logger/RendererLogger';
+import { RendererLogger } from '../logger/RendererLogger'
 
 const logger = new RendererLogger('[page][CharactersMenu]', window)
 

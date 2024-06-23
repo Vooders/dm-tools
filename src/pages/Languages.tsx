@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
-import Title from '../components/Title';
+import Title from '../components/Title'
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { LanguagesData } from '../handlers/getLanguages';
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
+import { LanguagesData } from '../handlers/getLanguages'
 
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
-import { RendererLogger } from '../logger/RendererLogger';
+import { RendererLogger } from '../logger/RendererLogger'
 
 const logger = new RendererLogger('[page][Languages]', window)
 

@@ -16,7 +16,7 @@ import HpBar from '../components/HpBar'
 import { CharacterProfileHp } from '../dm-tools-data.types'
 
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
-import { RendererLogger } from '../logger/RendererLogger';
+import { RendererLogger } from '../logger/RendererLogger'
 
 const logger = new RendererLogger('[page][Health]', window)
 

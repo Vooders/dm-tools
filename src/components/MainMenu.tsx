@@ -1,11 +1,11 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import List from '@mui/material/List';
+import List from '@mui/material/List'
 import CharactersMenu from './CharactersMenu'
-import Divider from '@mui/material/Divider';
-import { mainListItems, secondaryListItems } from './listItems';
+import Divider from '@mui/material/Divider'
+import { mainListItems, secondaryListItems } from './listItems'
 
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 export default function MainMenu() {
     return (
