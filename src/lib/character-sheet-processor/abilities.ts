@@ -1,5 +1,8 @@
 import { Stat, Modifier } from "../../ddb-data.types"
 import { Ability } from "../../dm-tools-data.types"
+import { Logger } from '../../logger/Logger'
+
+const logger = new Logger('[characterSheetProcessor][abilities]')
 
 const abilityNames = [
     'Strength',
@@ -11,6 +14,7 @@ const abilityNames = [
 ]
 
 export default function abilities(stats: Stat[], modifiers: Modifier[]): Ability[] {
+    logger.debug('Building abilities')
     const bonusModifiers = modifiers.filter((modifier) => {
         return modifier.entityId !== null
     })

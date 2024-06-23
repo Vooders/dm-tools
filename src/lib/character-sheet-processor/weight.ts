@@ -1,6 +1,10 @@
 import { ItemContainer, CurrenciesType, WeightData } from "../../dm-tools-data.types"
+import { Logger } from '../../logger/Logger'
+
+const logger = new Logger('[characterSheetProcessor][weight]')
 
 export default function weight(inventory: ItemContainer[], currencies: CurrenciesType, ignoreCoinWeight: boolean): WeightData {
+    logger.debug('Calculating weight')
     const carriedItemsWeight = totalCarriedItemsWeight()
     const coinWeight = ignoreCoinWeight ? 0 : totalCoinWeight()
     const totalCarriedWeight = Math.round((carriedItemsWeight + coinWeight) * 100) / 100

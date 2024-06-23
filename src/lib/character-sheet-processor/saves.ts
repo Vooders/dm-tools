@@ -1,7 +1,11 @@
 import { Modifier } from "../../ddb-data.types"
 import { Ability, Save } from "../../dm-tools-data.types"
+import { Logger } from '../../logger/Logger'
+
+const logger = new Logger('[characterSheetProcessor][saves]')
 
 export default function saves(classes: any, proficiencies: Modifier[], abilities: Ability[], isMultiClass: boolean, proficiency: number): Save[] {
+    logger.debug('Calculating saves')
     let bannedIds: number[] = []
     if (isMultiClass) {
         const multiClasses = classes.slice(1)

@@ -1,7 +1,10 @@
 import { ItemContainer, ContainerWealth, Item } from "../../dm-tools-data.types"
+import { Logger } from '../../logger/Logger'
+
+const logger = new Logger('[characterSheetProcessor][wealth]')
 
 export default function wealth(inventory: ItemContainer[], totalCurrency: number): Wealth {
-
+    logger.debug('Calculating wealth')
     function reduceAndRound<T>(someArray: T[], reduceFunc: (acc: number, item: T) => number): number {
         const result = someArray.reduce(reduceFunc, 0)
         return Math.round(result * 100) / 100

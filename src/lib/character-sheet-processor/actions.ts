@@ -1,7 +1,10 @@
 import { Action } from "../../dm-tools-data.types"
+import { Logger } from '../../logger/Logger'
+
+const logger = new Logger('[characterSheetProcessor][actions]')
 
 export default function action(actions: any, feats: any, inventory: any, proficiency: number): Action[] {
-
+    logger.debug('Building actions')
     const items = inventory.filter((item: any) => {
         return item.definition.canEquip === true
     })

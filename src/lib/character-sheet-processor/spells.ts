@@ -1,6 +1,10 @@
 import { SpellsType, CastingTime, SpellType } from "../../dm-tools-data.types"
+import { Logger } from '../../logger/Logger'
+
+const logger = new Logger('[characterSheetProcessor][spells]')
 
 export default function spells(spellsArray: SpellsType[]): SpellsType[] {
+    logger.debug('Building spells')
     function getActionType(spell: any): CastingTime {
         switch (spell.activation.activationType) {
             case 1:

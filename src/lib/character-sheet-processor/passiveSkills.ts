@@ -1,7 +1,11 @@
 import { Modifier } from "../../ddb-data.types"
 import { Skill, PassiveSkill } from "../../dm-tools-data.types"
+import { Logger } from '../../logger/Logger'
+
+const logger = new Logger('[characterSheetProcessor][passiveSkills]')
 
 export default function passiveSkills(skills: Skill[], bonuses: Modifier[]): PassiveSkill[] {
+    logger.debug('Calculating passive skills')
     const passiveBonuses = bonuses
         .filter((bonus) => bonus.subType.includes('passive'))
 

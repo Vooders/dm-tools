@@ -1,9 +1,13 @@
 import { Modifier } from "../../ddb-data.types"
 import { Ability, ItemContainer, Item } from "../../dm-tools-data.types"
+import { Logger } from '../../logger/Logger'
+
+const logger = new Logger('[characterSheetProcessor][armourClass]')
 
 const baseAC = 10
 
 export default function armourClass(abilities: Ability[], inventory: ItemContainer[], modifiers: Modifier[]): number {
+    logger.debug('Calculating armour class')
     const dexModifier = getAbilityModifier('DEX', abilities)
     const equippedArmorItems = getEquippedArmorItems(inventory)
     const equippedArmorItemsAc = getEquippedArmorItemsAc(equippedArmorItems)

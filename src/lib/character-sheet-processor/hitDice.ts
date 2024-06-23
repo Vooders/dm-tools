@@ -1,7 +1,11 @@
 import { CharacterClass } from "../../ddb-data.types"
 import { HitDice } from "../../dm-tools-data.types"
+import { Logger } from '../../logger/Logger'
+
+const logger = new Logger('[characterSheetProcessor][hitDice]')
 
 export function calculate(classes: CharacterClass[]): HitDice[] {
+    logger.debug('Calculating hit dice')
     const combined = classes.reduce((obj: combined, clazz) => {
         const dice = clazz.definition.hitDice
 

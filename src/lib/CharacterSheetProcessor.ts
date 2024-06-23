@@ -33,6 +33,9 @@ import {
     WeightData
 } from '../dm-tools-data.types'
 import { Modifier, ModifierKeys, Modifiers, Stat } from '../ddb-data.types'
+import { Logger } from '../logger/Logger'
+
+const logger = new Logger('[lib][saveCharacter]')
 
 export default class CharacterSheetProcessor {
     private modifiers: Modifiers
@@ -53,6 +56,7 @@ export default class CharacterSheetProcessor {
     }
 
     public process(): any {
+        logger.info('Processing character sheet')
         this.proficiency = this.calculateProficiency()
         this.abilities = this.buildAbilities()
         this.skills = this.buildSkills()
@@ -212,6 +216,7 @@ export default class CharacterSheetProcessor {
     }
 
     private buildHp(): CharacterProfileHp {
+        logger.debug('Building HP')
         const hpPerLevelBonus = this.filterModifiersBySubType("hit-points-per-level")
             .reduce((total: number, modifier: Modifier) => total + modifier.fixedValue, 0) * this.level
 
@@ -227,6 +232,7 @@ export default class CharacterSheetProcessor {
     }
 
     private buildProfile(): CharacterProfile {
+        logger.debug('Building profile')
         return {
             name: this.dndBeyondJson.data.name,
             race: this.dndBeyondJson.data.race.fullName,
@@ -250,6 +256,7 @@ export default class CharacterSheetProcessor {
     }
 
     private buildSpellSlots(): SpellSlot[] {
+        logger.debug('Building spell slots')
         const classes = this.dndBeyondJson.data.classes[0]
         const canCastSpells = this.canCastSpells(classes)
         const levelSpellSlots = classes.definition.spellRules.levelSpellSlots
@@ -276,6 +283,7 @@ export default class CharacterSheetProcessor {
     }
 
     private buildCurrencies(): CurrenciesType {
+        logger.debug('Building currencies')
         const currencies = this.dndBeyondJson.data.currencies
         return {
             cp: currencies.cp,

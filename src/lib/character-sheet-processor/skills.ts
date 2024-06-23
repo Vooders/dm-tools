@@ -1,7 +1,11 @@
 import { CustomProficiency, Modifier } from "../../ddb-data.types"
 import { Ability, Skill } from "../../dm-tools-data.types"
+import { Logger } from '../../logger/Logger'
+
+const logger = new Logger('[characterSheetProcessor][skills]')
 
 export default function skills(abilities: Ability[], customProfs: CustomProficiency[], proficiencies: Modifier[], expertise: Modifier[], proficiency: number): Skill[] {
+    logger.debug('Building skills')
     const abilityNames = abilities.map(ability => ability.name)
     const base = [
         { mod: 'DEX', name: 'Acrobatics' },

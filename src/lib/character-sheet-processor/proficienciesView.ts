@@ -1,7 +1,11 @@
 import { Modifier } from "../../ddb-data.types"
 import { Skill, ProficiencyView } from "../../dm-tools-data.types"
+import { Logger } from '../../logger/Logger'
+
+const logger = new Logger('[characterSheetProcessor][proficienciesView]')
 
 export default function proficienciesView(customProfs: any, skills: Skill[],  profs: Modifier[], langs: Modifier[]): ProficiencyView[] {
+    logger.debug('Building proficiencies')
     const entityId = {
         tools: 2103445194,
         martialWeapons: 1782728300,

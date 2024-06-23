@@ -1,7 +1,11 @@
 import { CharacterValues } from "../../ddb-data.types"
 import { ItemContainer, Item } from "../../dm-tools-data.types"
+import { Logger } from '../../logger/Logger'
+
+const logger = new Logger('[characterSheetProcessor][inventory]')
 
 export default function inventory(inventory: any, customItemInventory: any, carryCapacity: number, characterValues: CharacterValues[], id: number): ItemContainer[] {
+    logger.debug('Getting inventory')
     const items = inventory.map((item: any): Item => {
         const newItem = {
             id: item.id,

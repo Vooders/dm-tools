@@ -14,7 +14,6 @@ const avatarPath = path.join(userDataPath, 'avatars')
 const summaryPath = path.join(userDataPath, directory, 'summary.json');
 
 export default async (character: any) => {
-    logger.info(`saving character ${character.data.id}`)
     const filename = character.data.id
     const filePath = path.join(userDataPath, directory, filename + '.json');
     logger.info(filePath)
@@ -25,6 +24,7 @@ export default async (character: any) => {
         logger.info(`saved ${filename}`)
         await updateSummary(character.data)
         await downloadAvatar(character.data)
+        logger.info(`saved character ${character.data.id}`)
         return true
     } catch (error) {
         logger.info(`${error}`)
