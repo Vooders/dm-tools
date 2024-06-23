@@ -8,12 +8,10 @@ const prefix = '[contextBridge]'
 function log(level: string, line: any) {
     if (typeof line === 'object') {
         console.log(line)
-        // ipcRenderer.send(`log:${level}`, JSON.stringify(line))
     } else {
         console.log(`${prefix} ${line}`)
+        ipcRenderer.send(`log:${level}`, `${prefix}${line}`)
     }
-    ipcRenderer.send(`log:${level}`, `${prefix} ${line}`)
-
 }
 
 contextBridge.exposeInMainWorld('electron', {
