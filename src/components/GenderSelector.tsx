@@ -1,11 +1,15 @@
 import React from 'react'
-
-import { Box, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
+import { Box, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material"
 
 const style = {
-    textInput: {
-        width: 0.3
+    box: {
+        display: 'flex',
+        flexDirection: 'row',
+        m: 1
     },
+    select: {
+        width: 0.15
+    }
 }
 
 export default function GenderSelector(props: GenderSelectorProps) {
@@ -14,21 +18,24 @@ export default function GenderSelector(props: GenderSelectorProps) {
     }
 
     return (
-        <Box sx={style.textInput}>
+        <Grid item xs={6} >
             <FormControl fullWidth>
-                <InputLabel id="gender-select-label" shrink={true}>Gender</InputLabel>
-                <TextField value={props.gender} onChange={handleChange}></TextField>
-                <Select
-                    labelId="gender-select-label"
-                    id="gender-select"
-                    value=''
-                    onChange={handleChange}
-                >
-                    <MenuItem value={'Male'}>Male</MenuItem>
-                    <MenuItem value={'Female'}>Female</MenuItem>
-                </Select>
+                <Box sx={style.box}>
+                    <InputLabel id="gender-select-label" shrink={true}>Gender</InputLabel>
+                    <TextField value={props.gender} onChange={handleChange}></TextField>
+                    <Select
+                        sx={style.select}
+                        labelId="gender-select-label"
+                        id="gender-select"
+                        value=''
+                        onChange={handleChange}
+                    >
+                        <MenuItem value={'Male'}>Male</MenuItem>
+                        <MenuItem value={'Female'}>Female</MenuItem>
+                    </Select>
+                </Box>
             </FormControl>
-        </Box>
+        </Grid>
     )
 }
 

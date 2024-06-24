@@ -4,11 +4,12 @@ import React from "react"
 
 const style = {
     name: {
-        width: 0.4
+        display: 'flex',
+        flexDirection: 'row',
+        m: 1
     },
     nameButton: {
-        width: 0.65,
-        height: 0.5
+        m: 1,
     },
 }
 

@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material"
+import { Box, Button, Grid, TextField } from "@mui/material"
 import React, { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid'
@@ -10,6 +10,10 @@ import RaceSelector from "../components/RaceSelector"
 import NameSelector from "../components/NameSelector"
 import GenderSelector from "../components/GenderSelector"
 import ProficienciesViewSelector from "../components/ProficienciesViewSelector"
+import Accordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 import * as npcRepository from '../repositories/npcRepository'
 
@@ -234,70 +238,60 @@ export default function CreateNpc() {
     }
 
     const style = {
-        content: {
-            display: 'flex',
-            justifyContent: 'center',
-            mt: 5,
-        },
         centred: {
             display: 'flex',
             justifyContent: 'center',
         },
-        textInput: {
-            width: 0.3
+        column: {
+            display: 'flex',
+            flexDirection: 'column'
         },
-        name: {
-            width: 0.4
+        row: {
+            display: 'flex',
+            flexDirection: 'row',
+        },
+        content: {
+            marginTop: 5,
         },
         notes: {
-            width: 1
-        },
-        nameButton: {
-            width: 0.65,
-            height: 0.5
+            width: 1,
+            margin: 1,
         },
         saveButton: {
             width: 0.2,
-            m: 2,
-        },
-        abilities: {
-            display: 'flex',
-            justifyContent: 'center',
-            flexDirection: 'row',
             margin: 2,
         },
-        outer: {
-            display: 'flex',
-            justifyContent: 'center',
-            flexDirection: 'column',
+        abilities: {
+            margin: 2,
         },
-        gridItem: {
-            display: 'flex',
-            flexDirection: 'column',
-        }
+        text: {
+            margin: 1
+        },
     }
 
     return (
-        <Box sx={style.outer} >
+        <Box sx={[style.column, style.centred]}>
             <Title>Create NPC</Title>
-            <Box sx={style.content} >
+            <Box sx={[style.content, style.centred]}>
                 <Box>
                     <Box sx={style.centred}>
-                        <RaceSelector race={race} setRace={setRace} />
-                        <GenderSelector gender={gender} setGender={setGender} />
                         <NameSelector name={name} race={race} gender={gender} setName={setName} />
                     </Box>
-                    <Box sx={{ mt: 1 }}>
-                        <TextField label='Proficiency Bonus' type='number' value={proficiencyBonus} onChange={handleIntegerChange(setProficiencyBonus)} />
-                        <TextField label='AC' type='number' onChange={handleIntegerChange(setAc)} value={ac} />
-                        <TextField label='HP' type='number' onChange={handleIntegerChange(setHp)} value={hp} />
+                    <Grid container sx={style.centred}>
+                        <RaceSelector race={race} setRace={setRace} />
+                        <GenderSelector gender={gender} setGender={setGender} />
+                    </Grid>
+                    <Box >
+                        <TextField sx={style.text} label='Proficiency Bonus' type='number' value={proficiencyBonus} onChange={handleIntegerChange(setProficiencyBonus)} />
+                        <TextField sx={style.text} label='AC' type='number' onChange={handleIntegerChange(setAc)} value={ac} />
+                        <TextField sx={style.text} label='HP' type='number' onChange={handleIntegerChange(setHp)} value={hp} />
                     </Box>
-                    <Box sx={{ mt: 1 }}>
+                    <Box >
                         <TextField sx={style.notes} onChange={(e) => { setNotes(e.target.value) }} label='notes' variant='outlined' multiline />
                     </Box>
                 </Box>
             </Box>
-            <Grid container sx={style.abilities}>
+            <Grid container sx={[style.abilities, style.row, style.centred]}>
                 <AbilitySelector ability={strength} hook={setStrength} />
                 <AbilitySelector ability={dexterity} hook={setDexterity} />
                 <AbilitySelector ability={constitution} hook={setConstitution} />
@@ -305,48 +299,72 @@ export default function CreateNpc() {
                 <AbilitySelector ability={wisdom} hook={setWisdom} />
                 <AbilitySelector ability={charisma} hook={setCharisma} />
             </Grid>
-            <Grid container>
-                <Grid item xs={7} sx={style.gridItem}>
-                    <Typography component="h2" variant="h6" color="primary" gutterBottom>Skills</Typography>
-                    <ProficienciesSelector skill={acrobatics} hook={setAcrobatics} />
-                    <ProficienciesSelector skill={animalHandling} hook={setAnimalHandling} />
-                    <ProficienciesSelector skill={arcana} hook={setArcana} />
-                    <ProficienciesSelector skill={athletics} hook={setAthletics} />
-                    <ProficienciesSelector skill={deception} hook={setDeception} />
-                    <ProficienciesSelector skill={history} hook={setHistory} />
-                    <ProficienciesSelector skill={insight} hook={setInsight} />
-                    <ProficienciesSelector skill={intimidation} hook={setIntimidation} />
-                    <ProficienciesSelector skill={investigation} hook={setInvestigation} />
-                    <ProficienciesSelector skill={medicine} hook={setMedicine} />
-                    <ProficienciesSelector skill={nature} hook={setNature} />
-                    <ProficienciesSelector skill={perception} hook={setPerception} />
-                    <ProficienciesSelector skill={performance} hook={setPerformance} />
-                    <ProficienciesSelector skill={Persuasion} hook={setPersuasion} />
-                    <ProficienciesSelector skill={religion} hook={setReligion} />
-                    <ProficienciesSelector skill={sleightOfHand} hook={setSleightOfHand} />
-                    <ProficienciesSelector skill={stealth} hook={setStealth} />
-                    <ProficienciesSelector skill={survival} hook={setSurvival} />
-                </Grid>
-                <Grid item xs={5} sx={style.gridItem}>
-                    <Typography component="h2" variant="h6" color="primary" gutterBottom>Saves</Typography>
-                    <ProficienciesSelector skill={strengthSave} hook={setStrengthSave} expertise={false} />
-                    <ProficienciesSelector skill={dexteritySave} hook={setDexteritySave} expertise={false} />
-                    <ProficienciesSelector skill={constitutionSave} hook={setConstitutionSave} expertise={false} />
-                    <ProficienciesSelector skill={intelligenceSave} hook={setIntelligenceSave} expertise={false} />
-                    <ProficienciesSelector skill={wisdomSave} hook={setWisdomSave} expertise={false} />
-                    <ProficienciesSelector skill={charismaSave} hook={setCharismaSave} expertise={false} />
-                </Grid>
-            </Grid>
-            <Typography component="h2" variant="h6" color="primary" gutterBottom>Proficiencies</Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                <ProficienciesViewSelector proficiencyView={languages} setProficiency={setLanguages} />
-                <ProficienciesViewSelector proficiencyView={tools} setProficiency={setTools} />
-                <ProficienciesViewSelector proficiencyView={armour} setProficiency={setArmour} />
-                <ProficienciesViewSelector proficiencyView={weapons} setProficiency={setWeapons} />
-            </Box>
+            <Accordion>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />} >
+                    Skills
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Grid container sx={style.centred}>
+                        <Grid item xs={12} md={6} sx={style.column}>
+                            <ProficienciesSelector skill={acrobatics} hook={setAcrobatics} />
+                            <ProficienciesSelector skill={animalHandling} hook={setAnimalHandling} />
+                            <ProficienciesSelector skill={arcana} hook={setArcana} />
+                            <ProficienciesSelector skill={athletics} hook={setAthletics} />
+                            <ProficienciesSelector skill={deception} hook={setDeception} />
+                            <ProficienciesSelector skill={history} hook={setHistory} />
+                            <ProficienciesSelector skill={insight} hook={setInsight} />
+                            <ProficienciesSelector skill={intimidation} hook={setIntimidation} />
+                            <ProficienciesSelector skill={investigation} hook={setInvestigation} />
+                        </Grid>
+                        <Grid item xs={12} md={6} sx={style.column}>
+                            <ProficienciesSelector skill={medicine} hook={setMedicine} />
+                            <ProficienciesSelector skill={nature} hook={setNature} />
+                            <ProficienciesSelector skill={perception} hook={setPerception} />
+                            <ProficienciesSelector skill={performance} hook={setPerformance} />
+                            <ProficienciesSelector skill={Persuasion} hook={setPersuasion} />
+                            <ProficienciesSelector skill={religion} hook={setReligion} />
+                            <ProficienciesSelector skill={sleightOfHand} hook={setSleightOfHand} />
+                            <ProficienciesSelector skill={stealth} hook={setStealth} />
+                            <ProficienciesSelector skill={survival} hook={setSurvival} />
+                        </Grid>
+                    </Grid>
+                </AccordionDetails>
+            </Accordion >
+            <Accordion>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />} >
+                    Saves
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Grid container sx={style.centred}>
+                        <Grid item xs={12} sm={6} sx={style.column}>
+                            <ProficienciesSelector skill={strengthSave} hook={setStrengthSave} expertise={false} />
+                            <ProficienciesSelector skill={dexteritySave} hook={setDexteritySave} expertise={false} />
+                            <ProficienciesSelector skill={constitutionSave} hook={setConstitutionSave} expertise={false} />
+                        </Grid>
+                        <Grid item xs={12} sm={6} sx={style.column}>
+                            <ProficienciesSelector skill={intelligenceSave} hook={setIntelligenceSave} expertise={false} />
+                            <ProficienciesSelector skill={wisdomSave} hook={setWisdomSave} expertise={false} />
+                            <ProficienciesSelector skill={charismaSave} hook={setCharismaSave} expertise={false} />
+                        </Grid>
+                    </Grid>
+                </AccordionDetails>
+            </Accordion>
+            <Accordion>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />} >
+                    Proficiencies
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Box sx={style.row}>
+                        <ProficienciesViewSelector proficiencyView={languages} setProficiency={setLanguages} />
+                        <ProficienciesViewSelector proficiencyView={tools} setProficiency={setTools} />
+                        <ProficienciesViewSelector proficiencyView={armour} setProficiency={setArmour} />
+                        <ProficienciesViewSelector proficiencyView={weapons} setProficiency={setWeapons} />
+                    </Box>
+                </AccordionDetails>
+            </Accordion>
             <Box sx={style.centred}>
                 <Button variant="outlined" sx={style.saveButton} onClick={saveNpc} >Save</Button>
             </Box>
-        </Box>
+        </Box >
     )
 }

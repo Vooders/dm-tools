@@ -1,10 +1,15 @@
 import React from "react"
-import { Box, FormControl, InputLabel, TextField, Select, MenuItem } from "@mui/material"
+import { Box, FormControl, InputLabel, TextField, Select, MenuItem, Grid } from "@mui/material"
 
 const style = {
-    textInput: {
-        width: 0.3
+    box: {
+        display: 'flex',
+        flexDirection: 'row',
+        m: 1
     },
+    select: {
+        width: 0.15
+    }
 }
 
 export default function RaceSelector(props: RaceSelectorProps) {
@@ -13,37 +18,40 @@ export default function RaceSelector(props: RaceSelectorProps) {
     }
 
     return (
-        <Box sx={style.textInput}>
+        <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
-                <InputLabel id="race-select-label" shrink={true} >Race</InputLabel>
-                <TextField value={props.race} onChange={handleChange}></TextField>
-                <Select
-                    labelId="race-select-label"
-                    id="race-select"
-                    value=''
-                    onChange={handleChange}
-                >
-                    <MenuItem value={'Angel'}>Angel</MenuItem>
-                    <MenuItem value={'Cave Person'}>Cave Person</MenuItem>
-                    <MenuItem value={'Darkelf'}>Dark Elf</MenuItem>
-                    <MenuItem value={'Demon'}>Demon</MenuItem>
-                    <MenuItem value={'Dragon'}>Dragon</MenuItem>
-                    <MenuItem value={'Drow'}>Drow</MenuItem>
-                    <MenuItem value={'Dwarf'}>Dwarf</MenuItem>
-                    <MenuItem value={'Elf'}>Elf</MenuItem>
-                    <MenuItem value={'Fairy'}>Fairy</MenuItem>
-                    <MenuItem value={'Gnome'}>Gnome</MenuItem>
-                    <MenuItem value={'Goblin'}>Goblin</MenuItem>
-                    <MenuItem value={'Half Demon'}>Half Demon</MenuItem>
-                    <MenuItem value={'Halfling'}>Halfling</MenuItem>
-                    <MenuItem value={'Highelf'}>High Elf</MenuItem>
-                    <MenuItem value={'High Fairy'}>High Fairy</MenuItem>
-                    <MenuItem value={'Human'}>Human</MenuItem>
-                    <MenuItem value={'Ogre'}>Ogre</MenuItem>
-                    <MenuItem value={'Orc'}>Orc</MenuItem>
-                </Select>
+                <Box sx={style.box}>
+                    <InputLabel id="race-select-label" shrink={true} >Race</InputLabel>
+                    <TextField value={props.race} onChange={handleChange}></TextField>
+                    <Select
+                        sx={style.select}
+                        labelId="race-select-label"
+                        id="race-select"
+                        value=''
+                        onChange={handleChange}
+                    >
+                        <MenuItem value={'Angel'}>Angel</MenuItem>
+                        <MenuItem value={'Cave Person'}>Cave Person</MenuItem>
+                        <MenuItem value={'Darkelf'}>Dark Elf</MenuItem>
+                        <MenuItem value={'Demon'}>Demon</MenuItem>
+                        <MenuItem value={'Dragon'}>Dragon</MenuItem>
+                        <MenuItem value={'Drow'}>Drow</MenuItem>
+                        <MenuItem value={'Dwarf'}>Dwarf</MenuItem>
+                        <MenuItem value={'Elf'}>Elf</MenuItem>
+                        <MenuItem value={'Fairy'}>Fairy</MenuItem>
+                        <MenuItem value={'Gnome'}>Gnome</MenuItem>
+                        <MenuItem value={'Goblin'}>Goblin</MenuItem>
+                        <MenuItem value={'Half Demon'}>Half Demon</MenuItem>
+                        <MenuItem value={'Halfling'}>Halfling</MenuItem>
+                        <MenuItem value={'Highelf'}>High Elf</MenuItem>
+                        <MenuItem value={'High Fairy'}>High Fairy</MenuItem>
+                        <MenuItem value={'Human'}>Human</MenuItem>
+                        <MenuItem value={'Ogre'}>Ogre</MenuItem>
+                        <MenuItem value={'Orc'}>Orc</MenuItem>
+                    </Select>
+                </Box>
             </FormControl>
-        </Box>
+        </Grid>
     )
 }
 

@@ -1,10 +1,10 @@
-import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material"
+import { FormControl, FormLabel, FormControlLabel, FormGroup, Checkbox } from "@mui/material"
 import { Box } from "@mui/system"
 import React, { useEffect } from "react"
 import { Skill, Save } from "../dm-tools-data.types"
 
 const style = {
-    radioBox: {
+    checkBox: {
         display: 'flex'
     }
 }
@@ -23,38 +23,62 @@ export default function ProficienciesSelector(props: ProficienciesSelectorProps)
     })
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-        if (e.target.value === 'none') {
-            skill.proficient = false
-            skill.expertise = false
-        } else if (e.target.value === 'proficiency') {
-            skill.proficient = true
-            skill.expertise = false
-        } else if (e.target.value === 'expertise') {
-            skill.proficient = true
-            skill.expertise = true
+        if (e.target.name === 'proficiency') {
+            if (e.target.checked) {
+                skill.proficient = true
+                skill.expertise = false
+                setSelected('proficiency')
+            } else {
+                skill.proficient = false
+                setSelected('none')
+            }
+        } else if (e.target.name === 'expertise') {
+            if (e.target.checked) {
+                skill.expertise = true
+                skill.proficient = true
+                setSelected('expertise')
+            } else {
+                skill.expertise = false
+                skill.proficient = false
+                setSelected('none')
+            }
         }
-        setSelected(e.target.value)
         props.hook(skill)
     }
 
     return (
         <React.Fragment>
             <FormControl>
-                <Box sx={style.radioBox}>
-                    <FormLabel id="proficiency-radio-buttons-group-label">{skill.name}</FormLabel>
-                    <RadioGroup
-                        row
-                        aria-labelledby="proficiency-radio-buttons-group-label"
-                        name="proficiency-radio-buttons-group"
-                        value={selected}
-                        onChange={handleChange}
-                    >
-                        <FormControlLabel value="none" control={<Radio size="small" />} label="None" />
-                        <FormControlLabel value="proficiency" control={<Radio size="small" />} label="Proficiency" />
+                <Box sx={style.checkBox}>
+                    <FormLabel
+                        sx={{mt: 1, mr: 2, color: 'whitesmoke', fontSize: 18}}
+                        id="proficiency-checkbox-group-label">
+                        {skill.name}
+                    </FormLabel>
+                    <FormGroup row>
+                        <FormControlLabel
+                            label="Proficiency"
+                            control={
+                                <Checkbox
+                                    checked={selected === 'proficiency'}
+                                    onChange={handleChange}
+                                    name='proficiency'
+                                />
+                            }
+                        />
                         {props.expertise !== false &&
-                            <FormControlLabel value="expertise" control={<Radio size="small" />} label="Expertise" />
+                            <FormControlLabel
+                                label="Expertise"
+                                control={
+                                    <Checkbox
+                                        checked={selected === 'expertise'}
+                                        onChange={handleChange}
+                                        name='expertise'
+                                    />
+                                }
+                            />
                         }
-                    </RadioGroup>
+                    </FormGroup>
                 </Box>
             </FormControl>
         </React.Fragment>

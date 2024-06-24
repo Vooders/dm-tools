@@ -43,7 +43,8 @@ export default function ProficiencyViewSelector(props: ProficiencyViewSelectorPr
     const armour = [
         "Light",
         "Medium",
-        "Heavy"
+        "Heavy",
+        "Shields"
     ]
 
     const tools = [
