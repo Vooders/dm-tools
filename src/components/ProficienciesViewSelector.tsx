@@ -1,6 +1,6 @@
 import React from 'react'
 import { ProficiencyView } from '../dm-tools-data.types'
-import { FormControl, FormLabel, FormGroup, FormControlLabel, Checkbox } from '@mui/material'
+import { FormControl, FormLabel, FormGroup, FormControlLabel, Checkbox, Grid } from '@mui/material'
 
 export default function ProficiencyViewSelector(props: ProficiencyViewSelectorProps) {
     const proficiencies = props.proficiencyView.value
@@ -86,22 +86,24 @@ export default function ProficiencyViewSelector(props: ProficiencyViewSelectorPr
 
     return (
         <React.Fragment>
-            <FormControl sx={{ mx: 3 }} component="fieldset" variant="standard">
-                <FormLabel component="legend">{name}</FormLabel>
-                <FormGroup>
-                    {namesArray.map(item => {
-                        return (
-                            <FormControlLabel
-                                key={`${item}-${name}`}
-                                label={item}
-                                control={
-                                    <Checkbox checked={proficiencies.includes(item)} onChange={handleChange} name={item} />
-                                }
-                            />
-                        )
-                    })}
-                </FormGroup>
-            </FormControl>
+            <Grid item xs={6} sm={3}>
+                <FormControl sx={{ mx: 3 }} component="fieldset" variant="standard">
+                    <FormLabel component="legend">{name}</FormLabel>
+                    <FormGroup>
+                        {namesArray.map(item => {
+                            return (
+                                <FormControlLabel
+                                    key={`${item}-${name}`}
+                                    label={item}
+                                    control={
+                                        <Checkbox checked={proficiencies.includes(item)} onChange={handleChange} name={item} />
+                                    }
+                                />
+                            )
+                        })}
+                    </FormGroup>
+                </FormControl>
+            </Grid>
         </React.Fragment>
     )
 }

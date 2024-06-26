@@ -8,7 +8,7 @@ const style = {
         m: 1
     },
     select: {
-        width: 0.15
+        width: '40px'
     }
 }
 
@@ -18,7 +18,7 @@ export default function RaceSelector(props: RaceSelectorProps) {
     }
 
     return (
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} md={3}>
             <FormControl fullWidth>
                 <Box sx={style.box}>
                     <InputLabel id="race-select-label" shrink={true} >Race</InputLabel>

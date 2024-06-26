@@ -230,7 +230,7 @@ export default function CreateNpc() {
                 armour,
                 weapons,
                 tools,
-                languages
+                languages,
             ],
             filename: ''
         }
@@ -242,9 +242,13 @@ export default function CreateNpc() {
             display: 'flex',
             justifyContent: 'center',
         },
+        spaced: {
+            display: 'flex',
+            justifyContent: 'space-around',
+        },
         column: {
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
         },
         row: {
             display: 'flex',
@@ -262,7 +266,7 @@ export default function CreateNpc() {
             margin: 2,
         },
         abilities: {
-            margin: 2,
+            margin: 1,
         },
         text: {
             margin: 1
@@ -281,31 +285,39 @@ export default function CreateNpc() {
                         <RaceSelector race={race} setRace={setRace} />
                         <GenderSelector gender={gender} setGender={setGender} />
                     </Grid>
-                    <Box >
-                        <TextField sx={style.text} label='Proficiency Bonus' type='number' value={proficiencyBonus} onChange={handleIntegerChange(setProficiencyBonus)} />
-                        <TextField sx={style.text} label='AC' type='number' onChange={handleIntegerChange(setAc)} value={ac} />
-                        <TextField sx={style.text} label='HP' type='number' onChange={handleIntegerChange(setHp)} value={hp} />
-                    </Box>
-                    <Box >
-                        <TextField sx={style.notes} onChange={(e) => { setNotes(e.target.value) }} label='notes' variant='outlined' multiline />
-                    </Box>
+                    <Grid container sx={style.centred}>
+                        <Grid item xs={4} md={2}>
+                            <TextField sx={style.text} label='PB' type='number' onChange={handleIntegerChange(setProficiencyBonus)} value={proficiencyBonus} />
+                        </Grid>
+                        <Grid item xs={4} md={2}>
+                            <TextField sx={style.text} label='AC' type='number' onChange={handleIntegerChange(setAc)} value={ac} />
+                        </Grid>
+                        <Grid item xs={4} md={2}>
+                            <TextField sx={style.text} label='HP' type='number' onChange={handleIntegerChange(setHp)} value={hp} />
+                        </Grid>
+                    </Grid>
+                    <Grid container sx={[style.abilities, style.row, style.centred]}>
+                        <AbilitySelector ability={strength} hook={setStrength} />
+                        <AbilitySelector ability={dexterity} hook={setDexterity} />
+                        <AbilitySelector ability={constitution} hook={setConstitution} />
+                        <AbilitySelector ability={intelligence} hook={setIntelligence} />
+                        <AbilitySelector ability={wisdom} hook={setWisdom} />
+                        <AbilitySelector ability={charisma} hook={setCharisma} />
+                    </Grid>
+                    <Grid container sx={style.centred}>
+                        <Grid item xs={12} md={6}>
+                            <TextField sx={style.notes} onChange={(e) => { setNotes(e.target.value) }} label='notes' variant='outlined' multiline />
+                        </Grid>
+                    </Grid>
                 </Box>
             </Box>
-            <Grid container sx={[style.abilities, style.row, style.centred]}>
-                <AbilitySelector ability={strength} hook={setStrength} />
-                <AbilitySelector ability={dexterity} hook={setDexterity} />
-                <AbilitySelector ability={constitution} hook={setConstitution} />
-                <AbilitySelector ability={intelligence} hook={setIntelligence} />
-                <AbilitySelector ability={wisdom} hook={setWisdom} />
-                <AbilitySelector ability={charisma} hook={setCharisma} />
-            </Grid>
             <Accordion>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} >
                     Skills
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Grid container sx={style.centred}>
-                        <Grid item xs={12} md={6} sx={style.column}>
+                    <Grid container sx={style.spaced}>
+                        <Grid item xs={12} md={5} sx={style.column}>
                             <ProficienciesSelector skill={acrobatics} hook={setAcrobatics} />
                             <ProficienciesSelector skill={animalHandling} hook={setAnimalHandling} />
                             <ProficienciesSelector skill={arcana} hook={setArcana} />
@@ -316,7 +328,7 @@ export default function CreateNpc() {
                             <ProficienciesSelector skill={intimidation} hook={setIntimidation} />
                             <ProficienciesSelector skill={investigation} hook={setInvestigation} />
                         </Grid>
-                        <Grid item xs={12} md={6} sx={style.column}>
+                        <Grid item xs={12} md={5} sx={style.column}>
                             <ProficienciesSelector skill={medicine} hook={setMedicine} />
                             <ProficienciesSelector skill={nature} hook={setNature} />
                             <ProficienciesSelector skill={perception} hook={setPerception} />
@@ -335,13 +347,13 @@ export default function CreateNpc() {
                     Saves
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Grid container sx={style.centred}>
-                        <Grid item xs={12} sm={6} sx={style.column}>
+                    <Grid container sx={style.spaced}>
+                        <Grid item xs={12} sm={6} md={3} sx={style.column}>
                             <ProficienciesSelector skill={strengthSave} hook={setStrengthSave} expertise={false} />
                             <ProficienciesSelector skill={dexteritySave} hook={setDexteritySave} expertise={false} />
                             <ProficienciesSelector skill={constitutionSave} hook={setConstitutionSave} expertise={false} />
                         </Grid>
-                        <Grid item xs={12} sm={6} sx={style.column}>
+                        <Grid item xs={12} sm={6} md={3} sx={style.column}>
                             <ProficienciesSelector skill={intelligenceSave} hook={setIntelligenceSave} expertise={false} />
                             <ProficienciesSelector skill={wisdomSave} hook={setWisdomSave} expertise={false} />
                             <ProficienciesSelector skill={charismaSave} hook={setCharismaSave} expertise={false} />
@@ -354,12 +366,12 @@ export default function CreateNpc() {
                     Proficiencies
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Box sx={style.row}>
+                    <Grid container sx={style.row}>
                         <ProficienciesViewSelector proficiencyView={languages} setProficiency={setLanguages} />
                         <ProficienciesViewSelector proficiencyView={tools} setProficiency={setTools} />
                         <ProficienciesViewSelector proficiencyView={armour} setProficiency={setArmour} />
                         <ProficienciesViewSelector proficiencyView={weapons} setProficiency={setWeapons} />
-                    </Box>
+                    </Grid>
                 </AccordionDetails>
             </Accordion>
             <Box sx={style.centred}>
