@@ -79,15 +79,17 @@ export default function CharacterSheet(props: CharacterSheetProps) {
                                             {character.profile.name}
                                         </Typography>
                                         <Typography variant="subtitle1" color="text.primary" component="div">
-                                            {`${character.profile.appearance.gender || ''} ${character.profile.race} ${character.profile.classes}`}
+                                            {`${character.profile.appearance.gender || ''} ${character.profile.race}`}
+                                            {character.profile.classes ? ` ${character.profile.classes}` : ''}
                                         </Typography>
-                                        <Typography variant="subtitle2" color="text.secondary" component="div">
-                                            {`Level ${character.profile.level}`}
-                                        </Typography>
+                                        {character.profile.level ?
+                                            <Typography variant="subtitle2" color="text.secondary" component="div">
+                                                {`Level ${character.profile.level}`}
+                                            </Typography> : <></>}
                                     </Box>
                                 </Card>
-                                <Box sx={{ display: 'flex', flexDirection: 'row'}}>
-                                    <Box sx={{ mt: 5, mr: 2}}>
+                                <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                                    <Box sx={{ mt: 5, mr: 2 }}>
                                         <Ac ac={character.ac} />
                                     </Box>
                                     <Box sx={style.hpBox}>
