@@ -21,11 +21,12 @@ export default function abilities(stats: Stat[], modifiers: Modifier[]): Ability
 
     stats.forEach(stat => {
         bonusModifiers.forEach(modifier => {
-            const statIsTheOne = stat.id === modifier.entityId
-            if (statIsTheOne && modifier.type === 'bonus') {
-                stat.value = stat.value + modifier.fixedValue
-            } else if (statIsTheOne && modifier.type === 'set') {
-                stat.value = modifier.fixedValue
+            if (stat.id === modifier.entityId && !modifier.duration) {
+                if (modifier.type === 'bonus') {
+                    stat.value = stat.value + modifier.fixedValue
+                } else if (modifier.type === 'set') {
+                    stat.value = modifier.fixedValue
+                }
             }
         })
     })
