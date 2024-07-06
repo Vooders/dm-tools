@@ -285,17 +285,23 @@ export default class CharacterSheetProcessor {
     private buildCurrencies(): CurrenciesType {
         logger.debug('Building currencies')
         const currencies = this.dndBeyondJson.data.currencies
+        const containerCurrencies: CurrenciesType[] = this.dndBeyondJson.data.inventory
+            .filter((item: any) => item.currency)
+            .map((container: any) => container.currency)
+        const totalledCurrencies = {
+            cp: containerCurrencies.reduce((acc, obj) => acc + obj.cp, currencies.cp),
+            sp: containerCurrencies.reduce((acc, obj) => acc + obj.sp, currencies.sp),
+            gp: containerCurrencies.reduce((acc, obj) => acc + obj.gp, currencies.gp),
+            ep: containerCurrencies.reduce((acc, obj) => acc + obj.ep, currencies.ep),
+            pp: containerCurrencies.reduce((acc, obj) => acc + obj.pp, currencies.pp)
+        }
         return {
-            cp: currencies.cp,
-            sp: currencies.sp,
-            gp: currencies.gp,
-            ep: currencies.ep,
-            pp: currencies.pp,
-            total: Math.round(this.totalGold(currencies) * 100) / 100
+            ...totalledCurrencies,
+            total: Math.round(this.totalGold(totalledCurrencies) * 100) / 100
         }
     }
 
-    private totalGold(currencies: any): number {
+    private totalGold(currencies: CurrenciesType): number {
         const copper = currencies.cp / 100
         const silver = currencies.sp / 10
         const gold = currencies.gp

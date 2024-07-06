@@ -141,7 +141,7 @@ export type CurrenciesType = {
     gp: number
     pp: number
     ep: number
-    total: number
+    total?: number
 }
 
 export type ItemContainer = {
