@@ -14,6 +14,7 @@ import * as hitDice from './character-sheet-processor/hitDice'
 import action from './character-sheet-processor/actions'
 import healthPotions from './character-sheet-processor/healthPotions'
 import creatures from './character-sheet-processor/creatures'
+import currencies from './character-sheet-processor/currencies'
 import {
     Ability,
     Action,
@@ -195,6 +196,12 @@ export default class CharacterSheetProcessor {
         return action(actions, feats, inventory, this.proficiency)
     }
 
+    private buildCurrencies(): CurrenciesType {
+        const currency = this.dndBeyondJson.data.currencies
+        const inventory = this.dndBeyondJson.data.inventory
+        return currencies(currency, inventory)
+    }
+
     private calculateProficiency(): number {
         if (this.level < 5) {
             return 2
@@ -280,34 +287,6 @@ export default class CharacterSheetProcessor {
             return classes.subclassDefinition.canCastSpells
         }
         return false
-    }
-
-    private buildCurrencies(): CurrenciesType {
-        logger.debug('Building currencies')
-        const currencies = this.dndBeyondJson.data.currencies
-        const containerCurrencies: CurrenciesType[] = this.dndBeyondJson.data.inventory
-            .filter((item: any) => item.currency)
-            .map((container: any) => container.currency)
-        const totalledCurrencies = {
-            cp: containerCurrencies.reduce((acc, obj) => acc + obj.cp, currencies.cp),
-            sp: containerCurrencies.reduce((acc, obj) => acc + obj.sp, currencies.sp),
-            gp: containerCurrencies.reduce((acc, obj) => acc + obj.gp, currencies.gp),
-            ep: containerCurrencies.reduce((acc, obj) => acc + obj.ep, currencies.ep),
-            pp: containerCurrencies.reduce((acc, obj) => acc + obj.pp, currencies.pp)
-        }
-        return {
-            ...totalledCurrencies,
-            total: Math.round(this.totalGold(totalledCurrencies) * 100) / 100
-        }
-    }
-
-    private totalGold(currencies: CurrenciesType): number {
-        const copper = currencies.cp / 100
-        const silver = currencies.sp / 10
-        const gold = currencies.gp
-        const electrum = currencies.ep / 2
-        const platinum = currencies.pp * 10
-        return copper + silver + gold + electrum + platinum
     }
 
     private filterModifiersByType(type: string): Modifier[] {
