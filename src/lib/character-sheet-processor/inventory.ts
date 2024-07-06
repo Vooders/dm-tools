@@ -1,10 +1,10 @@
 import { CharacterValues } from "../../ddb-data.types"
-import { ItemContainer, Item } from "../../dm-tools-data.types"
+import { ItemContainer, Item, CurrenciesType } from "../../dm-tools-data.types"
 import { Logger } from '../../logger/Logger'
 
 const logger = new Logger('[characterSheetProcessor][inventory]')
 
-export default function inventory(inventory: any, customItemInventory: any, carryCapacity: number, characterValues: CharacterValues[], id: number): ItemContainer[] {
+export default function inventory(inventory: any, customItemInventory: any, characterValues: CharacterValues[], id: number, currency: CurrenciesType): ItemContainer[] {
     logger.debug('Getting inventory')
     const items = inventory.map((item: any): Item => {
         const newItem = {
@@ -28,6 +28,7 @@ export default function inventory(inventory: any, customItemInventory: any, carr
             equipped: item.equipped,
             quantity: item.quantity,
             limitedUse: {},
+            currency: item.currency
         }
         return addCustomValues(newItem)
     })
@@ -55,6 +56,7 @@ export default function inventory(inventory: any, customItemInventory: any, carr
             equipped: false,
             quantity: item.quantity,
             limitedUse: {},
+            currency: null
         }
     })
 
@@ -66,9 +68,9 @@ export default function inventory(inventory: any, customItemInventory: any, carr
             name: 'Equipment',
             equipped: true,
             weight: 0,
-            capacity: carryCapacity,
             contents: equipmentItems,
-            contentsWeight: totalItemsWeight(equipmentItems)
+            contentsWeight: totalItemsWeight(equipmentItems),
+            currency
         },
         ...containers.map((container: any) => {
             const containerItems = fillBag(container.id, items)
@@ -76,18 +78,18 @@ export default function inventory(inventory: any, customItemInventory: any, carr
                 name: container.definition.name,
                 equipped: container.equipped,
                 weight: container.definition.weight,
-                capacity: container.definition.capacity,
                 contents: containerItems,
-                contentsWeight: totalItemsWeight(containerItems)
+                contentsWeight: totalItemsWeight(containerItems),
+                currency: container.currency
             }
         }),
         {
             name: 'Custom Items',
             equipped: true,
             weight: 0,
-            capacity: null,
             contents: customItems,
-            contentsWeight: totalItemsWeight(customItems)
+            contentsWeight: totalItemsWeight(customItems),
+            currency: null
         },
     ]
 

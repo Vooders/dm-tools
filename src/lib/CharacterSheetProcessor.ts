@@ -123,10 +123,10 @@ export default class CharacterSheetProcessor {
     private buildInventory(): ItemContainer[] {
         const items = this.dndBeyondJson.data.inventory
         const customItems = this.dndBeyondJson.data.customItems
-        const carryCapacity = this.dndBeyondJson.data.stats[0].value * 15
+        const currency = this.dndBeyondJson.data.currencies
         const characterValues = this.dndBeyondJson.data.characterValues
         const id = this.dndBeyondJson.data.id
-        return inventory(items, customItems, carryCapacity, characterValues, id)
+        return inventory(items, customItems, characterValues, id, currency)
     }
 
     private buildAbilities(): Ability[] {

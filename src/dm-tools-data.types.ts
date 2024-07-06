@@ -148,9 +148,9 @@ export type ItemContainer = {
     name: string
     equipped: boolean
     weight: number
-    capacity: number
     contents: Item[]
     contentsWeight: number
+    currency: CurrenciesType
 }
 
 export type Item = {
@@ -181,6 +181,7 @@ export type Item = {
         numberUsed?: number
         useProficiencyBonus?: boolean
     },
+    currency: CurrenciesType
 }
 
 export type WeightData = {

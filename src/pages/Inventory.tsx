@@ -16,6 +16,7 @@ import { Item, ItemContainer } from '../dm-tools-data.types'
 import useUpdateWithCharacters from '../hooks/useUpdateWithCharacters'
 import { InventoryData } from '../handlers/getInventories'
 import { RendererLogger } from '../logger/RendererLogger'
+import Currencies from '../components/Currencies'
 
 const logger = new RendererLogger('[page][Inventory]', window)
 
@@ -40,6 +41,8 @@ export default function Inventory() {
                     inventory: character.inventory.map((container: ItemContainer) => {
                         return {
                             name: container.name,
+                            equipped: container.equipped,
+                            currency: container.currency,
                             contents: container.contents.filter((item: any) => item.definition.name.toLowerCase().includes(searchQuery.toLowerCase()))
                         }
                     })
@@ -55,9 +58,9 @@ export default function Inventory() {
         return (
             <Card variant="outlined">
                 <CardContent>
-                    <Grid container direction="row" spacing={2}>
+                    <Grid container direction="row" justifyContent='space-between' spacing={2}>
                         <Grid item>{container.equipped ? '✔️ ' : '❌ '}{container.name}</Grid>
-                        <Grid item>{container.capacity}{container.capacity ? 'lb capacity' : ''}</Grid>
+                        <Grid item>{container.currency && <Currencies currencies={container.currency} showZeroes={false} align='right'/>}</Grid>
                     </Grid>
                     <Table size="small">
                         <TableHead>

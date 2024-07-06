@@ -1,4 +1,4 @@
-import { Item } from "../../src/dm-tools-data.types"
+import { CurrenciesType, Item } from "../../src/dm-tools-data.types"
 
 export default class ItemBuilder {
     constructor(
@@ -25,6 +25,7 @@ export default class ItemBuilder {
         private maxUses: number = 0,
         private numberUsed: number = 0,
         private useProficiencyBonus: boolean = false,
+        private currency: CurrenciesType = null
     ) { }
 
     public withId(id: number) {
@@ -155,6 +156,11 @@ export default class ItemBuilder {
         return this
     }
 
+    public withCurrency(currency: CurrenciesType) {
+        this.currency = currency
+        return this
+    }
+
     public build(): Item {
         return {
             id: this.id,
@@ -184,6 +190,7 @@ export default class ItemBuilder {
                 numberUsed: this.numberUsed,
                 useProficiencyBonus: this.useProficiencyBonus
             },
+            currency: this.currency
         }
     }
 }
