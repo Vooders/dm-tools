@@ -6,7 +6,7 @@ const logger = new Logger('[lib][importCharacter]')
 
 export default async (id: string): Promise<ImportResponse> => {
     logger.info(`importing ${id}`)
-    const response: any = await fetch(`${decode('aHR0cHM6Ly9jaGFyYWN0ZXItc2VydmljZS5kbmRiZXlvbmQuY29tL2NoYXJhY3Rlci92My9jaGFyYWN0ZXIv')}${id}`);
+    const response: any = await fetch(`${decode('aHR0cHM6Ly9jaGFyYWN0ZXItc2VydmljZS5kbmRiZXlvbmQuY29tL2NoYXJhY3Rlci92NS9jaGFyYWN0ZXIv')}${id}`);
     if (response.ok) {
         const character = await response.json()
         if (character.message === 'Character successfully received.') {

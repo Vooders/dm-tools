@@ -67,7 +67,7 @@ const createWindow = (): void => {
         ipcMain.handle('npc:get', getNpc)
         ipcMain.handle('character:delete', deleteCharacter(mainWindow))
         ipcMain.handle('npc:delete', deleteNpc(mainWindow))
-        ipcMain.on('log:debug', (event, log) => logger.info(event, log))
+        ipcMain.on('log:debug', (event, log) => logger.debug(event, log))
         ipcMain.on('log:info', (event, log) => logger.info(event, log))
         ipcMain.on('log:warn', (event, log) => logger.warn(event, log))
         ipcMain.on('log:error', (event, log) => logger.error(event, log))
